@@ -27,19 +27,19 @@ description: "Building the digital laboratory..."
   <!-- 这里留空，所以右上角就变成完全干净的空白了 -->
 </div>
 
-<div style="text-align: center;">
+<div style="text-align: center;"> 
 
-# 欢迎来到我的网站 
+<!-- 使用 HTML 的 h1 标签作为大标题 -->
+<h1 style="text-align: center;">🚧 Welcome to My Website 🚧</h1>
 
-
-# 🚧 Welcome to My Website 🚧 
+<h1 style="text-align: center;">欢迎来到我的网站</h1>
 
 <br>
 
-### 目前网站正在建设中...  🏗️ 
+<h3 style="text-align: center;">Currently under construction...</h3>
 
+<h3 style="text-align: center;">目前网站正在建设中... 🏗️</h3>
 
-### Currently under construction… 
 
 <br><br><br><br><br><br>
 
