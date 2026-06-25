@@ -1,18 +1,23 @@
 ---
 layout: default
-title: Under Construction
+title: QY Niu's Lab
+description: "Currently under construction... waiting for launch..."
 ---
 
-<div style="text-align: center; padding: 100px 20px;">
-
 # 🚧 Welcome to My Website 🚧
+
 # 欢迎来到我的网站
 
 ### 目前网站正在建设中... 🏗️
-### Currently under construction... waiting for launch...
 
-<p style="color: gray; font-size: 0.8em; margin-top: 50px;">
-Version V0.0
-</p>
+### Currently under construction... 
 
+<br>
+
+<div style="text-align: center; border-top: 1px solid #eee; padding-top: 20px; margin-top: 40px;">
+  <p style="color: #666; font-family: monospace; font-size: 0.9em;">
+    Status: <span style="color: #e67e22;">Deploying V0.0 (Infrastructure Test) 🛠️</span>
+  </p>
 </div>
+
+
