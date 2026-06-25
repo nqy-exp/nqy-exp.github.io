@@ -33,11 +33,13 @@ description: "Building the digital laboratory..."
 
 # 🚧 Welcome to My Website 🚧
 
+<br>
+
 ### 目前网站正在建设中...  🏗️
 
 ### Currently under construction…
 
-<br><br>
+<br><br><br><br><br><br>
 
 <div style="display: inline-block; border-top: 1px solid #eee; padding-top: 20px; margin-top: 40px;">
   <p style="color: #666; font-family: monospace; font-size: 0.9em; margin: 0;">
