@@ -6,14 +6,20 @@ description: "A digital log of my research and thoughts."
 
 <style>
   /* 1. 强制移除主题自带的 Header 和 Footer */
-  header.site-header, 
-  footer.site-footer,
-  header, 
-  footer {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-  }
+  /* 只隐藏主题自带的、没有 class 的原生标签 */
+header, footer {
+  display: none !important;
+}
+
+/* 强制显示我们自定义的这两个类名 */
+.my-custom-header, .my-custom-footer {
+  display: flex !important; /* Header 用 flex，Footer 用 block 会更好 */
+}
+
+/* 特别针对 Footer 的 flex 问题进行修正 */
+footer.my-custom-footer {
+  display: block !important; 
+}
 
   /* 2. 基础重置 */
   body {
