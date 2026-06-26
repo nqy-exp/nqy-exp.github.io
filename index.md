@@ -5,82 +5,102 @@ description: "A digital log of my research and thoughts."
 ---
 
 <style>
-  /* 1. 强制隐藏主题自带的 Header 和 Footer */
-  header, footer {
+  /* 1. 强制移除主题自带的 Header 和 Footer */
+  header.site-header, 
+  footer.site-footer,
+  header, 
+  footer {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
   }
 
   /* 2. 基础重置 */
   body {
     margin: 0 !important;
     padding: 0 !important;
+    background-color: #ffffff;
   }
 
-  /* 3. 自定义 Header 样式 */
+  /* 3. 自定义 Header (显示在页面顶部) */
   .my-custom-header {
     display: flex !important;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
     border-bottom: 1px solid #eee;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
   }
 
-  .header-title {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #333;
-  }
-
-  .nav-menu {
-    display: flex;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-menu a {
-    text-decoration: none;
-    color: #666;
-    font-size: 0.9em;
-    transition: color 0.3s;
-  }
-
-  .nav-menu a:hover {
-    color: #e67e22;
-  }
+  .header-title { font-weight: bold; font-size: 1.2em; color: #333; }
+  .nav-menu { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
+  .nav-menu a { text-decoration: none; color: #666; font-size: 0.9em; transition: 0.3s; }
+  .nav-menu a:hover { color: #e67e22; }
 
   /* 4. 核心视觉区：对角线布局 */
   .hero-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 100vh;
+    min-height: 100vh; /* 确保至少占满一屏 */
     padding: 40px;
     box-sizing: border-box;
+    position: relative;
   }
 
   .hero-left { align-self: flex-start; max-width: 450px; text-align: left; }
   .hero-right { align-self: flex-end; text-align: right; color: #666; }
 
-  /* 中心导航 */
+  /* 5. 中心导航区域 (解决你说的间距问题) */
   .center-nav {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 100%; /* 确保宽度占满，方便居中 */
   }
-  .center-nav h2 { font-size: 0.8em; color: #bbb; letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; }
-  .center-links { display: flex; gap: 30px; justify-content: center; }
-  .center-links a { font-weight: bold; color: #333; text-decoration: none; font-size: 1.1em; }
 
-  /* 5. 各个模块的样式 */
-  .notice-section { padding: 40px 20px; text-align: center; background-color: #fdfdfd; }
-  .ai-disclosure { padding: 30px 40px; text-align: center; background-color: #fafafa; color: #777; font-size: 0.9em; }
-  .disclaimer-section { padding: 30px 40px; text-align: center; font-size: 0.85em; color: #999; background-color: #ffffff; }
-  .my-custom-footer { padding: 30px 20px; text-align: center; border-top: 1px solid #eee; font-size: 0.8em; color: #bbb; background-color: #f9f9f9; }
+  .center-nav h2 {
+    font-size: 0.8em;
+    color: #bbb;
+    letter-spacing: 4px;
+    margin-bottom: 30px; /* 增加与下方链接的间距 */
+    text-transform: uppercase;
+  }
+
+  .center-links {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .center-links a {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1em;
+  }
+
+  /* 6. 其他模块样式 */
+  .notice-section, .ai-disclosure, .disclaimer-section {
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .ai-disclosure { background-color: #fafafa; color: #777; font-size: 0.9em; }
+  .disclaimer-section { background-color: #ffffff; color: #999; font-size: 0.85em; }
+
+  /* 7. 自定义页脚 */
+  .my-custom-footer {
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+    color: #bbb;
+    font-size: 0.8em;
+  }
+
   .footer-contact a { color: #666; text-decoration: none; margin: 0 10px; }
 </style>
 
@@ -129,7 +149,7 @@ description: "A digital log of my research and thoughts."
   <div style="display: inline-block; border: 1px solid #ffeeba; background-color: #fff3cd; color: #856404; padding: 20px 40px; border-radius: 8px;">
     <p style="margin: 0; font-weight: bold; font-size: 1.1em;">⚠️ Notice / 注意</p>
     <p style="margin: 10px 0 0 0; font-size: 0.9em;">
-      This site is under construction.  Please excuse the mess.<br>
+      This site is under construction. Please excuse the mess.<br>
       本站仍在建设中，如有疏漏请见谅。
     </p>
   </div>
@@ -155,8 +175,8 @@ description: "A digital log of my research and thoughts."
 </section>
 
 <!-- 页脚模块 -->
-<footer class="site-footer">
+<footer class="my-custom-footer">
   <div class="footer-contact">
-    Contact me: <a href="mailto:nqy.pro@outlook.com">nqy.pro@outlook.com</a> ｜ © 2026 Qiyue Niu. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="color: #999; text-decoration: underline;">CC BY-NC-ND 4.0 ｜ V0.1 </a>
+    Contact me: <a href="mailto:nqy.pro@outlook.com">nqy.pro@outlook.com</a> ｜ © 2026 Qiyue Niu. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="color: #999;">CC BY-NC-ND 4.0 ｜ V0.1 </a>
   </div>
 </footer>
