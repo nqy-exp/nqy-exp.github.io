@@ -1,54 +1,222 @@
 ---
 layout: default
-title: QY Niu's Lab
-description: "Building the digital laboratory..."
+title: QY Niu's Log
+description: "A digital log of my research and thoughts."
 ---
 
 <style>
-  /* 1. 彻底隐藏掉主题自带的那个“乱七八糟”的 Header */
-  .site-header {
-    display: none !important;
+  /* 1. 基础重置 */
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
 
-  /* 2. 隐藏掉主题自带的 Footer */
+  /* 2. 顶部 Header 布局 */
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .header-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9em;
+    transition: color 0.3s;
+  }
+
+  .nav-menu a:hover {
+    color: #e67e22;
+  }
+
+  /* 3. 核心视觉区：对角线布局 */
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 80px);
+    padding: 40px;
+    position: relative;
+  }
+
+  .hero-left {
+    align-self: flex-start;
+    max-width: 450px;
+    text-align: left;
+  }
+
+  .hero-right {
+    align-self: flex-end;
+    text-align: right;
+    color: #666;
+  }
+
+  /* 中间导航 */
+  .center-nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .center-nav h2 {
+    font-size: 0.8em;
+    color: #bbb;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .center-links {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .center-links a {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1em;
+  }
+
+  /* 4. 新增：警告/通知模块 */
+  .notice-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fdfdfd;
+  }
+
+  /* 5. 新增：AI 说明模块 */
+  .ai-disclosure {
+    padding: 30px 40px;
+    text-align: center;
+    background-color: #fafafa;
+    color: #777;
+    font-size: 0.9em;
+    line-line-height: 1.6; /* 修复行高 */
+  }
+
+  /* 6. 新增：免责声明模块 */
+  .disclaimer-section {
+    padding: 30px 40px;
+    text-align: center;
+    font-size: 0.85em;
+    color: #999;
+    background-color: #ffffff;
+  }
+
+  /* 7. 新增：页脚模块 */
   .site-footer {
-    display: none !important;
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    font-size: 0.8em;
+    color: #bbb;
+    background-color: #f9f9f9;
   }
 
-  /* 3. 调整整体页面的内边距，让内容从顶部开始，不留太多空白 */
-  .main-wrapper {
-    padding-top: 20px !important;
+  .footer-contact a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
   }
 </style>
 
-<!-- 4. 手动创建一个极其干净的微型 Header -->
-<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; margin-bottom: 50px;">
-  <span style="font-weight: bold; font-size: 1.2em; color: #333;">QY Niu's Lab</span>
-  <!-- 这里留空，所以右上角就变成完全干净的空白了 -->
-</div>
+<!-- 顶部 Header -->
+<header class="main-header">
+  <div class="header-title">QY Niu's Log</div>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="/about/">About Me</a></li>
+      <li><a href="/projects/">Experimental Logs</a></li>
+      <li><a href="/ideas/">Jibber-Jabber</a></li>
+    </ul>
+  </nav>
+</header>
 
-<div style="text-align: center;"> 
+<!-- 核心视觉区 -->
+<main class="hero-container">
 
-<!-- 使用 HTML 的 h1 标签作为大标题 -->
-<h1 style="text-align: center;">🚧 Welcome to My Website 🚧</h1>
+  <!-- 左上方内容 -->
+  <div class="hero-left">
+    <h1 style="font-size: 1.8em; margin-bottom: 15px;">Welcome to my website.</h1>
+    <p style="line-height: 1.6; color: #444;">
+      This is a space where I document a series of exploration and attempts sparked by pure curiosity. <br>
+      Please be prepared: you will encounter many failures here. But do not be surprised, to me, failure is the norm and an essential part of the journey toward success.
+    </p>
+  </div>
 
-<h1 style="text-align: center;">欢迎来到我的网站</h1>
+  <!-- 中间导航 -->
+  <div class="center-nav">
+    <h2>Navigation | 板块导航</h2>
+    <div class="center-links">
+      <a href="/about/">About me</a>
+      <a href="/projects/">Experimental Logs</a>
+      <a href="/ideas/">Jibber-Jabber</a>
+    </div>
+  </div>
 
-<br>
+  <!-- 右下方内容 -->
+  <div class="hero-right">
+    <h1 style="font-size: 1.8em; margin-bottom: 15px;">欢迎来到我的网站。</h1>
+    <p style="line-height: 1.6;">
+      这里记录着由好奇心引发的一系列探索与尝试。<br>
+      请做好心理准备，你会看到很多失败，不过请不要惊讶，对我而言失败才是常态，失败是走向成功的必经之路。
+    </p>
+  </div>
 
-<h3 style="text-align: center;">Currently under construction...</h3>
+</main>
 
-<h3 style="text-align: center;">目前网站正在建设中... 🏗️</h3>
+<!-- 优化后的警告模块：更小、更精致 -->
+<section class="notice-section" style="padding: 20px 0;">
+  <div style="display: inline-block; border: 1px solid #fceabb; background-color: #fffcf5; color: #856404; padding: 10px 25px; border-radius: 30px; font-size: 0.85em;">
+    <span style="margin-right: 5px;">⚠️</span>
+    <span>Notice | 注意：<br> Under construction. Please excuse any gaps. <br> 本站仍在建设中，如有疏漏请见谅。</span>
+  </div>
+</section>
 
-
-<br><br><br><br><br><br>
-
-<div style="display: inline-block; border-top: 1px solid #eee; padding-top: 20px; margin-top: 40px;">
-  <p style="color: #666; font-family: monospace; font-size: 0.9em; margin: 0;">
-    Status: <span style="color: #e67e22;">Deploying V0.0 (Infrastructure Test) 🛠️</span>
+<!-- AI 说明模块 -->
+<section class="ai-disclosure">
+  <p>
+    To facilitate more efficient research and cross-linguistic communication, the English content on this site is AI-assisted. Should any linguistic ambiguity arise, please refer to the original Chinese text for clarification. <br>
+    <strong>If you are curious about the reasoning behind this, I've shared more in the <a href="/ideas/" style="color: #e67e22; text-decoration: none;">Jibber-Jabber</a> section.</strong>
   </p>
-</div>
+  <p>
+    为了能更高效地进行科研探索与跨语言交流，本网站的英文内容由人工智能辅助翻译。如遇语义歧义，请以中文原文为准。关于这种选择背后的思考，欢迎移步 <a href="/ideas/" style="color: #e67e22; text-decoration: none;">Jibber-Jabber</a> 栏目查看。
+  </p>
+</section>
 
-</div>
+<!-- 免责声明模块 -->
+<section class="disclaimer-section">
+  <p>
+    Disclaimer: This website is a personal space for academic exploration and intellectual documentation. The views expressed here are solely my own and do not constitute professional advice or represent any official institutional position.<br>
+    免责声明：本网站是我的个人学术研究与思想记录空间。文中所表达的内容仅代表作者个人观点，不构成任何专业建议，亦不代表任何机构立场。
+  </p>
+</section>
 
-
+<!-- 页脚模块 -->
+<footer class="site-footer">
+  <div class="footer-contact">
+    Contact me: <a href="mailto:nqy.pro@outlook.com">nqy.pro@outlook.com</a> ｜ © 2026 Qiyue Niu. This work is licensed under CC BY-NC-ND 4.0 | V0.1
+  </div>
+</footer>
