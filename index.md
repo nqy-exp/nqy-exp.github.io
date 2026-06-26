@@ -45,17 +45,28 @@ footer.my-custom-footer {
 
   /* 4. 核心视觉区：对角线布局 */
   .hero-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100vh; /* 确保至少占满一屏 */
-    padding: 40px;
-    box-sizing: border-box;
-    position: relative;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100%;       /* 显式声明宽度为 100% */
+  padding: 40px 10%; /* 左右留出 10% 的呼吸感，而不是死板的像素值 */
+  box-sizing: border-box;
+  position: relative;
+}
 
-  .hero-left { align-self: flex-start; max-width: 450px; text-align: left; }
-  .hero-right { align-self: flex-end; text-align: right; color: #666; }
+  .hero-left {
+  align-self: flex-start;
+  max-width: 600px; /* 从 450px 增加到 600px，让文字更舒展 */
+  text-align: left;
+}
+
+.hero-right {
+  align-self: flex-end;
+  max-width: 500px; /* 给右侧也给一点空间 */
+  text-align: right;
+  color: #666;
+}
 
   /* 5. 中心导航区域 (解决你说的间距问题) */
   .center-nav {
