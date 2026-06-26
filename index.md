@@ -5,71 +5,53 @@ description: "A digital log of my research and thoughts."
 ---
 
 <style>
-  /* 1. 基础重置 */
+  /* 1. 强制隐藏主题自带的 Header 和 Footer */
+  /* 使用更具体的选择器组合，确保优先级最高 */
+  header.site-header, 
+  header.main-header, 
+  footer.site-footer, 
+  footer.main-footer,
+  .site-header, 
+  .site-footer {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 2. 强制重置 Body，确保没有多余的边距 */
   body {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
     overflow-x: hidden;
   }
 
-  /* 2. 顶部 Header 布局 */
-  .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid #eee;
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-
-  .header-title {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #333;
-  }
-
-  .nav-menu {
-    display: flex;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-menu a {
-    text-decoration: none;
-    color: #666;
-    font-size: 0.9em;
-    transition: color 0.3s;
-  }
-
-  .nav-menu a:hover {
-    color: #e67e22;
-  }
-
-  /* 3. 核心视觉区：对角线布局 */
+  /* 3. 核心视觉区容器 */
   .hero-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100vh - 80px);
+    min-height: 100vh; /* 使用 min-height 确保至少占满一屏 */
     padding: 40px;
-    position: relative;
+    box-sizing: border-box; /* 确保 padding 不会撑大容器 */
   }
 
+  /* 4. 左上方文字样式 */
   .hero-left {
     align-self: flex-start;
-    max-width: 450px;
+    max-width: 500px;
     text-align: left;
   }
 
+  /* 5. 右下方文字样式 */
   .hero-right {
     align-self: flex-end;
     text-align: right;
     color: #666;
   }
 
-  /* 中间导航 */
+  /* 6. 中间导航区域 */
   .center-nav {
     position: absolute;
     top: 50%;
@@ -99,48 +81,13 @@ description: "A digital log of my research and thoughts."
     font-size: 1.1em;
   }
 
-  /* 4. 新增：警告/通知模块 */
-  .notice-section {
-    padding: 40px 20px;
+  /* 7. 底部状态栏样式 */
+  .status-bar {
     text-align: center;
-    background-color: #fdfdfd;
-  }
-
-  /* 5. 新增：AI 说明模块 */
-  .ai-disclosure {
-    padding: 30px 40px;
-    text-align: center;
-    background-color: #fafafa;
-    color: #777;
-    font-size: 0.9em;
-    line-line-height: 1.6; /* 修复行高 */
-  }
-
-  /* 6. 新增：免责声明模块 */
-  .disclaimer-section {
-    padding: 30px 40px;
-    text-align: center;
-    font-size: 0.85em;
-    color: #999;
-    background-color: #ffffff;
-  }
-
-  /* 7. 新增：页脚模块 */
-  .site-footer {
-    padding: 30px 20px;
-    text-align: center;
-    border-top: 1px solid #eee;
-    font-size: 0.8em;
-    color: #bbb;
-    background-color: #f9f9f9;
-  }
-
-  .footer-contact a {
-    color: #666;
-    text-decoration: none;
-    margin: 0 10px;
+    padding: 20px;
   }
 </style>
+
 
 <!-- 顶部 Header -->
 <header class="main-header">
