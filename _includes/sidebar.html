@@ -18,14 +18,14 @@
     </ul>
 
     {% elsif page.project or page.url contains '/projects/' %}
-    <!-- 情况 B: Projects 板块 (支持自动识别层级) -->
+    <!-- 【情况 B】: Projects 板块 (重新设计的层级逻辑) -->
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     
     <ul class="sidebar-list">
       {% if page.project %}
-        <!-- 1. 如果当前正在某个具体项目内 -->
-        
-        <!-- A. 显示该项目的总纲 (Plan) -->
+        <!-- 1. 当你在某个具体的项目内部时 -->
+
+        <!-- A. 显示该项目的【总纲/Plan】 (作为一个可点击的列表项) -->
         {% assign current_plan = site.projects | where: "project", page.project | where: "type", "plan" | first %}
         {% if current_plan %}
           <li class="sidebar-item">
@@ -37,14 +37,15 @@
 
         <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
-        <!-- B. 按子项目分组显示日志 -->
+        <!-- B. 分组显示该项目下的子项目日志 -->
         {% assign project_logs = site.projects | where: "project", page.project | where: "type", "log" %}
         {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
         {% for sub in sub_ids %}
           {% if sub != nil %}
-            <li class="sidebar-item" style="margin-top: 15px;">
-              <span style="font-size: 0.75em; color: #aaa; text-transform: uppercase;">{{ sub }}</span>
+            <!-- 子项目标题 (作为分组标识) -->
+            <li class="sidebar-item" style="margin-top: 15px; font-size: 0.8em; color: #aaa; text-transform: uppercase;">
+              {{ sub }}
             </li>
             {% for log in project_logs %}
               {% if log.sub_project == sub %}
@@ -63,7 +64,7 @@
         </li>
 
       {% else %}
-        <!-- 2. 如果在总目录页 (仅显示一级项目入口) -->
+        <!-- 2. 当你在 Projects 总目录页时 (显示所有的一级项目入口) -->
         {% assign all_plans = site.projects | where: "type", "plan" %}
         {% for plan in all_plans %}
           <li class="sidebar-item">

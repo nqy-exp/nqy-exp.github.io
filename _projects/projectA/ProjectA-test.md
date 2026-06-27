@@ -1,6 +1,6 @@
 ---
 layout: projects-layout
-title: ProjectA-Plan test
+title: ProjectA-Plantest
 project: projectA
 type: plan
 date: 2026-06-27
