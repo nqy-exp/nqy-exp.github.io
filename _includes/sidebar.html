@@ -1,18 +1,13 @@
 <!-- sidebar.html -->
 <aside class="sidebar">
-  <!-- 1. 标题部分 -->
   <h3 class="sidebar-title">
+    <!-- 确保标题可以点击，链接指向 ideas 目录 -->
     <a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a>
   </h3>
 
   <ul class="sidebar-list">
     {% for item in site.ideas %}
-      <!-- 调试模式：把每个文件的真实路径印出来，方便我们排查 -->
-      <li style="font-size: 10px; color: red; list-style: none;">
-        DEBUG PATH: {{ item.url }}
-      </li>
-
-      <!-- 原有的判断逻辑 -->
+      <!-- 【关键修复】：不再检查 name 是否等于 index，而是直接判断 URL 是否等于 /ideas/ -->
       {% if item.url != "/ideas/" %}
         <li class="sidebar-item">
           <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
@@ -25,15 +20,15 @@
 </aside>
 
 <style>
-/* 保持你原有的所有样式不变 */
+/* 侧边栏的基础样式 */
 .sidebar {
-  width: 250px;
+  width: 250px; /* 固定侧边栏宽度 */
   padding: 20px;
   border-right: 1px solid #eee;
-  height: calc(100vh - 80px);
-  position: sticky;
-  top: 80px;
-  overflow-y: auto;
+  height: calc(100vh - 80px); /* 高度撑满除去 Header 后的剩余空间 */
+  position: sticky; /* 让侧边栏在滚动时“粘”在左侧 */
+  top: 80px;        /* 距离顶部 Header 的距离 */
+  overflow-y: auto; /* 如果列表太长，允许侧边栏内部滚动 */
 }
 
 .sidebar-title {
@@ -41,7 +36,7 @@
   color: #333;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #e67e22;
+  border-bottom: 2px solid #e67e22; /* 给标题加个橙色底线，很有设计感 */
 }
 
 .sidebar-list {
@@ -59,9 +54,10 @@
   color: #666;
   font-size: 0.95em;
   transition: all 0.3s;
-  display: block;
+  display: block; /* 让整个区域都可以点击 */
 }
 
+/* 增加一个激活状态的样式，让你知道现在在哪 */
 .sidebar-link.active {
   color: #e67e22 !important;
   font-weight: bold;
@@ -70,6 +66,6 @@
 
 .sidebar-link:hover {
   color: #e67e22;
-  padding-left: 5px;
+  padding-left: 5px; /* 悬停时有一个微小的位移效果，很灵动 */
 }
 </style>
