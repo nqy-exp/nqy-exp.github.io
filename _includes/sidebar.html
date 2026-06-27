@@ -17,50 +17,55 @@
       {% endfor %}
     </ul>
 
- {% elsif page.url contains '/projects/' %}
-  <!-- 【情况 B】: Projects 板块 -->
-  <h3 class="sidebar-title">
-    <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
-  </h3>
-  <ul class="sidebar-list">
+  {% elsif page.project or page.url contains '/projects/' %}
+    <!-- 【情况 B】: Projects 板块 -->
+    <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
+    <ul class="sidebar-list">
 
-    {% if page.project %}
-      <!-- 1. 当你在某个具体项目内部时 (例如 projectA1 的日志页) -->
-      
-      <!-- 【关键修复】：强制转换 ID 为字符串，确保能匹配字典键 -->
-      {% assign current_proj_id = page.project | append: "" %}
+      {% if page.project %}
+        <!-- 1. 当你在某个具体项目内部时 -->
+        {% assign current_proj_id = page.project | downcase %}
 
-      <!-- A. 显示该项目的【大标题】 -->
-      <li class="sidebar-item" style="margin-bottom: 20px;">
-        <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-          <!-- 使用 site.project_mapping[id] 进行映射 -->
-          📂 {{ site.project_mapping[current_proj_id] | default: page.project }}
-        </span>
-      </li>
+        <!-- 【核心修改】：直接在这里硬编码翻译，不再调用 site.project_mapping -->
+        {% assign translated_title = "" %}
+        {% if current_proj_id == "projecta" %}
+          {% assign translated_title = "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究" %}
+        {% elsif current_proj_id == "projecta1" %}
+          {% assign translated_title = "Construction of Optical Microscopic Morphological Datasets for Textile Fibers｜纺织纤维光学显微形态学数据库构建" %}
+        {% elsif current_proj_id == "projecta2" %}
+          {% assign translated_title = "Exploration of Automated Fiber Identification via Computer Vision｜基于计算机视觉的纤维成分自动识别方案探索" %}
+        {% elsif current_proj_id == "projecta3" %}
+          {% assign translated_title = "Impact of Common Household Liquids on the Morphological Stability of Textile Fibers｜日常化学介质对纺织纤维形态的影响研究" %}
+        {% endif %}
 
-      <!-- B. 显示该项目的【总纲/Plan】 -->
-      {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
-      {% if current_plan %}
-        <li class="sidebar-item">
-          <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
-            📖 {{ current_plan.title }}
-          </a>
+        <!-- A. 显示该项目的【大标题】（不可点击） -->
+        <li class="sidebar-item" style="margin-bottom: 20px;">
+          <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
+            📂 {{ translated_title | default: page.project }}
+          </span>
         </li>
-      {% endif %}
 
-      <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
+        <!-- B. 显示该项目的【总纲/Plan】 -->
+        {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
+        {% if current_plan %}
+          <li class="sidebar-item">
+            <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
+              📖 {{ current_plan.title }}
+            </a>
+          </li>
+        {% endif %}
 
-      <!-- C. 分组显示该项目下的子项目日志 -->
-      {% assign project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
-      {% if project_logs.size > 0 %}
-        {% comment %} 获取所有不重复的 sub_project ID {% endcomment %}
+        <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
+
+        <!-- C. 分组显示该项目下的子项目日志 -->
+        {% assign project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
         {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
         {% for sub in sub_ids %}
-          <li class="sidebar-item" style="margin-top: 15px;">
-            <!-- 子项目分组标题 -->
-            <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
-            
+          {% if sub != nil %}
+            <li class="sidebar-item" style="margin-top: 15px;">
+              <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
+            </li>
             {% for log in project_logs %}
               {% if log.sub_project == sub %}
                 <li class="sidebar-item" style="padding-left: 10px;">
@@ -70,33 +75,41 @@
                 </li>
               {% endif %}
             {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+        <li class="sidebar-item" style="margin-top: 20px;">
+          <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
+        </li>
+
+      {% else %}
+        <!-- 2. 当你在 Projects 总目录页时 -->
+        {% assign all_plans = site.projects | where: "type", "plan" %}
+        {% for plan in all_plans %}
+          {% assign p_id = plan.project | downcase %}
+          
+          <!-- 【核心修改】：首页列表也直接进行硬编码翻译 -->
+          {% assign p_title = "" %}
+          {% if p_id == "projecta" %}
+            {% assign p_title = "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究" %}
+          {% elsif p_id == "projecta1" %}
+            {% assign p_title = "Construction of Optical Microscopic Morphological Datasets for Textile Fibers｜纺织纤维光学显微形态学数据库构建" %}
+          {% elsif p_id == "projecta2" %}
+            {% assign p_title = "Exploration of Automated Fiber Identification via Computer Vision｜基于计算机视觉的纤维成分自动识别方案探索" %}
+          {% elsif p_id == "projecta3" %}
+            {% assign p_title = "Impact of Common Household Liquids on the Morphological Stability of Textile Fibers｜日常化学介质对纺织纤维形态的影响研究" %}
+          {% endif %}
+
+          <li class="sidebar-item">
+            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
+              📂 {{ p_title | default: plan.title }}
+            </a>
           </li>
         {% endfor %}
       {% endif %}
-
-      <!-- 返回总目录链接 -->
-      <li class="sidebar-item" style="margin-top: 20px;">
-        <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
-      </li>
-
-    {% else %}
-      <!-- 2. 当你在 Projects 总目录页时 (显示所有一级项目入口) -->
-      {% for plan in site.projects %}
-        {% if plan.type == "plan" %}
-          <!-- 这里我们直接使用 mapping 里的名字 -->
-          {% assign display_name = site.project_mapping[plan.project] | default: plan.title %}
-          <li class="sidebar-item">
-            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
-              📂 {{ display_name }}
-            </a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-
-  </ul>
-{% endif %}
-
+    </ul>
+  {% endif %}
+</aside>
 
 <style>
 .sidebar { width: 250px; padding: 10px; height: calc(100vh - 80px); position: sticky; top: 80px; overflow-y: auto; }
