@@ -17,91 +17,72 @@
       {% endfor %}
     </ul>
 
-  {% elsif page.url contains '/projects/' %}
+   {% elsif page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 -->
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     <ul class="sidebar-list">
 
-      {% comment %} 
-        【逻辑重构】：不再通过解析 URL 的第几个斜杠来猜 ID。
-        直接问当前页面：你属于哪个 project？
-      {% endcomment %}
-      {% assign current_proj_id = page.project %}
+      {% comment %} 1. 提取 ID {% endcomment %}
+      {% assign path_parts = page.url | split: '/' %}
+      {% assign current_proj_id = "" %}
+      {% for part in path_parts %}
+        {% if part == 'projects' %}
+          {% assign next_index = forloop.index %}
+          {% if path_parts[next_index] != "" and path_parts[next_index] != nil %}
+            {% assign current_proj_id = path_parts[next_index] | strip | downcase %}
+          {% endif %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
 
-      {% if current_proj_id != nil and current_proj_id != "" %}
-        <!-- 【核心逻辑】：只要当前页面有 project 标签，我们就认定你在项目内部 -->
-
-               <!-- A. 显示该项目的【大标题】 (暴力匹配版) -->
+      {% if current_proj_id != "" and current_proj_id != "projects" %}
+        <!-- 正在项目内部 -->
         <li class="sidebar-item" style="margin-bottom: 20px;">
           <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-            📂 
-            {% assign final_display_name = "" %}
-            
-            {% comment %} 
-              【暴力匹配逻辑】：不再直接用 [key] 查找，而是遍历整个 mapping 表。
-              这样可以极大地规避由于索引失效导致的无法读取问题。
-            {% endcomment %}
-            
-            {% assign found_match = false %}
-            {% for key in site.project_mapping %}
-              {% if key == current_proj_id %}
-                {% assign final_display_name = site.project_mapping[key] %}
-                {% assign found_match = true %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
-
-            {% if found_match %}
-              {{ final_display_name }}
-            {% else %}
-              {% comment %} 如果遍历都没找到，尝试直接用 page 里的项目名 {% endcomment %}
-              {{ page.project | default: current_proj_id }}
-            {% endif %}
+            📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
           </span>
         </li>
+
+        <!-- 显示总纲 -->
+        {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
+        {% if current_plan %}
+          <li class="sidebar-item">
+            <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">📖 {{ current_plan.title }}</a>
+          </li>
         {% endif %}
 
         <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
-        <!-- C. 分组显示该项目下的所有日志 -->
-        {% assign all_project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
-        {% assign sub_ids = all_project_logs | map: "sub_project" | uniq %}
+        <!-- 显示子项目日志 -->
+        {% assign all_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
+        {% assign sub_ids = all_logs | map: "sub_project" | uniq %}
 
         {% for sub in sub_ids %}
           {% if sub != nil and sub != "" %}
-            <li class="sidebar-item" style="margin-top: 15px;">
-              <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
-            </li>
-            {% for log in all_project_logs %}
-              <!-- 这里去掉了 log.url != page.url，确保当前正在看的文章也会显示在列表中，只是会被高亮 -->
-              <li class="sidebar-item" style="padding-left: 10px;">
-                <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">
-                  • {{ log.title }}
-                </a>
-              </li>
+            <li class="sidebar-item" style="margin-top: 15px;"><span style="font-size: 0.75em; color: #aaa; font-weight: bold;">{{ sub }}</span></li>
+            {% for log in all_logs %}
+              {% if log.sub_project == sub %}
+                <li class="sidebar-item" style="padding-left: 10px;">
+                  <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">• {{ log.title }}</a>
+                </li>
+              {% endif %}
             {% endfor %}
           {% endif %}
         {% endfor %}
 
-        <li class="sidebar-item" style="margin-top: 20px;">
-          <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
-        </li>
+        <li class="sidebar-item" style="margin-top: 20px;"><a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a></li>
 
       {% else %}
-        <!-- 【情况 C】：如果当前页面没有 project 标签（比如就在 /projects/ 首页） -->
+        <!-- 在 Projects 总目录页 -->
         {% assign all_plans = site.projects | where: "type", "plan" %}
         {% for plan in all_plans %}
           <li class="sidebar-item">
-            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
-              📂 {{ site.project_mapping[plan.project | strip | downcase] | default: plan.title }}
-            </a>
+            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">📂 {{ site.project_mapping[plan.project | strip | downcase] | default: plan.title }}</a>
           </li >
         {% endfor %}
       {% endif %}
     </ul>
   {% endif %}
-
-  
 </aside>
 
 
