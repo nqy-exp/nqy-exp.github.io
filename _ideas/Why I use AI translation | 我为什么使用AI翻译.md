@@ -16,6 +16,8 @@ This is why I choose AI-assisted translation. It is my choice for efficiency and
 
 P.S. Of course, I am still improving my English and am preparing for the IELTS to prove my language skills.
 
+---
+
 关于为什么在这里使用 AI 辅助翻译，我想分享一些我的真实想法。
 
 首先，我必须坦诚：外语学习并非我的天赋所在。相比于钻研科学知识，我在语言学习方面的效率要低得多。面对无穷无尽的知识，我的精力有限，无法在每个领域都做到精益求精。

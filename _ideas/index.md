@@ -2,16 +2,12 @@
 layout: default
 title: Jibber-Jabber
 description: "Thoughts, fragments, and reflections."
+permalink: /ideas/
 ---
+<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
 
 <style>
-   /* 针对当前页面的 main 容器进行限宽 */
-  .hero-container {
-    max-width: 800px !important; /* 限制最大宽度 */
-    margin: 0 auto !important;   /* 让它在页面水平居中 */
-    padding: 40px 20px !important; 
-  }
-
+ 
   /* 每一行条目的样式 */
   .idea-item {
     display: flex;
@@ -43,7 +39,7 @@ description: "Thoughts, fragments, and reflections."
 <!-- 使用 Jekyll 的循环指令来遍历 _ideas 集合 (已添加自动过滤 index 功能) -->
 <div class="ideas-list">
   {% for item in site.ideas %}
-    {% if item.name != "index" %}
+    {% if item.url != "/ideas/" %}
       <div class="idea-item" style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #eee;">
         <a href="{{ item.url }}" style="font-weight: bold; color: #333; text-decoration: none;">
           {{ item.title }}
