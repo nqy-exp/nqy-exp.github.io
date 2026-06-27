@@ -10,8 +10,7 @@ collections:
 
 # 使用双引号包裹所有字符串，防止特殊字符干扰解析
 project_mapping:
-  "projectA": "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究"
-  "projectA1": "Construction of Optical Microscopic Morphological Datasets for Textile Fibers｜纺织纤维光学显微形态学数据库构建"
-  "projectA2": "Exploration of Automated Fiber Identification via Computer Vision｜基于计算机视觉的纤维成分自动识别方案探索"
-  "projectA3": "Impact of Common Household Liquids on the Morphological Stability of Textile Fibers｜日常化学介质对纺织纤维形态的影响研究"
-  
+  "projecta": "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究"
+  "projecta1": "Construction of Optical Microscopic Morphological Datasets for Textile Fibers｜纺织纤维光学显微形态学数据库构建"
+  "projecta2": "Exploration of Automated Fiber Identification via Computer Vision｜基于计算机视觉的纤维成分自动识别方案探索"
+  "projecta3": "Impact of Common Household Liquids on the Morphological Stability of Textile Fibers｜日常化学介质对纺织纤维形态的影响研究"
