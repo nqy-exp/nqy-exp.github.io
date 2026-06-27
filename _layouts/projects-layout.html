@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  {% include header.html %}
+
+  <!-- 使用 Flex 布局实现：左侧侧边栏 + 右侧内容区 -->
+  <main class="layout-container_split">
+    
+    <!-- 左侧项目树 -->
+    <aside class="sidebar">
+      <h3 class="sidebar-title">Projects</h3>
+      <ul class="sidebar-list">
+        {% for project in site.projects %}
+          <li class="sidebar-item">
+            <a href="{{ project.url }}" class="sidebar-link {% if page.url == project.url %}active{% endif %}">
+              {{ project.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <!-- 右侧主内容区 -->
+    <article class="main-content">
+      {{ content }}
+    </article>
+
+  </main>
+
+  {% include footer.html %}
+
+</body>
+</html>

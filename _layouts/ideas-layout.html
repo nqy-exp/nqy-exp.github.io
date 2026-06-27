@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  {% include header.html %}
+
+  <!-- 使用 Flex 布局实现：左侧侧边栏 + 右侧内容区 -->
+  <main class="layout-container_split">
+    
+    <!-- 左侧侧边栏 -->
+    <aside class="sidebar">
+      <h3 class="sidebar-title">Jibber-Jabber</h3>
+      <ul class="sidebar-list">
+        {% for item in site.ideas %}
+          <li class="sidebar-item">
+            <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
+              {{ item.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <!-- 右侧主内容区 -->
+    <article class="main-content">
+      {{ content }}
+    </article>
+
+  </main>
+
+  {% include footer.html %}
+
+</body>
+</html>
