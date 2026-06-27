@@ -1,8 +1,11 @@
 <!-- sidebar.html -->
 <aside class="sidebar">
-  <h3 class="sidebar-title">Jibber-Jabber</h3>
+  <h3 class="sidebar-title">
+  <a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a>
+</h3>
   <ul class="sidebar-list">
     {% for item in site.ideas %}
+     {% if item.name != "index" %}
       <li class="sidebar-item">
         <a href="{{ item.url }}" class="sidebar-link">
           {{ item.title }}

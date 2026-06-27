@@ -52,9 +52,12 @@ permalink: /ideas/
   {% endfor %}
 </div>
 
----
+<br><br>
 
-[← 返回首页](/ )
+<!-- 2. 返回首页链接 (使用 HTML 以确保稳定性) -->
+<a href="/" class="back-link">← 返回首页</a>
+
+<hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;">
 
 <br><br><br> <!-- 增加一些间距，把免责声明推下去 -->
 
