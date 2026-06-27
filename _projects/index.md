@@ -8,14 +8,68 @@ permalink: /projects/
 <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
 
 <style>
+  /* 树状目录容器 */
   .project-tree { list-style: none; padding-left: 0; }
-  .project-group { margin-bottom: 30px; border-left: 3px solid #e67e22; padding-left: 20px; }
-  .project-main-title { font-size: 1.4em; font-weight: bold; color: #333; margin-bottom: 15px; display: block; text-decoration: none; }
-  .sub-project-list { list-style: none; padding-left: 0; }
-  .sub-item { margin: 8px 0; color: #666; font-size: 0.95em; }
-  .sub-link { text-decoration: none; color: #666; transition: 0.2s; }
-  .sub-link:hover { color: #e67e22; padding-left: 5px; }
-  .back-link { display: block; margin-top: 40px; text-decoration: none; color: #999; font-size: 0.9em; }
+  
+  /* 一级项目组 (Project A) */
+  .project-group { 
+    margin-bottom: 40px; 
+    border-left: 4px solid #e67e22; 
+    padding-left: 25px;
+  }
+
+  /* 一级项目标题 (带翻译) */
+  .project-main-title { 
+    font-size: 1.5em; 
+    font-weight: bold; 
+    color: #333; 
+    text-decoration: none; 
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  /* 子项目/文件夹容器 */
+  .sub-project-container {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* 子项目标题 (如 ProjectA1) */
+  .sub-project-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* 具体日志条目 */
+  .log-item {
+    list-style: none;
+    padding: 8px 0;
+    border-bottom: 1px dotted #eee;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .log-link {
+    text-decoration: none;
+    color: #666;
+    transition: 0.2s;
+  }
+
+  .log-link:hover {
+    color: #e67e22;
+    padding-left: 5px;
+  }
+
+  .log-date {
+    font-size: 0.85em;
+    color: #aaa;
+    font-family: monospace;
+  }
+
+  .back-link { display: block; margin-top: 40px; text-decoration: none; color: #999; }
 </style>
 
 <h1 style="text-align: center;">Experimental Logs</h1>
@@ -26,36 +80,40 @@ permalink: /projects/
   
   {% for plan in all_plans %}
     <div class="project-group">
-      <!-- 显示长标题：优先从 mapping 查，查不到才用文件名 -->
+      <!-- 显示长标题 -->
       <a href="{{ plan.url }}" class="project-main-title">
         📂 {{ site.project_mapping[plan.project] | default: plan.title }}
       </a>
 
-      <ul class="sub-project-list">
-        {% comment %} 第二步：找到所有属于这个 project 的日志 {% endcomment %}
-        {% assign logs = site.projects | where: "project", plan.project | where: "type", "log" %}
+      {% comment %} 第二步：寻找属于这个 project 的所有日志 {% endcomment %}
+      {% assign all_logs_in_this_project = site.projects | where: "project", plan.project | where: "type", "log" %}
+
+      {% if all_logs_in_this_project.size > 0 %}
+        <!-- 第三步：将这些日志按 sub_project 进行分组展示 -->
+        {% assign sub_ids = all_logs_in_this_project | map: "sub_project" | uniq %}
         
-        {% for log in logs %}
-          <li class="sub-item">
-            <!-- 这里显示子项目名称 + 笔记标题 -->
-            <a href="{{ log.url }}" class="sub-link">
-              <span style="color: #aaa;">[{{ log.sub_project }}]</span> {{ log.title }}
-            </a>
-          </li>
+        {% for sub in sub_ids %}
+          <div class="sub-project-container">
+            <span class="sub-project-title">📁 {{ sub }}</span>
+            <ul style="list-style: none; padding-left: 0;">
+              {% for log in all_logs_in_this_project %}
+                {% if log.sub_project == sub %}
+                  <li class="log-item">
+                    <a href="{{ log.url }}" class="log-link">📄 {{ log.title }}</a>
+                    <span class="log-date">{{ log.date | date: "%Y-%m-%d" }}</span>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
         {% endfor %}
-      </ul>
+      {% else %}
+        <p style="color: #ccc; font-style: italic;">No logs recorded yet.</p>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
 
-<a href="/" class="back-link">← Homepage</a>
-
-<!-- 警示模块保持不变... -->
-</div>
-
-<br><br>
-
-<!-- 返回首页链接 -->
 <a href="/" class="back-link">← Homepage</a>
 
 <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;">
