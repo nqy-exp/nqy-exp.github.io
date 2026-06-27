@@ -17,17 +17,19 @@
       {% endfor %}
     </ul>
 
-   {% elsif page.project or page.url contains '/projects/' %}
+ {% elsif page.project or page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 -->
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     <ul class="sidebar-list">
 
       {% if page.project %}
-        <!-- 1. 当你在某个具体项目内部时 -->
-        {% assign current_proj_id = page.project | downcase %}
+        <!-- 1. 当你在某个具体项目内部时 (例如 projectA1 的日志页) -->
+        
+        <!-- 【关键修复】：强制转小写并去除空格，解决匹配问题 -->
+        {% assign current_proj_id = page.project | downcase | strip %}
 
-        <!-- A. 显示该项目的【大标题】 (不可点击) -->
-        {% assign translated_title = "" %}
+        <!-- A. 显示该项目的【大标题】（不可点击） -->
+        {% assign translated_title = page.project %}
         {% if current_proj_id == "projecta" %}
           {% assign translated_title = "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究" %}
         {% elsif current_proj_id == "projecta1" %}
@@ -40,11 +42,11 @@
 
         <li class="sidebar-item" style="margin-bottom: 20px;">
           <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-            📂 {{ translated_title | default: page.project }}
+            📂 {{ translated_title }}
           </span>
         </li>
 
-        <!-- B. 显示该项目的【总纲/Plan】 -->
+        <!-- B. 显示该项目的【总纲/Plan】 (单独列出，可点击) -->
         {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
         {% if current_plan %}
           <li class="sidebar-item">
@@ -61,12 +63,12 @@
         {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
         {% for sub in sub_ids %}
-          {% if sub != nil %}
+          {% if sub != nil and sub != "" %}
             <li class="sidebar-item" style="margin-top: 15px;">
+              <!-- 【关键修复】：移除了 uppercase，让子项目名称正常显示 -->
               <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
             </li>
             {% for log in project_logs %}
-              <!-- 【关键修复】：增加一个判断，确保当前正在看的页面本身不会出现在列表中 -->
               {% if log.sub_project == sub and log.url != page.url %}
                 <li class="sidebar-item" style="padding-left: 10px;">
                   <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">
@@ -86,8 +88,10 @@
         <!-- 2. 当你在 Projects 总目录页时 -->
         {% assign all_plans = site.projects | where: "type", "plan" %}
         {% for plan in all_plans %}
-          {% assign p_id = plan.project | downcase %}
-          {% assign p_title = "" %}
+          {% assign p_id = plan.project | downcase | strip %}
+          {% assign p_title = plan.title %}
+          
+          <!-- 首页列表也进行硬编码翻译 -->
           {% if p_id == "projecta" %}
             {% assign p_title = "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究" %}
           {% elsif p_id == "projecta1" %}
@@ -100,7 +104,7 @@
 
           <li class="sidebar-item">
             <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
-              📂 {{ p_title | default: plan.title }}
+              📂 {{ p_title }}
             </a>
           </li>
         {% endfor %}
