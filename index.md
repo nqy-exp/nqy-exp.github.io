@@ -2,140 +2,12 @@
 layout: default
 title: QY Niu's Log
 description: "A digital log of my research and thoughts."
-version: "0.1.1"
 ---
-
-<style>
-  /* 1. 强制移除主题自带的 Header 和 Footer */
-  /* 只隐藏主题自带的、没有 class 的原生标签 */
-header, footer {
-  display: none !important;
-}
-
-/* 强制显示我们自定义的这两个类名 */
-.my-custom-header, .my-custom-footer {
-  display: flex !important; /* Header 用 flex，Footer 用 block 会更好 */
-}
-
-/* 特别针对 Footer 的 flex 问题进行修正 */
-footer.my-custom-footer {
-  display: block !important; 
-}
-
-  /* 2. 基础重置 */
-  body {
-    margin: 0 !important;
-    padding: 0 !important;
-    background-color: #ffffff;
-  }
-
-  /* 3. 自定义 Header (显示在页面顶部) */
-  .my-custom-header {
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid #eee;
-    background-color: rgba(255, 255, 255, 0.9);
-  }
-
-  .header-title { font-weight: bold; font-size: 1.2em; color: #333; }
-  .nav-menu { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
-  .nav-menu a { text-decoration: none; color: #666; font-size: 0.9em; transition: 0.3s; }
-  .nav-menu a:hover { color: #e67e22; }
-
-  /* 4. 核心视觉区：对角线布局 */
-  .hero-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-  width: 100%;       /* 显式声明宽度为 100% */
-  padding: 40px 10%; /* 左右留出 10% 的呼吸感，而不是死板的像素值 */
-  box-sizing: border-box;
-  position: relative;
-}
-
-  .hero-left {
-  align-self: flex-start;
-  max-width: 600px; /* 从 450px 增加到 600px，让文字更舒展 */
-  text-align: left;
-}
-
-.hero-right {
-  align-self: flex-end;
-  max-width: 500px; /* 给右侧也给一点空间 */
-  text-align: right;
-  color: #666;
-}
-
-  /* 5. 中心导航区域 (解决你说的间距问题) */
-  .center-nav {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%; /* 确保宽度占满，方便居中 */
-  }
-
-  .center-nav h2 {
-    font-size: 0.8em;
-    color: #bbb;
-    letter-spacing: 4px;
-    margin-bottom: 30px; /* 增加与下方链接的间距 */
-    text-transform: uppercase;
-  }
-
-  .center-links {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-  }
-
-  .center-links a {
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-    font-size: 1.1em;
-  }
-
-  /* 6. 其他模块样式 */
-  .notice-section, .ai-disclosure, .disclaimer-section {
-    padding: 40px 20px;
-    text-align: center;
-  }
-
-  .ai-disclosure { background-color: #fafafa; color: #777; font-size: 0.9em; }
-  .disclaimer-section { background-color: #ffffff; color: #999; font-size: 0.85em; }
-
-  /* 7. 自定义页脚 */
-  .my-custom-footer {
-    padding: 40px 20px;
-    text-align: center;
-    border-top: 1px solid #eee;
-    background-color: #f9f9f9;
-    color: #bbb;
-    font-size: 0.8em;
-  }
-
-  .footer-contact a { color: #666; text-decoration: none; margin: 0 10px; }
-</style>
-
-<!-- 自定义 Header -->
-<header class="my-custom-header">
-  <div class="header-title">QY Niu's Log</div>
-  <nav>
-    <ul class="nav-menu">
-      <li><a href="/about/">About Me</a></li>
-      <li><a href="/projects/">Experimental Logs</a></li>
-      <li><a href="/ideas/">Jibber-Jabber</a></li>
-    </ul>
-  </nav>
-</header>
 
 <!-- 核心视觉区 -->
 <main class="hero-container">
+
+  <!-- 左上方内容 -->
   <div class="hero-left">
     <h1 style="font-size: 1.8em; margin-bottom: 15px;">Welcome to my website.</h1>
     <p style="line-height: 1.6; color: #444;">
@@ -144,6 +16,7 @@ footer.my-custom-footer {
     </p>
   </div>
 
+  <!-- 中间导航 -->
   <div class="center-nav">
     <h2>Navigation | 板块导航</h2>
     <div class="center-links">
@@ -153,6 +26,7 @@ footer.my-custom-footer {
     </div>
   </div>
 
+  <!-- 右下方内容 -->
   <div class="hero-right">
     <h1 style="font-size: 1.8em; margin-bottom: 15px;">欢迎来到我的网站。</h1>
     <p style="line-height: 1.6;">
@@ -160,6 +34,7 @@ footer.my-custom-footer {
       请做好心理准备，你会看到很多失败，不过请不要惊讶，对我而言失败才是常态，失败是走向成功的必经之路。
     </p>
   </div>
+
 </main>
 
 <!-- 警告模块 -->
@@ -190,11 +65,4 @@ footer.my-custom-footer {
     Disclaimer: This website is a personal space for academic exploration and intellectual documentation. The views expressed here are solely my own and do not constitute professional advice or represent any official institutional position.<br>
     免责声明：本网站是我的个人学术研究与思想记录空间。文中所表达的内容仅代表作者个人观点，不构成任何专业建议，亦不代表任何机构立场。
   </p>
-</section>
-
-<!-- 页脚模块 -->
-<footer class="my-custom-footer">
-  <div class="footer-contact">
-    Contact me: <a href="mailto:nqy.pro@outlook.com">nqy.pro@outlook.com</a> ｜ © 2026 Qiyue Niu. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="color: #999;">CC BY-NC-ND 4.0 ｜ V0.1 </a>
-  </div>
-</footer>
+</section middle>
