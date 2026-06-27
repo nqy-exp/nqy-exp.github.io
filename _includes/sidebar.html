@@ -31,21 +31,34 @@
       {% if current_proj_id != nil and current_proj_id != "" %}
         <!-- 【核心逻辑】：只要当前页面有 project 标签，我们就认定你在项目内部 -->
 
-        <!-- A. 显示该项目的【大标题】 (使用你最满意的那个翻译版本) -->
+               <!-- A. 显示该项目的【大标题】 (暴力匹配版) -->
         <li class="sidebar-item" style="margin-bottom: 20px;">
           <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-            📂 {{ site.project_mapping[current_proj_id | strip | downcase] | default: current_proj_id }}
+            📂 
+            {% assign final_display_name = "" %}
+            
+            {% comment %} 
+              【暴力匹配逻辑】：不再直接用 [key] 查找，而是遍历整个 mapping 表。
+              这样可以极大地规避由于索引失效导致的无法读取问题。
+            {% endcomment %}
+            
+            {% assign found_match = false %}
+            {% for key in site.project_mapping %}
+              {% if key == current_proj_id %}
+                {% assign final_display_name = site.project_mapping[key] %}
+                {% assign found_match = true %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+            {% if found_match %}
+              {{ final_display_name }}
+            {% else %}
+              {% comment %} 如果遍历都没找到，尝试直接用 page 里的项目名 {% endcomment %}
+              {{ page.project | default: current_proj_id }}
+            {% endif %}
           </span>
         </li>
-
-        <!-- B. 显示该项目的【总纲/Plan】 -->
-        {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
-        {% if current_plan %}
-          <li class="sidebar-item">
-            <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
-              📖 {{ current_plan.title }}
-            </a>
-          </li>
         {% endif %}
 
         <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
