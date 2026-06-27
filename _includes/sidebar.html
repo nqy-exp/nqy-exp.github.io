@@ -17,41 +17,36 @@
       {% endfor %}
     </ul>
 
- {% elsif page.url contains '/projects/' %}
+   {% elsif page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 -->
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     <ul class="sidebar-list">
 
-  {% comment %} 
-        【终极版路径解析】：不再依赖固定的 index[2]，而是动态定位 projects 之后的第一个元素
-      {% endcomment %}
       {% assign path_parts = page.url | split: '/' %}
-      {% assign current_proj_id = "" %}
+      
+      {% if path_parts.size > 2 and path_parts[2] != "" %}
+        <!-- 【关键修复点 1】：使用 strip 清除可能的空格，并确保转换为小写 -->
+        {% assign current_proj_id = path_parts[2] | strip | downcase %}
 
-      {% comment %} 遍历路径，寻找 'projects' 这个关键字 {% endcomment %}
-      {% for part in path_parts %}
-        {% if part == 'projects' %}
-          {% comment %} 获取 'projects' 后面那个非空的元素 {% endcomment %}
-          {% assign next_index = forloop.index %}
-          {% if path_parts[next_index] != "" and path_parts[next_index] != nil %}
-            {% assign current_proj_id = path_parts[next_index] | strip | downcase %}
-          {% endif %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-
-      {% if current_proj_id != "" and current_proj_id != "projects" %}
-        <!-- 我们现在处于某个具体的项目内部 -->
-
-        <!-- A. 显示该项目的【大标题】 -->
+        <!-- A. 显示该项目的【大标题】 (Mapping 逻辑增强版) -->
         <li class="sidebar-item" style="margin-bottom: 20px;">
-          {% assign mapped_name = site.project_mapping[current_proj_id] %}
           <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-            📂 {{ mapped_name | default: current_proj_id }}
+            📂 
+            {% comment %} 
+              【关键修复点 2】：先尝试从 mapping 取值，如果取不到，再尝试使用 page 中的 project 属性（双重保险）
+            {% endcomment %}
+            {% assign mapped_name = site.project_mapping[current_proj_id] %}
+            {% if mapped_name %}
+              {{ mapped_name }}
+            {% else %}
+               {% comment %} 如果 mapping 失效，尝试直接用 page 里的 project 标签内容进行映射 {% endcomment %}
+               {{ page.project | default: current_proj_id }}
+            {% endif %}
           </span>
         </li>
 
         <!-- B. 显示该项目的【总纲/Plan】 -->
+        <!-- 注意：这里使用了 site.projects，请确保你在 collections 中定义了 projects -->
         {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
         {% if current_plan %}
           <li class="sidebar-item">
@@ -64,17 +59,21 @@
         <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
         <!-- C. 分组显示该项目下的子项目日志 -->
-        {% comment %} 获取当前项目下所有的 log {% endcomment %}
-        {% assign all_project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
-        {% assign sub_ids = all_project_logs | map: "sub_project" | uniq %}
+        {% assign project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
+        
+        {% comment %} 提取不重复的 sub_project ID {% endcomment %}
+        {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
         {% for sub in sub_ids %}
           {% if sub != nil and sub != "" %}
             <li class="sidebar-item" style="margin-top: 15px;">
-              <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
+              <!-- 子项目标题也可以尝试 mapping，如果 sub 本身也是个 ID 的话 -->
+              <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">
+                {{ site.project_mapping[sub] | default: sub }}
+              </span>
             </li>
-            {% for log in all_project_logs %}
-              {% if log.sub_project == sub %}
+            {% for log in project_logs %}
+              {% if log.sub_project == sub and log.url != page.url %}
                 <li class="sidebar-item" style="padding-left: 10px;">
                   <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">
                     • {{ log.title }}
@@ -97,17 +96,13 @@
             <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
               📂 {{ site.project_mapping[plan.project | strip | downcase] | default: plan.title }}
             </a>
-          </li >
+          </li>
         {% endfor %}
       {% endif %}
     </ul>
   {% endif %}
   
 </aside>
-<!-- 调试用：看看程序到底抓到了什么 -->
-<div style="font-size: 10px; color: red;">
-  DEBUG: ID=['{{ current_proj_id }}'] | MappingVal=['{{ site.project_mapping[current_proj_id] }}']
-</div>
 
 
 <style>
