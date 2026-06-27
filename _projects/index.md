@@ -79,11 +79,22 @@ permalink: /projects/
 <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;">
 
 <div style="text-align: center; color: #888; font-size: 0.9em; line-height: 1.6;">
-  <p>
-    <strong>Experimental Note<strong>: All experiments documented herein are personal exploratory attempts conducted in a non-professional (home-based) setting. They do not constitute peer-reviewed research or standardized operational protocols. Please exercise caution and professional judgment; <strong>do not replicate any procedures based solely on these notes.<strong>
-  </p>
-  <p>
-    <strong>实验说明<strong>：本记录的所有实验均系个人在非专业实验室（家庭环境）下进行的探索性尝试，并非经过同行评议的研究成果，亦非标准操作指南。请读者审慎判断内容的可靠性，<strong>切勿盲目模仿任何实验步骤<strong>。
-   
-  </p>
+    <!-- 使用内联 style 定义高亮样式，颜色设为稍深一点的灰色或警告色 -->
+    <style>
+        .warning-highlight {
+            color: #555; /* 高亮文字颜色：比普通灰字深一点 */
+            font-weight: 600; /* 让高亮部分稍微厚实一点 */
+            text-decoration: underline; /* 可选：加个下划线增加警示感 */
+        }
+    </style>
+
+    <p>
+        <strong>Experimental Note</strong>: All experiments documented herein are personal exploratory attempts conducted in a non-professional (home-based) setting. They do not constitute peer-reviewed research or standardized operational protocols. Please exercise caution and professional judgment; 
+        <span class="warning-highlight">do not replicate any procedures based solely on these notes.</span>
+    </p>
+
+    <p>
+        <strong>实验说明</strong>：本记录的所有实验均系个人在非专业实验室（家庭环境）下进行的探索性尝试，并非经过同行评议的研究成果，亦非标准操作指南。请读者审慎判断内容的可靠性，
+        <span class="warning-highlight">切勿盲目模仿任何实验步骤</span>。
+    </p>
 </div>
