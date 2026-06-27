@@ -17,32 +17,86 @@
       {% endfor %}
     </ul>
 
- <!-- sidebar-debug.html (诊断模式) -->
-<aside class="sidebar" style="background: #fff0f0; border: 3px solid red !important;">
-  <h3 class="sidebar-title" style="color: red;">DEBUG MODE</h3>
-  
-  <div style="font-size: 10px; color: black; line-height: 1.4; word-break: break-all;">
-    <p><strong>1. 当前完整的 URL:</strong><br>{{ page.url }}</p>
-    
-    <p><strong>2. page.project 的值:</strong><br>[{{ page.project }}]</p>
-    
-    <p><strong>3. 是否包含 '/projects/':</strong><br>{% if page.url contains '/projects/' %}YES{% else %}NO{% endif %}</p>
-    
-    <p><strong>4. URL 切割后的结果 (path_parts):</strong><br>
-      {% assign parts = page.url | split: '/' %}
-      {% for p in parts %}
-        [{{ p }}] 
-      {% endfor %}
-    </p>
+ {% elsif page.url contains '/projects/' %}
+  <!-- 【情况 B】: Projects 板块 -->
+  <h3 class="sidebar-title">
+    <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
+  </h3>
+  <ul class="sidebar-list">
 
-    <hr>
-    <p><strong>5. site.project_mapping 内容预览:</strong><br>
-       {% for key, value in site.project_mapping %}
-         {{ key }}: {{ value }}<br>
-       {% endfor %}
-    </p>
-  </div>
-</aside>
+    {% if page.project %}
+      <!-- 1. 当你在某个具体项目内部时 (例如 projectA1 的日志页) -->
+      
+      <!-- 【关键修复】：强制转换 ID 为字符串，确保能匹配字典键 -->
+      {% assign current_proj_id = page.project | append: "" %}
+
+      <!-- A. 显示该项目的【大标题】 -->
+      <li class="sidebar-item" style="margin-bottom: 20px;">
+        <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
+          <!-- 使用 site.project_mapping[id] 进行映射 -->
+          📂 {{ site.project_mapping[current_proj_id] | default: page.project }}
+        </span>
+      </li>
+
+      <!-- B. 显示该项目的【总纲/Plan】 -->
+      {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
+      {% if current_plan %}
+        <li class="sidebar-item">
+          <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
+            📖 {{ current_plan.title }}
+          </a>
+        </li>
+      {% endif %}
+
+      <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
+
+      <!-- C. 分组显示该项目下的子项目日志 -->
+      {% assign project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
+      {% if project_logs.size > 0 %}
+        {% comment %} 获取所有不重复的 sub_project ID {% endcomment %}
+        {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
+
+        {% for sub in sub_ids %}
+          <li class="sidebar-item" style="margin-top: 15px;">
+            <!-- 子项目分组标题 -->
+            <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
+            
+            {% for log in project_logs %}
+              {% if log.sub_project == sub %}
+                <li class="sidebar-item" style="padding-left: 10px;">
+                  <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">
+                    • {{ log.title }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </li>
+        {% endfor %}
+      {% endif %}
+
+      <!-- 返回总目录链接 -->
+      <li class="sidebar-item" style="margin-top: 20px;">
+        <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
+      </li>
+
+    {% else %}
+      <!-- 2. 当你在 Projects 总目录页时 (显示所有一级项目入口) -->
+      {% for plan in site.projects %}
+        {% if plan.type == "plan" %}
+          <!-- 这里我们直接使用 mapping 里的名字 -->
+          {% assign display_name = site.project_mapping[plan.project] | default: plan.title %}
+          <li class="sidebar-item">
+            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
+              📂 {{ display_name }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+  </ul>
+{% endif %}
+
 
 <style>
 .sidebar { width: 250px; padding: 10px; height: calc(100vh - 80px); position: sticky; top: 80px; overflow-y: auto; }
