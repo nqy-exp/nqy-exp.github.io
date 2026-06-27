@@ -1,0 +1,151 @@
+/* =========================================
+   1. 基础重置 (Base Reset)
+   ========================================= */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #ffffff; /* 默认白色背景 */
+}
+
+/* =========================================
+   2. 自定义 Header (顶部导航栏)
+   ========================================= */
+.my-custom-header {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid #eee;
+  background-color: rgba(255, 255, 255, 0.9); /* 半透明白色 */
+}
+
+.header-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px; /* 菜单项之间的间距 */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #666;
+  font-size: 0.9em;
+  transition: color 0.3s ease; /* 让颜色变化更平滑 */
+}
+
+.nav-menu a:hover {
+  color: #e67e22; /* 悬停时的橙色 */
+}
+
+/* =========================================
+   3. 核心视觉区 (Hero Container)
+   ========================================= */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh; /* 确保至少占满一屏高度 */
+  padding: 40px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 左侧文字内容 */
+.hero-left {
+  align-self: flex-start;
+  max-width: 450px;
+  text-align: left;
+}
+
+/* 右侧文字内容 */
+.hero-right {
+  align-self: flex-end;
+  text-align: right;
+  color: #666;
+}
+
+/* 中心导航按钮组 */
+.center-nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 完美的几何中心对齐 */
+  text-align: center;
+}
+
+.center-nav h2 {
+  font-size: 0.8em;
+  color: #bbb;
+  letter-spacing: 4px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.center-links {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.center-links a {
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.center-links a:hover {
+  color: #e67e22;
+}
+
+/* =========================================
+   4. 其他功能模块样式 (Notice, AI, Disclaimer, Footer)
+   ========================================= */
+
+/* 警告/通知框 */
+.notice-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* AI 说明区 */
+.ai-disclosure {
+  padding: 30px 40px;
+  text-align: center;
+  background-color: #fafafa;
+  color: #777;
+  font-size: 0.9em;
+}
+
+/* 免责声明区 */
+.disclaimer-section {
+  padding: 30px 40px;
+  text-align: center;
+  font-size: 0.85em;
+  color: #999;
+  background-color: #ffffff;
+}
+
+/* 页脚 */
+.my-custom-footer {
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+  background-color: #f9f9f9;
+  color: #bbb;
+  font-size: 0.8em;
+}
+
+.footer-contact a {
+  color: #666;
+  text-decoration: none;
+  margin: 0 10px;
+}
