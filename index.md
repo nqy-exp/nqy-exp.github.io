@@ -2,6 +2,7 @@
 layout: default
 title: QY Niu's Log
 description: "A digital log of my research and thoughts."
+version: "0.1.1"
 ---
 
 <style>
