@@ -1,5 +1,5 @@
 ---
-layout: idea-layout
+layout: ideas-layout
 title: Why I use AI translation | 我为什么使用AI翻译
 date: 2026-06-25
 ---

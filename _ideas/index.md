@@ -5,11 +5,11 @@ description: "Thoughts, fragments, and reflections."
 ---
 
 <style>
-  /* 限制列表页的最大宽度，防止在宽屏上显得太散 */
-  .ideas-list-container {
-    max-width: 800px; /* 限制宽度，让阅读更集中 */
-    margin: 0 auto;   /* 水平居中 */
-    padding-top: 40px;
+   /* 针对当前页面的 main 容器进行限宽 */
+  .hero-container {
+    max-width: 800px !important; /* 限制最大宽度 */
+    margin: 0 auto !important;   /* 让它在页面水平居中 */
+    padding: 40px 20px !important; 
   }
 
   /* 每一行条目的样式 */
@@ -40,18 +40,20 @@ description: "Thoughts, fragments, and reflections."
   }
 </style>
 
-<!-- 使用 Jekyll 的循环指令来遍历 _ideas 集合 -->
+<!-- 使用 Jekyll 的循环指令来遍历 _ideas 集合 (已添加自动过滤 index 功能) -->
 <div class="ideas-list">
-{% for item in site.ideas %}
-  <div class="idea-item" style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #eee;">
-    <a href="{{ item.url }}" style="font-weight: bold; color: #333; text-decoration: none;">
-      {{ item.title }}
-    </a>
-    <span style="color: #999; font-size: 0.85em; font-family: monospace;">
-      {{ item.date | date: "%Y-%m-%d" }}
-    </span>
-  </div>
-{% endfor %}
+  {% for item in site.ideas %}
+    {% if item.name != "index" %}
+      <div class="idea-item" style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #eee;">
+        <a href="{{ item.url }}" style="font-weight: bold; color: #333; text-decoration: none;">
+          {{ item.title }}
+        </a>
+        <span style="color: #999; font-size: 0.85em; font-family: monospace;">
+          {{ item.date | date: "%Y-%m-%d" }}
+        </span>
+      </div>
+    {% endif %}
+  {% endfor %}
 </div>
 
 ---
