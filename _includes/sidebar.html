@@ -17,29 +17,67 @@
       {% endfor %}
     </ul>
 
-     <!-- sidebar-debug.html (临时调试用) -->
-<aside class="sidebar" style="background: #fffceb; border: 2px solid red !important;">
-  <h3 class="sidebar-title">DEBUG MODE</h3>
-  <div style="font-size: 0.8em; color: red; padding: 10px; line-height: 1.4;">
-    <p><strong>URL:</strong> {{ page.url }}</p>
-    <p><strong>Project ID (page.project):</strong> [{{ page.project }}]</p>
-    <p><strong>Contains '/projects/':</strong> {% if page.url contains '/projects/' %}YES{% else %}NO{% endif %}</p>
-  </div>
-
-  <hr>
-
-  <!-- 下面是原有的逻辑，但我们暂时注释掉复杂的，只看基础的分支 -->
-  <ul class="sidebar-list">
-    <li>
+  {% elsif page.project or page.url contains '/projects/' %}
+    <!-- 【情况 B】: Projects 板块 -->
+    <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
+    <ul class="sidebar-list">
+      
       {% if page.project %}
-        <span style="color: green;">检测到 Project ID! 正在尝试显示内容...</span>
-      {% elsif page.url contains '/projects/' %}
-        <span style="color: blue;">检测到 Projects URL! 进入总目录模式。</span>
+        <!-- 1. 当你在某个具体的 Project 内部时 -->
+        
+        <!-- A. 显示该项目的【总纲/Plan】 -->
+        {% assign current_proj_id = page.project %}
+        {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
+        
+        {% if current_plan %}
+          <li class="sidebar-item">
+            <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #333;">
+              📖 {{ site.project_mapping[current_proj_id] | default: current_plan.title }}
+            </a>
+          </li>
+        {% endif %}
+
+        <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
+
+        <!-- B. 分组显示该项目下的子项目日志 -->
+        {% assign project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
+        {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
+
+        {% for sub in sub_ids %}
+          {% if sub != nil %}
+            <li class="sidebar-item" style="margin-top: 15px;">
+              <span style="font-size: 0.75em; color: #aaa; text-transform: uppercase;">{{ sub }}</span>
+            </li>
+            {% for log in project_logs %}
+              {% if log.sub_project == sub %}
+                <li class="sidebar-item" style="padding-left: 10px;">
+                  <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">
+                    • {{ log.title }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+        <li class="sidebar-item" style="margin-top: 20px;">
+          <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
+        </li>
+
       {% else %}
-        <span style="color: red;">未匹配到任何项目分支！</span>
+        <!-- 2. 当你在 Projects 总目录页时 -->
+        {% assign all_plans = site.projects | where: "type", "plan" %}
+        {% for plan in all_plans %}
+          <li class="sidebar-item">
+            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
+              📂 {{ site.project_mapping[plan.project] | default: plan.title }}
+            </a>
+          </li>
+        {% endfor %}
       {% endif %}
-    </li>
-  </ul>
+    </ul>
+
+  {% endif %}
 </aside>
 
 <style>
