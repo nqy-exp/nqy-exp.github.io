@@ -225,24 +225,69 @@ body {
 /* ----------------------------------------- */
 /* 移动端响应式样式 (针对手机/小屏幕) */
 /* ----------------------------------------- */
+/* ----------------------------------------- */
+/* 移动端响应式样式 (水平滚动模式) */
+/* ----------------------------------------- */
 @media (max-width: 768px) {
-  .layout-container_split {
-    flex-direction: column !important; /* 变成上下堆叠 */
-    padding: 0 !important;             /* 移除容器边距，让内容撑满屏幕 */
-  }
+    /* 1. 容器层：由并排改为上下堆叠 */
+    .layout-container_split {
+        flex-direction: column !important;
+        padding: 0 !important; /* 移除边距，让内容撑满屏幕 */
+    }
 
-  .sidebar {
-    width: 100% !important;            /* 宽度占满 */
-    height: auto !important;           /* 高度自动 */
-    position: relative !important;     /* 取消粘性定位 */
-    top: 0 !important;
-    border-right: none !important;
-    border-bottom: 1px solid #eee;
-    padding: 20px;                     /* 给侧边栏留点呼吸空间 */
-  }
+    /* 2. 侧边栏：从“纵向长列表”转变为“横向滑动条” */
+    .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        position: relative !important; /* 取消粘性，随页面滚动 */
+        top: 0 !important;
+        border-right: none !important;
+        border-bottom: 1px solid #eee;
+        padding: 15px 20px !important;
+        
+        /* 核心逻辑：横向布局与滑动 */
+        display: flex !important;           /* 使用 flex 布局 */
+        flex-direction: row !important;     /* 强制改为横向 */
+        overflow-x: auto !important;        /* 允许水平溢出时滚动 */
+        white-space: nowrap !important;     /* 强制文字不换行，保证单行排列 */
+        -webkit-overflow-scrolling: touch;   /* 让 iOS 的滑动更顺滑 */
+    }
 
-  .main-content {
-    padding: 20px !important;          /* 内容左右留出一点间距，不至于贴死边缘 */
-    width: 100%;
-  }
+    /* 隐藏侧边栏滚动条（可选：为了视觉极简） */
+    .sidebar::-webkit-scrollbar {
+        display: none; /* Chrome/Safari 隐藏滚动条 */
+    }
+    .sidebar {
+        -ms-overflow-style: none;  /* IE/Edge 隐藏滚动条 */
+        scrollbar-width: none;     /* Firefox 隐藏滚动条 */
+    }
+
+    .sidebar-title {
+        display: none !important; /* 移动端隐藏“侧边栏标题”，因为横向模式下不需要它占位 */
+    }
+
+    .sidebar-list {
+        display: flex !important;   /* 让列表项也横向排列 */
+        flex-direction: row !important;
+        gap: 20px;                  /* 设置每一项之间的间距 */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .sidebar-item {
+        margin-bottom: 0 !important; /* 取消纵向间距 */
+        margin-right: 10px;         /* 设置项与项之间的横向间距 */
+    }
+
+    .sidebar-link {
+        padding: 5px 0 !important;  /* 增加点击热区的高度 */
+    }
+
+    /* 3. 主内容区：调整边距 */
+    .main-content {
+        padding: 20px !important;   /* 给正文留出呼吸感，不至于贴死边缘 */
+        width: 100% !important;
+        flex: none !important;
+    }
 }
+

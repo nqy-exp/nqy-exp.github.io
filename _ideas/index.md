@@ -68,7 +68,7 @@ permalink: /ideas/
 <br><br>
 
 <!-- 2. 返回首页链接 (使用 HTML 以确保稳定性) -->
-<a href="/" class="back-link">← 返回首页</a>
+<a href="/" class="back-link">← Homepage</a>
 
 <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;">
 
