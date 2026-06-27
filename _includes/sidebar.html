@@ -17,22 +17,27 @@
       {% endfor %}
     </ul>
 
-  {% elsif page.project or page.url contains '/projects/' %}
+   {% elsif page.project or page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 -->
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     <ul class="sidebar-list">
-      
+
       {% if page.project %}
-        <!-- 1. 当你在某个具体的 Project 内部时 -->
+        <!-- 1. 当你在某个具体项目内部时 (例如 projectA1 的日志页) -->
         
-        <!-- A. 显示该项目的【总纲/Plan】 -->
-        {% assign current_proj_id = page.project %}
-        {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
-        
+        <!-- 【核心修改】：首先显示【项目大标题】，它现在是纯文本，不可点击！ -->
+        <li class="sidebar-item" style="margin-bottom: 20px;">
+          <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
+            📂 {{ site.project_mapping[page.project] | default: page.project }}
+          </span>
+        </li>
+
+        <!-- A. 显示该项目的【总纲/Plan】作为一个独立的、可点击的条目 -->
+        {% assign current_plan = site.projects | where: "project", page.project | where: "type", "plan" | first %}
         {% if current_plan %}
           <li class="sidebar-item">
-            <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #333;">
-              📖 {{ site.project_mapping[current_proj_id] | default: current_plan.title }}
+            <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
+              📖 {{ current_plan.title }}
             </a>
           </li>
         {% endif %}
@@ -40,7 +45,7 @@
         <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
         <!-- B. 分组显示该项目下的子项目日志 -->
-        {% assign project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
+        {% assign project_logs = site.projects | where: "project", page.project | where: "type", "log" %}
         {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
         {% for sub in sub_ids %}
@@ -57,7 +62,7 @@
                 </li>
               {% endif %}
             {% endfor %}
-          {% endif %}
+          {% endendif %}
         {% endfor %}
 
         <li class="sidebar-item" style="margin-top: 20px;">
@@ -65,7 +70,7 @@
         </li>
 
       {% else %}
-        <!-- 2. 当你在 Projects 总目录页时 -->
+        <!-- 2. 当你在 Projects 总目录页时 (显示所有一级项目入口) -->
         {% assign all_plans = site.projects | where: "type", "plan" %}
         {% for plan in all_plans %}
           <li class="sidebar-item">
@@ -76,7 +81,6 @@
         {% endfor %}
       {% endif %}
     </ul>
-
   {% endif %}
 </aside>
 
@@ -127,5 +131,11 @@
 .sidebar-link:hover {
   color: #e67e22;
   padding-left: 5px;
+}
+
+.project-header-text {
+  display: block;
+  color: #333;
+  font-weight: bold;
 }
 </style>
