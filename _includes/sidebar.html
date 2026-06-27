@@ -17,7 +17,7 @@
       {% endfor %}
     </ul>
 
-  {% elsif page.project or page.url contains '/projects/' %}
+   {% elsif page.project or page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 -->
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     <ul class="sidebar-list">
@@ -26,7 +26,7 @@
         <!-- 1. 当你在某个具体项目内部时 -->
         {% assign current_proj_id = page.project | downcase %}
 
-        <!-- 【核心修改】：直接在这里硬编码翻译，不再调用 site.project_mapping -->
+        <!-- A. 显示该项目的【大标题】 (不可点击) -->
         {% assign translated_title = "" %}
         {% if current_proj_id == "projecta" %}
           {% assign translated_title = "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究" %}
@@ -38,7 +38,6 @@
           {% assign translated_title = "Impact of Common Household Liquids on the Morphological Stability of Textile Fibers｜日常化学介质对纺织纤维形态的影响研究" %}
         {% endif %}
 
-        <!-- A. 显示该项目的【大标题】（不可点击） -->
         <li class="sidebar-item" style="margin-bottom: 20px;">
           <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
             📂 {{ translated_title | default: page.project }}
@@ -67,7 +66,8 @@
               <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
             </li>
             {% for log in project_logs %}
-              {% if log.sub_project == sub %}
+              <!-- 【关键修复】：增加一个判断，确保当前正在看的页面本身不会出现在列表中 -->
+              {% if log.sub_project == sub and log.url != page.url %}
                 <li class="sidebar-item" style="padding-left: 10px;">
                   <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">
                     • {{ log.title }}
@@ -87,8 +87,6 @@
         {% assign all_plans = site.projects | where: "type", "plan" %}
         {% for plan in all_plans %}
           {% assign p_id = plan.project | downcase %}
-          
-          <!-- 【核心修改】：首页列表也直接进行硬编码翻译 -->
           {% assign p_title = "" %}
           {% if p_id == "projecta" %}
             {% assign p_title = "Rapid Characterization of Textile Fibers via Optical Microscopy｜基于光学显微成像的纺织纤维快速表征研究" %}
