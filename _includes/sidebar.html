@@ -51,7 +51,7 @@
         {% for sub in sub_ids %}
           {% if sub != nil %}
             <li class="sidebar-item" style="margin-top: 15px;">
-              <span style="font-size: 0.75em; color: #aaa; text-transform: uppercase;">{{ sub }}</span>
+              <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
             </li>
             {% for log in project_logs %}
               {% if log.sub_project == sub %}
