@@ -1,2 +1,9 @@
 title: QY Niu's Log
 theme: minima
+
+# 定义自定义集合 (Collections)
+collections:
+  ideas:
+    output: true    # 允许将这些文件渲染成网页
+  projects:
+    output: true    # 允许将这些文件渲染成网页
