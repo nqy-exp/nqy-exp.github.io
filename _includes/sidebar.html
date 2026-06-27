@@ -22,16 +22,23 @@
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     <ul class="sidebar-list">
 
-      {% comment %} 
-        【逻辑增强】：更加鲁棒的 ID 提取。
-        无论路径是 /projects/projecta/ 或 /projects/projecta/log1/，都能拿到 projecta
+  {% comment %} 
+        【终极版路径解析】：不再依赖固定的 index[2]，而是动态定位 projects 之后的第一个元素
       {% endcomment %}
       {% assign path_parts = page.url | split: '/' %}
       {% assign current_proj_id = "" %}
-      
-      {% if path_parts.size > 2 %}
-        {% assign current_proj_id = path_parts[2] | strip | downcase %}
-      {% endif %}
+
+      {% comment %} 遍历路径，寻找 'projects' 这个关键字 {% endcomment %}
+      {% for part in path_parts %}
+        {% if part == 'projects' %}
+          {% comment %} 获取 'projects' 后面那个非空的元素 {% endcomment %}
+          {% assign next_index = forloop.index %}
+          {% if path_parts[next_index] != "" and path_parts[next_index] != nil %}
+            {% assign current_proj_id = path_parts[next_index] | strip | downcase %}
+          {% endif %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
 
       {% if current_proj_id != "" and current_proj_id != "projects" %}
         <!-- 我们现在处于某个具体的项目内部 -->
@@ -97,6 +104,10 @@
   {% endif %}
   
 </aside>
+<!-- 调试用：看看程序到底抓到了什么 -->
+<div style="font-size: 10px; color: red;">
+  DEBUG: ID=['{{ current_proj_id }}'] | MappingVal=['{{ site.project_mapping[current_proj_id] }}']
+</div>
 
 
 <style>
