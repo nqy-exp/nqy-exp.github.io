@@ -65,4 +65,4 @@ description: "A digital log of my research and thoughts."
     Disclaimer: This website is a personal space for academic exploration and intellectual documentation. The views expressed here are solely my own and do not constitute professional advice or represent any official institutional position.<br>
     免责声明：本网站是我的个人学术研究与思想记录空间。文中所表达的内容仅代表作者个人观点，不构成任何专业建议，亦不代表任何机构立场。
   </p>
-</section middle>
+</section>
