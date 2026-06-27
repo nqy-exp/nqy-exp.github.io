@@ -8,83 +8,49 @@ permalink: /projects/
 <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
 
 <style>
-  /* 项目列表条目容器 */
-  .projects-list {
-    margin-top: 20px;
-  }
-
-  /* 每一行项目的样式 */
-  .idea-item {
-    display: flex;
-    justify-content: space-between; /* 标题在左，日期在右 */
-    align-items: baseline;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee; /* 行与行之间的分割线 */
-    text-decoration: none;
-    transition: background 0.2s ease;
-  }
-
-  .idea-item:hover {
-    background-color: #f9f9f9; /* 鼠标悬停时的微弱反馈 */
-  }
-
-  /* 项目标题样式 */
-  .idea-title {
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-  }
-
-  /* 日期样式 */
-  .idea-date {
-    color: #999;
-    font-size: 0.85em;
-    font-family: monospace; /* 使用等宽字体增加极客感 */
-  }
-
-  /* 返回首页链接样式 */
-  .back-link {
-    display: block;
-    margin-top: 30px;
-    text-decoration: none;
-    color: #666;
-    font-size: 0.9em;
-    transition: color 0.2s;
-  }
-
-  .back-link:hover {
-    color: #e67e22; /* 悬停时变为主题橙色 */
-  }
-
-  /* 警示模块高亮样式 */
-  .warning-highlight {
-    color: #555; /* 比普通灰字稍深，起到强调作用 */
-    font-weight: 600;
-    text-decoration: underline;
-  }
+  .project-tree { list-style: none; padding-left: 0; }
+  .project-group { margin-bottom: 30px; border-left: 3px solid #e67e22; padding-left: 20px; }
+  .project-main-title { font-size: 1.4em; font-weight: bold; color: #333; margin-bottom: 15px; display: block; text-decoration: none; }
+  .sub-project-list { list-style: none; padding-left: 0; }
+  .sub-item { margin: 8px 0; color: #666; font-size: 0.95em; }
+  .sub-link { text-decoration: none; color: #666; transition: 0.2s; }
+  .sub-link:hover { color: #e67e22; padding-left: 5px; }
+  .back-link { display: block; margin-top: 40px; text-decoration: none; color: #999; font-size: 0.9em; }
 </style>
 
-<!-- 项目大厅列表 -->
-<div class="projects-list">
-  {% comment %} 
-    核心逻辑：
-    1. 我们只寻找 type 为 'plan' 的文件作为大厅入口（即一级项目）。
-    2. 通过 permalink 确保 index 本身不会被当作一个项目显示出来。
-  {% endcomment %}
+<h1 style="text-align: center;">Experimental Logs</h1>
+
+<div class="project-tree">
+  {% comment %} 第一步：找到所有的一级项目 (type: plan) {% endcomment %}
   {% assign all_plans = site.projects | where: "type", "plan" %}
   
   {% for plan in all_plans %}
-    {% if plan.url != "/projects/" %}
-      <div class="idea-item">
-        <a href="{{ plan.url }}" class="idea-title">
-          📂 {{ plan.title }}
-        </a>
-        <span class="idea-date">
-          {{ plan.date | date: "%Y-%m-%d" }}
-        </span>
-      </div>
-    {% endif %}
+    <div class="project-group">
+      <!-- 显示长标题：优先从 mapping 查，查不到才用文件名 -->
+      <a href="{{ plan.url }}" class="project-main-title">
+        📂 {{ site.project_mapping[plan.project] | default: plan.title }}
+      </a>
+
+      <ul class="sub-project-list">
+        {% comment %} 第二步：找到所有属于这个 project 的日志 {% endcomment %}
+        {% assign logs = site.projects | where: "project", plan.project | where: "type", "log" %}
+        
+        {% for log in logs %}
+          <li class="sub-item">
+            <!-- 这里显示子项目名称 + 笔记标题 -->
+            <a href="{{ log.url }}" class="sub-link">
+              <span style="color: #aaa;">[{{ log.sub_project }}]</span> {{ log.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   {% endfor %}
+</div>
+
+<a href="/" class="back-link">← Homepage</a>
+
+<!-- 警示模块保持不变... -->
 </div>
 
 <br><br>
