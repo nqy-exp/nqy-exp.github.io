@@ -34,6 +34,19 @@ permalink: /ideas/
     font-size: 0.85em;
     font-family: monospace; /* 时间用等宽字体更有极客感 */
   }
+
+  /* 返回链接的样式 */
+.back-link {
+  display: block;
+  margin-top: 30px;
+  text-decoration: none;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.back-link:hover {
+  color: #e67e22;
+}
 </style>
 
 <!-- 使用 Jekyll 的循环指令来遍历 _ideas 集合 (已添加自动过滤 index 功能) -->
