@@ -17,26 +17,31 @@
       {% endfor %}
     </ul>
 
-   {% elsif page.project or page.url contains '/projects/' %}
+    {% elsif page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 -->
     <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
     <ul class="sidebar-list">
 
-      {% if page.project %}
-        <!-- 1. 当你在某个具体项目内部时 (例如 projectA1 的日志页) -->
-        
-        <!-- 【关键修复 1】：强制将当前项目的 ID 转为小写，确保能从 mapping 中查到翻译 -->
-        {% assign current_proj_id = page.project | downcase %}
+      {% comment %} 
+        【核心重构】：通过解析 URL 路径来获取 Project ID，不再依赖 page.project 变量
+        假设 URL 为 /projects/projectA1/log-01/
+        split('/') 会得到 ["", "projects", "projectA1", "log-01", ""]
+      {% endcomment %}
+      {% assign path_parts = page.url | split: '/' %}
 
-        <!-- A. 显示该项目的【大标题】（不可点击） -->
+      {% if path_parts.size > 2 and path_parts[2] != "" %}
+        <!-- 1. 检测到你在某个项目路径下 -->
+        {% assign detected_id = path_parts[2] | downcase %}
+
+        <!-- A. 显示【项目大标题】 (不可点击) -->
         <li class="sidebar-item" style="margin-bottom: 20px;">
           <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-            📂 {{ site.project_mapping[current_proj_id] | default: page.project }}
+            📂 {{ site.project_mapping[detected_id] | default: detected_id }}
           </span>
         </li>
 
-        <!-- B. 显示该项目的【总纲/Plan】 (单独列出，可点击) -->
-        {% assign current_plan = site.projects | where: "project", current_proj_id | where: "type", "plan" | first %}
+        <!-- B. 显示该项目的【总纲/Plan】 (可点击) -->
+        {% assign current_plan = site.projects | where: "project", detected_id | where: "type", "plan" | first %}
         {% if current_plan %}
           <li class="sidebar-item">
             <a href="{{ current_plan.url }}" class="sidebar-link {% if page.url == current_plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
@@ -47,14 +52,13 @@
 
         <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
-        <!-- C. 分组显示该项目下的子项目日志 -->
-        {% assign project_logs = site.projects | where: "project", current_proj_id | where: "type", "log" %}
+        <!-- C. 分组显示日志 -->
+        {% assign project_logs = site.projects | where: "project", detected_id | where: "type", "log" %}
         {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
         {% for sub in sub_ids %}
           {% if sub != nil %}
             <li class="sidebar-item" style="margin-top: 15px;">
-              <!-- 子项目分组标题 -->
               <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">{{ sub }}</span>
             </li>
             {% for log in project_logs %}
@@ -74,14 +78,12 @@
         </li>
 
       {% else %}
-        <!-- 2. 当你在 Projects 总目录页时 (显示所有一级项目入口) -->
+        <!-- 2. 你在 Projects 总目录页 -->
         {% assign all_plans = site.projects | where: "type", "plan" %}
         {% for plan in all_plans %}
-          {% comment %} 【关键修复 2】：在首页遍历时，也强制将 ID 转为小写去查字典 {% endcomment %}
-          {% assign plan_id = plan.project | downcase %}
           <li class="sidebar-item">
             <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
-              📂 {{ site.project_mapping[plan_id] | default: plan.title }}
+              📂 {{ site.project_mapping[plan.project | downcase] | default: plan.title }}
             </a>
           </li>
         {% endfor %}
