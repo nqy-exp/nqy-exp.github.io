@@ -348,73 +348,7 @@ body {
     width: 100%;
   }
 }
-/* --- 免责声明样式 (Disclaimer) --- */
-.project-disclaimer {
-  margin-top: 60px;
-  padding: 20px;
-  background-color: #fff5f5; /* 极淡的红色/粉色背景，起到警示作用但不过于刺眼 */
-  border: 1px solid #ffebeb;
-  border-radius: 6px;
-}
 
-.project-disclaimer p {
-  margin: 5px 0;
-  font-size: 0.85em;
-  color: #a94442; /* 深红色文字，符合警示逻辑 */
-  line-height: 1.5;
-}
-
-/* --- 项目导航样式 (Project Navigation) --- */
-.project-nav-footer {
-  margin-top: 40px;
-  padding-bottom: 40px;
-}
-
-.project-nav-controls {
-  display: flex;
-  justify-content: space-between; /* 三个元素：左、中、右 */
-  align-items: center;
-  gap: 10px;
-}
-
-/* 回到目录样式 (居中) */
-.proj-back {
-  flex: 1;
-  text-align: left;
-  font-size: 0.85em;
-  color: #999;
-  text-decoration: none;
-  font-style: italic;
-}
-
-/* 上一篇和下一篇样式 */
-.proj-item {
-  flex: 1;
-  font-size: 0.9em;
-  color: #666;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.proj-item:last-child {
-  text-align: right; /* 下一篇靠右 */
-}
-
-.proj-back:hover, .proj-item:hover {
-  color: #e67e22;
-}
-
-/* 移动端适配 */
-@media (max-width: 600px) {
-  .project-nav-controls {
-    flex-direction: column; /* 手机上垂直排列 */
-    gap: 15px;
-  }
-  .proj-back, .proj-item {
-    text-align: center !important;
-    width: 100%;
-  }
-}
 /* 建设中提示便签样式 */
 .construction-note {
   margin: 50px auto 30px auto; /* 与上方内容保持距离，并水平居中 */
@@ -500,27 +434,63 @@ body {
   border-radius: 8px;
 }
 
-*/
-/* 轻量级风险提示样式 */
+/* --- 轻量级提示样式 --- */
 .tiny-disclaimer {
-  margin: 10px 0 20px 0;      /* 与日期和分割线保持呼吸感 */
-  padding: 4px 8px;           /* 极小的内边距 */
-  display: inline-flex;       /* 让图标和文字水平排列 */
-  align-items: center;        /* 垂直居中对齐 */
-  background-color: #fcfcfc;  /* 近乎透明的背景色 */
-  border-radius: 4px;
+  margin: 0 0 20px 0; /* 确保与下方分割线有距离 */
+  padding: 4px 10px;
+  display: flex;      /* 使用 flex 让图标和文字对齐 */
+  align-items: center;
 }
 
 .tiny-disclaimer .disclaimer-text {
-  font-size: 0.75em;          /* 非常小的字号，不会干扰主视觉 */
-  color: #bbb;                /* 使用浅灰色，降低存在感 */
-  margin-left: 6px;           /* 图标和文字的间距 */
-  line-height: 1.2;
-  letter-spacing: 0.5px;      /* 增加字间距，提升精致感 */
+  font-size: 0.75em;
+  color: #aaa;
+  margin-left: 6px;
+  line-height: 1.4;
 }
 
-/* 如果你想让它在鼠标悬停时稍微明显一点点（可选） */
-.tiny-disclaimer:hover {
-  background-color: #f5f5f5;
-  color: #999;
+/* --- 免责声明样式 (宽屏版) --- */
+.project-disclaimer {
+  margin-top: 60px;   /* 与正文保持较大距离 */
+  padding: 20px;      /* 内边距 */
+  width: 100%;        /* 【关键】确保宽度撑满文章区域 */
+  box-sizing: border-box; /* 确保 padding 不会撑破容器 */
+  background-color: #fcfcfc;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.project-disclaimer p {
+  margin: 5px 0;
+  font-size: 0.85em;
+  color: #777;
+  line-height: 1.6;
+}
+
+.project-disclaimer .disclaimer-label {
+  color: #444;
+  margin-right: 4px;
+}
+
+/* --- 项目导航样式 --- */
+.project-nav-footer {
+  margin-top: 20px;
+}
+
+.project-nav-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.proj-back, .proj-item {
+  text-decoration: none;
+  color: #888;
+  font-size: 0.9em;
+  transition: color 0.2s;
+}
+
+.proj-back:hover, .proj-item:hover {
+  color: #e67e22;
 }

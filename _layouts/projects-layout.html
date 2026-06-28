@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} | {{ site.title }}</title>
+<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
@@ -12,12 +12,13 @@
 
   <!-- 使用 Flex 布局实现：左侧侧边栏 + 右侧内容区 -->
   <main class="layout-container_split">
-    
-    <!-- 召唤自动识别项目的侧边栏 (它会根据当前页面的 parent_project 来决定显示什么) -->
+    <!-- 召唤自动识别项目的侧边栏 -->
     {% include sidebar.html %}
 
     <!-- 右侧主内容区 -->
     <article class="main-content">
+      
+      <!-- 1. 文章头部 (Header) -->
       <header style="margin-top: 0;">
         <h1 style="margin-bottom: 5px;">{{ page.title }}</h1>
         {% if page.date %}
@@ -27,33 +28,30 @@
         {% endif %}
       </header>
 
-        <!-- 【轻量级风险提示】 -->
-  <div class="tiny-disclaimer">
-    ⚠️ <span class="disclaimer-text">Experimental content. Personal exploration only. Do not replicate. / 实验记录仅供个人探索，请勿模仿。</span>
+      <!-- 2. 【轻量级风险提示】 - 放在标题下方，分割线上方 -->
+      <div class="tiny-disclaimer">
+        ⚠️ <span class="disclaimer-text">Experimental content. Personal exploration only. Do not replicate. / 实验记录仅供个人探索，请勿模仿。</span>
+      </div> <!-- 这里之前漏掉了闭合标签！ -->
 
       <hr style="border: none; border-top: 1px solid #eee; margin-bottom: 30px;">
 
-      <!-- 文章正文内容 -->
+      <!-- 3. 文章正文内容 (Content) -->
       <div class="post-content">
         {{ content }}
       </div>
 
- <!-- 【新增模块 1】：免责声明 (Disclaimer) -->
+      <!-- 4. 【免责声明模块】 - 放在正文下方 -->
       <div class="project-disclaimer">
-        <p><strong>Disclaimer:</strong> Home-based personal explorations. Not professional advice. Do not replicate.</p>
-        <p><strong>免责声明：</strong> 家庭环境下的个人探索，非专业指导，请勿模仿。</p>
+        <p><strong class="disclaimer-label">Disclaimer:</strong> Home-based personal explorations. Not professional advice. Do not replicate.</p>
+        <p><strong class="disclaimer-label">免责声明：</strong> 家庭环境下的个人探索，非专业指导，请勿模仿。</p>
       </div>
 
-      <!-- 【新增模块 2】：项目内导航 (Project Navigation) -->
-      {% comment %} 
-        逻辑：先找到当前项目的所有日志，然后根据当前页面的 URL 在这个子集中找前后篇。
-      {% endcomment %}
+      <!-- 5. 【项目内导航模块】 -->
       {% assign current_project = page.project %}
       {% assign project_logs = site.projects | where: "project", current_project | where: "type", "log" | sort: "date" %}
       
       <footer class="project-nav-footer">
         <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0 20px 0;">
-        
         <div class="project-nav-controls">
           <!-- 回到项目总目录 -->
           <a href="/projects/" class="proj-back">← Back to Experimental Logs</a>
@@ -80,10 +78,8 @@
         </div>
       </footer>
 
-
-    </article>
-
-  </main>
+    </article> <!-- article 结束 -->
+  </main> <!-- main 结束 -->
 
   {% include footer.html %}
 
