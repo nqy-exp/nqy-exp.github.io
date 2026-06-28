@@ -64,17 +64,6 @@
             {% endif %}
           {% endfor %}
 
-          <!-- 上一篇 -->
-          {% if current_index > 0 %}
-            {% assign prev_log = project_logs[current_index | minus: 1] %}
-            <a href="{{ prev_log.url }}" class="proj-item">← {{ prev_log.title }}</a>
-          {% endif %}
-
-          <!-- 下一篇 -->
-          {% if current_index < project_logs.size | minus: 1 %}
-            {% assign next_log = project_logs[current_index | plus: 1] %}
-            <a href="{{ next_log.url }}" class="proj-item">{{ next_log.title }} →</a>
-          {% endif %}
         </div>
       </footer>
 
