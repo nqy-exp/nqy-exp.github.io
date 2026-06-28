@@ -74,20 +74,33 @@ permalink: /projects/
 
 <br><br><br>
 
+<!-- 【建设中提示便签】 -->
+<div class="construction-note">
+  <div class="note-content">
+    <span class="note-icon">🚧</span>
+    <p class="note-text">This section is currently under construction. New project logs and documentation will be uploaded soon.</p>
+    <p class="note-text-zh">此板块正在建设中，新的项目日志与文档即将上线。</p>
+  </div>
+</div>
+
+<br><br><br>
+
 <a href="/" class="back-link">← Homepage</a>
 
 <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;">
 
 <!-- 警示模块 -->
-<div style="text-align: center; color: #888; font-size: 0.9em; line-height: 1.6;">
-  <p>
-    <strong>Experimental Note</strong>: All experiments documented herein are personal exploratory attempts conducted in a non-professional (home-based) setting. They do not constitute peer-reviewed research or standardized operational protocols. Please exercise caution and professional judgment; 
+<div class="disclaimer-container">
+  <p class="disclaimer-text">
+    <strong class="disclaimer-label">Experimental Note</strong>: All experiments documented herein are personal exploratory attempts conducted in a non-professional (home-based) setting. They do not constitute peer-reviewed research or standardized operational protocols. Please exercise caution and professional judgment; 
     <span class="warning-highlight">do not replicate any procedures based solely on these notes.</span>
   </p>
 
-  <p>
-    <strong>实验说明</strong>：本记录的所有实验均系个人在非专业实验室（家庭环境）下进行的探索性尝试，并非经过同行评议的研究成果，亦非标准操作指南。请读者审慎判断内容的可靠性，
+  <p class="disclaimer-text">
+    <strong class="disclaimer-label">实验说明</strong>：本记录的所有实验均系个人在非专业实验室（家庭环境）下进行的探索性尝试，并非经过同行评议的研究成果，亦非标准操作指南。请读者审慎判断内容的可靠性，
     <span class="warning-highlight">切勿盲目模仿任何实验步骤</span>。
+  </p>
+</div>
   </p>
 </div>
 

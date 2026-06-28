@@ -100,7 +100,15 @@
         {% endfor %}
       {% endif %}
     </ul>
+
+                    <!-- 【温馨提示便签 - 插入在列表末尾】 -->
+        <div class="sidebar-notice-card">
+          <p class="notice-en">💡 Note: Sidebar header may occasionally vanish during navigation. Content remains unaffected.</p>
+          <p class="notice-zh">💡 提示：侧边栏标题在部分页面跳转时可能暂时消失，不影响阅读。</p>
+        </div>
+        
   {% endif %}
+
 </aside>
 
 
@@ -162,4 +170,32 @@
   color: #333;
   font-weight: bold;
 }
+/* 便签卡片样式 - 底部独立脚注版 */
+.sidebar-notice-card {
+  margin-top: 40px;      /* 【关键】创造一段明显的间距，不贴着 Back to All Projects */
+  margin-left: 5px;      /* 微调左边距，对齐视觉中心 */
+  padding: 12px 15px;
+  background-color: #f8f8f8; /* 极淡的底色 */
+  border-left: 2px solid #e67e22; /* 标志性的橙色装饰线 */
+  border-radius: 4px;
+  /* 使用非常轻微的阴影，让它看起来像是一个独立的脚注 */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+}
+
+.notice-en {
+  font-size: 10px;
+  color: #999;           /* 英文颜色调浅，减少视觉压力 */
+  margin: 0 0 3px 0;
+  line-height: 1.2;
+  font-style: italic;
+}
+
+.notice-zh {
+  font-size: 11px;
+  color: #777;           /* 中文颜色稍深，保证可读性 */
+  margin: 0;
+  line-height: 1.4;
+}
+
+
 </style>

@@ -31,6 +31,40 @@
       <div class="post-content">
         {{ content }}
       </div>
+
+      <!-- 【新增模块】：文章底部导航 -->
+      <footer class="post-navigation">
+        <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0 20px 0;">
+        
+        <div class="nav-controls">
+          <!-- 1. 回到目录 -->
+          <a href="/ideas/" class="nav-back">← Back to Jibber-Jabber</a>
+
+          {% comment %} 
+            【逻辑核心】：寻找上一篇和下一篇 
+          {% endcomment %}
+          {% assign current_index = 0 %}
+          {% for item in site.ideas %}
+            {% if item.url == page.url %}
+              {% assign current_index = forloop.index0 %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          <!-- 2. 上一篇 -->
+          {% if current_index > 0 %}
+            {% assign prev_item = site.ideas[current_index | minus: 1] %}
+            <a href="{{ prev_item.url }}" class="nav-item">← {{ prev_item.title }}</a>
+          {% endif %}
+
+          <!-- 3. 下一篇 -->
+          {% if current_index < site.ideas.size | minus: 1 %}
+            {% assign next_item = site.ideas[current_index | plus: 1] %}
+            <a href="{{ next_item.url }}" class="nav-item">{{ next_item.title }} →</a>
+          {% endif %}
+        </div>
+      </footer>
+      
     </article>
 
   </main>
