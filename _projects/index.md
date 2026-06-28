@@ -94,12 +94,12 @@ permalink: /projects/
   <div class="warning-icon">⚠️</div>
   <div class="warning-content">
     <p class="warning-text-en">
-      <strong class="warning-label">Experimental Note:</strong> All experiments documented herein are personal exploratory attempts conducted in a non-professional (home-based) setting. They do not constitute peer-reviewed research or standardized operational protocols. Please exercise caution and professional judgment; 
+      <strong class="warning-label">Disclaimer:</strong> All experiments documented herein are personal exploratory attempts conducted in a non-professional (home-based) setting. They do not constitute peer-reviewed research or standardized operational protocols. Please exercise caution and professional judgment; 
       <span class="critical-highlight">do not replicate any procedures based solely on these notes.</span>
     </p>
 
     <p class="warning-text-zh">
-      <strong class="warning-label">实验说明：</strong>本记录的所有实验均系个人在非专业实验室（家庭环境）下进行的探索性尝试，并非经过同行评议的研究成果，亦非标准操作指南。请读者审慎判断内容的可靠性，
+      <strong class="warning-label">免责声明：</strong>本记录的所有实验均系个人在非专业实验室（家庭环境）下进行的探索性尝试，并非经过同行评议的研究成果，亦非标准操作指南。请读者审慎判断内容的可靠性，
       <span class="critical-highlight">切勿盲目模仿任何实验步骤。</span>
     </p>
   </div>
