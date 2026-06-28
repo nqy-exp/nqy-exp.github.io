@@ -10,7 +10,7 @@ title: FAQ
 <div style="border-left: 4px solid #e67e22; padding-left: 15px; margin: 20px 0;">
   <p style="color: #666; font-style: italic; margin: 0;">
     This section is currently under construction. <br>
-    该页面正在建设中，敬请期待。
+    该页面正在建设中，敬请期待...
   </p>
 </div>
 
