@@ -494,3 +494,164 @@ body {
 .proj-back:hover, .proj-item:hover {
   color: #e67e22;
 }
+
+/* --- About Me 全局容器 --- */
+.about-hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-main-title {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* 头像与身份 */
+.about-identity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e67e22;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.name-title {
+  font-size: 1.8em;
+  margin: 0;
+  color: #333;
+}
+
+.role-subtitle {
+  font-size: 1.1em;
+  color: #e67e22;
+  margin: 5px 0 0 0;
+  font-style: italic;
+}
+
+/* 时间线样式 */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+}
+
+.timeline li {
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.specialization {
+  font-size: 0.85em;
+  color: #999;
+  font-style: italic;
+}
+
+/* 内容块样式 */
+.content-body {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.main-text {
+  font-size: 1em;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 40px;
+}
+
+/* 交互区域样式 */
+.engagement-section {
+  margin-top: 40px;
+}
+
+.section-sub-title {
+  font-size: 1.25em;
+  color: #333;
+  margin: 35px 0 15px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.engagement-item {
+  margin-bottom: 25px;
+}
+
+.engagement-link {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #e67e22 !important;
+  text-decoration: none;
+}
+
+.item-desc {
+  font-size: 0.9em;
+  color: #777;
+  margin: 5px 0 0 28px; /* 对齐图标 */
+}
+
+/* 机会、简历、反馈文本 */
+.opportunity-text, .resume-text, .feedback-text {
+  font-size: 0.95em;
+  line-height: 1.7;
+  color: #555;
+}
+
+.resume-link, .email-link {
+  color: #e67e22;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* 中英文分割线 */
+.about-lang-divider {
+  margin: 80px auto;
+  width: 60%;
+  border: none;
+  border-top: 1px dashed #ddd;
+}
+
+/* 响应式适配 */
+@media (max-width: 600px) {
+  .about-identity {
+    flex-direction: column;
+    text-align: center;
+  }
+  .engagement-item {
+    text-align: left;
+  }
+}
+/* 底部导航容器 */
+.section-footer-nav {
+  text-align: center;    /* 按钮水平居中 */
+  margin-top: 40px;      /* 与上方内容保持间距 */
+  padding-bottom: 20px;
+}
+
+/* 返回首页的链接样式 */
+.back-home-link {
+  display: inline-block;
+  font-size: 0.85em;
+  color: #999;           /* 使用中性灰色，不要抢戏 */
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 5px 15px;
+  border: 1px solid #eee; /* 给按钮加一个极淡的边框，更有“按钮感” */
+  border-radius: 20px;    /* 圆角设计，显得轻盈 */
+}
+
+.back-home-link:hover {
+  color: #e67e22;        /* 悬停时变为你的品牌橙色 */
+  border-color: #e67e22;
+  background-color: #fffcf5; /* 增加一个淡淡的背景色反馈 */
+}
