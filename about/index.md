@@ -72,7 +72,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">Opportunities</h3>
       <p class="opportunity-text">
-        I am currently seeking opportunities in academic research (PhD positions) and R&D roles. If you feel my research interests align with your team, please feel free to reach out at any time.<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
+        I am currently seeking opportunities in academic research (PhD positions) and R&D roles. If you feel my capabilities or research interests align with your team, please feel free to reach out at any time.<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
 
       </p>
 
@@ -145,7 +145,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">关于机会</h3>
       <p class="opportunity-text">
-        我目前正在寻找学术研究（博士深造）与研发（R&D）领域的职业发展机会。如果你认为我的研究方向与你的团队契合，非常欢迎随时联系。<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
+        我目前正在寻找学术研究（博士深造）与研发（R&D）领域的职业发展机会。如果你认为我的个人能力或研究方向与你的团队契合，非常欢迎随时联系。<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
 
       </p>
 
