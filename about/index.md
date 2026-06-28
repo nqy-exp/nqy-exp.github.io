@@ -52,7 +52,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
       <h3 class="section-sub-title">Want to know more?</h3>
       
       <div class="engagement-item">
-        <a href="/about/FAQ.md/" class="engagement-link">
+        <a href="/about/FAQ/" class="engagement-link">
           <span class="icon">❓</span> FAQ
         </a>
         <p class="item-desc">I have collected some answers to questions I often encounter in interviews. Feel free to take a look.</p>
@@ -120,7 +120,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
       <h3 class="section-sub-title">想了解更多</h3>
       
       <div class="engagement-item">
-        <a href="/about/FAQ.md/" class="engagement-link">
+        <a href="/about/FAQ/" class="engagement-link">
           <span class="icon">❓</span> FAQ
         </a>
         <p class="item-desc">这里收集了我面试时常被问到的问题和回答，感兴趣的话可以看看。</p>
