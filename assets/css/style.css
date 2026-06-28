@@ -655,3 +655,16 @@ body {
   border-color: #e67e22;
   background-color: #fffcf5; /* 增加一个淡淡的背景色反馈 */
 }
+
+.tiny-email-icon {
+  text-decoration: none; /* 去掉可能出现的下划线 */
+  font-size: 1.2em;      /* 让图标稍微大一点点，方便点击 */
+  display: inline-block; /* 允许设置边距和变换 */
+  transition: transform 0.2s ease, opacity 0.2s ease; /* 添加平滑动画 */
+  vertical-align: middle; /* 与文字对齐 */
+}
+
+.tiny-email-icon:hover {
+  transform: scale(1.2); /* 鼠标指上去时，图标轻微放大，增加反馈感 */
+  opacity: 0.7;           /* 稍微变透明一点点 */
+}

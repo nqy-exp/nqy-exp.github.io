@@ -52,7 +52,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
       <h3 class="section-sub-title">Want to know more?</h3>
       
       <div class="engagement-item">
-        <a href="/about/faq/" class="engagement-link">
+        <a href="/about/FAQ.md/" class="engagement-link">
           <span class="icon">❓</span> FAQ
         </a>
         <p class="item-desc">I have collected some answers to questions I often encounter in interviews. Feel free to take a look.</p>
@@ -67,13 +67,14 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">Opportunities</h3>
       <p class="opportunity-text">
-        I am currently seeking opportunities in academic research (PhD positions) and R&D roles. If you feel my research interests align with your team, please feel free to reach out at any time.
+        I am currently seeking opportunities in academic research (PhD positions) and R&D roles. If you feel my research interests align with your team, please feel free to reach out at any time.<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
+
       </p>
 
       <h3 class="section-sub-title">Resume Download</h3>
       <p class="resume-text">
         You can view or download a clearer version of my resume here: (now under construction)
-        <a href="/about/cv.pdf" class="resume-link" target="_blank">[Download PDF]</a>
+        <a href="/about/Niu-Qiyue-cv.pdf" class="resume-link" target="_blank">[Download PDF]</a>
       </p>
 
       <h3 class="section-sub-title">Feedback & Discussion</h3>
@@ -119,7 +120,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
       <h3 class="section-sub-title">想了解更多</h3>
       
       <div class="engagement-item">
-        <a href="/about/faq/" class="engagement-link">
+        <a href="/about/FAQ.md/" class="engagement-link">
           <span class="icon">❓</span> FAQ
         </a>
         <p class="item-desc">这里收集了我面试时常被问到的问题和回答，感兴趣的话可以看看。</p>
@@ -134,13 +135,14 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">关于机会</h3>
       <p class="opportunity-text">
-        我目前正在寻找学术研究（博士深造）与研发（R&D）领域的职业发展机会。如果你认为我的研究方向与你的团队契合，非常欢迎随时联系。
+        我目前正在寻找学术研究（博士深造）与研发（R&D）领域的职业发展机会。如果你认为我的研究方向与你的团队契合，非常欢迎随时联系。<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
+
       </p>
 
       <h3 class="section-sub-title">简历下载</h3>
       <p class="resume-text">
         你可以点击下方链接查看简历：(目前正在建设中)
-        <a href="/about/cv.pdf" class="resume-link" target="_blank">[点击下载 PDF]</a>
+        <a href="/about/Niu-Qiyue-cv.pdf" class="resume-link" target="_blank">[点击下载 PDF]</a>
       </p>
 
       <h3 class="section-sub-title">反馈与交流</h3>
@@ -154,5 +156,5 @@ I want to thank my family. During my job searching, they encouraged me to pursue
   <div class="section-footer-nav">
      <a href="/" class="back-home-link">← 返回首页</a>
   </div>
-  
+
 </section>
