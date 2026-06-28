@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,-scale=1.0">
+<title>{{ page.title }} | {{ site.title }}</title>
+<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
   {% include header.html %} <!-- 引入全局页眉 -->
 
-  <!-- 使用 Flex 布局实现：左侧侧边栏 + 右侧内容区 -->
-  <main class="layout-container_split">
-    
-    <!-- 【关键改动】：不再手写列表，而是直接调用零件 -->
+<!-- 使用 Flex 布局实现：左侧侧边栏 + 右侧内容区 -->
+<main class="layout-container_split">
     {% include sidebar.html %}
 
-    <!-- 右侧内容区 -->
-    <article class="main-content">
-      <!-- 自动显示文章标题 -->
-      <h1 style="margin-top: 0;">{{ page.title }}</h1>
-      <!-- 自动显示日期 -->
-      {% if page.date %}
-        <p style="color: #999; font-size: 0.9em;">{{ page.date | date: "%Y-%m-%d" }}</p>
+<!-- 右侧内容区 -->
+<article class="main-content">
+  <header>
+    <h1 style="margin-top: 0;">{{ page.title }}</h1>
+    {% if page.date %}
+      <p style="color: #999; font-size: 0.9em;">{{ page.date | date: "%Y-%m-%d" }}</p>
+    {% endif %}
+  </header>
+
+  <hr> <!-- 分割线 -->
+
+  <!-- 这里是 Markdown 的正文内容 -->
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <!-- 【新增模块】：轻量级免责声明 (Disclaimer) -->
+  <div class="ideas-disclaimer">
+    <p>Disclaimer: This website is a personal space for academic exploration. Views expressed are my own and do not constitute professional advice.</p>
+    <p>免责声明：本网站为个人学术研究空间，观点仅代表作者个人。</p>
+  </div>
+
+  <!-- 【文章底部导航】 -->
+  <footer class="post-navigation">
+    <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0 20px 0;">
+    <div class="nav-controls">
+      <!-- 1. 回到目录 -->
+      <a href="/ideas/" class="nav-back">← Back to Jibber-Jabber</a>
+
+      {% comment %} 逻辑核心：寻找上一篇和下一篇 {% endcomment %}
+      {% assign current_index = 0 %}
+      {% for item in site.ideas %}
+        {% if item.url == page.url %}
+          {% assign current_index = forloop.index0 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- 2. 上一篇 -->
+      {% if current_index > 0 %}
+        {% assign prev_item = site.ideas[current_index | minus: 1] %}
+        <a href="{{ prev_item.url }}" class="nav-item">← {{ prev_item.title }}</a>
       {% endif %}
-      
-      <hr> <!-- 分割线 -->
 
-      <!-- 这里是 Markdown 的正文内容 -->
-      <div class="post-content">
-        {{ content }}
-      </div>
+      <!-- 3. 下一篇 -->
+      {% if current_index < site.ideas.size | minus: 1 %}
+        {% assign next_item = site.ideas[current_index | plus: 1] %}
+        <a href="{{ next_item.url }}" class="nav-item">{{ next_item.title }} →</a>
+      {% endif %}
+    </div>
+  </footer>
 
-      <!-- 【新增模块】：文章底部导航 -->
-      <footer class="post-navigation">
-        <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0 20px 0;">
-        
-        <div class="nav-controls">
-          <!-- 1. 回到目录 -->
-          <a href="/ideas/" class="nav-back">← Back to Jibber-Jabber</a>
+</article>
+</main>
 
-          {% comment %} 
-            【逻辑核心】：寻找上一篇和下一篇 
-          {% endcomment %}
-          {% assign current_index = 0 %}
-          {% for item in site.ideas %}
-            {% if item.url == page.url %}
-              {% assign current_index = forloop.index0 %}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-
-          <!-- 2. 上一篇 -->
-          {% if current_index > 0 %}
-            {% assign prev_item = site.ideas[current_index | minus: 1] %}
-            <a href="{{ prev_item.url }}" class="nav-item">← {{ prev_item.title }}</a>
-          {% endif %}
-
-          <!-- 3. 下一篇 -->
-          {% if current_index < site.ideas.size | minus: 1 %}
-            {% assign next_item = site.ideas[current_index | plus: 1] %}
-            <a href="{{ next_item.url }}" class="nav-item">{{ next_item.title }} →</a>
-          {% endif %}
-        </div>
-      </footer>
-      
-    </article>
-
-  </main>
-
-  {% include footer.html %} <!-- 引入全局页脚 -->
+{% include footer.html %} <!-- 引入全局页脚 -->
 
 </body>
 </html>

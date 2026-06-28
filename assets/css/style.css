@@ -455,20 +455,20 @@ body {
   padding: 20px;      /* 内边距 */
   width: 100%;        /* 【关键】确保宽度撑满文章区域 */
   box-sizing: border-box; /* 确保 padding 不会撑破容器 */
-  background-color: #fcfcfc;
-  border: 1px solid #eee;
-  border-radius: 6px;
+  background-color: #fff5f5; /* 极淡的红色背景 */
+  border-left: 4px solid #e74c3c; /* 醒目的红色侧边线 */
+  border-radius: 4px;
 }
 
 .project-disclaimer p {
-  margin: 5px 0;
-  font-size: 0.85em;
-  color: #777;
+ margin: 5px 0;
+  font-size: 0.9em;
+  color: #c0392b; /* 深红色文字，强调警告感 */
   line-height: 1.6;
 }
 
 .project-disclaimer .disclaimer-label {
-  color: #444;
+  color: #e74c3c;
   margin-right: 4px;
 }
 
@@ -667,4 +667,85 @@ body {
 .tiny-email-icon:hover {
   transform: scale(1.2); /* 鼠标指上去时，图标轻微放大，增加反馈感 */
   opacity: 0.7;           /* 稍微变透明一点点 */
+}
+
+/* Jibber-Jabber 专属轻量免责声明 */
+.ideas-disclaimer {
+  margin-top: 50px;       /* 与正文保持较大距离 */
+  padding: 15px 0;        /* 上下留白 */
+  border-top: 1px dashed #eee; /* 使用虚线作为视觉分隔，显得更轻盈 */
+  border-bottom: 1px dashed #eee; /* 上下都有虚线，形成一个“声明区” */
+}
+
+.ideas-disclaimer p {
+  margin: 5px 0;          /* 行间距紧凑一点 */
+  font-size: 0.8em;       /* 灰小字 */
+  color: #aaa;            /* 颜色很淡，不抢眼 */
+  line-height: 1.5;
+}
+
+/* 如果你想让英文稍微深一点点以便阅读，可以加这个 */
+.ideas-disclaimer p:first-child {
+  color: #888;
+}
+
+
+/* --- Project 模块：强化版红色警示块 --- */
+.project-warning-block {
+  display: flex;               /* 使用 flex 让图标和文字并排 */
+  align-items: flex-start;     /* 图标顶部对齐 */
+  gap: 15px;                   /* 图标与文字的间距 */
+  margin: 40px 0;              /* 与上下内容的距离 */
+  padding: 20px;
+  background-color: #fff5f5;   /* 非常淡的红色底色 */
+  border: 1px solid #feb2b2;  /* 浅红色的细边框 */
+  border-left: 6px solid #e53e3e; /* 左侧加一条很粗的深红色实线，极其醒目 */
+  border-radius: 8px;          /* 圆角，让它看起来更像一个精致的警告卡片 */
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.1); /* 添加淡淡的红色阴影，增加层次感 */
+}
+
+/* 警告图标样式 */
+.warning-icon {
+  font-size: 1.5em;            /* 图标稍微大一点 */
+  line-height: 1;
+  padding-top: 2px;            /* 微调对齐 */
+}
+
+/* 文字容器 */
+.warning-content {
+  flex: 1;                     /* 占据剩余的所有宽度 */
+}
+
+/* 警告文本通用样式 */
+.warning-text-en, .warning-text-zh {
+  margin: 0;                   /* 清除段落默认边距 */
+  line-height: 1.6;
+}
+
+.warning-text-en {
+  font-size: 0.95em;
+  color: #c53030;              /* 使用深红色文字，体现严肃性 */
+  margin-bottom: 8px;
+}
+
+.warning-text-zh {
+  font-size: 0.9em;
+  color: #9b2c2c;              /* 中文使用稍深的红褐色 */
+}
+
+/* 标签样式 (Experimental Note / 实验说明) */
+.warning-label {
+  font-weight: 800;            /* 极粗的字体 */
+  text-transform: uppercase;   /* 英文全大写，增加权威感 */
+  margin-right: 4px;
+}
+
+/* 【核心】最关键的那句话：高亮样式 */
+.critical-highlight {
+  display: inline;             /* 保持在行内 */
+  background-color: #feb2b2;   /* 使用稍深的红色背景作为“荧光笔”效果 */
+  color: #ffffff;              /* 文字改为白色，与深色背景形成高对比度 */
+  padding: 1px 4px;            /* 紧凑的内边距 */
+  border-radius: 3px;          /* 微小的圆角 */
+  font-weight: bold;           /* 加粗 */
 }
