@@ -749,3 +749,19 @@ body {
   border-radius: 3px;          /* 微小的圆角 */
   font-weight: bold;           /* 加粗 */
 }
+
+/* 让 Markdown 的正文区域自动识别回车键 */
+.post-content {
+  /* 【核心魔法】：pre-wrap 会保留你在编辑器里敲的所有回车和空格 */
+  white-space: pre-wrap; 
+  
+  /* 既然使用了 pre-wrap，我们就不再需要 margin-bottom 了，
+     因为每一个回车在视觉上都会产生一个换行效果 */
+  line-height: 1.8;
+  color: #444;
+}
+
+/* 如果你希望段落之间看起来更宽一点，可以结合这个技巧 */
+.post-content p {
+  margin-bottom: 1em; /* 这会让你的 <p> 标签更有呼吸感 */
+}
