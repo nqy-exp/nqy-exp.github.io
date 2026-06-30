@@ -22,7 +22,7 @@ permalink: /ideas/
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 60px;
+    width: 60%;
     height: 3px;
     background-color: #e67e22;
     box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4);

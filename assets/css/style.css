@@ -21,15 +21,16 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
+
 /* 标题基础样式 */
 .header-title {
     font-weight: bold;
     font-size: 1.2em;
-    color: #333;            /* 文字保持深色，不随悬停改变 */
-    text-decoration: none;  /* 去掉默认下划线 */
-    position: relative;     /* 为伪元素定位基准 */
-    display: inline-block;  /* 确保线条长度仅等于文字长度 */
-    padding-bottom: 4px;    /* 线条与文字的间距 */
+    color: #333;            /* 这里定义初始颜色 */
+    text-decoration: none !important; /* 强制去掉所有下划线 */
+    position: relative;     
+    display: inline-block;  
+    padding-bottom: 4px;    
     transition: color 0.3s ease; 
 }
 
@@ -40,24 +41,25 @@ body {
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 2px;            /* 线条厚度 */
-    background-color: #e67e22; /* 你的主题橙色 */
-    
-    /* 核心动画逻辑：初始状态宽度为0 */
+    height: 2px;            
+    background-color: #e67e22; 
     transform: scaleX(0);   
-    transform-origin: center; /* 从中间向两边展开 */
-    transition: transform 0.3s ease; 
+    transform-origin: center; 
+    transition: transform 0.3s ease;
+    /* 确保线不会遮挡文字 */
+    pointer-events: none; 
 }
 
-/* 【关键修改】：仅让线条在悬停时出现，文字颜色保持不变 */
+/* 当鼠标悬停时，展开线条 */
 .header-title:hover::after {
-    transform: scaleX(1);   /* 线条展开 */
+    transform: scaleX(1);   
 }
 
-/* 如果你希望鼠标移上去时连文字颜色都不要变，可以把下面这段删掉或者留空 */
+/* 确保悬停时颜色依然是 #333，不被其他规则干扰 */
 .header-title:hover {
-    color: #333;            /* 强制保持原色 */
+    color: #333 !important; 
 }
+
 
 
 .nav-menu {
@@ -79,60 +81,74 @@ body {
   color: #e67e22; /* 悬停时的橙色 */
 }
 
-/* =========================================
+ /* =========================================
    3. 核心视觉区 (Hero Container)
    ========================================= */
 .hero-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh; /* 确保至少占满一屏高度 */
-  padding: 40px;
-  box-sizing: border-box;
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    position: relative;
 }
 
 /* 左侧文字内容 */
 .hero-left {
-  align-self: flex-start;
-  max-width: 450px;
-  text-align: left;
+    align-self: flex-start;
+    max-width: 450px;
+    text-align: left;
 }
 
 /* 右侧文字内容 */
 .hero-right {
-  align-self: flex-end;
-  text-align: right;
-  color: #666;
-  margin-bottom: 40px; /* <--- 添加这一行！数值越大，内容整体就越往上“顶” */
+    align-self: flex-end;
+    text-align: right;
+    color: #666;
+    margin-bottom: 40px; /* 向上顶的效果 */
+}
+
+/* 主页标题文字样式 (统一管理) */
+.hero-title {
+    font-size: 1.8em !important; /* 使用 important 确保覆盖默认样式 */
+    margin-bottom: 25px !important;
+    position: relative;         /* 必须：为装饰线提供定位基准 */
+    display: inline-block;      /* 必须：让线条宽度随文字长度变化 */
+}
+
+/* 主页描述文字样式 */
+.hero-description {
+    line-height: 1.6;
+    color: #444;
 }
 
 /* =========================================
    增量样式：主页标题装饰线 (Home Page Title Decoration)
    ========================================= */
 
-.hero-title {
-    position: relative; /* 为伪元素定位做准备 */
-    display: inline-block; /* 让装饰线宽度随文字长度变化，而不是撑满全屏 */
-}
-
 .hero-title::after {
-    content: ""; /* 必须项，用于生成这个“虚构”的线条 */
+    content: ""; 
     position: absolute;
     left: 0;
     bottom: -12px;  /* 线条距离文字底部的距离 */
-    width: 60px;    /* 线条的长度，你可以根据喜好改长或改短 (比如 40px 或 80px) */
-    height: 3px;    /* 线条的粗细 */
-    background-color: #e67e22; /* 使用你的主题橙色 */
-    
-    /* 阴影效果：让线条下方有一种微微浮起的立体感 */
-    /* 第一个值是水平偏移，第二个是垂直偏移(向下)，第三个是模糊程度 */
+    width: 60px;    /* 线条长度 */
+    height: 3px;    /* 线条粗细 */
+    background-color: #e67e22; 
     box-shadow: 0 4px 6px rgba(230, 126, 34, 0.3); 
+    border-radius: 2px;
     
-    border-radius: 2px; /* 让线条边缘有一点点圆润感，不那么生硬 */
+    /* 初始状态：隐藏线条 */
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
-/* 特殊处理：如果标题是右对齐的（右下方内容），线也要靠右对齐 */
+/* 鼠标悬停在标题上时，线显现出来 */
+.hero-title:hover::after {
+    transform: scaleX(1);
+}
+
+/* 特殊处理：右侧标题的线要靠右对齐 */
 .hero-right .hero-title::after {
     left: auto;
     right: 0;
@@ -564,47 +580,75 @@ body {
 }
 
 /* --- About Me 全局容器 --- */
-/* --- 保留并微调你原有的 About Hero 结构 --- */
 .about-hero {
   text-align: center;
   margin-bottom: 50px;
 }
 
+/* 【新增】让标题也拥有装饰线，保持全站统一 */
 .about-main-title {
   font-size: 2.5em;
   color: #333;
   margin-bottom: 30px;
+  position: relative;    
+  display: inline-block; /* 必须：让装饰线宽度随文字变化 */
 }
 
-/* --- 修改后的 Identity 部分：增加了定位和内边距，为光晕腾出空间 --- */
+/* 【新增】About Me 的标题装饰线样式 */
+.about-main-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;        /* 线条距离标题底部的距离 */
+  transform: translateX(-50%);
+  width: 50px;          /* 线条长度 */
+  height: 3px;
+  background-color: #e67e22;
+  border-radius: 2px;
+  box-shadow: 0 4px 6px rgba(230, 126, 34, 0.3);
+}
+
+/* --- About Identity (身份核心区) --- */
 .about-identity {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 25px;
-  
-  /* 以下是新增的，用于承载氛围光晕 */
+  gap: 30px;            /* 头像和文字之间的间距 */
   position: relative;    /* 必须：让光晕相对于这个容器定位 */
-  padding: 40px;         /* 必须：给光晕扩散留出空间，防止切断 */
+  padding: 40px;         /* 给光晕扩散留出空间 */
 }
 
-/* --- 保留头像样式，并增加发光感 --- */
+/* 兼容你 HTML 中的包裹层，确保头像和文字依然水平排列 */
+.about-identity > div {
+    display: flex;
+    align-items: center;
+}
+
+/* 如果 identity-text 是在 avatar-container 旁边，我们需要确保它们能并排 */
+/* 针对你现在的 HTML 结构进行微调 */
+.avatar-container, .identity-text {
+    display: flex;
+    flex-direction: column; /* 让头像容器内部和文字容器内部垂直排列 */
+    align-items: center;    /* 居中对齐 */
+}
+
+/* 特殊处理：如果 identity-text 是在右边，让文字左对齐 */
+.identity-text {
+    align-items: flex-start; /* 文字内容靠左对齐，更符合阅读习惯 */
+}
+
+/* --- 头像样式 --- */
 .profile-avatar {
   width: 110px;
   height: 110px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #e67e22;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 你原有的阴影 */
-  transition: box-shadow 0.5s ease;       /* 为悬停时的发光增加过渡 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.5s ease; /* 增加过渡 */
 }
 
-/* =========================================
-   这是刚才为你设计的【氛围光晕】代码块
-   请直接粘贴在上面所有代码的下方
-   ========================================= */
-
-/* 创建径向渐变光晕 */
+/* --- 氛围光晕 (Ambient Glow) --- */
 .about-identity::before {
   content: "";
   position: absolute;
@@ -618,11 +662,11 @@ body {
     rgba(230, 126, 34, 0.08) 0%,   /* 中心极淡的橙色 */
     rgba(230, 126, 34, 0) 70%      /* 向边缘透明 */
   );
-  z-index: -1;           /* 确保在文字和头像下方 */
-  pointer-events: none;  /* 防止干扰鼠标点击 */
+  z-index: -1;           
+  pointer-events: none;  
 }
 
-/* 悬停交互：光晕稍微变亮，头像发光 */
+/* 悬停交互：光晕变亮，头像发光 */
 .about-identity:hover::before {
   background: radial-gradient(
     circle, 
@@ -632,7 +676,20 @@ body {
 }
 
 .about-identity:hover .profile-avatar {
-  box-shadow: 0 0 25px rgba(230, 126, 34, 0.3); /* 悬停时头像轻微发光 */
+  box-shadow: 0 0 25px rgba(230, 126, 34, 0.4); /* 悬停时头像轻微发光 */
+  transform: scale(1.05); /* 悬停时头像轻微放大，增加灵动感 */
+}
+
+/* 姓名与身份描述的样式补全 */
+.name-title {
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
+}
+.role-subtitle {
+    margin: 5px 0 0 0;
+    font-style: italic;
+    color: #e67e22; /* 让身份描述也带一点品牌色 */
 }
 
 .name-title {

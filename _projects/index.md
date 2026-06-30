@@ -35,7 +35,7 @@ permalink: /projects/
     left: 50%;           /* 居中定位起始点 */
     bottom: 0;           /* 贴在容器底部 */
     transform: translateX(-50%); /* 实现真正的水平居中 */
-    width: 60px;         /* 线的长度，可根据喜好调整 */
+    width: 60%;         /* 线的长度，可根据喜好调整 */
     height: 3px;         /* 线的粗细 */
     background-color: #e67e22; /* 主题橙色 */
     
