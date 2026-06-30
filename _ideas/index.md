@@ -11,16 +11,18 @@ permalink: /ideas/
 /* --- 新增：页面大标题装饰样式 (与 Experimental Logs 保持一致) --- */
 .page-title {
     text-align: center;
-    position: relative;
-    padding-bottom: 25px;
-    margin-bottom: 40px;
+    font-size: 2.5em;
+    color: #333;
+    position: relative; 
+    padding-bottom: 10px; /* 从 25px 减小到 10px，让线靠近文字 */
+    margin-bottom: 30px;  /* 从 50px 减小到 30px，让标题整体紧凑一点 */
 }
 
 .page-title::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: 0;
+    bottom: 0;            /* 线条直接贴在 padding 的底部 */
     transform: translateX(-50%);
     width: 60%;
     height: 3px;

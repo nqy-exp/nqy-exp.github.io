@@ -124,34 +124,44 @@ body {
 }
 
 /* =========================================
-   增量样式：主页标题装饰线 (Home Page Title Decoration)
+   优化版：主页标题动态渐变线 (Dynamic Gradient Line)
    ========================================= */
 
+.hero-title {
+    position: relative; 
+    display: inline-block; 
+    padding-bottom: 15px; /* 稍微增加间距，让线条更有呼吸感 */
+}
+
 .hero-title::after {
-    content: ""; 
+    content: "";
     position: absolute;
+    bottom: 0;
+    height: 3px;        /* 线条厚度 */
+    border-radius: 2px; /* 圆润的边缘 */
+    transition: all 0.5s ease; /* 增加过渡动画 */
+}
+
+/* --- 左侧英文标题：从左到右，由深变淡 --- */
+.hero-left .hero-title::after {
     left: 0;
-    bottom: -12px;  /* 线条距离文字底部的距离 */
-    width: 60px;    /* 线条长度 */
-    height: 3px;    /* 线条粗细 */
-    background-color: #e67e22; 
-    box-shadow: 0 4px 6px rgba(230, 126, 34, 0.3); 
-    border-radius: 2px;
-    
-    /* 初始状态：隐藏线条 */
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    width: 120px;       /* 你可以根据需要调整长度，比如 150px */
+    /* 渐变逻辑：从品牌橙色 -> 到透明 */
+    background: linear-gradient(to right, #e67e22, rgba(230, 126, 34, 0));
 }
 
-/* 鼠标悬停在标题上时，线显现出来 */
-.hero-title:hover::after {
-    transform: scaleX(1);
-}
-
-/* 特殊处理：右侧标题的线要靠右对齐 */
+/* --- 右侧中文标题：从右到左，由深变淡 --- */
 .hero-right .hero-title::after {
-    left: auto;
-    right: 0;
+    right: 0;          /* 靠右对齐 */
+    width: 120px;      /* 长度保持一致 */
+    /* 渐变逻辑：从品牌橙色 -> 到透明 (方向是反的) */
+    background: linear-gradient(to left, #e67e22, rgba(230, 126, 34, 0));
+}
+
+/* 【可选】增加一个悬停时的动态效果：线条变长并稍微亮一点 */
+.hero-title:hover::after {
+    width: 150px;      /* 鼠标移上去时，线稍微变长一点点 */
+    filter: brightness(1.2); /* 线条稍微变亮 */
 }
 
 
@@ -601,11 +611,15 @@ body {
   left: 50%;
   bottom: -10px;        /* 线条距离标题底部的距离 */
   transform: translateX(-50%);
-  width: 50px;          /* 线条长度 */
-  height: 3px;
-  background-color: #e67e22;
-  border-radius: 2px;
-  box-shadow: 0 4px 6px rgba(230, 126, 34, 0.3);
+  width: 40px;          /* 线条长度 */
+  height: 2px;
+  /* 【核心改动】：使用带有极高透明度的颜色 */
+  /* 使用 rgba(230, 126, 34, 0.3) 让它看起来像是一抹淡淡的橙色余晖 */
+  background-color: rgba(230, 126, 34, 0.3); 
+  
+  /* 去掉沉重的阴影，或者改用极其轻微的模糊感 */
+  box-shadow: none;      
+  border-radius: 10px;   /* 让线看起来更柔和 */
 }
 
 /* --- About Identity (身份核心区) --- */
@@ -648,31 +662,44 @@ body {
   transition: all 0.5s ease; /* 增加过渡 */
 }
 
-/* --- 氛围光晕 (Ambient Glow) --- */
+/* =========================================
+   终极版：超柔和氛围光晕 (Ultra-Soft Ambient Glow)
+   ========================================= */
+
 .about-identity::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
+  
+  /* 1. 极大化尺寸：让光晕的“边缘”远在容器之外，这样在容器内看到的永远是过渡带 */
+  width: 250%;   
+  height: 250%;  
+
+  /* 2. 极度平滑的渐变：通过增加更多的阶梯，让颜色消失得极其缓慢 */
   background: radial-gradient(
     circle, 
-    rgba(230, 126, 34, 0.08) 0%,   /* 中心极淡的橙色 */
-    rgba(230, 126, 34, 0) 70%      /* 向边缘透明 */
+    rgba(230, 126, 34, 0.1) 0%,    /* 中心点 */
+    rgba(230, 126, 34, 0.05) 30%,  /* 中间过渡 */
+    rgba(230, 126, 34, 0.02) 60%,  /* 极淡的边缘 */
+    rgba(230, 126, 34, 0) 95%      /* 到达 95% 才完全透明，实现“无界感” */
   );
+  
   z-index: -1;           
   pointer-events: none;  
+  transition: all 0.8s ease; /* 让光晕的变化也变得缓慢优雅 */
 }
 
-/* 悬停交互：光晕变亮，头像发光 */
+/* 悬停交互：让光晕变大且更柔和，而不是生硬地变亮 */
 .about-identity:hover::before {
   background: radial-gradient(
     circle, 
-    rgba(230, 126, 34, 0.12) 0%, 
-    rgba(230, 126, 34, 0) 75%
+    rgba(230, 126, 34, 0.15) 0%,   /* 悬停时中心稍微明亮一点点 */
+    rgba(230, 126, 34, 0.05) 40%, 
+    rgba(230, 126, 34, 0) 90%     /* 依然保持极长的过渡过程 */
   );
+  transform: translate(-50%, -50%) scale(1.1); /* 悬停时光晕轻微扩张 */
 }
 
 .about-identity:hover .profile-avatar {

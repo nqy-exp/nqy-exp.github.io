@@ -24,24 +24,24 @@ permalink: /projects/
   /* --- 新增：页面大标题装饰样式 --- */
 .page-title {
     text-align: center;
-    position: relative; /* 为装饰线定位 */
-    padding-bottom: 25px; /* 给底部的线留出空间 */
-    margin-bottom: 40px;  /* 线条与下方内容的距离 */
+    font-size: 2.5em;
+    color: #333;
+    position: relative; 
+    padding-bottom: 10px; /* 从 25px 减小到 10px，让线靠近文字 */
+    margin-bottom: 30px;  /* 从 50px 减小到 30px，让标题整体紧凑一点 */
 }
 
 .page-title::after {
     content: "";
     position: absolute;
-    left: 50%;           /* 居中定位起始点 */
-    bottom: 0;           /* 贴在容器底部 */
-    transform: translateX(-50%); /* 实现真正的水平居中 */
-    width: 60%;         /* 线的长度，可根据喜好调整 */
-    height: 3px;         /* 线的粗细 */
-    background-color: #e67e22; /* 主题橙色 */
-    
-    /* 阴影效果：让线下方有一种微微浮起的立体感 */
+    left: 50%;
+    bottom: 0;            /* 线条直接贴在 padding 的底部 */
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background-color: #e67e22;
     box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4);
-    border-radius: 2px;  /* 线条两端稍微圆润一点点 */
+    border-radius: 2px;
 }
 </style>
 
