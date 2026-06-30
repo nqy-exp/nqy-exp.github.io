@@ -9,7 +9,7 @@ description: "A digital log of my research and thoughts."
 
   <!-- 左上方内容 -->
   <div class="hero-left">
-    <h1 style="font-size: 1.8em; margin-bottom: 15px;">Welcome to my website.</h1>
+  <h1 class="hero-title" style="font-size: 1.8em; margin-bottom: 25px;">Welcome to my website.</h1>
     <p style="line-height: 1.6; color: #444;">
       This is a space where I document a series of exploration and attempts sparked by pure curiosity. <br>
       Please be prepared: you will encounter many failures here. But do not be surprised, to me, failure is the norm and an essential part of the journey toward success.
@@ -28,7 +28,7 @@ description: "A digital log of my research and thoughts."
 
   <!-- 右下方内容 -->
   <div class="hero-right">
-    <h1 style="font-size: 1.8em; margin-bottom: 15px;">欢迎来到我的网站。</h1>
+     <h1 class="hero-title" style="font-size: 1.8em; margin-bottom: 25px;">欢迎来到我的网站。</h1>
     <p style="line-height: 1.6;">
       这里记录着由好奇心引发的一系列探索与尝试。<br>
       请做好心理准备，你会看到很多失败，不过请不要惊讶，对我而言失败才是常态，失败是走向成功的必经之路。

@@ -6,161 +6,174 @@ title: FAQ
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ | Niu Qiyue</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <style>
-        /* 基础容器 */
-        body { margin: 0; padding: 0; background-color: #fff; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | Niu Qiyue</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+/* 基础容器 */
+body { margin: 0; padding: 0; background-color: #fff; }
 
-        .container {
-            max-width: 800px; /* 你要求的宽度限制 */
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
 
-        /* 大标题 */
-        .main-title {
-            text-align: center;
-            font-size: 2.5em;
-            color: #333;
-            margin-bottom: 50px;
-        }
+/* --- 修改后的：大标题装饰样式 (与前面页面完全一致) --- */
+.main-title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #333;
+    position: relative; /* 为装饰线定位 */
+    padding-bottom: 25px; /* 线条与文字的间距 */
+    margin-bottom: 50px;  /* 标题与下方内容的距离 */
+}
 
-        /* 手风琴容器 */
-        .faq-section { margin-bottom: 40px; }
+.main-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #e67e22;
+    box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4);
+    border-radius: 2px;
+}
 
-        /* 问题样式 (Summary) */
-        details {
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
+/* 手风琴容器 */
+.faq-section { margin-bottom: 40px; }
 
-        summary {
-            list-style: none; /* 去掉默认箭头 */
-            cursor: pointer;
-            outline: none;
-            padding: 15px 0;
-        }
+/* 问题样式 (Summary) */
+details {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
 
-        summary::-webkit-details-marker { display: none; } /* 兼容 Chrome/Safari */
+summary {
+    list-style: none; /* 去掉默认箭头 */
+    cursor: pointer;
+    outline: none;
+    padding: 15px 0;
+}
 
-        /* 问题中的文字层级 */
-        .q-en {
-            display: block;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #333; /* 英文黑字 */
-            margin-bottom: 4px;
-        }
+summary::-webkit-details-marker { display: none; }
 
-        .q-zh {
-            display: block;
-            font-size: 0.85em;
-            color: #888; /* 中文灰小字 */
-            font-weight: normal;
-        }
+/* 问题中的文字层级 */
+.q-en {
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
+}
 
-        /* 问题右侧的指示器 (+ / -) */
-        summary::after {
-            content: '+';
-            float: right;
-            color: #e67e22;
-            font-size: 1.2em;
-            transition: transform 0.3s ease;
-        }
+.q-zh {
+    display: block;
+    font-size: 0.85em;
+    color: #888;
+}
 
-        details[open] summary::after {
-            content: '−'; /* 打开时变成减号 */
-            transform: rotate(180deg);
-        }
+/* 问题右侧的指示器 (+ / -) */
+summary::after {
+    content: '+';
+    float: right;
+    color: #e67e22;
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
 
-        /* 回答内容样式 */
-        .answer-container {
-            padding: 10px 20px;
-            margin: 5px 0 15px 0;
-            background-color: #fcfcfc; /* 淡淡的背景色 */
-            border-radius: 4px;
-        }
+details[open] summary::after {
+    content: '−';
+    transform: rotate(180deg);
+}
 
-        .a-en {
-            font-size: 1em;
-            color: #333; /* 英文黑字 */
-            margin-bottom: 6px;
-            line-height: 1.6;
-        }
+/* 回答内容样式 */
+.answer-container {
+    padding: 10px 20px;
+    margin: 5px 0 15px 0;
+    background-color: #fcfcfc;
+    border-radius: 4px;
+}
 
-        .a-zh {
-            font-size: 0.85em;
-            color: #888; /* 中文灰小字 */
-            line-height: 1.5;
-        }
+.a-en {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
 
-        /* 返回链接 */
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 60px;
-            color: #999;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
+.a-zh {
+    font-size: 0.85em;
+    color: #888;
+    line-height: 1.5;
+}
 
-        .back-link:hover { color: #e67e22; }
+/* 返回链接 */
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 60px;
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s;
+}
 
-    </style>
+.back-link:hover { color: #e67e22; }
+</style>
 </head>
 <body>
 
-
-  <div class="container">
+<div class="container">
+    <!-- 这里已经是统一的样式类了 -->
     <h1 class="main-title">FAQ | Niu Qiyue</h1>
 
     <div class="faq-section">
 
-      <!-- 问题 1 -->
-      <details>
-        <summary>
-          <span class="q-en">How can I contact you?</span>
-          <span class="q-zh">我该如何联系你？</span>
-        </summary>
-        <div class="answer-container">
-          <p class="a-en">You can reach me via email at nqy.pro@outlook.com.</p>
-          <p class="a-zh">你可以通过邮件联系我：nqy.pro@outlook.com</p>
-        </div>
-      </details>
+        <!-- 问题 1 -->
+        <details>
+            <summary>
+                <span class="q-en">How can I contact you?</span>
+                <span class="q-zh">我该如何联系你？</span>
+            </summary>
+            <div class="answer-container">
+                <p class="a-en">You can reach me via email at nqy.pro@outlook.com.</p>
+                <p class="a-zh">你可以通过邮件联系我：nqy.pro@outlook.com</p>
+            </div>
+        </details>
 
-      <!-- 问题 2 -->
-      <details>
-        <summary>
-          <span class="q-en">test</span>
-          <span class="q-zh">测试</span>
-        </summary>
-        <div class="answer-container">
-          <p class="a-en">test</p>
-          <p class="a-zh">测试</p>
-        </div>
-      </details>
+        <!-- 问题 2 -->
+        <details>
+            <summary>
+                <span class="q-en">test</span>
+                <span class="q-zh">测试</span>
+            </summary>
+            <div class="answer-container">
+                <p class="a-en">test</p>
+                <p class="a-zh">测试</p>
+            </div>
+        </details>
 
-      <!-- 问题 3 -->
-      <details>
-        <summary>
-          <span class="q-en">test</span>
-          <span class="q-zh">测试</span>
-        </summary>
-        <div class="answer-container">
-          <p class="a-en">test</p>
-          <p class="a-zh">测试</p>
-        </div>
-      </details>
+        <!-- 问题 3 -->
+        <details>
+            <summary>
+                <span class="q-en">test</span>
+                <span class="q-zh">测试</span>
+            </summary>
+            <div class="answer-container">
+                <p class="a-en">test</p>
+                <p class="a-zh">测试</p>
+            </div>
+        </details>
 
     </div> <!-- faq-section 结束 -->
 
     <a href="/about/" class="back-link">← Back to About Me</a>
-  </div>
-
+</div>
 
 </body>
 </html>

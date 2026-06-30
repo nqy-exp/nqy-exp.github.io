@@ -4,86 +4,132 @@ title: Jibber-Jabber
 description: "Thoughts, fragments, and reflections."
 permalink: /ideas/
 ---
+
 <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
 
 <style>
- 
-  /* 每一行条目的样式 */
-  .idea-item {
+/* --- 新增：页面大标题装饰样式 (与 Experimental Logs 保持一致) --- */
+.page-title {
+    text-align: center;
+    position: relative;
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+}
+
+.page-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #e67e22;
+    box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4);
+    border-radius: 2px;
+}
+
+/* --- 原有：每一行条目的样式 (进行了精简和规范化) --- */
+.ideas-list {
+    margin-top: 20px;
+}
+
+.idea-item {
     display: flex;
-    justify-content: space-between; /* 标题在左，时间在右 */
+    justify-content: space-between;
     align-items: baseline;
     padding: 15px 0;
-    border-bottom: 1px solid #eee; /* 行与行之间的分割线 */
+    border-bottom: 1px solid #eee;
     text-decoration: none;
-    transition: background 0.2s;
-  }
+    transition: all 0.2s ease; /* 增加平滑过渡 */
+}
 
-  .idea-item:hover {
-    background-color: #f9f9f9; /* 鼠标悬停时的微弱反馈 */
-  }
+.idea-item:hover {
+    background-color: #fffcf5; /* 使用极淡的品牌橙色背景，更有设计感 */
+    padding-left: 10px;       /* 悬停时轻微向右滑动，增加交互感 */
+}
 
-  .idea-title {
+.idea-link {
     font-weight: bold;
     color: #333;
     text-decoration: none;
-  }
+    transition: color 0.2s ease;
+}
 
-  .idea-date {
+.idea-link:hover {
+    color: #e67e22; /* 悬停时文字变橙色 */
+}
+
+.idea-date {
     color: #999;
     font-size: 0.85em;
-    font-family: monospace; /* 时间用等宽字体更有极客感 */
-  }
+    font-family: monospace;
+}
 
-  /* 返回链接的样式 */
+/* --- 返回链接和底部模块 --- */
 .back-link {
-  display: block;
-  margin-top: 30px;
-  text-decoration: none;
-  color: #666;
-  font-size: 0.9em;
+    display: block;
+    margin-top: 40px;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.9em;
+    transition: color 0.2s;
 }
 
 .back-link:hover {
-  color: #e67e22;
+    color: #e67e22;
+}
+
+.contact-section {
+    text-align: center;
+    color: #888;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-top: 50px;
+}
+
+.contact-email {
+    color: #e67e22;
+    text-decoration: none;
+    font-weight: bold;
 }
 </style>
 
-<!-- 使用 Jekyll 的循环指令来遍历 _ideas 集合 (已添加自动过滤 index 功能) -->
+<!-- 1. 新增的大标题 -->
+<h1 class="page-title">Jibber-Jabber</h1>
+
+<!-- 2. 思想碎片列表 -->
 <div class="ideas-list">
   {% for item in site.ideas %}
     {% if item.url != "/ideas/" %}
-      <div class="idea-item" style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #eee;">
-        <a href="{{ item.url }}" style="font-weight: bold; color: #333; text-decoration: none;">
-          {{ item.title }}
-        </a>
-        <span style="color: #999; font-size: 0.85em; font-family: monospace;">
-          {{ item.date | date: "%Y-%m-%d" }}
-        </span>
-      </div>
+    <div class="idea-item">
+      <a href="{{ item.url }}" class="idea-link">
+        {{ item.title }}
+      </a>
+      <span class="idea-date">
+        {{ item.date | date: "%Y-%m-%d" }}
+      </span>
+    </div>
     {% endif %}
   {% endfor %}
 </div>
 
 <br><br>
 
-<!-- 2. 返回首页链接 (使用 HTML 以确保稳定性) -->
+<!-- 3. 返回首页 -->
 <a href="/" class="back-link">← Homepage</a>
 
 <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;">
 
-<br><br><br> <!-- 增加一些间距，把免责声明推下去 -->
-
-<!-- 底部的联系/纠错模块 -->
-<hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;">
-
-<div style="text-align: center; color: #888; font-size: 0.9em; line-height: 1.6;">
-  <p>
-    If you encounter any errors, translation inaccuracies, or logical inconsistencies—or if you simply wish to discuss the topics presented here—please feel free to reach out via email: 
-    <a href="mailto:nqy.pro@outlook.com" style="color: #e67e22; text-decoration: none;">nqy.pro@outlook.com</a>
-  </p>
-  <p>
-    如果你在阅读过程中发现任何疏漏、翻译偏差或逻辑误区，亦或是希望就相关话题展开讨论，欢迎随时通过邮件与我联系
-   
-  </p>
+<!-- 4. 底部的联系/纠错模块 -->
+<div class="contact-section">
+    <p>
+        If you encounter any errors, translation inaccuracies, or logical inconsistencies—or if you simply wish to discuss the topics presented here—please feel free to reach out via email: 
+        <a href="mailto:nqy.pro@outlook.com" class="contact-email">nqy.pro@outlook.com</a>
+    </p>
+    <p>
+        如果你在阅读过程中发现任何疏漏、翻译偏差或逻辑误区，亦或是希望就相关话题展开讨论，欢迎随时通过邮件与我联系。
+    </p>
 </div>
+
+</div> <!-- 对应最外层的 div -->

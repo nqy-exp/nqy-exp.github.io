@@ -7,23 +7,58 @@ body {
   background-color: #ffffff; /* 默认白色背景 */
 }
 
+
 /* =========================================
-   2. 自定义 Header (顶部导航栏)
+   2. 自定义 Header (顶部导航栏) - 精简版
    ========================================= */
+
 .my-custom-header {
-  display: flex !important;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  border-bottom: 1px solid #eee;
-  background-color: rgba(255, 255, 255, 0.9); /* 半透明白色 */
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
+/* 标题基础样式 */
 .header-title {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #333;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;            /* 文字保持深色，不随悬停改变 */
+    text-decoration: none;  /* 去掉默认下划线 */
+    position: relative;     /* 为伪元素定位基准 */
+    display: inline-block;  /* 确保线条长度仅等于文字长度 */
+    padding-bottom: 4px;    /* 线条与文字的间距 */
+    transition: color 0.3s ease; 
 }
+
+/* 创建那条“隐形的线” */
+.header-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;            /* 线条厚度 */
+    background-color: #e67e22; /* 你的主题橙色 */
+    
+    /* 核心动画逻辑：初始状态宽度为0 */
+    transform: scaleX(0);   
+    transform-origin: center; /* 从中间向两边展开 */
+    transition: transform 0.3s ease; 
+}
+
+/* 【关键修改】：仅让线条在悬停时出现，文字颜色保持不变 */
+.header-title:hover::after {
+    transform: scaleX(1);   /* 线条展开 */
+}
+
+/* 如果你希望鼠标移上去时连文字颜色都不要变，可以把下面这段删掉或者留空 */
+.header-title:hover {
+    color: #333;            /* 强制保持原色 */
+}
+
 
 .nav-menu {
   display: flex;
@@ -69,7 +104,40 @@ body {
   align-self: flex-end;
   text-align: right;
   color: #666;
+  margin-bottom: 40px; /* <--- 添加这一行！数值越大，内容整体就越往上“顶” */
 }
+
+/* =========================================
+   增量样式：主页标题装饰线 (Home Page Title Decoration)
+   ========================================= */
+
+.hero-title {
+    position: relative; /* 为伪元素定位做准备 */
+    display: inline-block; /* 让装饰线宽度随文字长度变化，而不是撑满全屏 */
+}
+
+.hero-title::after {
+    content: ""; /* 必须项，用于生成这个“虚构”的线条 */
+    position: absolute;
+    left: 0;
+    bottom: -12px;  /* 线条距离文字底部的距离 */
+    width: 60px;    /* 线条的长度，你可以根据喜好改长或改短 (比如 40px 或 80px) */
+    height: 3px;    /* 线条的粗细 */
+    background-color: #e67e22; /* 使用你的主题橙色 */
+    
+    /* 阴影效果：让线条下方有一种微微浮起的立体感 */
+    /* 第一个值是水平偏移，第二个是垂直偏移(向下)，第三个是模糊程度 */
+    box-shadow: 0 4px 6px rgba(230, 126, 34, 0.3); 
+    
+    border-radius: 2px; /* 让线条边缘有一点点圆润感，不那么生硬 */
+}
+
+/* 特殊处理：如果标题是右对齐的（右下方内容），线也要靠右对齐 */
+.hero-right .hero-title::after {
+    left: auto;
+    right: 0;
+}
+
 
 /* 中心导航按钮组 */
 .center-nav {
@@ -496,6 +564,7 @@ body {
 }
 
 /* --- About Me 全局容器 --- */
+/* --- 保留并微调你原有的 About Hero 结构 --- */
 .about-hero {
   text-align: center;
   margin-bottom: 50px;
@@ -507,21 +576,63 @@ body {
   margin-bottom: 30px;
 }
 
-/* 头像与身份 */
+/* --- 修改后的 Identity 部分：增加了定位和内边距，为光晕腾出空间 --- */
 .about-identity {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 25px;
+  
+  /* 以下是新增的，用于承载氛围光晕 */
+  position: relative;    /* 必须：让光晕相对于这个容器定位 */
+  padding: 40px;         /* 必须：给光晕扩散留出空间，防止切断 */
 }
 
+/* --- 保留头像样式，并增加发光感 --- */
 .profile-avatar {
   width: 110px;
   height: 110px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #e67e22;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 你原有的阴影 */
+  transition: box-shadow 0.5s ease;       /* 为悬停时的发光增加过渡 */
+}
+
+/* =========================================
+   这是刚才为你设计的【氛围光晕】代码块
+   请直接粘贴在上面所有代码的下方
+   ========================================= */
+
+/* 创建径向渐变光晕 */
+.about-identity::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle, 
+    rgba(230, 126, 34, 0.08) 0%,   /* 中心极淡的橙色 */
+    rgba(230, 126, 34, 0) 70%      /* 向边缘透明 */
+  );
+  z-index: -1;           /* 确保在文字和头像下方 */
+  pointer-events: none;  /* 防止干扰鼠标点击 */
+}
+
+/* 悬停交互：光晕稍微变亮，头像发光 */
+.about-identity:hover::before {
+  background: radial-gradient(
+    circle, 
+    rgba(230, 126, 34, 0.12) 0%, 
+    rgba(230, 126, 34, 0) 75%
+  );
+}
+
+.about-identity:hover .profile-avatar {
+  box-shadow: 0 0 25px rgba(230, 126, 34, 0.3); /* 悬停时头像轻微发光 */
 }
 
 .name-title {

@@ -20,9 +20,32 @@ permalink: /projects/
   .log-date { font-size: 0.85em; color: #aaa; font-family: monospace; }
   .back-link { display: block; margin-top: 40px; text-decoration: none; color: #999; font-size: 0.9em; }
   .warning-highlight { color: #555; font-weight: 600; text-decoration: underline; }
+
+  /* --- 新增：页面大标题装饰样式 --- */
+.page-title {
+    text-align: center;
+    position: relative; /* 为装饰线定位 */
+    padding-bottom: 25px; /* 给底部的线留出空间 */
+    margin-bottom: 40px;  /* 线条与下方内容的距离 */
+}
+
+.page-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;           /* 居中定位起始点 */
+    bottom: 0;           /* 贴在容器底部 */
+    transform: translateX(-50%); /* 实现真正的水平居中 */
+    width: 60px;         /* 线的长度，可根据喜好调整 */
+    height: 3px;         /* 线的粗细 */
+    background-color: #e67e22; /* 主题橙色 */
+    
+    /* 阴影效果：让线下方有一种微微浮起的立体感 */
+    box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4);
+    border-radius: 2px;  /* 线条两端稍微圆润一点点 */
+}
 </style>
 
-<h1 style="text-align: center;">Experimental Logs</h1>
+<h1 class="page-title">Experimental Logs</h1>
 
 <div class="project-tree">
   {% assign all_plans = site.projects | where: "type", "plan" %}
