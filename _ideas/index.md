@@ -11,7 +11,7 @@ permalink: /ideas/
 /* --- 新增：页面大标题装饰样式 (与 Experimental Logs 保持一致) --- */
 .page-title {
     text-align: center;
-    font-size: 2.5em;
+    font-size: 1.8em;
     color: #333;
     position: relative; 
     padding-bottom: 10px; /* 从 25px 减小到 10px，让线靠近文字 */

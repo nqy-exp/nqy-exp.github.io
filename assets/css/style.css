@@ -627,9 +627,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;            /* 头像和文字之间的间距 */
-  position: relative;    /* 必须：让光晕相对于这个容器定位 */
-  padding: 40px;         /* 给光晕扩散留出空间 */
+  gap: 30px;
+  position: relative;    /* 为光晕提供定位基准 */
+  padding: 50px 20px;    /* 增加上下内边距，给光晕留出足够的“呼吸空间” */
+  margin: 20px 0;        /* 让整个区域与上下文字保持距离 */
+  z-index: 1;            /* 确保容器在最顶层 */
 }
 
 /* 兼容你 HTML 中的包裹层，确保头像和文字依然水平排列 */
@@ -665,41 +667,42 @@ body {
 /* =========================================
    终极版：超柔和氛围光晕 (Ultra-Soft Ambient Glow)
    ========================================= */
-
+/* --- 【核心优化】超柔和、无边界的氛围光晕 --- */
 .about-identity::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
-  /* 1. 极大化尺寸：让光晕的“边缘”远在容器之外，这样在容器内看到的永远是过渡带 */
-  width: 250%;   
-  height: 250%;  
 
-  /* 2. 极度平滑的渐变：通过增加更多的阶梯，让颜色消失得极其缓慢 */
+  /* 1. 极大化尺寸：让渐变的“边缘”远远超出容器边界，这样你在容器内看到的永远是最平滑的部分 */
+  width: 300%;  
+  height: 300%; 
+
+  /* 2. 极度丝滑的阶梯式渐变：通过增加更多的透明度节点，消除“界限感” */
   background: radial-gradient(
     circle, 
-    rgba(230, 126, 34, 0.1) 0%,    /* 中心点 */
-    rgba(230, 126, 34, 0.05) 30%,  /* 中间过渡 */
-    rgba(230, 126, 34, 0.02) 60%,  /* 极淡的边缘 */
-    rgba(230, 126, 34, 0) 95%      /* 到达 95% 才完全透明，实现“无界感” */
+    rgba(230, 126, 34, 0.12) 0%,   /* 中心点：最明显的颜色 */
+    rgba(230, 126, 34, 0.05) 25%,  /* 快速衰减到极淡 */
+    rgba(230, 126, 34, 0.02) 50%,  /* 极其微弱的过渡 */
+    rgba(230, 126, 34, 0) 85%      /* 在 85% 的位置才彻底消失，确保在容器内完全看不见边缘 */
   );
-  
-  z-index: -1;           
-  pointer-events: none;  
-  transition: all 0.8s ease; /* 让光晕的变化也变得缓慢优雅 */
+
+  z-index: -1;           /* 确保在文字和头像下方 */
+  pointer-events: none;  /* 防止干扰鼠标点击 */
+  transition: all 0.8s ease; /* 让光晕的变亮过程非常缓慢、优雅 */
 }
 
-/* 悬停交互：让光晕变大且更柔和，而不是生硬地变亮 */
+/* --- 悬停交互：让光晕更有“生命感” --- */
 .about-identity:hover::before {
+  /* 悬停时，光晕稍微扩大一点点，并稍微加深一点点，像是在呼吸 */
+  transform: translate(-50%, -50%) scale(1.1);
   background: radial-gradient(
     circle, 
-    rgba(230, 126, 34, 0.15) 0%,   /* 悬停时中心稍微明亮一点点 */
+    rgba(230, 126, 34, 0.18) 0%, 
     rgba(230, 126, 34, 0.05) 40%, 
-    rgba(230, 126, 34, 0) 90%     /* 依然保持极长的过渡过程 */
+    rgba(230, 126, 34, 0) 90%
   );
-  transform: translate(-50%, -50%) scale(1.1); /* 悬停时光晕轻微扩张 */
 }
 
 .about-identity:hover .profile-avatar {
