@@ -25,16 +25,17 @@ title: About Me
     
     <!-- 时间线履历 -->
     <ul class="timeline">
-      <li><strong>2013.09 - 2017.07</strong> | ECUST | Chemical Engineering and Technology</li>
+      <li><strong>2013.09 - 2017.07</strong> | ECUST(CN) | B.Eng. Chemical Engineering and Technology</li>
       <li><strong>2017.09 - 2019.02</strong> | German Language Studies</li>
-      <li><strong>2019.04 - 2023.09</strong> | TU Clausthal | Process/Chemical Engineering <span class="specialization">(Specialization in New Materials)</span></li>
+      <li><strong>2019.04 - 2023.09</strong> | TU Clausthal(DE) | M.Sc. Process/Chemical Engineering <span class="specialization">(Specialization in New Materials)</span></li>
       <li><strong>2023.09 - 2026.05</strong> | Search for jobs</li>
       <li><strong>2026.06 - now</strong> | Independent Explorer & Experimental Learner</li>
     </ul>
 
     <!-- 正文文本 -->
     <div class="main-text">
-      This is my resume, though it may not look very impressive.
+      This is my background, though it may not look very impressive.  
+  <br><br>
 
 As a child, I dreamed of changing the world. I was deeply attracted by the phrase "Chemistry can change the world," which sparked my interest in this field. During my studies, I found chemistry to be an empirical science filled with variables and unknowns--the way a tiny adjustment in conditions could lead to entirely new phenomena fascinated me.
 <br><br>
@@ -78,8 +79,12 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">Resume Download</h3>
       <p class="resume-text">
-        You can view or download a clearer version of my resume here: (now under construction)
-        <a href="/about/Niu-Qiyue-cv.pdf" class="resume-link" target="_blank">[Download PDF]</a>
+        You can view or download a clearer version of my resume here: 
+        <a href="/about/Niu-Qiyue-cv.pdf" class="resume-link" target="_blank">[Download resume with photo PDF]</a>
+      </p>
+      <p class="resume-text">
+    For a version of the resume without photo, please download here： 
+    <a href="/about/Niu-Qiyue-cv-nopic.pdf" class="resume-link" target="_blank">[Download no Photo resume PDF]</a>
       </p>
 
       <h3 class="section-sub-title">Feedback & Discussion</h3>
@@ -107,6 +112,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
     <!-- 正文文本 -->
     <div class="main-text">
      这是我的履历，或许它并不算光鲜亮丽。
+   <br><br>
 
 小时候，我曾梦想改变世界。那是因为我曾被一句“化学可以改变世界”深深吸引，从此对化学产生了浓厚的兴趣。在学习过程中，我发现化学是一个非常具有经验科学的学科——充满了变数与未知，每一次条件的微调都可能催生全新的现象，这种探索感令我着迷。
 <br><br>
@@ -151,8 +157,12 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">简历下载</h3>
       <p class="resume-text">
-        你可以点击下方链接查看简历：(目前正在建设中)
-        <a href="/about/Niu-Qiyue-cv.pdf" class="resume-link" target="_blank">[点击下载 PDF]</a>
+        你可以点击下方链接查看简历：
+        <a href="/about/Niu-Qiyue-cv.pdf" class="resume-link" target="_blank">[点击下载简历 PDF]</a>
+      </p>
+          <p class="resume-text">
+    如需下载无照片版本的简历，请在此处下载：
+    <a href="/about/Niu-Qiyue-cv-nopic.pdf" class="resume-link" target="_blank">[点击下载无照片版 PDF]</a>
       </p>
 
       <h3 class="section-sub-title">反馈与交流</h3>

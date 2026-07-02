@@ -937,3 +937,14 @@ body {
   font-weight: bold;           /* 加粗 */
 }
 
+/* 嵌入在段落中的链接样式 */
+.inline-link {
+  color: #e67e22;         /* 使用你的品牌橙色 */
+  text-decoration: none;  /* 默认不显示下划线，显得干净 */
+  font-weight: 500;       /* 稍微加粗一点点 */
+}
+
+.inline-link:hover {
+  text-decoration: underline; /* 鼠标指上去时显示下划线 */
+  opacity: 0.8;               /* 增加一点透明度变化 */
+}
