@@ -41,7 +41,7 @@ However, AI-generated websites still have limitations. Although the code is smoo
 
 Overall, AI has played a huge role in building this website. With only basic programming knowledge, I was able to build my own website independently, and it wasn't just a plain text system, it included my aesthetic and design. Through this process, I also learned some basic knowledge of web structure. However, there are still certain limitations. When facing complex web structures, it is difficult for me to make independent modifications due to a lack of deep-level technical knowledge. Additionally, I cannot fully control the security or compatibility of third-party plugins.
 
-Based on these observations, my suggestion is this: If your goal is to build a static website to showcase text and images, and you possess basic programming skills along with a clear design plan, then using AI for assistance is a highly efficient and controllable choice. However, if you have more complex or advanced requirements, it would be wiser to seek professional help.
+Based on my experiences and observations, my suggestion is this: If your goal is to build a static website to showcase text and images, and you possess basic programming skills along with a clear design plan, then using AI for assistance is a highly efficient and controllable choice. However, if you have more complex or advanced requirements, it would be wiser to seek professional help.
 
 ---
 
@@ -74,4 +74,4 @@ Based on these observations, my suggestion is this: If your goal is to build a s
 
 总体而言，AI在建设网站中起到的作用是非常大的。我只凭藉最基础的编程知识就可以一个人独立建起属于自己的网站，并且不只是普通的文字系统，还兼具了我的审美与设计，并且在这个过程中我也学习到了一些初步的网页搭建结构知识。虽然仍有一定的局限性，在面对复杂的网页结构时，由于缺乏深层的底层知识，我很难进行自主修改；同时，对于第三方插件的安全性及兼容性，也存在无法完全掌控的问题。
 
-基于这些观察，我的建议是： 如果你的需求是建设一个展示文字与图片的静态网站，且具备基础编程能力并有明确的设计规划，那么利用 AI 辅助搭建是一个非常高效且可控的选择。但如果你有更复杂、更高阶的需求，引入专业人士的帮助会是更明智的做法。
+基于我的体验与观察，我的建议是： 如果你的需求是建设一个展示文字与图片的静态网站，且具备基础编程能力并有明确的设计规划，那么利用 AI 辅助搭建是一个非常高效且可控的选择。但如果你有更复杂、更高阶的需求，引入专业人士的帮助会是更明智的做法。
