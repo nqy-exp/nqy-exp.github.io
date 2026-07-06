@@ -25,7 +25,7 @@ However, I decided to make a bold attempt. Instead of spending until the end of 
 After deciding to create a static website without third-party plugins to reduce uncontrollability, I began my attempt. During the creation of my first config file, I also encountered a small issue: because I did not use a plain text format, the file failed to run. It took several pushes before I finally found and fixed the bug. After the successful push, I opened my very first meaningful page, this is the memorable first page::
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/first-v0.png" alt="QY Niu's Log V0.0" style="max-width: 500px; height: auto; border-radius: 4px;">
+  <img src="/images/first-v0.png" alt="QY Niu's Log V0.0" style="max-width: 400px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     QY Niu's Log V0.0
   </figcaption>
@@ -74,4 +74,4 @@ Based on my experiences and observations, my suggestion is this: If your goal is
 
 总体而言，AI在建设网站中起到的作用是非常大的。我只凭藉最基础的编程知识就可以一个人独立建起属于自己的网站，并且不只是普通的文字系统，还兼具了我的审美与设计，并且在这个过程中我也学习到了一些初步的网页搭建结构知识。虽然仍有一定的局限性，在面对复杂的网页结构时，由于缺乏深层的底层知识，我很难进行自主修改；同时，对于第三方插件的安全性及兼容性，也存在无法完全掌控的问题。
 
-基于我的体验与观察，我的建议是： 如果你的需求是建设一个展示文字与图片的静态网站，且具备基础编程能力并有明确的设计规划，那么利用 AI 辅助搭建是一个非常高效且可控的选择。但如果你有更复杂、更高阶的需求，引入专业人士的帮助会是更明智的做法。
+基于我的体验与观察，我的建议是： 如果你的需求是建设一个展示文字与图片的静态网站，且具备基础编程能力并有明确的设计规划，那么利用 AI 辅助搭建是一个非常高效且可控的选择。但如果你有更复杂、更高阶的需求，寻求专业人士的帮助会是更明智的做法。

@@ -102,7 +102,7 @@ permalink: /ideas/
 
 <!-- 2. 思想碎片列表 -->
 <div class="ideas-list">
-  {% for item in site.ideas %}
+  {% for item in site.ideas reversed %}
     {% if item.url != "/ideas/" %}
     <div class="idea-item">
       <a href="{{ item.url }}" class="idea-link">
