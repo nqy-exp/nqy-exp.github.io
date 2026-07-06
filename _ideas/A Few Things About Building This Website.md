@@ -24,7 +24,13 @@ However, I decided to make a bold attempt. Instead of spending until the end of 
 
 After deciding to create a static website without third-party plugins to reduce uncontrollability, I began my attempt. During the creation of my first config file, I also encountered a small issue: because I did not use a plain text format, the file failed to run. It took several pushes before I finally found and fixed the bug. After the successful push, I opened my very first meaningful page, this is the memorable first page::
 
-{% figure /images/first-v0.png | QY Niu's Log V0.0 %}
+<figure style="text-align: center; margin: 2em 0;">
+  <img src="/images/first-v0.png" alt="QY Niu's Log V0.0" style="max-width: 100%; height: auto;">
+  <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
+    QY Niu's Log V0.0
+  </figcaption>
+</figure>
+
 
 After passing the first stage of testing, I began to try more complex-designing for my homepage, incorporating my personal aesthetic. Initially, I planned a black and white design. However, when designing the "AI-assisted translation disclaimer," I wanted to highlight Jibber-Jabber and attract more readers, so I decided not to use the standard blue hyperlinks. The AI chose `#e67e22` orange as an accent color, which happened to match my preference and also matched the theme color of my first resume. Therefore, I decided to use this color as the theme for my entire website.
 
