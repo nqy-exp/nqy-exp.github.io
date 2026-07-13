@@ -37,7 +37,7 @@ description: "A digital log of my research and thoughts."
     </p>
   </div>
 
-
+</main>
 
 <!-- AI 说明模块 -->
 <section class="ai-disclosure">

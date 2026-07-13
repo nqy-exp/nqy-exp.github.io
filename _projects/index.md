@@ -95,7 +95,7 @@ permalink: /projects/
   {% endfor %}
 </div>
 
-<br><br><br>
+<br>
 
 <!-- 【提示便签】 -->
 <div class="construction-note">
@@ -106,7 +106,7 @@ permalink: /projects/
   </div>
 </div>
 
-<br><br><br>
+<br>
 
 <a href="/" class="back-link">← Homepage</a>
 
