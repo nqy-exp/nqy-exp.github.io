@@ -73,7 +73,7 @@ In summary, this exploratory research project will be conducted through three ex
 - **Experimental Reagents**: Glycerin (HYNAUT), nail base coat (KH Little Lightbulb Nail Care Series Calcium-enriched Base Coat).
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/om.jpg" alt="Figure 1. Optical Microscope(Phenix XSP-06)" style="max-width: 400; height: auto; border-radius: 4px;">
+  <img src="/images/om.jpg" alt="Figure 1. Optical Microscope(Phenix XSP-06)" style="max-width: 400px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 1. Optical Microscope(Phenix XSP-06)
   </figcaption>
@@ -108,7 +108,7 @@ The light source used is a Panasonic eye-protection desk lamp (HHLT0655B) with a
 		- *Option 3: Embedding the target fiber within an identifiable carrier fiber (e.g., wool) prior to slicing and observation<sup class="reference">[3]</sup>.*
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/hami.jpg" alt="Figure 2. Y172 fiber slicer (Harrington Slicer) " style="max-width: 400; height: auto; border-radius: 4px;">
+  <img src="/images/hami.jpg" alt="Figure 2. Y172 fiber slicer (Harrington Slicer) " style="max-width: 400px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 2. Y172 fiber slicer (Harrington Slicer) 
   </figcaption>
