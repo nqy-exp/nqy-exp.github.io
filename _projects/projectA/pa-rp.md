@@ -82,26 +82,29 @@ In summary, this exploratory research project will be conducted through three ex
 
 ### 4.1.2 Experimental Procedures
 
-**A. Blank Control Group Setup** 
+**1. Blank Control Group Setup** 
+
 Apply a small amount of glycerin or nail base coat to a microscope slide and cover it with a coverslip to observe the impact of ambient dust on microscopic imaging.
 
-**B. Sample Pre-treatment**
+**2. Sample Pre-treatment**
+
 - **For textile samples**: Use 3M Scotch Magic tape to perform surface dust removal, then cut the edges of the sample to extract a small amount of fiber.
 - **For wool fibers**: Due to their inherent characteristics, no tape-based dust removal pre-treatment is performed.
 
-**C. Microscopic Observation**
+**3. Microscopic Observation**
+
 Unless otherwise recorded, the microscope objective is 40x and the eyepiece is 12.5x (the eyepiece is part of the Phenix universal metal smartphone mount).
 The light source used is a Panasonic eye-protection desk lamp (HHLT0655B) with a color temperature of 5000K. The illuminance is approximately 1250 lx (measured by Photone app).
 
 - **Longitudinal Structural Observation:**
-	- 1. Place a small amount of fiber samples on a microscope slide, apply an appropriate amount of glycerin or nail base coat\*, and then cover with a coverslip.
-	- 2. Place the slide on the stage and conduct observation. 
+	- 1.Place a small amount of fiber samples on a microscope slide, apply an appropriate amount of glycerin or nail base coat\*, and then cover with a coverslip.
+	- 2.Place the slide on the stage and conduct observation. 
 	- _\*Note: In this experiment, nail base coat serves as a substitute embedding medium for nitrocellulose (due to its nitrocellulose content). To evaluate its potential destructive impact on fiber structure, an additional comparative observation of the longitudinal structure after adding nail base coat must be conducted._
 
 - **Cross-sectional Observation:**
-	- 1. Secure the fiber sample using the Y172 slicer, apply an appropriate amount of nail base coat, and perform slicing after it has dried (using a fan for accelerated drying if necessary).
-	- 2. Carefully place the sliced fibers onto a microscope slide, apply an appropriate amount of glycerin, and cover with a coverslip.
-	- 3. Place the slide on the stage and conduct observation. 
+	- 1.Secure the fiber sample using the Y172 slicer, apply an appropriate amount of nail base coat, and perform slicing after it has dried (using a fan for accelerated drying if necessary).
+	- 2.Carefully place the sliced fibers onto a microscope slide, apply an appropriate amount of glycerin, and cover with a coverslip.
+	- 3.Place the slide on the stage and conduct observation. 
 	- _Note: If the nail base coat causes structural damage to the fibers, a "direct slicing without embedding" method will be adopted; if slicing remains difficult, the following alternative solutions will be attempted:_
 		-  _Option 1: Multi-layer coating method (via multiple thin applications or reinforcement using nail top coat)._
 		- _Option 2: Replacement of embedding media (such as switching to fabric hardeners, edge-sealing liquids, or 502 adhesive and observing their impact on the longitudinal structure of fibers before use)._
@@ -114,7 +117,8 @@ The light source used is a Panasonic eye-protection desk lamp (HHLT0655B) with a
   </figcaption>
 </figure>
 
-**D. Imaging & Data Recording** 
+**4. Imaging & Data Recording** 
+
 Perform microscopic imaging and complete digital recording. Recorded data items include, but are not limited to: material type, color, morphological state, environmental humidity and temperature.
 
 ## 4.2 Exploration of Automated Fiber Identification via Computer Vision
@@ -122,18 +126,23 @@ Perform microscopic imaging and complete digital recording. Recorded data items 
 Following the completion of Phase 1, the second sub-project will proceed through stages of data expansion, model training, and validation. The specific workflow is as follows:
 
 **1. Data Expansion and Sample Preparation** 
+
 By sampling more fabrics of known materials, the dataset scale will be further expanded. For each fiber sample, multiple preparations will be performed to obtain various microscopic images of both longitudinal and cross-sectional structures.
 
 **2. Image Processing and Labeling** 
+
 FIJI (ImageJ) software will be used to process the collected images and measure fiber diameter data. Subsequently, Label Studio will be utilized for image annotation to prepare a high-quality dataset for model training.
 
 **3. Model Fine-tuning** 
+
 Using LoRA (Low-Rank Adaptation) technology, the Google Gemma-4-26b-a4b-qat (4-bit) model will be fine-tuned via the MLXTune platform to achieve specialized training for fiber morphological recognition. Considering the risk of overfitting caused by the sample size, this study will employ data augmentation to expand the diversity of training samples, ensuring that the model learns essential morphological features rather than merely memorizing image details, thereby improving its generalization capability.
 
 **4. Testing and Performance Evaluation** 
+
 To verify the capability of the model, a test set consisting of microscopic images of known fiber samples that have not been involved in training will be collected. The training will be considered successful if the model achieves an accuracy rate of over 85% on this test set, otherwise, the research will revert to employing morphological observation as the primary method for fiber identification.
 
 **5. Open Science** 
+
 Regardless of the training outcome, all data packages used for AI training will be packaged after the completion of the research and uploaded to the Zenodo platform for open-source sharing.
 
 ## 4.3 Impact of Common Household Liquids on the Morphological Stability of Textile Fibers
@@ -146,15 +155,19 @@ This phase is the core component of the exploratory research, aiming to observe 
 - **Selection of Experimental Media**: Various readily available daily liquids will be selected, including but not limited to food seasonings, beverages, household cleaners, and craft adhesives/glues.
 
 **2. Sample Processing and Reaction Process** 
+
 Known fiber samples will be placed into five covered petri dishes, and the target experimental solutions will be added. The samples will undergo wetting processes at different time intervals: 1 minute, 15 minutes, 30 minutes, 60 minutes, and 120 minutes.
 
 **3. Post-treatment and Microscopic Observation** 
+
 Upon reaching the target times, the samples will be removed; an initial observation of fiber morphology will be performed and recorded. Subsequently, a dust-free cloth will be used to absorb excess liquid for drying before sample preparation. Morphological observations will then be conducted from both longitudinal and cross-sectional dimensions using an optical microscope, followed by image collection and recording.
 
 **4. Data Collection and Analysis** 
+
 After obtaining the image data, FIJI (ImageJ) software will be utilized for digital processing and parameter measurement.
 
 **5. AI-Assisted Validation** 
+
 If the computer vision training in Phase 2 reaches the expected goals, this phase may also employ the AI model as an auxiliary tool. By adding new images into the fine-tuned AI model's database and performing secondary fine-tuning, the morphological changes of fibers in subsequent experiments will be identified.
 
 **The final objective** is to establish a cross-verification analytical mode based on common household substances, utilizing the morphological variations induced by multiple media to achieve reliable qualitative analysis of textile fiber composition.
@@ -259,35 +272,38 @@ As well as the challenges and technical bottlenecks to be addressed during the r
 
 ### 4.1.2实验流程
 
-**A. 空白对照组设置**
+**1. 空白对照组设置**
+
 在载玻片上滴加少量甘油或指甲底油后覆盖盖玻片，用于观察实验环境内的粉尘对显微成像的影响。
 
-**B. 样本预处理**
+**2. 样本预处理**
 - 对于织物样本：使用3M隐形胶带对表面进行除尘处理后，将小样边缘剪开提取少量纤维。
 - 对于毛类纤维样本：由于其特性，暂不进行胶带除尘预处理。
 
-**C. 显微镜观察**
+**3. 显微镜观察**
+
 若无特殊记录，显微镜物镜为40倍，目镜为12.5倍（目镜为Phenix通用金属手机支架自带）
 光源为Panasonic护眼台灯（HHLT0655B），色温5000K。照度约为1250 lx（由Photone APP进行测量）。
 
 - **纵向结构观察：**
-	- 1. 取小样少量纤维在载玻片上，滴适量甘油或指甲底油\*后放盖玻片。
+	- 1.取小样少量纤维在载玻片上，滴适量甘油或指甲底油\*后放盖玻片。
 	- 2.将载玻片放入载物台上后，进行观察。
 	 _\*：在本实验中，指甲底油作为火棉胶的替代包埋介质（因其含有硝化纤维）。为评估其对纤维结构的潜在破坏性，需额外设置一组加入指甲底油后的纵向结构对比观察。_
 
 - **横截面观察：**
-	- 1. 使用Y172型切片器卡紧样本纤维，滴加适量指甲底油，待其干燥（必要时使用风扇辅助加速干燥）后进行切片处理。
+	- 1.使用Y172型切片器卡紧样本纤维，滴加适量指甲底油，待其干燥（必要时使用风扇辅助加速干燥）后进行切片处理。
 	- 2.将切下的纤维小心放置在在载玻片上，滴加适量甘油后盖盖玻片。
 	- 3.将载玻片放入载物台上后，进行观察。
 	- _注：若指甲底油对纤维结构产生破坏，将采用“非包埋直接切片法”；若切片困难，则尝试以下替代方案：
 		- *方案一：多层覆膜法（通过多次薄涂或使用指甲顶油进行加固）*
 		- *方案二：更换包埋介质（如改用织物硬化剂、锁边液、502胶等可使纤维变硬的溶液，并在使用前观察其对纤维纵向结构的破坏性）。*
-		- *方案三：使用可识别的载体纤维（比如羊毛）包裹后进行切片观察<sup class="reference">[3]</sup>。
+		- *方案三：使用可识别的载体纤维（比如羊毛）包裹后进行切片观察<sup class="reference">[3]</sup>。*
 
 图2 Y172型纤维切片器（哈氏切片器）（图见英文版）
 
 
-**D.图像采集与数据记录**
+**4.图像采集与数据记录**
+
 进行显微成像并完成数字化记录。记录的数据项包括但不限于：材料材质、颜色、形态状态、环境湿度及温度。
 
 ## 4.2 基于计算机视觉的纤维成分自动识别方案探索
@@ -295,18 +311,23 @@ As well as the challenges and technical bottlenecks to be addressed during the r
 在完成第一阶段的数据库构建后，第二个子项目将进入数据扩充、模型训练与验证阶段，具体流程如下：
 
 **1. 数据扩充与样本制备** 
+
 通过对更多已知材料的布料进行采样，进一步扩大数据集规模。针对每种纤维样本进行多次重复制样，以获取多张不同的纵向结构与横截面结构的显微图像。
 
 **2. 图像处理与标注** 
+
 利用 FIJI (ImageJ) 软件对采集到的图像进行处理，测量纤维的直径数据。随后，使用 Label Studio 工具对图像进行标注，为模型训练准备高质量的数据集。
 
 **3. 模型微调** 
+
 采用 LoRA (Low-Rank Adaptation) 技术，利用 MLXTune 平台对 Google Gemma-4-26b-a4b-qat (4-bit) 模型进行微调，实现针对纤维形态识别的专用化训练。考虑到样本规模可能带来的过拟合风险，本研究将采用数据增强来扩充训练样本的多样性，以确保模型能够学习到本质的形态特征而非仅仅是记住图像细节，从而提升模型的泛化能力。
 
 **4. 测试与性能评估** 
+
 为了验证模型的能力，将采集一批尚未参与训练的已知材料的纤维样本显微图像作为测试集。若模型在测试集上的识别准确率达到 85% 以上，则视为训练成功，否则，研究将退回到采用显微形态学观察作为主要的纤维鉴别手段。
 
 **5. 开源分享**
+
 无论训练结果如何，所有用于 AI 训练的数据包都将在研究结束后进行打包处理，并上传至 Zenodo 平台进行开源分享。
 
 
@@ -320,15 +341,19 @@ As well as the challenges and technical bottlenecks to be addressed during the r
 - **实验介质选择**：选取各类易于获取的日常液体，包括但不限于食品调味品、饮料、家用清洁剂以及手工胶类制品等。
 
 **2. 样本处理与反应过程**
+
 将已知成分的纤维样本置于五个带盖培养皿中，滴加目标实验溶液。样本将分别在不同的时间梯度下进行浸润处理，分别是：1分钟、15分钟、30分钟、60分钟及120分钟。
 
 **3. 后处理与显微观察** 
+
 到达目标时间后，取出样本，先进行纤维形态观察，并记录。随后，利用无尘布吸干多余液体进行干燥处理后进行制样。通过光学显微镜分别从纵向结构与横截面两个维度进行形态学观察，采集图像并记录。
 
 **4. 数据采集与分析** 
+
 获取图像数据后，利用 FIJI (ImageJ) 软件进行数字化处理与参数测量。
 
 **5. AI辅助验证** 
+
 若第二阶段的计算机视觉训练达到预期目标，本阶段也可使用该 AI 模型作为辅助工具，将图片加入微调AI模型的数据库，进行二次微调后，对后续实验中的纤维形态变化进行识别。
 
 **最终目标**是构建一种基于常见日用介质的交叉分析模式，利用多种介质引发的形态学差异，实现对纺织纤维成分可靠的定性分析。

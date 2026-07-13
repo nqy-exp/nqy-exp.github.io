@@ -37,19 +37,7 @@ description: "A digital log of my research and thoughts."
     </p>
   </div>
 
-</main>
 
-
-<!-- 警告模块 -->
-<section class="notice-section">
-  <div style="display: inline-block; border: 1px solid #ffeeba; background-color: #fff3cd; color: #856404; padding: 20px 40px; border-radius: 8px;">
-    <p style="margin: 0; font-weight: bold; font-size: 1.1em;">⚠️ Notice / 注意</p>
-    <p style="margin: 10px 0 0 0; font-size: 0.9em;">
-      This site is under construction. Please excuse the mess.<br>
-      本站仍在建设中，如有疏漏请见谅。
-    </p>
-  </div>
-</section>
 
 <!-- AI 说明模块 -->
 <section class="ai-disclosure">
