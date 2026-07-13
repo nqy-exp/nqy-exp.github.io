@@ -6,7 +6,7 @@ date: 2026-07-06
 
 The framework of this website is now almost complete.
 
-Actually, the idea of building a website started a long time ago. At that time, I felt that social media platforms provide too much instant feedback, while I prefer more asynchronous communication (such as E-mails or letters), so I had the idea to start my own blog. Although I consulted others about the technical solutions back then and a friend recommended GitHub Pages, I never actually implemented it at that time.
+Actually, the idea of building a website started a long time ago. At that time, I felt that social media platforms provide too much instant feedback, while I prefer more asynchronous communication (such as E-mails), so I had the idea to start my own blog. Although I consulted others about the technical solutions back then and a friend recommended GitHub Pages, I never actually implemented it at that time.
 
 Now, more than just wanting to "say something" or have people see me, I have a more specific thought: to showcase my curiosity. Regardless of whether this website exists, I will continue to work on the-projects that interest me. However, because my personal perspective is limited and has many blind spots, I hope to use this website as a platform to introduce a "third-party perspective" to complement my own.
 
@@ -47,7 +47,7 @@ Based on my experiences and observations, my suggestion is this: If your goal is
 
 现在网站的框架建立已经基本告一段落了。
 
-说起来有建立网站这个想法其实是非常早的时候了，当时是因为我觉得在社交平台上发点什么都会收到即时反馈，但我更喜欢异步通信式的反馈（比如E-Mail或者信件这一类），所以我就萌生了自己建立一个博客的想法，虽然当时询问过他人技术方案，有朋友推荐我Github静态网页托管，不过当时一直付诸实施。
+说起来有建立网站这个想法其实是非常早的时候了，当时是因为我觉得在社交平台上发点什么都会收到即时反馈，但我更喜欢异步通信式的反馈（比如E-Mail），所以我就萌生了自己建立一个博客的想法，虽然当时询问过他人技术方案，有朋友推荐我Github静态网页托管，不过当时一直付诸实施。
 
 而现在比起以前只是想说一些什么、想让他人看到我的窗口，这次还有一个更加具体的想法——想要展示的好奇心。当然无论是否建立这个网站，我还是会持续进行我感兴趣的项目，只是个人的视角还是狭窄的，有许多看不到的盲区，希望能通过网站这个平台来引入第三视角来弥补个人视角的偏颇。
 

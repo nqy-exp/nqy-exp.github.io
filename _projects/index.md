@@ -97,12 +97,12 @@ permalink: /projects/
 
 <br><br><br>
 
-<!-- 【建设中提示便签】 -->
+<!-- 【提示便签】 -->
 <div class="construction-note">
   <div class="note-content">
-    <span class="note-icon">🚧</span>
-    <p class="note-text">This section is currently under construction. New project logs and documentation will be uploaded soon.</p>
-    <p class="note-text-zh">此板块正在建设中，新的项目日志与文档即将上线。</p>
+    <span class="note-icon">🏖️</span>
+    <p class="note-text">Please note that experimental logs updates may proceed at a slower pace due to summer heat conditions.</p>
+    <p class="note-text-zh">受夏季高温影响，实验日志更新可能会以较慢的节奏进行。</p>
   </div>
 </div>
 
