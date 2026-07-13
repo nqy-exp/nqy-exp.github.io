@@ -501,7 +501,7 @@ body {
 .disclaimer-text {
   margin: 0 0 12px 0;       /* 段落间距 */
   font-size: 0.9em;         /* 稍微缩小，体现它是补充说明 */
-  color: #666;              /* 常规文字使用中性灰色 */
+  color: #d9534f;             
   line-height: 1.6;
 }
 
@@ -538,7 +538,7 @@ body {
 
 .tiny-disclaimer .disclaimer-text {
   font-size: 0.75em;
-  color: #aaa;
+  color: #d9534f;
   margin-left: 6px;
   line-height: 1.4;
 }
