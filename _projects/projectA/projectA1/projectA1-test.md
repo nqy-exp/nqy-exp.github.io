@@ -1,8 +1,8 @@
 ---
 layout: projects-layout
 title: projectA1test1
-project: projectA1
-sub_project: Task 01
+project: projecta
+sub_project: projecta1
 type: log
 date: 2026-06-27
 ---
