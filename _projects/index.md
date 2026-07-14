@@ -160,7 +160,7 @@ permalink: /projects/
 
 <h1 class="page-title">Experimental Logs</h1>
 
-<<div class="project-tree">
+<div class="project-tree">
   {% comment %} 第一步：获取所有不重复的项目 ID {% endcomment %}
   {% assign all_plans = site.projects | where: "type", "plan" %}
   {% assign unique_project_ids = all_plans | map: "project" | uniq %}

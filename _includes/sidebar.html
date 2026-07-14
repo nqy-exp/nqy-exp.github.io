@@ -18,52 +18,48 @@
     </ul>
 
      {% elsif page.url contains '/projects/' %}
-<!-- 【情况 B】: Projects 板块 - 基于物理路径提取版 -->
+<!-- 【情况 B】: Projects 板块 - 绝对身份校验版 -->
 <h3 class="sidebar-title">
   <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
 </h3>
 <ul class="sidebar-list">
 
   {% comment %} 
-    【核心逻辑】：直接从 URL 中切分。
-    URL 示例: /projects/projecta/projecta1/log1/
-    split('/') 会得到: ["", "projects", "projecta", "projecta1", "log1", ""]
-    我们要的 ID 是索引为 2 的元素，即 "projecta"
+    【第一步：定位当前页面属于哪个项目】
+    我们直接遍历所有的 projects，看哪一个项目的 URL 和当前页面的 URL 完全一致。
+    这比解析 URL 字符串要可靠 100 倍。
   {% endcomment %}
-  
-  {% assign path_parts = page.url | split: '/' %}
-  
+  {% assign current_project_obj = nil %}
+  {% for item in site.projects %}
+    {% if item.url == page.url %}
+      {% assign current_project_obj = item %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
   {% comment %} 
-    首先判断是否是在总目录页 (URL 为 /projects/ 或 /projects)
+    如果找到了对应的项目对象，我们就提取它的 project ID
   {% endcomment %}
-  {% if path_parts.size <= 3 or path_parts[2] == "" %}
-    <!-- --- 进入【Projects 总目录模式】 --- -->
-    {% assign all_plans = site.projects | where: "type", "plan" %}
-    {% for plan in all_plans %}
-      <li class="sidebar-item">
-        <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
-          📂 {{ site.project_mapping[plan.project] | default: plan.title }}
-        </a>
-      </li>
-    {% endfor %}
-
+  {% if current_project_obj != nil %}
+    {% assign current_proj_id = current_project_obj.project %}
   {% else %}
-    <!-- --- 进入【项目内视图】 --- -->
-    {% assign current_proj_id = path_parts[2] %}
+    {% assign current_proj_id = nil %}
+  {% endif %}
 
-    <!-- A. 项目大标题 (Mapping) -->
+  {% comment %} 
+    【第二步：根据是否识别到项目，决定显示模式】
+  {% endcomment %}
+  {% if current_proj_id != nil and current_proj_id != "" %}
+    <!-- --- 【模式 A】：项目详情视图 (进入了某个具体的项目) --- -->
+
+    <!-- 1. 项目大标题 -->
     <li class="sidebar-item" style="margin-bottom: 20px;">
       <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
         📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
       </span>
     </li>
 
-    <!-- B. 获取该项目下所有的文档 (通过硬核提取的 ID) -->
-    {% comment %} 
-      注意：这里我们使用 site.projects 进行遍历，因为 URL 切分出的 ID 是最可靠的。
-    {% endcomment %}
-    
-    <!-- B-1. 显示该项目的所有 Plan -->
+    <!-- 2. 该项目下的所有 Plan -->
     {% for item in site.projects %}
       {% if item.project == current_proj_id and item.type == "plan" %}
         <li class="sidebar-item">
@@ -76,10 +72,8 @@
 
     <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
-    <!-- B-2. 分组显示子项目日志 -->
-    {% comment %} 
-      先收集该项目下所有不重复的 sub_project ID
-    {% endcomment %}
+    <!-- 3. 该项目下的子项目日志 (分组展示) -->
+    {% comment %} 先找该项目下所有的不重复 sub_project ID {% endcomment %}
     {% assign sub_ids = "" | split: "" %}
     {% for item in site.projects %}
       {% if item.project == current_proj_id and item.type == "log" and item.sub_project != nil %}
@@ -90,7 +84,7 @@
       {% endif %}
     {% endfor %}
 
-    <!-- 遍历子项目展示 -->
+    <!-- 遍历子项目展示日志 -->
     {% for sub in sub_ids %}
       <li class="sidebar-item" style="margin-top: 15px;">
         <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">
@@ -113,9 +107,21 @@
     <li class="sidebar-item" style="margin-top: 20px;">
       <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
     </li>
+
+  {% else %}
+    <!-- --- 【模式 B】：总目录视图 (在 /projects/ 页面) --- -->
+    {% assign all_plans = site.projects | where: "type", "plan" %}
+    {% for plan in all_plans %}
+      <li class="sidebar-item">
+        <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
+          📂 {{ site.project_mapping[plan.project] | default: plan.title }}
+        </a>
+      </li>
+    {% endfor %}
   {% endif %}
 
 </ul>
+
 
 
 
