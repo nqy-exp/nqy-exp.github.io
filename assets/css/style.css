@@ -1022,10 +1022,7 @@ body {
 }
 
 
-/* ============================================================
-   SIDEBAR & MOBILE NAVIGATION (Ultimate Dual-Mode Version)
-   逻辑：桌面端显示侧边栏 | 移动端实现“双模式”导航切换
-   ============================================================ */
+
 
 /* ============================================================
    SIDEBAR & MOBILE DRAWER (Pure Clean Version)
@@ -1036,30 +1033,33 @@ body {
    1. 桌面端样式 (Desktop Mode)
    ----------------------------------------------------------- */
 
-/* ============================================================
-   SIDEBAR & MOBILE NAVIGATION (Ultimate Integrated Version)
-   ============================================================ */
+/* 确保在桌面端，侧边栏是隐藏的或者正常的固定位置 */
+@media (min-width: 769px) {
+    .sidebar {
+        display: block !important;
+        position: sticky !important;
+        top: 80px !important;
+        width: 250px !important;
+        padding: 20px !important;
+        border-right: 1px solid #eee !important;
+        height: calc(100vh - 80px) !important;
+        background-color: #ffffff !important;
+        transform: none !important; /* 桌面端不允许位移 */
+    }
 
-/* -----------------------------------------------------------
-   1. 桌面端样式 (Desktop Mode)
-   ----------------------------------------------------------- */
-
-.sidebar {
-    width: 250px;
-    flex-shrink: 0;
-    padding: 20px;
-    border-right: 1px solid #eee;
-    height: calc(100vh - 80px);
-    position: sticky;
-    top: 80px;
-    overflow-y: auto;
-    background-color: #fff; /* 桌面端实心白色 */
-    transition: transform 0.3s ease;
+    /* 隐藏所有移动端专属组件 */
+    .hamburger-btn, 
+    .menu-overlay, 
+    .mobile-quick-nav, 
+    .sidebar-global-nav, 
+    .sidebar-divider {
+        display: none !important;
+    }
 }
 
-/* 汉堡按钮：确保在顶层 */
+/* 汉堡按钮样式 - 确保它在顶层 */
 .hamburger-btn {
-    z-index: 3000 !important; /* 确保它永远在最顶层，不会被侧边栏挡住 */
+    z-index: 9999 !important; /* 提到最高级 */
     width: 25px;
     height: 18px;
     background: transparent;
@@ -1067,7 +1067,7 @@ body {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .hamburger-btn span {
@@ -1083,92 +1083,80 @@ body {
 .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-/* 桌面端强制隐藏所有移动端专属元素 */
-@media (min-width: 769px) {
-    .hamburger-btn, 
-    .menu-overlay, 
-    .mobile-only-nav, 
-    .quick-links-list,   /* 确保 header 里的快速导航在桌面端隐藏 */
-    .sidebar-global-nav, 
-    .sidebar-divider {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-    }
-}
-
 
 /* -----------------------------------------------------------
-   2. 移动端样式 (Mobile Drawer Mode)
+   2. 移动端样式 (Mobile Drawer Mode) - 【彻底修复版】
    ----------------------------------------------------------- */
 
 @media (max-width: 768px) {
-    /* 侧边栏抽屉：实心白色卡片 */
-    .sidebar {
+    /* 【核心修复】：强制侧边栏为实心白色卡片，且带橙色边框 */
+    aside.sidebar {
+        display: block !important;
         position: fixed !important;
-        left: 0;
-        top: 0;
-        height: 100vh !important;
+        left: 0 !important;
+        top: 0 !important;
         width: 280px !important;
-        z-index: 2000; /* 高层级，在遮罩之上 */
-        transform: translateX(-100%); /* 默认藏在左边 */
-        border-right: 4px solid #e67e22; /* 【关键】：侧边栏自带主题色边缘线 */
-        background-color: #ffffff !important; /* 【核心】：纯白背景，不透明 */
-        box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* 轻微阴影增加立体感 */
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100vh !important;
+        z-index: 9999 !important; /* 确保在最顶层 */
+        transform: translateX(-100%); /* 初始隐藏 */
+        background-color: #ffffff !important; /* 【关键】：强制纯白，绝不透明 */
+        border-right: 4px solid #e67e22 !important; /* 主题色边框 */
+        box-shadow: 5px 0 20px rgba(0,0,0,0.2) !important;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
-    /* 当菜单激活时滑出 */
-    .sidebar.is-open {
-        transform: translateX(0);
+    /* 当侧边栏激活时 */
+    aside.sidebar.is-open {
+        transform: translateX(0) !important;
     }
 
     /* 内容容器 */
     .sidebar-content {
         position: relative;
-        z-index: 2;      /* 高于遮罩层的 1 */
+        z-index: 10 !important;
         width: 100%;
         height: 100%;
-        background-color: #ffffff !important; /* 确保内容区也是纯白 */
+        background-color: #ffffff !important; /* 【关键】：内容区纯白 */
         overflow-y: auto;
     }
 
-    /* 【核心修改】：透明遮罩层 (用于点击背景关闭菜单) */
+    /* 遮罩层：让背景变暗，但它是透明的，只负责捕捉点击 */
     .menu-overlay {
         display: block !important;
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background: rgba(0, 0, 0, 0.3) !important; /* 【关键】：你可以根据需要把 0.3 改成 transparent 实现完全透明 */
-        z-index: 1;      /* 在侧边栏内容之下，在页面内容之上 */
+        background: rgba(0, 0, 0, 0.4) !important; /* 这里可以改成 transparent 如果你想要完全没阴影 */
+        z-index: 9998 !important; /* 在侧边栏之下 */
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease;
     }
 
     .menu-overlay.is-visible {
-        opacity: 1;
-        pointer-events: auto; /* 允许点击阴影关闭菜单 */
+        opacity: 1 !important;
+        pointer-events: auto !important;
     }
 
-    /* 强制显示移动端专用元素 */
-    .hamburger-btn { display: flex !important; }
-    .mobile-only-nav { display: block !important; }
+    /* 汉堡按钮显示 */
+    .hamburger-btn {
+        display: flex !important;
+    }
 
-    /* --- Header 里的快速导航 (针对主页) --- */
+    /* --- Header 里的快速导航 (主页用) --- */
     .mobile-quick-nav {
-        display: none; /* 默认隐藏，由 JS 控制 */
+        display: none; /* 由 JS 控制 */
         position: fixed;
         top: 60px;
         left: 0;
         width: 100%;
-        background: white;
-        z-index: 999; /* 在遮罩层之下，在侧边栏之上 */
+        background: white !important;
+        z-index: 9997 !important; /* 在遮罩层之下 */
         box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
     .mobile-quick-nav.is-active {
-        display: block; /* 由 JS 控制显示 */
+        display: block !important;
     }
 
     .quick-links-list {
@@ -1186,12 +1174,7 @@ body {
         border-bottom: 1px solid #f5f5f5;
     }
 
-    .quick-link:hover {
-        background-color: #fffcf5;
-        color: #e67e22 !important;
-    }
-
-    /* --- 侧边栏内的全局导航样式 --- */
+    /* --- 侧边栏内部导航样式 --- */
     .sidebar-global-nav {
         list-style: none;
         padding: 0;
@@ -1208,12 +1191,6 @@ body {
         text-decoration: none;
     }
 
-    .sidebar-global-nav .global-link:hover {
-        color: #e67e22 !important;
-        background-color: #fffcf5;
-    }
-
-    /* 分隔线 */
     .sidebar-divider {
         border: none;
         border-top: 1px solid #eee;
