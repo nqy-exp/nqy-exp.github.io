@@ -85,23 +85,25 @@
     {% endfor %}
 
     <!-- 遍历子项目展示日志 -->
-    {% for sub in sub_ids %}
-      <li class="sidebar-item" style="margin-top: 15px;">
-        <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">
-          {{ site.project_mapping[sub] | default: sub }}
-        </span>
-      </li>
+      {% for sub in sub_ids %}
+        <li class="sidebar-item" style="margin-top: 15px;">
+          <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">
+            {{ site.project_mapping[sub] | default: sub }}
+          </span>
+        </li>
 
-      {% for item in site.projects %}
-        {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" and item.url != page.url %}
-          <li class="sidebar-item" style="padding-left: 10px;">
-            <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
-              • {{ item.title }}
-            </a>
-          </li>
-        {% endif %}
+        {% comment %} 【关键修复】：删除了 item.url != page.url 这个条件 {% endcomment %}
+        {% for item in site.projects %}
+          {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" %}
+            <li class="sidebar-item" style="padding-left: 10px;">
+              <!-- 这里通过 active 类来高亮当前页面 -->
+              <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
+                • {{ item.title }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
       {% endfor %}
-    {% endfor %}
 
     <!-- 返回按钮 -->
     <li class="sidebar-item" style="margin-top: 20px;">
