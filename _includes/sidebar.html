@@ -18,85 +18,26 @@
     </ul>
 
      {% elsif page.url contains '/projects/' %}
-<!-- 【情况 B】: Projects 板块 - 重写版 -->
+<!-- 【情况 B】: Projects 板块 - 基于物理路径提取版 -->
 <h3 class="sidebar-title">
   <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
 </h3>
 <ul class="sidebar-list">
 
   {% comment %} 
-    【第一步：获取当前项目 ID】
-    尝试直接从页面获取，如果拿不到（比如某些布局下 page.project 失效），就去 site.projects 集合里根据 URL 反查。
+    【核心逻辑】：直接从 URL 中切分。
+    URL 示例: /projects/projecta/projecta1/log1/
+    split('/') 会得到: ["", "projects", "projecta", "projecta1", "log1", ""]
+    我们要的 ID 是索引为 2 的元素，即 "projecta"
   {% endcomment %}
-  {% assign current_proj_id = page.project %}
   
-  {% if current_proj_id == nil or current_proj_id == "" %}
-    {% for item in site.projects %}
-      {% if item.url == page.url %}
-        {% assign current_proj_id = item.project %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-
+  {% assign path_parts = page.url | split: '/' %}
+  
   {% comment %} 
-    【第二步：判断是“项目详情页”还是“总目录页”】
+    首先判断是否是在总目录页 (URL 为 /projects/ 或 /projects)
   {% endcomment %}
-  {% if current_proj_id != nil and current_proj_id != "" %}
-    <!-- --- 进入【项目内视图】 --- -->
-
-    <!-- A. 项目大标题 (Mapping) -->
-    <li class="sidebar-item" style="margin-bottom: 20px;">
-      <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-        📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
-      </span>
-    </li>
-
-    <!-- B. 该项目下的所有 Plans (解决一个项目多个 Plan 的问题) -->
-    {% assign project_items = site.projects | where: "project", current_proj_id %}
-    {% assign all_plans_in_this_project = project_items | where: "type", "plan" %}
-    
-    {% for plan in all_plans_in_this_project %}
-      <li class="sidebar-item">
-        <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
-          📖 {{ plan.title }}
-        </a>
-      </li>
-    {% endfor %}
-
-    <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
-
-    <!-- C. 分组显示该项目下的子项目日志 -->
-    {% assign project_logs = project_items | where: "type", "log" %}
-    {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
-
-    {% for sub in sub_ids %}
-      {% if sub != nil and sub != "" %}
-        <li class="sidebar-item" style="margin-top: 15px;">
-          <!-- 子项目标题翻译 -->
-          <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">
-            {{ site.project_mapping[sub] | default: sub }}
-          </span>
-        </li>
-        {% for log in project_logs %}
-          {% if log.sub_project == sub and log.url != page.url %}
-            <li class="sidebar-item" style="padding-left: 10px;">
-              <a href="{{ log.url }}" class="sidebar-link {% if page.url == log.url %}active{% endif %}">
-                • {{ log.title }}
-              </a>
-            </li>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-
-    <!-- 返回按钮 -->
-    <li class="sidebar-item" style="margin-top: 20px;">
-      <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
-    </li>
-
-  {% else %}
-    <!-- --- 进入【Projects 总目录页】 --- -->
+  {% if path_parts.size <= 3 or path_parts[2] == "" %}
+    <!-- --- 进入【Projects 总目录模式】 --- -->
     {% assign all_plans = site.projects | where: "type", "plan" %}
     {% for plan in all_plans %}
       <li class="sidebar-item">
@@ -105,9 +46,77 @@
         </a>
       </li>
     {% endfor %}
+
+  {% else %}
+    <!-- --- 进入【项目内视图】 --- -->
+    {% assign current_proj_id = path_parts[2] %}
+
+    <!-- A. 项目大标题 (Mapping) -->
+    <li class="sidebar-item" style="margin-bottom: 20px;">
+      <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
+        📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
+      </span>
+    </li>
+
+    <!-- B. 获取该项目下所有的文档 (通过硬核提取的 ID) -->
+    {% comment %} 
+      注意：这里我们使用 site.projects 进行遍历，因为 URL 切分出的 ID 是最可靠的。
+    {% endcomment %}
+    
+    <!-- B-1. 显示该项目的所有 Plan -->
+    {% for item in site.projects %}
+      {% if item.project == current_proj_id and item.type == "plan" %}
+        <li class="sidebar-item">
+          <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
+            📖 {{ item.title }}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
+
+    <!-- B-2. 分组显示子项目日志 -->
+    {% comment %} 
+      先收集该项目下所有不重复的 sub_project ID
+    {% endcomment %}
+    {% assign sub_ids = "" | split: "" %}
+    {% for item in site.projects %}
+      {% if item.project == current_proj_id and item.type == "log" and item.sub_project != nil %}
+        {% assign s_val = item.sub_project %}
+        {% unless sub_ids contains s_val %}
+          {% assign sub_ids = sub_ids | push: s_val %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+    <!-- 遍历子项目展示 -->
+    {% for sub in sub_ids %}
+      <li class="sidebar-item" style="margin-top: 15px;">
+        <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">
+          {{ site.project_mapping[sub] | default: sub }}
+        </span>
+      </li>
+
+      {% for item in site.projects %}
+        {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" and item.url != page.url %}
+          <li class="sidebar-item" style="padding-left: 10px;">
+            <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
+              • {{ item.title }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+
+    <!-- 返回按钮 -->
+    <li class="sidebar-item" style="margin-top: 20px;">
+      <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
+    </li>
   {% endif %}
 
 </ul>
+
 
 
 
