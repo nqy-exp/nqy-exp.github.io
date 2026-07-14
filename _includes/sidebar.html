@@ -1,163 +1,155 @@
-
 <!-- sidebar.html -->
 <aside class="sidebar" id="sidebarDrawer">
+  <!-- 1. 【遮罩层】 -->
   <div class="menu-overlay" id="menuOverlay"></div>
 
+  <!-- 2. 【内容容器】 -->
   <div class="sidebar-content">
-    
-    <!-- 【核心修复】：这部分在所有 if 判断之外！ -->
-    <!-- 这样无论你在哪个页面，只要点开手机菜单，这三个链接永远都在最顶端 -->
-    <ul class="sidebar-global-nav mobile-only-nav">
-      <li><a href="/about/" class="sidebar-link global-link">About Me</a></li>
-      <li><a href="/projects/" class="sidebar-link global-link">Experimental Logs</a></li>
-      <li><a href="/ideas/" class="sidebar-link global-link">Jibber-Jabber</a></li>
-    </ul>
 
-    <!-- 分隔线 -->
-    <hr class="sidebar-divider mobile-only-nav">
-
-    
-
-  {% if page.url contains '/ideas/' %}
-  <!-- 【情况 A】: Jibber-Jabber 板块 -->
-  <h3 class="sidebar-title">
-    <a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a>
-  </h3>
-  <ul class="sidebar-list">
-    
-    {% assign sorted_ideas = site.ideas | sort: "date" | reverse %}
-
-    {% for item in sorted_ideas %}
-      {% if item.url != "/ideas/" %}
-        <li class="sidebar-item">
-          <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
-            {{ item.title }}
-          </a>
-        </li >
-      {% endif %}
-    {% endfor %}
-
-    <!-- 返回按钮 -->
-        <li class="sidebar-item" style="margin-top: 20px;">
-          <a href="/ideas/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to Jibber-Jabber</a>
-        </li>
-  </ul>
-
-  {% elsif page.url contains '/projects/' %}
-    <!-- 【情况 B】: Projects 板块 (智能导航模式) -->
-    <h3 class="sidebar-title">
-      <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
-    </h3>
-    <ul class="sidebar-list">
-
-      {% comment %} 
-        【第一步：定位当前页面属于哪个项目】
-        通过遍历所有项目，比对 URL 来获取最可靠的 Project ID。
-      {% endcomment %}
-      {% assign current_proj_id = nil %}
-      {% for item in site.projects %}
-        {% if item.url == page.url %}
-          {% assign current_proj_id = item.project %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-
-      {% if current_proj_id != nil and current_proj_id != "" %}
-        <!-- --- 【模式 A】：进入了某个具体的项目内 --- -->
-
-        <!-- 1. 项目大标题 (Mapping) -->
-        <li class="sidebar-item" style="margin-bottom: 20px;">
-          <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-            📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
-          </span>
-        </li >
-
-        <!-- 2. 该项目的所有 Plan (始终显示) -->
-        {% for item in site.projects %}
-          {% if item.project == current_proj_id and item.type == "plan" %}
+    {% if page.url contains '/ideas/' %}
+      <!-- =======================================================
+           【情况 A】: Jibber-Jabber 板块 (保持你原本的所有逻辑)
+           ======================================================= -->
+      <h3 class="sidebar-title">
+        <a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a>
+      </h3>
+      <ul class="sidebar-list">
+        {% assign sorted_ideas = site.ideas | sort: "date" | reverse %}
+        {% for item in sorted_ideas %}
+          {% if item.url != "/ideas/" %}
             <li class="sidebar-item">
-              <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
-                📖 {{ item.title }}
+              <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
+                {{ item.title }}
               </a>
             </li >
           {% endif %}
         {% endfor %}
 
-        <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
+        <!-- 返回按钮 -->
+        <li class="sidebar-item" style="margin-top: 20px;">
+          <a href="/ideas/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to Jibber-Jabber</a>
+        </li>
+      </ul>
 
-        <!-- 3. 子项目日志 (带自动展开逻辑的折叠抽屉) -->
-        {% comment %} 首先收集该项目下所有的不重复 sub_project ID {% endcomment %}
-        {% assign sub_ids = "" | split: "" %}
-        {% for item in site.projects %}
-          {% if item.project == current_proj_id and item.type == "log" and item.sub_project != nil %}
-            {% assign s_val = item.sub_project %}
-            {% unless sub_ids contains s_val %}
-              {% assign sub_ids = sub_ids | push: s_val %}
-            {% endunless %}
-          {% endif %}
-        {% endfor %}
+    {% elsif page.url contains '/projects/' %}
+      <!-- =======================================================
+         【情况 B】: Projects 板块 (保持你原本的所有逻辑)
+         ======================================================= -->
+      <h3 class="sidebar-title">
+        <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
+      </h3>
+      <ul class="sidebar-list">
 
-        <!-- 遍历子项目展示日志 -->
-        {% for sub in sub_ids %}
           {% comment %} 
-            【核心：自动展开逻辑】
-            判断当前页面是否属于这个子项目，如果是，则给 <details> 加上 open 属性。
+            【第一步：定位当前页面属于哪个项目】
+            通过遍历所有项目，比对 URL 来获取最可靠的 Project ID。
           {% endcomment %}
-          {% assign should_open = false %}
+          {% assign current_proj_id = nil %}
           {% for item in site.projects %}
-            {% if item.url == page.url and item.sub_project == sub %}
-              {% assign should_open = true %}
+            {% if item.url == page.url %}
+              {% assign current_proj_id = item.project %}
               {% break %}
             {% endif %}
           {% endfor %}
 
-          <details class="sidebar-accordion" {% if should_open %}open{% endif %}>
-            <summary class="sidebar-sub-title">
-              📁 {{ site.project_mapping[sub] | default: sub }}
-            </summary>
-            <ul class="sidebar-log-list">
+          {% if current_proj_id != nil and current_proj_id != "" %}
+            <!-- --- 【模式 A】：进入了某个具体的项目内 --- -->
+
+            <!-- 1. 项目大标题 (Mapping) -->
+            <li class="sidebar-item" style="margin-bottom: 20px;">
+              <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
+                📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
+              </span>
+            </li >
+
+            <!-- 2. 该项目的所有 Plan (始终显示) -->
+            {% for item in site.projects %}
+              {% if item.project == current_proj_id and item.type == "plan" %}
+                <li class="sidebar-item">
+                  <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
+                    📖 {{ item.title }}
+                  </a>
+                </li >
+              {% endif %}
+            {% endfor %}
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
+
+            <!-- 3. 子项目日志 (带自动展开逻辑的折叠抽屉) -->
+            {% assign sub_ids = "" | split: "" %}
+            {% for item in site.projects %}
+              {% if item.project == current_proj_id and item.type == "log" and item.sub_project != nil %}
+                {% assign s_val = item.sub_project %}
+                {% unless sub_ids contains s_val %}
+                  {% assign sub_ids = sub_ids | push: s_val %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+
+            <!-- 遍历子项目展示日志 -->
+            {% for sub in sub_ids %}
+              {% assign should_open = false %}
               {% for item in site.projects %}
-                <!-- 只要属于该项目、该子项目且是 log，就显示出来 (包含当前页) -->
-                {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" %}
-                  <li class="sidebar-item">
-                    <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
-                      • {{ item.title }}
-                    </a>
-                  </li >
+                {% if item.url == page.url and item.sub_project == sub %}
+                  {% assign should_open = true %}
+                  {% break %}
                 {% endif %}
               {% endfor %}
-            </ul>
-          </details>
-        {% endfor %}
 
-        <!-- 返回按钮 -->
-        <li class="sidebar-item" style="margin-top: 20px;">
-          <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
-        </li>
+              <details class="sidebar-accordion" {% if should_open %}open{% endif %}>
+                <summary class="sidebar-sub-title">
+                  📁 {{ site.project_mapping[sub] | default: sub }}
+                </summary>
+                <ul class="sidebar-log-list">
+                  {% for item in site.projects %}
+                    {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" %}
+                      <li class="sidebar-item">
+                        <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
+                          • {{ item.title }}
+                        </a>
+                      </li >
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </details>
+            {% endfor %}
 
-      {% else %}
-        <!-- --- 【模式 B】：处于 Projects 总目录页 --- -->
-        {% assign all_plans = site.projects | where: "type", "plan" %}
-        {% for plan in all_plans %}
-          <li class="sidebar-item">
-            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
-              📂 {{ site.project_mapping[plan.project] | default: plan.title }}
-            </a>
-          </li >
-        {% endfor %}
+            <!-- 返回按钮 -->
+            <li class="sidebar-item" style="margin-top: 20px;">
+              <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
+            </li>
+
+          {% else %}
+            <!-- --- 【模式 B】：处于 Projects 总目录页 --- -->
+            {% assign all_plans = site.projects | where: "type", "plan" %}
+            {% for plan in all_plans %}
+              <li class="sidebar-item">
+                <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
+                  📂 {{ site.project_mapping[plan.project] | default: plan.title }}
+                </a>
+              </li >
+            {% endfor %}
+          {% endif %}
+        </ul>
+
+        <!-- 底部便签 -->
+        <div class="sidebar-notice-card">
+          <p class="notice-en">💐 Sidebar header once vanished on navigation. Now fixed. For remembrance.</p>
+          <p class="notice-zh">💐 侧栏标题曾于跳转时隐身，现已修复，留作纪念。</p>
+        </div>
       {% endif %}
-    </ul>
 
+    {% else %}
+      <!-- =======================================================
+         【情况 C】：不在上述板块 (例如：主页/About) -> 显示全局三大导航
+         ======================================================= -->
+      <h3 class="sidebar-title">Main Navigation</h3>
+      <ul class="sidebar-global-nav mobile-only-nav">
+        <li><a href="/about/" class="sidebar-link global-link">About Me</a></li>
+        <li><a href="/projects/" class="sidebar-link global-link">Experimental Logs</a></li>
+        <li><a href="/ideas/" class="sidebar-link global-link">Jibber-Jabber</a></li>
+      </ul>
+    {% endif %}
 
-    <!-- 底部便签 -->
-    <div class="sidebar-notice-card">
-      <p class="notice-en">💐 Sidebar header once vanished on navigation. Now fixed. For remembrance.</p>
-      <p class="notice-zh">💐 侧栏标题曾于跳转时隐身，现已修复，留作纪念。</p>
-    </div>
-  {% endif %}
-
-  </div>
+  </div> <!-- sidebar-content 结束 -->
 </aside>
-
-
-

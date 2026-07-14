@@ -1,18 +1,28 @@
+<!-- header.html -->
 <header class="my-custom-header">
-  <!-- 1. 【新增】汉堡按钮 (放在左侧) -->
+  <!-- 1. 汉堡按钮 -->
   <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
 
+  <!-- 2. 【新增】移动端专属的“快速全局导航” -->
+  <!-- 它只在没有侧边栏的页面（如主页）点开汉堡包时显示 -->
+  <nav class="mobile-quick-nav" id="mobileQuickNav">
+    <ul class="quick-links-list">
+      <li><a href="/about/" class="quick-link">About Me</a></li>
+      <li><a href="/projects/" class="quick-link">Experimental Logs</a></li>
+      <li><a href="/ideas/" class="quick-link">Jibber-Jabber</a></li>
+    </ul>
+  </nav>
 
   <!-- 3. 标题 -->
   <div class="header-left">
     <a href="/" class="header-title">QY Niu's Log</a>
   </div>
 
-  <!-- 4. 原有的导航菜单 (桌面端显示) -->
+  <!-- 4. 桌面端导航 (保持不变) -->
   <nav class="desktop-nav">
     <ul class="nav-menu">
       <li><a href="/about/">About Me</a></li>

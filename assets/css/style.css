@@ -908,6 +908,11 @@ body {
    逻辑：桌面端显示侧边栏 | 移动端显示“全局导航+抽屉”
    ============================================================ */
 
+/* ============================================================
+   SIDEBAR & MOBILE NAVIGATION (Unified Global Module)
+   逻辑：桌面端显示侧边栏 | 移动端显示“全局导航+抽屉”
+   ============================================================ */
+
 /* -----------------------------------------------------------
    1. 基础与桌面端样式 (Desktop Mode)
    ----------------------------------------------------------- */
@@ -925,7 +930,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* 桌面端强制隐藏移动端专属元素 */
+/* 桌面端强制隐藏移动端专用元素 (汉堡按钮, 遮罩层, 全局导航) */
 @media (min-width: 769px) {
     .hamburger-btn, 
     .menu-overlay, 
@@ -935,9 +940,9 @@ body {
     }
 }
 
-/* 汉堡按钮层级：确保永远在最顶层 */
+/* 汉堡按钮层级：确保在任何情况下都处于最顶层 */
 .hamburger-btn {
-    z-index: 3000;
+    z-index: 3000; /* 高于侧边栏 (2000) 和内容 (2) */
 }
 
 
@@ -946,7 +951,7 @@ body {
    ----------------------------------------------------------- */
 
 @media (max-width: 768px) {
-    /* 侧边栏容器：变成左侧滑出的白色抽屉 */
+    /* 侧边栏容器：变成左侧滑出的白色实心抽屉 */
     .sidebar {
         position: fixed !important;
         left: 0;
@@ -954,13 +959,13 @@ body {
         height: 100vh !important;
         width: 280px !important;
         z-index: 2000; /* 高层级 */
-        transform: translateX(-100%); /* 默认藏在左边 */
+        transform: translateX(-100%); /* 默认藏在左侧外 */
         border-right: none;
         box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-        background-color: #ffffff !important; /* 确保抽屉是实心白色，不透明 */
+        background-color: #ffffff !important; /* 【关键修复】确保抽屉是实心白色，不透明 */
     }
 
-    /* 当菜单激活时滑出 */
+    /* 当菜单激活时滑出屏幕 */
     .sidebar.is-open {
         transform: translateX(0);
     }
@@ -971,31 +976,87 @@ body {
         z-index: 2;      /* 高于遮罩层的 1 */
         width: 100%;
         height: 100%;
-        background-color: #ffffff;
+        background-color: #ffffff; /* 确保内容区也是纯白，不透明 */
         overflow-y: auto;
     }
 
-    /* 遮罩层：铺满全屏的灰色阴影 */
+    /* 遮罩层：铺满全屏的灰色阴影，用于点击关闭菜单 */
     .menu-overlay {
         display: block !important;
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background: rgba(0, 0, 0, 0.4); /* 半透明黑 */
-        z-index: 1;      /* 在侧边栏内容之下，页面内容之上 */
+        background: rgba(0, 0, 0, 0.4); /* 半透明黑色 */
+        z-index: 1;      /* 在侧边栏内容之上，但在页面其他内容之下 */
         opacity: 0;
-        pointer-events: none;
+        pointer-events: none; /* 防止未激活时挡住点击 */
         transition: opacity 0.3s ease;
     }
 
     .menu-overlay.is-visible {
         opacity: 1;
-        pointer-events: auto; /* 允许点击阴影关闭菜单 */
+        pointer-events: auto; /* 允许点击阴影来关闭菜单 */
     }
 
-    /* 强制显示移动端专用元素 */
+    /* 强制显示移动端专属元素 (汉堡按钮, 全局导航) */
     .hamburger-btn { display: flex !important; }
     .mobile-only-nav { display: block !important; }
+}
+/* =========================================
+   移动端快速导航样式 (Header 中的 Quick Nav)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 默认隐藏 */
+    .mobile-quick-nav {
+        display: none;
+        position: fixed;
+        top: 60px; /* 紧贴 header 下方 */
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        z-index: 999; /* 在内容之上，但在汉堡包之下 */
+        padding: 10px 0;
+    }
+
+    /* 当 JS 给它添加 is-active 时显示 */
+    .mobile-quick-nav.is-active {
+        display: block;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .quick-links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .quick-link {
+        display: block;
+        padding: 15px 25px;
+        color: #333 !important;
+        font-weight: bold;
+        text-decoration: none;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    .quick-link:hover {
+        background-color: #fffcf5;
+        color: #e67e22 !important;
+    }
+}
+
+/* 确保桌面端绝对不会看到这两个移动端专属组件 */
+@media (min-width: 769px) {
+    .mobile-quick-nav, .menu-overlay {
+        display: none !important;
+    }
 }
 
 
@@ -1004,19 +1065,21 @@ body {
    ----------------------------------------------------------- */
 
 @media (max-width: 768px) {
+    /* 全局导航列表容器 */
     .sidebar-global-nav {
         list-style: none;
         padding: 0;
         margin: 0 0 15px 0;
     }
 
+    /* 全局一级目录链接：专门为手指点击优化 (大字、高 Padding) */
     .sidebar-global-nav .global-link {
         display: block;
         font-weight: bold;
         color: #333 !important;
         font-size: 1.1em;           /* 手机端稍大，方便看 */
-        padding: 12px 5px;          /* 增加点击区域 */
-        border-bottom: 1px solid #f5f5f5;
+        padding: 12px 5px;          /* 【关键】增加上下内边距，方便手指点击 */
+        border-bottom: 1px solid #f5f5f5; /* 每个主项下面加一条极淡的分隔线 */
         text-decoration: none;
     }
 
@@ -1026,6 +1089,7 @@ body {
         border-radius: 4px;
     }
 
+    /* 分隔线样式 */
     .sidebar-divider {
         border: none;
         border-top: 1px solid #eee;
@@ -1033,6 +1097,7 @@ body {
         opacity: 0.6;
     }
 }
+
 
 
 /* -----------------------------------------------------------
