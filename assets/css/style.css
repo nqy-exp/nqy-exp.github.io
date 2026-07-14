@@ -930,12 +930,18 @@ body {
 }
 
 /* 桌面端强制隐藏移动端专用元素 */
+/* 【关键修复】：强制在桌面端隐藏所有移动端专属元素 */
 @media (min-width: 769px) {
+    /* 这里的选择器必须覆盖到你 HTML 里所有的移动端专用 class */
     .hamburger-btn, 
     .menu-overlay, 
     .mobile-only-nav, 
+    .sidebar-global-nav, /* 增加这一行，确保全局导航在桌面端也被藏起来 */
+    .quick-links-list,   /* 增加这一行，防止 header 里的快速链接乱跳 */
     .sidebar-divider {
         display: none !important;
+        visibility: hidden !important; /* 双重保险：不仅不显示，还不占空间 */
+        opacity: 0 !important;         /* 双重保险：完全透明 */
     }
 }
 
