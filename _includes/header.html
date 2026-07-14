@@ -1,18 +1,15 @@
-<!-- 自定义 Header -->
 <header class="my-custom-header">
-  <!-- 1. 左侧组合：汉堡按钮 + 标题 -->
+  <!-- 1. 新增的左侧容器，包含按钮和标题 -->
   <div class="header-left">
-    <!-- 汉堡按钮 (现在放在这里了) -->
-    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu">
+    <button class="hamburger-btn" id="hamburgerBtn">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    
     <a href="/" class="header-title">QY Niu's Log</a>
   </div>
 
-  <!-- 2. 右侧导航：仅在桌面端显示 -->
+  <!-- 2. 原有的导航菜单，现在被包裹在 desktop-nav 中以便移动端隐藏 -->
   <nav class="desktop-nav">
     <ul class="nav-menu">
       <li><a href="/about/">About Me</a></li>
