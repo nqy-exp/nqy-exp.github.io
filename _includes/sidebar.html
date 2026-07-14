@@ -42,7 +42,6 @@
 
           {% comment %} 
             【第一步：定位当前页面属于哪个项目】
-            通过遍历所有项目，比对 URL 来获取最可靠的 Project ID。
           {% endcomment %}
           {% assign current_proj_id = nil %}
           {% for item in site.projects %}
@@ -137,9 +136,9 @@
           <p class="notice-en">💐 Sidebar header once vanished on navigation. Now fixed. For remembrance.</p>
           <p class="notice-zh">💐 侧栏标题曾于跳转时隐身，现已修复，留作纪念。</p>
         </div>
-      {% endif %}
 
     {% else %}
+
       <!-- =======================================================
          【情况 C】：不在上述板块 (例如：主页/About) -> 显示全局三大导航
          ======================================================= -->
