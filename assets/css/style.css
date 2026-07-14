@@ -8,83 +8,90 @@ body {
 }
 
 
-/* =========================================
+/*/* =========================================
    2. 自定义 Header (顶部导航栏) - 响应式增强版
    ========================================= */
 
 .my-custom-header {
-  display: flex; 
-  justify-content: space-between; /* 桌面端：左侧按钮+标题，右侧菜单 */
-  align-items: center;
-  padding: 15px 40px;
-  border-bottom: 1px solid #eee;
-  background-color: rgba(255, 255, 255, 0.9);
-  position: sticky; /* 让 header 粘在顶部 */
-  top: 0;
-  z-index: 1001;
+    display: flex; 
+    /* 【核心修复】确保左边是标题，右边是菜单，中间留空 */
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 40px;
+    border-bottom: 1px solid #eee;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: sticky; /* 让 header 粘在顶部 */
+    top: 0;
+    z-index: 1001;
 }
 
 /* 左侧组合容器：包含汉堡按钮和标题 */
 .header-left {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* 按钮和标题之间的距离 */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 按钮和标题之间的距离 */
+    /* 确保左侧部分不会被挤向中间 */
+    margin-right: auto; 
 }
 
 /* 标题基础样式 */
 .header-title {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #333;
-  text-decoration: none !important;
-  position: relative;     
-  display: inline-block;  
-  padding-bottom: 4px;    
-  transition: color 0.3s ease; 
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+    text-decoration: none !important;
+    position: relative;     
+    display: inline-block;  
+    padding-bottom: 4px;    
+    transition: color 0.3s ease; 
 }
 
 /* 标题下方的橙色装饰线 */
 .header-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;            
-  background-color: #e67e22; 
-  transform: scaleX(0);   
-  transform-origin: center; 
-  transition: transform 0.3s ease;
-  pointer-events: none; 
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;            
+    background-color: #e67e22; 
+    transform: scaleX(0);   
+    transform-origin: center; 
+    transition: transform 0.3s ease;
+    pointer-events: none; 
 }
 
 .header-title:hover::after {
-  transform: scaleX(1);   
+    transform: scaleX(1);   
 }
 
-/* 桌面端导航菜单 */
+/* 桌面端导航菜单 (确保它被推向最右边) */
+.desktop-nav {
+    margin-left: auto; /* 【核心修复】强制将菜单推向最右侧 */
+}
+
 .nav-menu {
-  display: flex;
-  gap: 25px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-menu a {
-  text-decoration: none;
-  color: #666;
-  font-size: 0.9em;
-  transition: color 0.3s ease;
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
 }
 
 .nav-menu a:hover {
-  color: #e67e22;
+    color: #e67e22;
 }
 
 /* --- 汉堡按钮样式 (默认桌面端隐藏) --- */
 .hamburger-btn {
-    display: none; /* 桌面端不显示 */
+    display: none !important; /* 桌面端不显示 */
     flex-direction: column;
     justify-content: space-around;
     width: 25px;
@@ -93,40 +100,45 @@ body {
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 3000; /* <--- 这里确保是 3000 */
+    z-index: 3000; /* 确保在最顶层 */
 }
-
 
 .hamburger-btn span {
-  width: 25px;
-  height: 3px;
-  background-color: #333;
-  border-radius: 10px;
-  transition: all 0.3s ease;
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
+
+/* 汉堡按钮变形成“X”的动画 */
+.hamburger-btn.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
 
 /* ============================================================
    响应式媒体查询 (针对手机/小屏幕)
    ============================================================ */
 @media (max-width: 768px) {
-  .my-custom-header {
-    padding: 10px 20px; /* 移动端更紧凑的 Padding */
-  }
+    .my-custom-header {
+        padding: 10px 20px; /* 移动端更紧凑的 Padding */
+    }
 
-  /* 核心：在移动端隐藏桌面端的横向菜单 */
-  .desktop-nav {
-    display: none !important;
-  }
+    /* 在移动端隐藏桌面端的横向菜单 */
+    .desktop-nav {
+        display: none !important;
+    }
 
-  /* 核心：在移动端显示汉堡按钮 */
-  .hamburger-btn {
-    display: flex !important; /* 强制显示 */
-  }
+    /* 在移动端显示汉堡按钮 */
+    .hamburger-btn {
+        display: flex !important; /* 强制显示 */
+    }
 
-  /* 汉堡按钮变形成“X”的动画 */
-  .hamburger-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
-  .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* 确保移动端标题也靠左，不居中 */
+    .header-left {
+        margin-right: 0; 
+    }
 }
 
  /* =========================================
@@ -1015,8 +1027,13 @@ body {
    逻辑：桌面端显示侧边栏 | 移动端实现“双模式”导航切换
    ============================================================ */
 
+/* ============================================================
+   SIDEBAR & MOBILE DRAWER (Pure Clean Version)
+   逻辑：移除灰色阴影 | 实现纯净的白色抽屉滑入效果
+   ============================================================ */
+
 /* -----------------------------------------------------------
-   1. 基础与桌面端样式 (Desktop Mode)
+   1. 桌面端样式 (Desktop Mode)
    ----------------------------------------------------------- */
 
 .sidebar {
@@ -1028,11 +1045,22 @@ body {
     position: sticky;
     top: 80px;
     overflow-y: auto;
-    background-color: #fff; /* 桌面端实心白色 */
+    background-color: #fff;
     transition: transform 0.3s ease;
 }
 
-/* 【关键修复】汉堡按钮层级：确保在任何情况下都处于全站最高层 */
+/* 桌面端强制隐藏所有移动端专属元素 */
+@media (min-width: 769px) {
+    .hamburger-btn, 
+    .menu-overlay, 
+    .mobile-only-nav, 
+    .sidebar-global-nav, 
+    .sidebar-divider {
+        display: none !important;
+    }
+}
+
+/* 汉堡按钮：确保在顶层 */
 .hamburger-btn {
     z-index: 3000 !important;
     width: 25px;
@@ -1042,167 +1070,95 @@ body {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
-/* 汉堡按钮的三行线条样式 */
 .hamburger-btn span {
-    width: 100%;
+    width: 25px;
     height: 3px;
     background-color: #333;
     border-radius: 2px;
-    transition: all 0.3s ease; /* 用于制作旋转 X 动画 */
+    transition: all 0.3s ease;
 }
 
-/* 【汉堡变 X 的动画逻辑】 */
+/* 汉堡变 X 的动画 */
 .hamburger-btn.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
 .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-/* 桌面端强制隐藏所有移动端专属元素 (汉堡按钮在下面会重新定义显示) */
-@media (min-width: 769px) {
-    .hamburger-btn, 
-    .menu-overlay, 
-    .mobile-only-nav, 
-    .quick-links-list,   /* 防止 Header 里的快速链接在桌面端乱跳 */
-    .sidebar-global-nav, 
-    .sidebar-divider {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-    }
-}
-
 
 /* -----------------------------------------------------------
-   2. 移动端抽屉逻辑 (Mobile Drawer Mode)
+   2. 移动端样式 (Mobile Drawer Mode) - 【纯净版】
    ----------------------------------------------------------- */
 
 @media (max-width: 768px) {
-    /* --- A. 侧边栏抽屉样式 (主要用于项目详情页) --- */
+    /* 侧边栏抽屉：实心白色卡片 */
     .sidebar {
         position: fixed !important;
         left: 0;
         top: 0;
         height: 100vh !important;
         width: 280px !important;
-        z-index: 2000; /* 高层级 */
-        transform: translateX(-100%); /* 默认藏在左侧外 */
-        border-right: none;
-        box-shadow: 5px 0 25px rgba(0,0,0,0.2); /* 加深阴影，增加立体感 */
-        background-color: #ffffff !important; /* 【核心修复】必须是纯白实心 */
+        z-index: 2000; 
+        transform: translateX(-100%); /* 默认藏在左边 */
+        border-right: 4px solid #e67e22; /* 【关键】：侧边栏自带主题色边缘线 */
+        background-color: #ffffff !important; /* 【核心】：纯白背景，绝不透明 */
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* 轻微阴影增加立体感 */
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* 当侧边栏激活时滑出 */
     .sidebar.is-open {
         transform: translateX(0);
     }
 
-    /* 侧边栏内部的内容容器 */
+    /* 内容容器 */
     .sidebar-content {
         position: relative;
-        z-index: 2;      /* 高于遮罩层的 1 */
+        z-index: 2;      /* 高于遮罩层 (1) */
         width: 100%;
         height: 100%;
         background-color: #ffffff !important; /* 确保内容区也是纯白 */
         overflow-y: auto;
     }
 
-    /* --- B. 遮罩层样式 (用于背景变暗) --- */
+    /* 【核心修改】：透明遮罩层 */
     .menu-overlay {
         display: block !important;
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background: rgba(0, 0, 0, 0.4); /* 半透明黑 */
-        z-index: 1;      /* 在侧边栏内容之下，在页面其他内容之上 */
+        background: transparent !important; /* 【关键】：背景完全透明，不再变暗 */
+        z-index: 1;      /* 在侧边栏之下，在页面内容之上 */
         opacity: 0;
-        pointer-events: none;
+        pointer-events: none; /* 默认不拦截点击 */
         transition: opacity 0.3s ease;
     }
 
+    /* 当菜单打开时，遮罩层变透明但仍然可以“捕捉”点击以关闭菜单 */
     .menu-overlay.is-visible {
         opacity: 1;
-        pointer-events: auto; /* 允许点击阴影关闭菜单 */
+        pointer-events: auto; /* 允许用户通过点击背景来关闭侧边栏 */
     }
 
-    /* --- C. Header 里的快速导航样式 (用于主页/无侧边栏页面) --- */
-    .mobile-quick-nav {
-        display: none; /* 默认隐藏，由 JS 控制 */
-        position: fixed;
-        top: 60px; /* 紧贴 header 下方 */
-        left: 0;
-        width: 100%;
-        background: white;
-        z-index: 999; /* 在内容之上，在侧边栏之下 */
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .mobile-quick-nav.is-active {
-        display: block; /* 由 JS 控制显示 */
-    }
-
-    .quick-links-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .quick-link {
-        display: block;
-        padding: 15px 25px;
-        color: #333 !important;
-        font-weight: bold;
-        text-decoration: none;
-        border-bottom: 1px solid #f5f5f5;
-    }
-
-    .quick-link:hover {
-        background-color: #fffcf5;
-        color: #e67e22 !important;
-    }
-
-    /* --- D. 强制显示移动端专属元素 --- */
+    /* 强制显示移动端按钮和导航 */
     .hamburger-btn { display: flex !important; }
-    /* 注意：mobile-only-nav 是侧边栏里的全局导航，它在 mobile 下也需要显示 */
-    .sidebar-global-nav, .sidebar-divider { display: block !important; }
+    .mobile-only-nav { display: block !important; }
 }
 
-
 /* -----------------------------------------------------------
-   3. 移动端侧边栏内部样式 (Sidebar Items)
+   3. 其他组件样式 (保持不变)
    ----------------------------------------------------------- */
 
+/* 移动端全局导航列表 */
 @media (max-width: 768px) {
-    /* 全局导航列表容器 */
-    .sidebar-global-nav {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 15px 0;
-    }
-
+    .sidebar-global-nav { list-style: none; padding: 0; margin: 0 0 15px 0; }
     .sidebar-global-nav .global-link {
-        display: block;
-        font-weight: bold;
-        color: #333 !important;
-        font-size: 1.1em;
-        padding: 12px 5px;
-        border-bottom: 1px solid #f5f5f5;
+        display: block; font-weight: bold; color: #333 !important;
+        font-size: 1.1em; padding: 12px 5px; border-bottom: 1px solid #f5f5f5;
         text-decoration: none;
     }
-
-    .sidebar-global-nav .global-link:hover {
-        color: #e67e22 !important;
-        background-color: #fffcf5;
-        border-radius: 4px;
-    }
-
-    .sidebar-divider {
-        border: none;
-        border-top: 1px solid #eee;
-        margin: 15px 0;
-        opacity: 0.6;
-    }
+    .sidebar-global-nav .global-link:hover { color: #e67e22 !important; background-color: #fffcf5; }
+    .sidebar-divider { border: none; border-top: 1px solid #eee; margin: 15px 0; opacity: 0.6; }
 }
 
 /* -----------------------------------------------------------
