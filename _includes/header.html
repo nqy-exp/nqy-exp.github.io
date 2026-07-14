@@ -1,14 +1,13 @@
 <!-- header.html -->
 <header class="my-custom-header">
-  <!-- 1. 汉堡按钮 -->
+  <!-- 1. 汉堡按钮 (必须包含三个 span 用于制作 X 动画) -->
   <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
 
-  <!-- 2. 【新增】移动端专属的“快速全局导航” -->
-  <!-- 它只在没有侧边栏的页面（如主页）点开汉堡包时显示 -->
+  <!-- 2. 【移动端专属】Header 里的快速导航 (仅在主页/无侧边栏页面显示) -->
   <nav class="mobile-quick-nav" id="mobileQuickNav">
     <ul class="quick-links-list">
       <li><a href="/about/" class="quick-link">About Me</a></li>

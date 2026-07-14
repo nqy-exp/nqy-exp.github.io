@@ -10,39 +10,44 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const btn = document.getElementById('hamburgerBtn');
-  const sidebar = document.getElementById('sidebarDrawer'); // 侧边栏容器
-  const quickNav = document.getElementById('mobileQuickNav'); // Header里的快速导航
-  const overlay = document.getElementById('menuOverlay');   // 遮罩层
+  const sidebar = document.getElementById('sidebarDrawer'); // 注意 ID 必须匹配
+  const quickNav = document.getElementById('mobileQuickNav'); // 注意 ID 必须匹配
+  const overlay = document.getElementById('menuOverlay');
 
   if (btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
       
-      // 判断当前页面是“项目页”还是“普通页”
+      // 判断当前页面是否有侧边栏元素存在
       if (sidebar && document.body.contains(sidebar)) {
-        // 【模式 1】：如果是项目页，控制侧边栏
+        // 【模式 A】：如果侧边栏在 HTML 里，控制侧边栏和遮罩
         sidebar.classList.toggle('is-open');
         if (overlay) overlay.classList.toggle('is-visible');
       } else if (quickNav) {
-        // 【模式 2】：如果是普通页，控制 Header 里的快速导航
+        // 【模式 B】：如果侧边栏不在 HTML 里（主页），控制快速导航
         quickNav.classList.toggle('is-active');
       }
       
+      // 汉堡按钮变 X 的动画
       btn.classList.toggle('is-open');
     });
   }
 
-  // 点击遮罩层关闭 (仅针对侧边栏)
+  // 点击遮罩层关闭 (针对侧边栏)
   if (overlay) {
     overlay.addEventListener('click', function() {
-      if (sidebar) {
-        sidebar.classList.remove('is-open');
-        overlay.classList.remove('is-visible');
-      }
-      if (quickNav) {
-        quickNav.classList.remove('is-active');
-      }
+      if (sidebar) sidebar.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
       if (btn) btn.classList.remove('is-open');
+    });
+  }
+
+  // 点击快速导航链接后自动关闭菜单
+  if (quickNav) {
+    quickNav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        setTimeout(() => { quickNav.classList.remove('is-active'); }, 250);
+      }
     });
   }
 
@@ -53,17 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => { 
           sidebar.classList.remove('is-open');
           if (overlay) overlay.classList.remove('is-visible');
-        }, 250);
-      }
-    });
-  }
-
-  // 点击快速导航的链接自动关闭
-  if (quickNav) {
-    quickNav.addEventListener('click', function(e) {
-      if (e.target.tagName === 'A') {
-        setTimeout(() => { 
-          quickNav.classList.remove('is-active');
         }, 250);
       }
     });

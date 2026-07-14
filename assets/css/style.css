@@ -1010,11 +1010,171 @@ body {
 }
 
 
+/* ============================================================
+   SIDEBAR & MOBILE NAVIGATION (Ultimate Dual-Mode Version)
+   逻辑：桌面端显示侧边栏 | 移动端实现“双模式”导航切换
+   ============================================================ */
+
 /* -----------------------------------------------------------
-   3. 移动端全局导航样式 (Global Nav)
+   1. 基础与桌面端样式 (Desktop Mode)
+   ----------------------------------------------------------- */
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    padding: 20px;
+    border-right: 1px solid #eee;
+    height: calc(100vh - 80px);
+    position: sticky;
+    top: 80px;
+    overflow-y: auto;
+    background-color: #fff; /* 桌面端实心白色 */
+    transition: transform 0.3s ease;
+}
+
+/* 【关键修复】汉堡按钮层级：确保在任何情况下都处于全站最高层 */
+.hamburger-btn {
+    z-index: 3000 !important;
+    width: 25px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 汉堡按钮的三行线条样式 */
+.hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease; /* 用于制作旋转 X 动画 */
+}
+
+/* 【汉堡变 X 的动画逻辑】 */
+.hamburger-btn.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* 桌面端强制隐藏所有移动端专属元素 (汉堡按钮在下面会重新定义显示) */
+@media (min-width: 769px) {
+    .hamburger-btn, 
+    .menu-overlay, 
+    .mobile-only-nav, 
+    .quick-links-list,   /* 防止 Header 里的快速链接在桌面端乱跳 */
+    .sidebar-global-nav, 
+    .sidebar-divider {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+}
+
+
+/* -----------------------------------------------------------
+   2. 移动端抽屉逻辑 (Mobile Drawer Mode)
    ----------------------------------------------------------- */
 
 @media (max-width: 768px) {
+    /* --- A. 侧边栏抽屉样式 (主要用于项目详情页) --- */
+    .sidebar {
+        position: fixed !important;
+        left: 0;
+        top: 0;
+        height: 100vh !important;
+        width: 280px !important;
+        z-index: 2000; /* 高层级 */
+        transform: translateX(-100%); /* 默认藏在左侧外 */
+        border-right: none;
+        box-shadow: 5px 0 25px rgba(0,0,0,0.2); /* 加深阴影，增加立体感 */
+        background-color: #ffffff !important; /* 【核心修复】必须是纯白实心 */
+    }
+
+    /* 当侧边栏激活时滑出 */
+    .sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    /* 侧边栏内部的内容容器 */
+    .sidebar-content {
+        position: relative;
+        z-index: 2;      /* 高于遮罩层的 1 */
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff !important; /* 确保内容区也是纯白 */
+        overflow-y: auto;
+    }
+
+    /* --- B. 遮罩层样式 (用于背景变暗) --- */
+    .menu-overlay {
+        display: block !important;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.4); /* 半透明黑 */
+        z-index: 1;      /* 在侧边栏内容之下，在页面其他内容之上 */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .menu-overlay.is-visible {
+        opacity: 1;
+        pointer-events: auto; /* 允许点击阴影关闭菜单 */
+    }
+
+    /* --- C. Header 里的快速导航样式 (用于主页/无侧边栏页面) --- */
+    .mobile-quick-nav {
+        display: none; /* 默认隐藏，由 JS 控制 */
+        position: fixed;
+        top: 60px; /* 紧贴 header 下方 */
+        left: 0;
+        width: 100%;
+        background: white;
+        z-index: 999; /* 在内容之上，在侧边栏之下 */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .mobile-quick-nav.is-active {
+        display: block; /* 由 JS 控制显示 */
+    }
+
+    .quick-links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .quick-link {
+        display: block;
+        padding: 15px 25px;
+        color: #333 !important;
+        font-weight: bold;
+        text-decoration: none;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    .quick-link:hover {
+        background-color: #fffcf5;
+        color: #e67e22 !important;
+    }
+
+    /* --- D. 强制显示移动端专属元素 --- */
+    .hamburger-btn { display: flex !important; }
+    /* 注意：mobile-only-nav 是侧边栏里的全局导航，它在 mobile 下也需要显示 */
+    .sidebar-global-nav, .sidebar-divider { display: block !important; }
+}
+
+
+/* -----------------------------------------------------------
+   3. 移动端侧边栏内部样式 (Sidebar Items)
+   ----------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    /* 全局导航列表容器 */
     .sidebar-global-nav {
         list-style: none;
         padding: 0;
@@ -1044,9 +1204,6 @@ body {
         opacity: 0.6;
     }
 }
-
-
-
 
 /* -----------------------------------------------------------
    4. 侧边栏组件细节 (Sub-components - All Styles)
