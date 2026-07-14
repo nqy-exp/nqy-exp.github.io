@@ -8,154 +8,180 @@ permalink: /projects/
 <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
 
 <style>
-/* --- 1. 页面大标题装饰样式 (Page Title) --- */
+/* =========================================
+   1. 页面大标题装饰样式 (Page Title)
+   ========================================= */
 .page-title {
-  text-align: center;
-  font-size: 1.8em;
-  color: #333;
-  position: relative; 
-  padding-bottom: 10px;
-  margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+    position: relative; 
+    padding-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .page-title::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;            
-  transform: translateX(-50%);
-  width: 60%;
-  height: 3px;
-  background-color: #e67e22;
-  box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4);
-  border-radius: 2px;
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;            
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background-color: #e67e22;
+    box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4);
+    border-radius: 2px;
 }
 
-/* --- 2. 项目树整体布局 (Project Tree Layout) --- */
+/* =========================================
+   2. 项目树整体布局 (Project Tree Layout)
+   ========================================= */
 .project-tree { 
-  list-style: none; 
-  padding-left: 0; 
+    list-style: none; 
+    padding-left: 0; 
 }
 
 .project-group { 
-  margin-bottom: 40px; 
-  border-left: 4px solid #e67e22; 
-  padding-left: 25px; 
+    margin-bottom: 50px; /* 增加组与组之间的间距 */
+    border-left: 4px solid #e67e22; /* 左侧品牌色装饰线 */
+    padding-left: 25px; 
 }
 
 .project-main-title { 
-  font-size: 1.5em; 
-  font-weight: bold; 
-  color: #333; 
-  display: block; 
-  margin-bottom: 10px; 
+    font-size: 1.5em; 
+    font-weight: bold; 
+    color: #333; 
+    display: block; 
+    margin-bottom: 15px; 
 }
 
-/* --- 3. 项目总纲/Plan 样式 --- */
+/* =========================================
+   3. 项目总纲/Plan 样式 (已修复挤在一起的问题)
+   ========================================= */
 .plan-list {
-  margin-bottom: 15px;
+    display: flex;           /* 使用 Flex 布局 */
+    flex-direction: column;  /* 【核心修复】强制子元素垂直排列 */
+    gap: 10px;               /* 【核心修复】设置 Plan 之间的间距 */
+    margin-bottom: 25px;     /* 与下方折叠部分的间距 */
 }
 
 .plan-link {
-  font-weight: bold !important;
-  color: #e67e22 !important;
-  display: inline-block;
-  margin-bottom: 5px;
-  text-decoration: none;
+    display: block;          /* 【核心修复】从 inline-block 改为 block，确保独占一行 */
+    font-weight: bold !important;
+    color: #e67e22 !important;
+    text-decoration: none;
+    padding: 5px 0;          /* 增加点击区域的上下高度 */
+    transition: all 0.3s ease; /* 增加平滑过渡动画 */
 }
 
-/* --- 4. 子项目折叠样式 (Sub-Project Accordion) --- */
+.plan-link:hover {
+    color: #d35400 !important; /* 悬停时颜色稍微加深 */
+    padding-left: 8px;         /* 悬停时有一个优雅的向右位移感 */
+}
+
+/* =========================================
+   4. 子项目折叠样式 (Sub-Project Accordion)
+   ========================================= */
 .sub-project-accordion {
-  margin-bottom: 10px;
-  background: #fcfcfc; /* 极淡的背景色，增加层次感 */
-  border-radius: 4px;
+    margin-bottom: 10px;
+    background: #fcfcfc; 
+    border-radius: 6px;     /* 稍微圆润一点 */
+    overflow: hidden;       /* 防止内容溢出 */
 }
 
 /* 子项目标题 (Summary 标签) */
 .sub-project-title {
-  font-size: 1.05em;
-  font-weight: bold;
-  color: #555;
-  padding: 10px 15px;
-  cursor: pointer; /* 鼠标变为手型 */
-  list-style: none; /* 移除默认箭头 */
-  display: flex;
-  align-items: center;
-  transition: background 0.3s;
+    font-size: 1.05em;
+    font-weight: bold;
+    color: #555;
+    padding: 12px 15px;     /* 增加点击区域 */
+    cursor: pointer; 
+    list-style: none; 
+    display: flex;
+    align-items: center;
+    transition: background 0.3s;
 }
 
 /* 兼容 Safari 的默认箭头隐藏 */
 .sub-project-title::-webkit-details-marker {
-  display: none;
+    display: none;
 }
 
 /* 自定义展开/收起小箭头 */
 .sub-project-title::before {
-  content: '▶'; /* 默认向右 */
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 0.8em;
-  color: #e67e22;
-  transition: transform 0.3s;
+    content: '▶'; 
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 0.8em;
+    color: #e67e22;
+    transition: transform 0.3s ease; /* 平滑旋转 */
 }
 
 /* 当折叠框打开时，箭头旋转向下 */
 .sub-project-accordion[open] .sub-project-title::before {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 .sub-project-title:hover {
-  background-color: #f4f4f4;
+    background-color: #f4f4f4;
 }
 
 /* --- 5. 日志列表样式 (Log List) --- */
 .log-list {
-  list-style: none;
-  padding: 0 15px 10px 35px; /* 向右缩进，形成层级感 */
-  margin: 0;
+    list-style: none;
+    padding: 0 15px 15px 35px; /* 向右缩进，形成层级感 */
+    margin: 0;
 }
 
 .log-item { 
-  list-style: none; 
-  padding: 8px 0; 
-  border-bottom: 1px dotted #eee; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: baseline; 
+    list-style: none; 
+    padding: 8px 0; 
+    border-bottom: 1px dotted #eee; 
+    display: flex; 
+    justify-content: space-between; /* 文字在左，日期在右 */
+    align-items: baseline; 
+}
+
+.log-item:last-child {
+    border-bottom: none; /* 最后一条不显示虚线 */
 }
 
 .log-link { 
-  text-decoration: none; 
-  color: #666; 
-  transition: 0.2s; 
+    text-decoration: none; 
+    color: #666; 
+    transition: all 0.2s ease; 
 }
 
 .log-link:hover { 
-  color: #e67e22; 
-  padding-left: 5px; 
+    color: #e67e22; 
+    padding-left: 5px; /* 悬停时微动 */
 }
 
 .log-date { 
-  font-size: 0.85em; 
-  color: #aaa; 
-  font-family: monospace; 
+    font-size: 0.85em; 
+    color: #aaa; 
+    font-family: monospace; 
 }
 
 /* --- 6. 其他辅助样式 (Utilities) --- */
 .back-link { 
-  display: block; 
-  margin-top: 40px; 
-  text-decoration: none; 
-  color: #999; 
-  font-size: 0.9em; 
+    display: inline-block; /* 改为 inline-block 方便控制边距 */
+    margin-top: 40px; 
+    text-decoration: none; 
+    color: #999; 
+    font-size: 0.9em; 
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #e67e22;
 }
 
 .warning-highlight { 
-  color: #555; 
-  font-weight: 600; 
-  text-decoration: underline; 
+    color: #555; 
+    font-weight: 600; 
+    text-decoration: underline; 
 }
-
 </style>
 
 <h1 class="page-title">Experimental Logs</h1>

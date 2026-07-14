@@ -902,14 +902,16 @@ body {
   opacity: 0.8;               /* 增加一点透明度变化 */
 }
 
+
 /* ============================================================
-   Sidebar1. 基础容器与全局样式 (Desktop & Mobile)
-   ============================================================ */
-/* ============================================================
-   Sidebar 核心重构逻辑 (整合 Desktop, Mobile & Overlay)
+   SIDEBAR & MOBILE NAVIGATION (Unified Global Module)
+   逻辑：桌面端显示侧边栏 | 移动端显示“全局导航+抽屉”
    ============================================================ */
 
-/* 1. 桌面端基础样式 (保持原有设计) */
+/* -----------------------------------------------------------
+   1. 基础与桌面端样式 (Desktop Mode)
+   ----------------------------------------------------------- */
+
 .sidebar {
     width: 250px;
     flex-shrink: 0;
@@ -919,50 +921,68 @@ body {
     position: sticky;
     top: 80px;
     overflow-y: auto;
-    background-color: #fff;
+    background-color: #fff; /* 桌面端实心白色 */
     transition: transform 0.3s ease;
 }
 
-/* 2. 移动端样式 (抽屉模式) */
+/* 桌面端强制隐藏移动端专属元素 */
+@media (min-width: 769px) {
+    .hamburger-btn, 
+    .menu-overlay, 
+    .mobile-only-nav, 
+    .sidebar-divider {
+        display: none !important;
+    }
+}
+
+/* 汉堡按钮层级：确保永远在最顶层 */
+.hamburger-btn {
+    z-index: 3000;
+}
+
+
+/* -----------------------------------------------------------
+   2. 移动端抽屉逻辑 (Mobile Drawer Mode)
+   ----------------------------------------------------------- */
+
 @media (max-width: 768px) {
+    /* 侧边栏容器：变成左侧滑出的白色抽屉 */
     .sidebar {
         position: fixed !important;
         left: 0;
         top: 0;
         height: 100vh !important;
         width: 280px !important;
-        z-index: 2000; /* 确保在顶层 */
-        transform: translateX(-100%);
+        z-index: 2000; /* 高层级 */
+        transform: translateX(-100%); /* 默认藏在左边 */
         border-right: none;
         box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-        background-color: transparent !important; /* 重要：侧边栏本身透明，否则会挡住遮罩 */
+        background-color: #ffffff !important; /* 确保抽屉是实心白色，不透明 */
     }
 
-    /* 【核心】新增的容器：承载白色背景和文字，确保它们在遮罩层之上 */
+    /* 当菜单激活时滑出 */
+    .sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    /* 内容容器：承载文字和背景，确保层级高于遮罩层 */
     .sidebar-content {
         position: relative;
         z-index: 2;      /* 高于遮罩层的 1 */
         width: 100%;
         height: 100%;
-        background-color: #fff; /* 侧边栏的白色背景移到这里 */
+        background-color: #ffffff;
         overflow-y: auto;
     }
 
-    /* 当菜单打开时 */
-    .sidebar.is-open {
-        transform: translateX(0);
-    }
-
-    /* 遮罩层样式 - 现在是侧边栏内部的一个“影子” */
+    /* 遮罩层：铺满全屏的灰色阴影 */
     .menu-overlay {
-        display: block !important; /* 由 JS 控制可见性 */
+        display: block !important;
         position: fixed;
-        top: 0; 
-        left: 0;
-        width: 100vw; 
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.4); /* 半透明阴影 */
-        z-index: 1;      /* 【关键】层级在 content (2) 之下，但在页面其他内容之上 */
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.4); /* 半透明黑 */
+        z-index: 1;      /* 在侧边栏内容之下，页面内容之上 */
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease;
@@ -970,46 +990,74 @@ body {
 
     .menu-overlay.is-visible {
         opacity: 1;
-        pointer-events: auto; /* 允许点击遮罩层关闭菜单 */
+        pointer-events: auto; /* 允许点击阴影关闭菜单 */
     }
 
-    /* 桌面端隐藏相关元素 */
-    .hamburger-btn, .menu-overlay {
-        display: none !important;
+    /* 强制显示移动端专用元素 */
+    .hamburger-btn { display: flex !important; }
+    .mobile-only-nav { display: block !important; }
+}
+
+
+/* -----------------------------------------------------------
+   3. 移动端全局导航样式 (Global Nav - Only on Mobile)
+   ----------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .sidebar-global-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
     }
-    /* 特殊处理：移动端要显示按钮和遮罩，上面已经写了逻辑 */
-    @media (max-width: 768px) {
-        .hamburger-btn { display: flex !important; }
-        .menu-overlay { display: block !important; }
+
+    .sidebar-global-nav .global-link {
+        display: block;
+        font-weight: bold;
+        color: #333 !important;
+        font-size: 1.1em;           /* 手机端稍大，方便看 */
+        padding: 12px 5px;          /* 增加点击区域 */
+        border-bottom: 1px solid #f5f5f5;
+        text-decoration: none;
+    }
+
+    .sidebar-global-nav .global-link:hover {
+        color: #e67e22 !important;
+        background-color: #fffcf5;
+        border-radius: 4px;
+    }
+
+    .sidebar-divider {
+        border: none;
+        border-top: 1px solid #eee;
+        margin: 15px 0;
+        opacity: 0.6;
     }
 }
 
-/* 3. 桌面端隐藏相关元素 */
-@media (min-width: 769px) {
-    .hamburger-btn, .menu-overlay {
-        display: none !important;
-    }
-}
 
-/* 4. 侧边栏组件内部样式 (保持你原本的所有精美细节) */
+/* -----------------------------------------------------------
+   4. 侧边栏组件细节 (Sub-components - All Styles)
+   ----------------------------------------------------------- */
+
+/* 标题样式 */
 .sidebar-title {
     font-size: 1em; font-weight: bold; color: #333;
     margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e67e22;
 }
 
+/* 列表项基础 */
 .sidebar-list { list-style: none; padding: 0; margin: 0; }
-
 .sidebar-item { margin-bottom: 12px; }
 
+/* 链接样式 */
 .sidebar-link {
     text-decoration: none; color: #666; font-size: 0.95em;
     transition: all 0.3s ease; display: block;
 }
-
 .sidebar-link.active { color: #e67e22 !important; font-weight: bold; padding-left: 5px; }
 .sidebar-link:hover { color: #e67e22; padding-left: 5px; }
 
-/* 折叠抽屉样式 */
+/* 折叠抽屉 (Accordion) */
 .sidebar-accordion { margin-bottom: 10px; background: #fcfcfc; border-radius: 4px; }
 .sidebar-sub-title {
     font-size: 0.85em; color: #666; padding: 8px 12px; cursor: pointer;
@@ -1022,12 +1070,12 @@ body {
 .sidebar-accordion[open] .sidebar-sub-title::before { transform: rotate(90deg); }
 .sidebar-sub-title:hover { background-color: #f4f4f4; }
 
-/* 日志列表紧凑样式 */
+/* 日志列表 (Log List) */
 .sidebar-log-list { list-style: none; padding: 0 0 8px 25px; margin: 0; }
 .sidebar-log-list .sidebar-item { margin-bottom: 4px; }
 .sidebar-log-list .sidebar-link { font-size: 0.85em; }
 
-/* 侧边栏纪念/成就小卡片 */
+/* 纪念小卡片 (Notice Card) */
 .sidebar-notice-card {
     margin-top: 30px;
     margin-left: 5px;
@@ -1037,64 +1085,5 @@ body {
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
-
-.notice-en { 
-    color: #bc9b82; font-size: 9px; margin: 0 0 2px 0; line-height: 1.2; font-style: italic; 
-}
-
-.notice-zh { 
-    color: #a67c52; font-size: 10px; margin: 0; line-height: 1.3;
-}
-
-
- /* =========================================
-   移动端专属全局导航 (Mobile-Only Global Nav)
-   逻辑：桌面端完全隐藏 | 手机端显示并优化点击感
-   ========================================= */
-
-/* 1. 【默认状态】在桌面端，这些元素会被彻底从页面中抹除 */
-.mobile-only-nav {
-    display: none !important;
-}
-
-/* 2. 【移动端响应式激活】仅在屏幕宽度 <= 768px 时生效 */
-@media (max-width: 768px) {
-    
-    /* 让隐藏的容器显示出来 */
-    .mobile-only-nav {
-        display: block !important;
-    }
-
-    /* 全局链接容器样式 */
-    .sidebar-global-nav {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 15px 0; /* 下方留一点间距 */
-    }
-
-    /* 全局一级目录链接：专门为“手指点击”优化 */
-    .sidebar-global-nav .global-link {
-        display: block;            /* 撑满整行，方便点击 */
-        font-weight: bold;         /* 加粗，体现层级感 */
-        color: #333 !important;    /* 深色文字 */
-        font-size: 1.1em;          /* 比普通链接大一点 */
-        padding: 12px 5px;         /* 【关键】增加上下内边距，让点击区域变大，防止误触 */
-        border-bottom: 1px solid #f5f5f5; /* 每个主项下面加一条极淡的分隔线 */
-        text-decoration: none;
-    }
-
-    /* 全局链接的悬停/触摸反馈 */
-    .sidebar-global-nav .global-link:hover {
-        color: #e67e22 !important; /* 变成品牌橙色 */
-        background-color: #fffcf5; /* 淡淡的橙色背景，给用户点击反馈 */
-        border-radius: 4px;
-    }
-
-    /* 分隔线样式 (仅在移动端显示) */
-    .sidebar-divider {
-        border: none;
-        border-top: 1px solid #eee; /* 浅灰色细线 */
-        margin: 15px 0;
-        opacity: 0.6;
-    }
-}
+.notice-en { color: #bc9b82; font-size: 9px; margin: 0 0 2px 0; line-height: 1.2; font-style: italic; }
+.notice-zh { color: #a67c52; font-size: 10px; margin: 0; line-height: 1.3; }

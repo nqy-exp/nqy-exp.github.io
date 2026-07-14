@@ -1,23 +1,22 @@
 
-
 <!-- sidebar.html -->
 <aside class="sidebar" id="sidebarDrawer">
   <div class="menu-overlay" id="menuOverlay"></div>
 
   <div class="sidebar-content">
     
-    <!-- 【修改点】增加 mobile-only-nav 这个类名 -->
+    <!-- 【核心修复】：这部分在所有 if 判断之外！ -->
+    <!-- 这样无论你在哪个页面，只要点开手机菜单，这三个链接永远都在最顶端 -->
     <ul class="sidebar-global-nav mobile-only-nav">
       <li><a href="/about/" class="sidebar-link global-link">About Me</a></li>
       <li><a href="/projects/" class="sidebar-link global-link">Experimental Logs</a></li>
       <li><a href="/ideas/" class="sidebar-link global-link">Jibber-Jabber</a></li>
     </ul>
 
-    <!-- 分隔线 (如果你只想在移动端看到，就把这一行也加个类名) -->
+    <!-- 分隔线 -->
     <hr class="sidebar-divider mobile-only-nav">
 
-    <!-- ... 原有的 if/else 逻辑保持不变 ... -->
-
+    
 
   {% if page.url contains '/ideas/' %}
   <!-- 【情况 A】: Jibber-Jabber 板块 -->
@@ -43,16 +42,6 @@
           <a href="/ideas/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to Jibber-Jabber</a>
         </li>
   </ul>
-
-       <h3 class="sidebar-title"><a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a></h3>
-       <ul class="sidebar-list">
-         {% assign sorted_ideas = site.ideas | sort: "date" | reverse %}
-         {% for item in sorted_ideas %}
-           {% if item.url != "/ideas/" %}
-           <li class="sidebar-item"><a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">{{ item.title }}</a></li>
-           {% endif %}
-         {% endfor %}
-       </ul>
 
   {% elsif page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 (智能导航模式) -->
