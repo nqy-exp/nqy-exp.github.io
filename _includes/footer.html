@@ -4,3 +4,41 @@
     Contact me: <a href="mailto:nqy.pro@outlook.com">nqy.pro@outlook.com</a> ｜ © 2026 Qiyue Niu. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="color: #999; text-decoration: underline;">CC BY-NC-ND 4.0</a> ｜ V1.0
   </div>
 </footer>
+
+<!-- ... 其他 footer 内容 ... -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebarDrawer');
+  const overlay = document.getElementById('menuOverlay');
+
+  if (btn && sidebar && overlay) {
+    // 点击按钮：切换菜单状态
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation(); 
+      sidebar.classList.toggle('is-open');
+      overlay.classList.toggle('is-visible');
+      btn.classList.toggle('is-open'); // 让按钮自己也变 X
+    });
+
+    // 点击遮罩层：关闭菜单
+    overlay.addEventListener('click', function() {
+      sidebar.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+      btn.classList.remove('is-open');
+    });
+
+    // 点击侧边栏内的链接：自动关闭抽屉以便观察页面跳转
+    sidebar.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        setTimeout(() => { 
+          sidebar.classList.remove('is-open');
+          overlay.classList.remove('is-visible');
+          btn.classList.remove('is-open');
+        }, 250);
+      }
+    });
+  }
+});
+</script>
