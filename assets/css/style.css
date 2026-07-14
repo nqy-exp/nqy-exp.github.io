@@ -84,17 +84,18 @@ body {
 
 /* --- 汉堡按钮样式 (默认桌面端隐藏) --- */
 .hamburger-btn {
-  display: none; /* 桌面端不显示 */
-  flex-direction: column;
-  justify-content: space-around;
-  width: 25px;
-  height: 18px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1100;
+    display: none; /* 桌面端不显示 */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 3000; /* <--- 这里确保是 3000 */
 }
+
 
 .hamburger-btn span {
   width: 25px;
@@ -904,72 +905,96 @@ body {
 /* ============================================================
    Sidebar1. 基础容器与全局样式 (Desktop & Mobile)
    ============================================================ */
+/* ============================================================
+   Sidebar 核心重构逻辑 (整合 Desktop, Mobile & Overlay)
+   ============================================================ */
+
+/* 1. 桌面端基础样式 (保持原有设计) */
 .sidebar {
-  width: 250px;
-  flex-shrink: 0;
-  padding: 20px;
-  border-right: 1px solid #eee;
-  height: calc(100vh - 80px);
-  position: sticky;
-  top: 80px;
-  overflow-y: auto;
-  background-color: #fff;
-  transition: transform 0.3s ease; /* 用于移动端滑入动画 */
+    width: 250px;
+    flex-shrink: 0;
+    padding: 20px;
+    border-right: 1px solid #eee;
+    height: calc(100vh - 80px);
+    position: sticky;
+    top: 80px;
+    overflow-y: auto;
+    background-color: #fff;
+    transition: transform 0.3s ease;
 }
 
-/* ============================================================
-   2. 桌面端样式 (Desktop Only)
-   ============================================================ */
-@media (min-width: 769px) {
-  /* 桌面端隐藏抽屉式按钮和遮罩层，因为我们使用的是横向导航 */
-  .hamburger-btn, .menu-overlay {
-    display: none !important;
-  }
-}
-
-/* ============================================================
-   3. 移动端样式 (Mobile - Drawer Mode)
-   ============================================================ */
+/* 2. 移动端样式 (抽屉模式) */
 @media (max-width: 768px) {
-  .sidebar {
-    position: fixed !important; /* 固定定位，变成抽屉 */
-    left: 0;
-    top: 0;
-    height: 100vh !important; /* 铺满全屏高度 */
-    width: 280px !important;  /* 侧边栏宽度 */
-    z-index: 1000;            /* 置于顶层，确保在 Header 下方或上方（取决于 z-index） */
-    transform: translateX(-100%); /* 初始状态隐藏在屏幕左侧外 */
-    border-right: none;
-    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-  }
+    .sidebar {
+        position: fixed !important;
+        left: 0;
+        top: 0;
+        height: 100vh !important;
+        width: 280px !important;
+        z-index: 2000; /* 确保在顶层 */
+        transform: translateX(-100%);
+        border-right: none;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        background-color: transparent !important; /* 重要：侧边栏本身透明，否则会挡住遮罩 */
+    }
 
-  /* 当菜单通过 JS 被添加了 .is-open 类时，滑入屏幕 */
-  .sidebar.is-open {
-    transform: translateX(0);
-  }
+    /* 【核心】新增的容器：承载白色背景和文字，确保它们在遮罩层之上 */
+    .sidebar-content {
+        position: relative;
+        z-index: 2;      /* 高于遮罩层的 1 */
+        width: 100%;
+        height: 100%;
+        background-color: #fff; /* 侧边栏的白色背景移到这里 */
+        overflow-y: auto;
+    }
 
-  /* 遮罩层样式 - 配合汉堡按钮点击使用 */
-  .menu-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4); /* 半透明黑色遮罩 */
-    z-index: 999; /* 在侧边栏下方，按钮上方 */
-  }
-  .menu-overlay.is-visible {
-    display: block !important;
-  }
+    /* 当菜单打开时 */
+    .sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    /* 遮罩层样式 - 现在是侧边栏内部的一个“影子” */
+    .menu-overlay {
+        display: block !important; /* 由 JS 控制可见性 */
+        position: fixed;
+        top: 0; 
+        left: 0;
+        width: 100vw; 
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4); /* 半透明阴影 */
+        z-index: 1;      /* 【关键】层级在 content (2) 之下，但在页面其他内容之上 */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .menu-overlay.is-visible {
+        opacity: 1;
+        pointer-events: auto; /* 允许点击遮罩层关闭菜单 */
+    }
+
+    /* 桌面端隐藏相关元素 */
+    .hamburger-btn, .menu-overlay {
+        display: none !important;
+    }
+    /* 特殊处理：移动端要显示按钮和遮罩，上面已经写了逻辑 */
+    @media (max-width: 768px) {
+        .hamburger-btn { display: flex !important; }
+        .menu-overlay { display: block !important; }
+    }
 }
 
-/* ============================================================
-   4. 侧边栏组件内部样式 (通用)
-   ============================================================ */
-/* 这里包含了折叠抽屉、日志列表、标题等所有细节 */
+/* 3. 桌面端隐藏相关元素 */
+@media (min-width: 769px) {
+    .hamburger-btn, .menu-overlay {
+        display: none !important;
+    }
+}
 
+/* 4. 侧边栏组件内部样式 (保持你原本的所有精美细节) */
 .sidebar-title {
-  font-size: 1em; font-weight: bold; color: #333;
-  margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e67e22;
+    font-size: 1em; font-weight: bold; color: #333;
+    margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e67e22;
 }
 
 .sidebar-list { list-style: none; padding: 0; margin: 0; }
@@ -977,8 +1002,8 @@ body {
 .sidebar-item { margin-bottom: 12px; }
 
 .sidebar-link {
-  text-decoration: none; color: #666; font-size: 0.95em;
-  transition: all 0.3s ease; display: block;
+    text-decoration: none; color: #666; font-size: 0.95em;
+    transition: all 0.3s ease; display: block;
 }
 
 .sidebar-link.active { color: #e67e22 !important; font-weight: bold; padding-left: 5px; }
@@ -987,12 +1012,12 @@ body {
 /* 折叠抽屉样式 */
 .sidebar-accordion { margin-bottom: 10px; background: #fcfcfc; border-radius: 4px; }
 .sidebar-sub-title {
-  font-size: 0.85em; color: #666; padding: 8px 12px; cursor: pointer;
-  list-style: none; display: flex; align-items: center; transition: background 0.2s;
+    font-size: 0.85em; color: #666; padding: 8px 12px; cursor: pointer;
+    list-style: none; display: flex; align-items: center; transition: background 0.2s;
 }
 .sidebar-sub-title::-webkit-details-marker { display: none; }
 .sidebar-sub-title::before {
-  content: '▶'; display: inline-block; margin-right: 6px; font-size: 0.7em; color: #e67e22; transition: transform 0.2s;
+    content: '▶'; display: inline-block; margin-right: 6px; font-size: 0.7em; color: #e67e22; transition: transform 0.2s;
 }
 .sidebar-accordion[open] .sidebar-sub-title::before { transform: rotate(90deg); }
 .sidebar-sub-title:hover { background-color: #f4f4f4; }
@@ -1002,32 +1027,74 @@ body {
 .sidebar-log-list .sidebar-item { margin-bottom: 4px; }
 .sidebar-log-list .sidebar-link { font-size: 0.85em; }
 
-/* ============================================================
-   【精致优化版】：侧边栏纪念/成就小卡片
-   ============================================================ */
+/* 侧边栏纪念/成就小卡片 */
 .sidebar-notice-card {
-  margin-top: 30px;        /* 稍微缩小间距，不再那么突兀 */
-  margin-left: 5px;
-  padding: 8px 12px;       /* 更加紧凑的内边距，显得精巧 */
-  background-color: #fff9f5; /* 极淡的暖橘色/奶油色背景，非常高级 */
-  border-left: 2px solid rgba(230, 126, 34, 0.3); /* 使用半透明的主题色作为左边框，更轻盈 */
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(230, 126, 34, 0.05); /* 极淡的暖色阴影 */
+    margin-top: 30px;
+    margin-left: 5px;
+    padding: 8px 12px;
+    background-color: #fff9f5;
+    border-left: 2px solid rgba(230, 126, 34, 0.3);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-/* 英文文案样式：使用低饱和度的暖棕色，而不是灰色 */
 .notice-en { 
-  color: #bc9b82;          /* 这种颜色是“褪色的暖棕”，既淡又不是灰色 */
-  font-size: 9px;         /* 更小的字号，增加精致感 */
-  margin: 0 0 2px 0; 
-  line-height: 1.2;
-  font-style: italic; 
+    color: #bc9b82; font-size: 9px; margin: 0 0 2px 0; line-height: 1.2; font-style: italic; 
 }
 
-/* 中文文案样式：使用稍深一点的暖棕色，保证可读性但保持整体调性 */
 .notice-zh { 
-  color: #a67c52;          /* 稍微深一点的暖调，看起来像旧墨水 */
-  font-size: 10px;         /* 微小的字号 */
-  margin: 0; 
-  line-height: 1.3;
+    color: #a67c52; font-size: 10px; margin: 0; line-height: 1.3;
+}
+
+
+ /* =========================================
+   移动端专属全局导航 (Mobile-Only Global Nav)
+   逻辑：桌面端完全隐藏 | 手机端显示并优化点击感
+   ========================================= */
+
+/* 1. 【默认状态】在桌面端，这些元素会被彻底从页面中抹除 */
+.mobile-only-nav {
+    display: none !important;
+}
+
+/* 2. 【移动端响应式激活】仅在屏幕宽度 <= 768px 时生效 */
+@media (max-width: 768px) {
+    
+    /* 让隐藏的容器显示出来 */
+    .mobile-only-nav {
+        display: block !important;
+    }
+
+    /* 全局链接容器样式 */
+    .sidebar-global-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0; /* 下方留一点间距 */
+    }
+
+    /* 全局一级目录链接：专门为“手指点击”优化 */
+    .sidebar-global-nav .global-link {
+        display: block;            /* 撑满整行，方便点击 */
+        font-weight: bold;         /* 加粗，体现层级感 */
+        color: #333 !important;    /* 深色文字 */
+        font-size: 1.1em;          /* 比普通链接大一点 */
+        padding: 12px 5px;         /* 【关键】增加上下内边距，让点击区域变大，防止误触 */
+        border-bottom: 1px solid #f5f5f5; /* 每个主项下面加一条极淡的分隔线 */
+        text-decoration: none;
+    }
+
+    /* 全局链接的悬停/触摸反馈 */
+    .sidebar-global-nav .global-link:hover {
+        color: #e67e22 !important; /* 变成品牌橙色 */
+        background-color: #fffcf5; /* 淡淡的橙色背景，给用户点击反馈 */
+        border-radius: 4px;
+    }
+
+    /* 分隔线样式 (仅在移动端显示) */
+    .sidebar-divider {
+        border: none;
+        border-top: 1px solid #eee; /* 浅灰色细线 */
+        margin: 15px 0;
+        opacity: 0.6;
+    }
 }

@@ -1,19 +1,31 @@
 
 
-<!-- 侧边栏主体 (在移动端它将变成一个滑出的抽屉) -->
+<!-- sidebar.html -->
 <aside class="sidebar" id="sidebarDrawer">
-  
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <div class="sidebar-content">
+    
+    <!-- 【修改点】增加 mobile-only-nav 这个类名 -->
+    <ul class="sidebar-global-nav mobile-only-nav">
+      <li><a href="/about/" class="sidebar-link global-link">About Me</a></li>
+      <li><a href="/projects/" class="sidebar-link global-link">Experimental Logs</a></li>
+      <li><a href="/ideas/" class="sidebar-link global-link">Jibber-Jabber</a></li>
+    </ul>
+
+    <!-- 分隔线 (如果你只想在移动端看到，就把这一行也加个类名) -->
+    <hr class="sidebar-divider mobile-only-nav">
+
+    <!-- ... 原有的 if/else 逻辑保持不变 ... -->
+
+
   {% if page.url contains '/ideas/' %}
   <!-- 【情况 A】: Jibber-Jabber 板块 -->
   <h3 class="sidebar-title">
     <a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a>
   </h3>
   <ul class="sidebar-list">
-    {% comment %} 
-      【核心逻辑】：
-      1. 先用 sort: "date" 按日期升序排列 (旧 $\rightarrow$ 新)
-      2. 再用 reverse 反转顺序 (新 $\rightarrow$ 旧)
-    {% endcomment %}
+    
     {% assign sorted_ideas = site.ideas | sort: "date" | reverse %}
 
     {% for item in sorted_ideas %}
@@ -25,9 +37,22 @@
         </li >
       {% endif %}
     {% endfor %}
+
+    <!-- 返回按钮 -->
+        <li class="sidebar-item" style="margin-top: 20px;">
+          <a href="/ideas/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to Jibber-Jabber</a>
+        </li>
   </ul>
 
-
+       <h3 class="sidebar-title"><a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a></h3>
+       <ul class="sidebar-list">
+         {% assign sorted_ideas = site.ideas | sort: "date" | reverse %}
+         {% for item in sorted_ideas %}
+           {% if item.url != "/ideas/" %}
+           <li class="sidebar-item"><a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">{{ item.title }}</a></li>
+           {% endif %}
+         {% endfor %}
+       </ul>
 
   {% elsif page.url contains '/projects/' %}
     <!-- 【情况 B】: Projects 板块 (智能导航模式) -->
@@ -141,6 +166,8 @@
       <p class="notice-zh">💐 侧栏标题曾于跳转时隐身，现已修复，留作纪念。</p>
     </div>
   {% endif %}
+
+  </div>
 </aside>
 
 
