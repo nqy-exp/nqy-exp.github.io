@@ -48,52 +48,65 @@ permalink: /projects/
 <h1 class="page-title">Experimental Logs</h1>
 
 <div class="project-tree">
+  {% comment %} 
+    第一步：先找到所有类型为 plan 的文档，并提取它们不重复的 project ID 
+  {% endcomment %}
   {% assign all_plans = site.projects | where: "type", "plan" %}
-  
-  {% for plan in all_plans %}
+  {% assign unique_project_ids = all_plans | map: "project" | uniq %}
+
+  {% for proj_id in unique_project_ids %}
     <div class="project-group">
-      <!-- 1. 一级项目标题（已翻译） -->
+      <!-- 1. 展示大项目标题 (基于 ID 映射) -->
       <span class="project-main-title">
-        📂 {{ site.project_mapping[plan.project] | default: plan.title }}
+        📂 {{ site.project_mapping[proj_id] | default: proj_id }}
       </span>
 
-      {% assign all_items_in_this_project = site.projects | where: "project", plan.project %}
+      {% comment %} 
+        第二步：抓取当前这个 project 下的所有相关文档（包括所有的 plans 和 logs）
+      {% endcomment %}
+      {% assign all_items_in_this_project = site.projects | where: "project", proj_id %}
 
-      {% if all_items_in_this_project.size > 0 %}
-        <!-- 2. 展示该项目的【总纲/Plan】 -->
-        <div class="plan-item">
-          <a href="{{ plan.url }}" class="log-link" style="font-weight: bold; color: #e67e22;">📖 {{ plan.title }}</a>
-        </div>
-
-        <!-- 3. 分组显示子项目日志 -->
-        {% assign project_logs = all_items_in_this_project | where: "type", "log" %}
-        {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
-
-        {% for sub in sub_ids %}
-          {% if sub != nil %}
-            <div class="sub-project-container">
-              <!-- 【关键修复】：这里不再直接显示 sub，而是去 mapping 里找翻译 -->
-              <span class="sub-project-title">
-                📁 {{ site.project_mapping[sub] | default: sub }}
-              </span>
-              
-              <ul style="list-style: none; padding-left: 0;">
-                {% for log in project_logs %}
-                  {% if log.sub_project == sub %}
-                    <li class="log-item">
-                      <a href="{{ log.url }}" class="log-link">📄 {{ log.title }}</a>
-                      <span class="log-date">{{ log.date | date: "%Y-%m-%d" }}</span>
-                    </li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
+      <!-- 2. 展示该项目下的所有 Plan (解决一个项目有多个 plan 的问题) -->
+      {% assign current_project_plans = all_items_in_this_project | where: "type", "plan" %}
+      <div class="plan-container" style="margin-bottom: 15px;">
+        {% for plan in current_project_plans %}
+          <div class="plan-item" style="margin-bottom: 5px;">
+            <a href="{{ plan.url }}" class="log-link" style="font-weight: bold; color: #e67e22;">
+              📖 {{ plan.title }}
+            </a>
+          </div>
         {% endfor %}
-      {% endif %}
-    </div>
+      </div>
+
+      <!-- 3. 分组显示该项目下的子项目日志 -->
+      {% assign project_logs = all_items_in_this_project | where: "type", "log" %}
+      {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
+
+      {% for sub in sub_ids %}
+        {% if sub != nil %}
+          <div class="sub-project-container">
+            <!-- 子项目标题 -->
+            <span class="sub-project-title">
+              📁 {{ site.project_mapping[sub] | default: sub }}
+            </span>
+            
+            <ul style="list-style: none; padding-left: 0;">
+              {% for log in project_logs %}
+                {% if log.sub_project == sub %}
+                  <li class="log-item">
+                    <a href="{{ log.url }}" class="log-link">📄 {{ log.title }}</a>
+                    <span class="log-date">{{ log.date | date: "%Y-%m-%d" }}</span>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div> <!-- project-group 结束 -->
   {% endfor %}
 </div>
+
 
 <br>
 
