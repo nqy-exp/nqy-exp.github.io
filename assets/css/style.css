@@ -1036,6 +1036,14 @@ body {
    1. 桌面端样式 (Desktop Mode)
    ----------------------------------------------------------- */
 
+/* ============================================================
+   SIDEBAR & MOBILE NAVIGATION (Ultimate Integrated Version)
+   ============================================================ */
+
+/* -----------------------------------------------------------
+   1. 桌面端样式 (Desktop Mode)
+   ----------------------------------------------------------- */
+
 .sidebar {
     width: 250px;
     flex-shrink: 0;
@@ -1045,24 +1053,13 @@ body {
     position: sticky;
     top: 80px;
     overflow-y: auto;
-    background-color: #fff;
+    background-color: #fff; /* 桌面端实心白色 */
     transition: transform 0.3s ease;
-}
-
-/* 桌面端强制隐藏所有移动端专属元素 */
-@media (min-width: 769px) {
-    .hamburger-btn, 
-    .menu-overlay, 
-    .mobile-only-nav, 
-    .sidebar-global-nav, 
-    .sidebar-divider {
-        display: none !important;
-    }
 }
 
 /* 汉堡按钮：确保在顶层 */
 .hamburger-btn {
-    z-index: 3000 !important;
+    z-index: 3000 !important; /* 确保它永远在最顶层，不会被侧边栏挡住 */
     width: 25px;
     height: 18px;
     background: transparent;
@@ -1086,9 +1083,23 @@ body {
 .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
+/* 桌面端强制隐藏所有移动端专属元素 */
+@media (min-width: 769px) {
+    .hamburger-btn, 
+    .menu-overlay, 
+    .mobile-only-nav, 
+    .quick-links-list,   /* 确保 header 里的快速导航在桌面端隐藏 */
+    .sidebar-global-nav, 
+    .sidebar-divider {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+}
+
 
 /* -----------------------------------------------------------
-   2. 移动端样式 (Mobile Drawer Mode) - 【纯净版】
+   2. 移动端样式 (Mobile Drawer Mode)
    ----------------------------------------------------------- */
 
 @media (max-width: 768px) {
@@ -1099,14 +1110,15 @@ body {
         top: 0;
         height: 100vh !important;
         width: 280px !important;
-        z-index: 2000; 
+        z-index: 2000; /* 高层级，在遮罩之上 */
         transform: translateX(-100%); /* 默认藏在左边 */
         border-right: 4px solid #e67e22; /* 【关键】：侧边栏自带主题色边缘线 */
-        background-color: #ffffff !important; /* 【核心】：纯白背景，绝不透明 */
+        background-color: #ffffff !important; /* 【核心】：纯白背景，不透明 */
         box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* 轻微阴影增加立体感 */
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* 当菜单激活时滑出 */
     .sidebar.is-open {
         transform: translateX(0);
     }
@@ -1114,52 +1126,102 @@ body {
     /* 内容容器 */
     .sidebar-content {
         position: relative;
-        z-index: 2;      /* 高于遮罩层 (1) */
+        z-index: 2;      /* 高于遮罩层的 1 */
         width: 100%;
         height: 100%;
         background-color: #ffffff !important; /* 确保内容区也是纯白 */
         overflow-y: auto;
     }
 
-    /* 【核心修改】：透明遮罩层 */
+    /* 【核心修改】：透明遮罩层 (用于点击背景关闭菜单) */
     .menu-overlay {
         display: block !important;
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background: transparent !important; /* 【关键】：背景完全透明，不再变暗 */
-        z-index: 1;      /* 在侧边栏之下，在页面内容之上 */
+        background: rgba(0, 0, 0, 0.3) !important; /* 【关键】：你可以根据需要把 0.3 改成 transparent 实现完全透明 */
+        z-index: 1;      /* 在侧边栏内容之下，在页面内容之上 */
         opacity: 0;
-        pointer-events: none; /* 默认不拦截点击 */
+        pointer-events: none;
         transition: opacity 0.3s ease;
     }
 
-    /* 当菜单打开时，遮罩层变透明但仍然可以“捕捉”点击以关闭菜单 */
     .menu-overlay.is-visible {
         opacity: 1;
-        pointer-events: auto; /* 允许用户通过点击背景来关闭侧边栏 */
+        pointer-events: auto; /* 允许点击阴影关闭菜单 */
     }
 
-    /* 强制显示移动端按钮和导航 */
+    /* 强制显示移动端专用元素 */
     .hamburger-btn { display: flex !important; }
     .mobile-only-nav { display: block !important; }
-}
 
-/* -----------------------------------------------------------
-   3. 其他组件样式 (保持不变)
-   ----------------------------------------------------------- */
+    /* --- Header 里的快速导航 (针对主页) --- */
+    .mobile-quick-nav {
+        display: none; /* 默认隐藏，由 JS 控制 */
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: white;
+        z-index: 999; /* 在遮罩层之下，在侧边栏之上 */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
 
-/* 移动端全局导航列表 */
-@media (max-width: 768px) {
-    .sidebar-global-nav { list-style: none; padding: 0; margin: 0 0 15px 0; }
+    .mobile-quick-nav.is-active {
+        display: block; /* 由 JS 控制显示 */
+    }
+
+    .quick-links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .quick-link {
+        display: block;
+        padding: 15px 25px;
+        color: #333 !important;
+        font-weight: bold;
+        text-decoration: none;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    .quick-link:hover {
+        background-color: #fffcf5;
+        color: #e67e22 !important;
+    }
+
+    /* --- 侧边栏内的全局导航样式 --- */
+    .sidebar-global-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+    }
+
     .sidebar-global-nav .global-link {
-        display: block; font-weight: bold; color: #333 !important;
-        font-size: 1.1em; padding: 12px 5px; border-bottom: 1px solid #f5f5f5;
+        display: block;
+        font-weight: bold;
+        color: #333 !important;
+        font-size: 1.1em;
+        padding: 12px 5px;
+        border-bottom: 1px solid #f5f5f5;
         text-decoration: none;
     }
-    .sidebar-global-nav .global-link:hover { color: #e67e22 !important; background-color: #fffcf5; }
-    .sidebar-divider { border: none; border-top: 1px solid #eee; margin: 15px 0; opacity: 0.6; }
+
+    .sidebar-global-nav .global-link:hover {
+        color: #e67e22 !important;
+        background-color: #fffcf5;
+    }
+
+    /* 分隔线 */
+    .sidebar-divider {
+        border: none;
+        border-top: 1px solid #eee;
+        margin: 15px 0;
+        opacity: 0.6;
+    }
 }
+
 
 /* -----------------------------------------------------------
    4. 侧边栏组件细节 (Sub-components - All Styles)
