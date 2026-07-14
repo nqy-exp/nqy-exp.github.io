@@ -43,6 +43,15 @@ Overall, AI has played a huge role in building this website. With only basic pro
 
 Based on my experiences and observations, my suggestion is this: If your goal is to build a static website to showcase text and images, and you possess basic programming skills along with a clear design plan, then using AI for assistance is a highly efficient and controllable choice. However, if you have more complex or advanced requirements, it would be wiser to seek professional help.
 
+
+P.S. | July 14, 2026
+
+Recording a small unexpected twist: That sidebar bug that had been troubling me for a long time，I had actually already sought out a friend who does frontend development to fix it. After uploading the test documents, I wanted to try fixing it one last time; perhaps because I felt I had "external help," I decided to tear everything down and start over, and unexpectedly, I actually fixed it! (Of course, still using AI assistance--Vibe Coding).
+
+Now, the original Bug notice has turned into a Bug memorial. And I even improved the sidebar, so there's no need to remove it even if there are too many logs in the future.
+
+
+
 ---
 
 现在网站的框架建立已经基本告一段落了。
@@ -75,3 +84,10 @@ Based on my experiences and observations, my suggestion is this: If your goal is
 总体而言，AI在建设网站中起到的作用是非常大的。我只凭藉最基础的编程知识就可以一个人独立建起属于自己的网站，并且不只是普通的文字系统，还兼具了我的审美与设计，并且在这个过程中我也学习到了一些初步的网页搭建结构知识。虽然仍有一定的局限性，在面对复杂的网页结构时，由于缺乏深层的底层知识，我很难进行自主修改；同时，对于第三方插件的安全性及兼容性，也存在无法完全掌控的问题。
 
 基于我的体验与观察，我的建议是： 如果你的需求是建设一个展示文字与图片的静态网站，且具备基础编程能力并有明确的设计规划，那么利用 AI 辅助搭建是一个非常高效且可控的选择。但如果你有更复杂、更高阶的需求，寻求专业人士的帮助会是更明智的做法。 
+
+
+P.S. | 2026.07.14
+
+记录一个小小的意外转折：之前那个困扰我许久的侧边栏 Bug，本来已经寻找了做前端的朋友进行修理，在上传测试文档后，想最后尝试修一次，可能是因为有外援，就决定推倒重来，没想到居然修好了！（当然还是使用AI辅助——Vibe Coding）
+
+现在，原先那个Bug 告示，变成了Bug纪念。而且还改进了一下侧边栏，这下不需要因为未来Logs过多而取消侧边栏了。

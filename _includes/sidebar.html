@@ -12,21 +12,42 @@
 <aside class="sidebar" id="sidebarDrawer">
   
   {% if page.url contains '/ideas/' %}
-    <!-- 【情况 A】: Jibber-Jabber 板块 -->
-    <h3 class="sidebar-title"><a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a></h3>
-    <ul class="sidebar-list">
-      {% for item in site.ideas %}
-        {% if item.url != "/ideas/" %}
-          <li class="sidebar-item"><a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">{{ item.title }}</a></li>
-        {% endif %}
-      {% endfor %}
-    </ul>
+  <!-- 【情况 A】: Jibber-Jabber 板块 -->
+  <h3 class="sidebar-title">
+    <a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a>
+  </h3>
+  <ul class="sidebar-list">
+    {% comment %} 
+      【核心逻辑】：
+      1. 先用 sort: "date" 按日期升序排列 (旧 $\rightarrow$ 新)
+      2. 再用 reverse 反转顺序 (新 $\rightarrow$ 旧)
+    {% endcomment %}
+    {% assign sorted_ideas = site.ideas | sort: "date" | reverse %}
+
+    {% for item in sorted_ideas %}
+      {% if item.url != "/ideas/" %}
+        <li class="sidebar-item">
+          <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
+            {{ item.title }}
+          </a>
+        </li >
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}
+
 
   {% elsif page.url contains '/projects/' %}
-    <!-- 【情况 B】: Projects 板块 -->
-    <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
+    <!-- 【情况 B】: Projects 板块 (智能导航模式) -->
+    <h3 class="sidebar-title">
+      <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
+    </h3>
     <ul class="sidebar-list">
 
+      {% comment %} 
+        【第一步：定位当前页面属于哪个项目】
+        通过遍历所有项目，比对 URL 来获取最可靠的 Project ID。
+      {% endcomment %}
       {% assign current_proj_id = nil %}
       {% for item in site.projects %}
         {% if item.url == page.url %}
@@ -36,14 +57,16 @@
       {% endfor %}
 
       {% if current_proj_id != nil and current_proj_id != "" %}
-        <!-- 项目大标题 -->
+        <!-- --- 【模式 A】：进入了某个具体的项目内 --- -->
+
+        <!-- 1. 项目大标题 (Mapping) -->
         <li class="sidebar-item" style="margin-bottom: 20px;">
           <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
             📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
           </span>
-        </li>
+        </li >
 
-        <!-- 该项目的所有 Plan -->
+        <!-- 2. 该项目的所有 Plan (始终显示) -->
         {% for item in site.projects %}
           {% if item.project == current_proj_id and item.type == "plan" %}
             <li class="sidebar-item">
@@ -56,40 +79,58 @@
 
         <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
-        <!-- 分组显示子项目日志 (折叠抽屉) -->
+        <!-- 3. 子项目日志 (带自动展开逻辑的折叠抽屉) -->
+        {% comment %} 首先收集该项目下所有的不重复 sub_project ID {% endcomment %}
         {% assign sub_ids = "" | split: "" %}
         {% for item in site.projects %}
           {% if item.project == current_proj_id and item.type == "log" and item.sub_project != nil %}
             {% assign s_val = item.sub_project %}
-            {% unless sub_ids contains s_val %}{% assign sub_ids = sub_ids | push: s_val %}{% endunless %}
+            {% unless sub_ids contains s_val %}
+              {% assign sub_ids = sub_ids | push: s_val %}
+            {% endunless %}
           {% endif %}
         {% endfor %}
 
+        <!-- 遍历子项目展示日志 -->
         {% for sub in sub_ids %}
-          <details class="sidebar-accordion">
+          {% comment %} 
+            【核心：自动展开逻辑】
+            判断当前页面是否属于这个子项目，如果是，则给 <details> 加上 open 属性。
+          {% endcomment %}
+          {% assign should_open = false %}
+          {% for item in site.projects %}
+            {% if item.url == page.url and item.sub_project == sub %}
+              {% assign should_open = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          <details class="sidebar-accordion" {% if should_open %}open{% endif %}>
             <summary class="sidebar-sub-title">
               📁 {{ site.project_mapping[sub] | default: sub }}
             </summary>
             <ul class="sidebar-log-list">
               {% for item in site.projects %}
-                {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" and item.url != page.url %}
+                <!-- 只要属于该项目、该子项目且是 log，就显示出来 (包含当前页) -->
+                {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" %}
                   <li class="sidebar-item">
                     <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
                       • {{ item.title }}
                     </a>
-                  </li>
+                  </li >
                 {% endif %}
               {% endfor %}
             </ul>
           </details>
         {% endfor %}
 
+        <!-- 返回按钮 -->
         <li class="sidebar-item" style="margin-top: 20px;">
           <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
         </li>
 
       {% else %}
-        <!-- 【情况 C】: 总目录页 -->
+        <!-- --- 【模式 B】：处于 Projects 总目录页 --- -->
         {% assign all_plans = site.projects | where: "type", "plan" %}
         {% for plan in all_plans %}
           <li class="sidebar-item">
@@ -100,6 +141,7 @@
         {% endfor %}
       {% endif %}
     </ul>
+
 
     <!-- 底部便签 -->
     <div class="sidebar-notice-card">
@@ -157,15 +199,16 @@ document.addEventListener('DOMContentLoaded', function() {
   top: 80px;
   overflow-y: auto;
   background-color: #fff;
-  transition: transform 0.3s ease; /* 抽屉动画 */
+  transition: transform 0.3s ease; /* 用于移动端滑入动画 */
 }
 
 /* ============================================================
    2. 桌面端样式 (Desktop Only)
    ============================================================ */
 @media (min-width: 769px) {
+  /* 桌面端隐藏抽屉式按钮和遮罩层，因为我们使用的是横向导航 */
   .hamburger-btn, .menu-overlay {
-    display: none !important; /* 桌面端隐藏汉堡按钮和遮罩层 */
+    display: none !important;
   }
 }
 
@@ -178,54 +221,25 @@ document.addEventListener('DOMContentLoaded', function() {
     left: 0;
     top: 0;
     height: 100vh !important; /* 铺满全屏高度 */
-    width: 280px !important;  /* 固定宽度 */
-    z-index: 1000;            /* 置于顶层 */
-    transform: translateX(-100%); /* 初始状态在屏幕左侧外 */
+    width: 280px !important;  /* 侧边栏宽度 */
+    z-index: 1000;            /* 置于顶层，确保在 Header 下方或上方（取决于 z-index） */
+    transform: translateX(-100%); /* 初始状态隐藏在屏幕左侧外 */
     border-right: none;
-    box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* 增加阴影，提升质感 */
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
   }
 
-  /* 当菜单打开时 */
+  /* 当菜单通过 JS 被添加了 .is-open 类时，滑入屏幕 */
   .sidebar.is-open {
     transform: translateX(0);
   }
 
-  /* 汉堡按钮样式 */
-  .hamburger-btn {
-    display: flex !important; /* 移动端显示 */
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 1100; /* 高于侧边栏 */
-    position: fixed;
-    top: 20px;
-    left: 20px;
-  }
-
-  .hamburger-btn span {
-    width: 30px;
-    height: 3px;
-    background-color: #333;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-
-  /* 汉堡按钮变形成“X”的动画 */
-  .hamburger-btn.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-  .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
-  .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-  /* 遮罩层样式 */
+  /* 遮罩层样式 - 配合汉堡按钮点击使用 */
   .menu-overlay {
     display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4); /* 半透明黑色 */
+    background: rgba(0,0,0,0.4); /* 半透明黑色遮罩 */
     z-index: 999; /* 在侧边栏下方，按钮上方 */
   }
   .menu-overlay.is-visible {
@@ -236,6 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ============================================================
    4. 侧边栏组件内部样式 (通用)
    ============================================================ */
+/* 这里包含了折叠抽屉、日志列表、标题等所有细节 */
+
 .sidebar-title {
   font-size: 1em; font-weight: bold; color: #333;
   margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e67e22;
@@ -271,17 +287,34 @@ document.addEventListener('DOMContentLoaded', function() {
 .sidebar-log-list .sidebar-item { margin-bottom: 4px; }
 .sidebar-log-list .sidebar-link { font-size: 0.85em; }
 
-/* 便签样式 */
+/* ============================================================
+   【精致优化版】：侧边栏纪念/成就小卡片
+   ============================================================ */
 .sidebar-notice-card {
-  margin-top: 40px;
+  margin-top: 30px;        /* 稍微缩小间距，不再那么突兀 */
   margin-left: 5px;
-  padding: 12px 15px;
-  background-color: #fffaf0; /* 改成一种非常淡的、暖色的底色，代表“温暖的回忆” */
-  border-left: 2px solid #e67e22; 
+  padding: 8px 12px;       /* 更加紧凑的内边距，显得精巧 */
+  background-color: #fff9f5; /* 极淡的暖橘色/奶油色背景，非常高级 */
+  border-left: 2px solid rgba(230, 126, 34, 0.3); /* 使用半透明的主题色作为左边框，更轻盈 */
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(230, 126, 34, 0.1); /* 给阴影加一点点主题色的微光 */
+  box-shadow: 0 1px 2px rgba(230, 126, 34, 0.05); /* 极淡的暖色阴影 */
 }
 
-.notice-en { color: #999; margin: 0 0 3px 0; font-style: italic; }
-.notice-zh { color: #777; margin: 0; }
+/* 英文文案样式：使用低饱和度的暖棕色，而不是灰色 */
+.notice-en { 
+  color: #bc9b82;          /* 这种颜色是“褪色的暖棕”，既淡又不是灰色 */
+  font-size: 9px;         /* 更小的字号，增加精致感 */
+  margin: 0 0 2px 0; 
+  line-height: 1.2;
+  font-style: italic; 
+}
+
+/* 中文文案样式：使用稍深一点的暖棕色，保证可读性但保持整体调性 */
+.notice-zh { 
+  color: #a67c52;          /* 稍微深一点的暖调，看起来像旧墨水 */
+  font-size: 10px;         /* 微小的字号 */
+  margin: 0; 
+  line-height: 1.3;
+}
+
 </style>

@@ -1,8 +1,19 @@
 <!-- 自定义 Header -->
 <header class="my-custom-header">
-  <!-- 删掉了内联的 style，让 CSS 接管一切 -->
-  <a href="/" class="header-title">QY Niu's Log</a>
-  <nav>
+  <!-- 1. 左侧组合：汉堡按钮 + 标题 -->
+  <div class="header-left">
+    <!-- 汉堡按钮 (现在放在这里了) -->
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <a href="/" class="header-title">QY Niu's Log</a>
+  </div>
+
+  <!-- 2. 右侧导航：仅在桌面端显示 -->
+  <nav class="desktop-nav">
     <ul class="nav-menu">
       <li><a href="/about/">About Me</a></li>
       <li><a href="/projects/">Experimental Logs</a></li>

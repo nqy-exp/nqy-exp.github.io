@@ -9,62 +9,63 @@ body {
 
 
 /* =========================================
-   2. 自定义 Header (顶部导航栏) - 精简版
+   2. 自定义 Header (顶部导航栏) - 响应式增强版
    ========================================= */
 
 .my-custom-header {
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid #eee;
-    background-color: rgba(255, 255, 255, 0.9);
+  display: flex; 
+  justify-content: space-between; /* 桌面端：左侧按钮+标题，右侧菜单 */
+  align-items: center;
+  padding: 15px 40px;
+  border-bottom: 1px solid #eee;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: sticky; /* 让 header 粘在顶部 */
+  top: 0;
+  z-index: 1001;
 }
 
+/* 左侧组合容器：包含汉堡按钮和标题 */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* 按钮和标题之间的距离 */
+}
 
 /* 标题基础样式 */
 .header-title {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #333;            /* 这里定义初始颜色 */
-    text-decoration: none !important; /* 强制去掉所有下划线 */
-    position: relative;     
-    display: inline-block;  
-    padding-bottom: 4px;    
-    transition: color 0.3s ease; 
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+  text-decoration: none !important;
+  position: relative;     
+  display: inline-block;  
+  padding-bottom: 4px;    
+  transition: color 0.3s ease; 
 }
 
-/* 创建那条“隐形的线” */
+/* 标题下方的橙色装饰线 */
 .header-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;            
-    background-color: #e67e22; 
-    transform: scaleX(0);   
-    transform-origin: center; 
-    transition: transform 0.3s ease;
-    /* 确保线不会遮挡文字 */
-    pointer-events: none; 
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;            
+  background-color: #e67e22; 
+  transform: scaleX(0);   
+  transform-origin: center; 
+  transition: transform 0.3s ease;
+  pointer-events: none; 
 }
 
-/* 当鼠标悬停时，展开线条 */
 .header-title:hover::after {
-    transform: scaleX(1);   
+  transform: scaleX(1);   
 }
 
-/* 确保悬停时颜色依然是 #333，不被其他规则干扰 */
-.header-title:hover {
-    color: #333 !important; 
-}
-
-
-
+/* 桌面端导航菜单 */
 .nav-menu {
   display: flex;
-  gap: 25px; /* 菜单项之间的间距 */
+  gap: 25px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -74,11 +75,57 @@ body {
   text-decoration: none;
   color: #666;
   font-size: 0.9em;
-  transition: color 0.3s ease; /* 让颜色变化更平滑 */
+  transition: color 0.3s ease;
 }
 
 .nav-menu a:hover {
-  color: #e67e22; /* 悬停时的橙色 */
+  color: #e67e22;
+}
+
+/* --- 汉堡按钮样式 (默认桌面端隐藏) --- */
+.hamburger-btn {
+  display: none; /* 桌面端不显示 */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 25px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100;
+}
+
+.hamburger-btn span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   响应式媒体查询 (针对手机/小屏幕)
+   ============================================================ */
+@media (max-width: 768px) {
+  .my-custom-header {
+    padding: 10px 20px; /* 移动端更紧凑的 Padding */
+  }
+
+  /* 核心：在移动端隐藏桌面端的横向菜单 */
+  .desktop-nav {
+    display: none !important;
+  }
+
+  /* 核心：在移动端显示汉堡按钮 */
+  .hamburger-btn {
+    display: flex !important; /* 强制显示 */
+  }
+
+  /* 汉堡按钮变形成“X”的动画 */
+  .hamburger-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
 
  /* =========================================
