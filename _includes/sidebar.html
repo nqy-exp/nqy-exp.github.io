@@ -1,228 +1,287 @@
-<!-- sidebar.html -->
-<aside class="sidebar">
+<!-- 1. 移动端专用的汉堡按钮 (仅在手机端显示) -->
+<button class="hamburger-btn" id="hamburgerBtn">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- 2. 遮罩层 (点击侧边栏以外区域时自动关闭菜单) -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- 3. 侧边栏主体 (在移动端它将变成一个滑出的抽屉) -->
+<aside class="sidebar" id="sidebarDrawer">
+  
   {% if page.url contains '/ideas/' %}
-    <!-- 【情况 A】: 当你在 Jibber-Jabber 板块时 -->
-    <h3 class="sidebar-title">
-      <a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a>
-    </h3>
+    <!-- 【情况 A】: Jibber-Jabber 板块 -->
+    <h3 class="sidebar-title"><a href="/ideas/" style="text-decoration: none; color: inherit;">Jibber-Jabber</a></h3>
     <ul class="sidebar-list">
       {% for item in site.ideas %}
         {% if item.url != "/ideas/" %}
-          <li class="sidebar-item">
-            <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
-              {{ item.title }}
-            </a>
-          </li>
+          <li class="sidebar-item"><a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">{{ item.title }}</a></li>
         {% endif %}
       {% endfor %}
     </ul>
 
-     {% elsif page.url contains '/projects/' %}
-<!-- 【情况 B】: Projects 板块 - 绝对身份校验版 -->
-<h3 class="sidebar-title">
-  <a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a>
-</h3>
-<ul class="sidebar-list">
+  {% elsif page.url contains '/projects/' %}
+    <!-- 【情况 B】: Projects 板块 -->
+    <h3 class="sidebar-title"><a href="/projects/" style="text-decoration: none; color: inherit;">Experimental Logs</a></h3>
+    <ul class="sidebar-list">
 
-  {% comment %} 
-    【第一步：定位当前页面属于哪个项目】
-    我们直接遍历所有的 projects，看哪一个项目的 URL 和当前页面的 URL 完全一致。
-    这比解析 URL 字符串要可靠 100 倍。
-  {% endcomment %}
-  {% assign current_project_obj = nil %}
-  {% for item in site.projects %}
-    {% if item.url == page.url %}
-      {% assign current_project_obj = item %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
+      {% assign current_proj_id = nil %}
+      {% for item in site.projects %}
+        {% if item.url == page.url %}
+          {% assign current_proj_id = item.project %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
 
-  {% comment %} 
-    如果找到了对应的项目对象，我们就提取它的 project ID
-  {% endcomment %}
-  {% if current_project_obj != nil %}
-    {% assign current_proj_id = current_project_obj.project %}
-  {% else %}
-    {% assign current_proj_id = nil %}
-  {% endif %}
-
-  {% comment %} 
-    【第二步：根据是否识别到项目，决定显示模式】
-  {% endcomment %}
-  {% if current_proj_id != nil and current_proj_id != "" %}
-    <!-- --- 【模式 A】：项目详情视图 (进入了某个具体的项目) --- -->
-
-    <!-- 1. 项目大标题 -->
-    <li class="sidebar-item" style="margin-bottom: 20px;">
-      <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
-        📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
-      </span>
-    </li>
-
-    <!-- 2. 该项目下的所有 Plan -->
-    {% for item in site.projects %}
-      {% if item.project == current_proj_id and item.type == "plan" %}
-        <li class="sidebar-item">
-          <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
-            📖 {{ item.title }}
-          </a>
-        </li>
-      {% endif %}
-    {% endfor %}
-
-    <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
-
-    <!-- 3. 该项目下的子项目日志 (分组展示) -->
-    {% comment %} 先找该项目下所有的不重复 sub_project ID {% endcomment %}
-    {% assign sub_ids = "" | split: "" %}
-    {% for item in site.projects %}
-      {% if item.project == current_proj_id and item.type == "log" and item.sub_project != nil %}
-        {% assign s_val = item.sub_project %}
-        {% unless sub_ids contains s_val %}
-          {% assign sub_ids = sub_ids | push: s_val %}
-        {% endunless %}
-      {% endif %}
-    {% endfor %}
-
-    <!-- 遍历子项目展示日志 -->
-      {% for sub in sub_ids %}
-        <li class="sidebar-item" style="margin-top: 15px;">
-          <span style="font-size: 0.75em; color: #aaa; text-transform: none; font-weight: bold;">
-            {{ site.project_mapping[sub] | default: sub }}
+      {% if current_proj_id != nil and current_proj_id != "" %}
+        <!-- 项目大标题 -->
+        <li class="sidebar-item" style="margin-bottom: 20px;">
+          <span class="project-header-text" style="font-weight: bold; color: #333; font-size: 1.1em; display: block;">
+            📂 {{ site.project_mapping[current_proj_id] | default: current_proj_id }}
           </span>
         </li>
 
-        {% comment %} 【关键修复】：删除了 item.url != page.url 这个条件 {% endcomment %}
+        <!-- 该项目的所有 Plan -->
         {% for item in site.projects %}
-          {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" %}
-            <li class="sidebar-item" style="padding-left: 10px;">
-              <!-- 这里通过 active 类来高亮当前页面 -->
-              <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
-                • {{ item.title }}
+          {% if item.project == current_proj_id and item.type == "plan" %}
+            <li class="sidebar-item">
+              <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}" style="font-weight: bold; color: #e67e22;">
+                📖 {{ item.title }}
               </a>
-            </li>
+            </li >
           {% endif %}
         {% endfor %}
-      {% endfor %}
 
-    <!-- 返回按钮 -->
-    <li class="sidebar-item" style="margin-top: 20px;">
-      <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
-    </li>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;">
 
-  {% else %}
-    <!-- --- 【模式 B】：总目录视图 (在 /projects/ 页面) --- -->
-    {% assign all_plans = site.projects | where: "type", "plan" %}
-    {% for plan in all_plans %}
-      <li class="sidebar-item">
-        <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
-          📂 {{ site.project_mapping[plan.project] | default: plan.title }}
-        </a>
-      </li>
-    {% endfor %}
+        <!-- 分组显示子项目日志 (折叠抽屉) -->
+        {% assign sub_ids = "" | split: "" %}
+        {% for item in site.projects %}
+          {% if item.project == current_proj_id and item.type == "log" and item.sub_project != nil %}
+            {% assign s_val = item.sub_project %}
+            {% unless sub_ids contains s_val %}{% assign sub_ids = sub_ids | push: s_val %}{% endunless %}
+          {% endif %}
+        {% endfor %}
+
+        {% for sub in sub_ids %}
+          <details class="sidebar-accordion">
+            <summary class="sidebar-sub-title">
+              📁 {{ site.project_mapping[sub] | default: sub }}
+            </summary>
+            <ul class="sidebar-log-list">
+              {% for item in site.projects %}
+                {% if item.project == current_proj_id and item.sub_project == sub and item.type == "log" and item.url != page.url %}
+                  <li class="sidebar-item">
+                    <a href="{{ item.url }}" class="sidebar-link {% if page.url == item.url %}active{% endif %}">
+                      • {{ item.title }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </details>
+        {% endfor %}
+
+        <li class="sidebar-item" style="margin-top: 20px;">
+          <a href="/projects/" class="sidebar-link" style="font-style: italic; color: #aaa;">← Back to All Projects</a>
+        </li>
+
+      {% else %}
+        <!-- 【情况 C】: 总目录页 -->
+        {% assign all_plans = site.projects | where: "type", "plan" %}
+        {% for plan in all_plans %}
+          <li class="sidebar-item">
+            <a href="{{ plan.url }}" class="sidebar-link {% if page.url == plan.url %}active{% endif %}">
+              📂 {{ site.project_mapping[plan.project] | default: plan.title }}
+            </a>
+          </li >
+        {% endfor %}
+      {% endif %}
+    </ul>
+
+    <!-- 底部便签 -->
+    <div class="sidebar-notice-card">
+      <p class="notice-en">💐 Sidebar header once vanished on navigation. Now fixed. For remembrance.</p>
+      <p class="notice-zh">💐 侧栏标题曾于跳转时隐身，现已修复，留作纪念。</p>
+    </div>
   {% endif %}
-
-</ul>
-
-
-
-
-
-                    <!-- 【温馨提示便签 - 插入在列表末尾】 -->
-        <div class="sidebar-notice-card">
-          <p class="notice-en">💡 Note: Sidebar header may occasionally vanish during navigation. Content remains unaffected.</p>
-          <p class="notice-zh">💡 提示：侧边栏标题在部分页面跳转时可能暂时消失，不影响阅读。</p>
-        </div>
-        
-  {% endif %}
-
 </aside>
 
+<!-- 4. 控制逻辑的原生 JS (极其轻量) -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebarDrawer');
+  const overlay = document.getElementById('menuOverlay');
+
+  if (btn && sidebar && overlay) {
+    // 点击按钮：切换菜单状态
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation(); // 防止事件冒泡
+      sidebar.classList.toggle('is-open');
+      overlay.classList.toggle('is-visible');
+    });
+
+    // 点击遮罩层：关闭菜单
+    overlay.addEventListener('click', function() {
+      sidebar.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+    });
+
+    // 点击侧边栏内部的内容（如链接）：关闭菜单以便观察页面变化
+    sidebar.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            setTimeout(() => { // 延迟一下，等待页面跳转开始
+                sidebar.classList.remove('is-open');
+                overlay.classList.remove('is-visible');
+            }, 200);
+        }
+    });
+  }
+});
+</script>
 
 <style>
-.sidebar { width: 250px; padding: 10px; height: calc(100vh - 80px); position: sticky; top: 80px; overflow-y: auto; }
-</style>
-
-<style>
-/* 保持你原有的样式不变 */
+/* ============================================================
+   1. 基础容器与全局样式 (Desktop & Mobile)
+   ============================================================ */
 .sidebar {
   width: 250px;
+  flex-shrink: 0;
   padding: 20px;
   border-right: 1px solid #eee;
   height: calc(100vh - 80px);
   position: sticky;
   top: 80px;
   overflow-y: auto;
+  background-color: #fff;
+  transition: transform 0.3s ease; /* 抽屉动画 */
 }
 
+/* ============================================================
+   2. 桌面端样式 (Desktop Only)
+   ============================================================ */
+@media (min-width: 769px) {
+  .hamburger-btn, .menu-overlay {
+    display: none !important; /* 桌面端隐藏汉堡按钮和遮罩层 */
+  }
+}
+
+/* ============================================================
+   3. 移动端样式 (Mobile - Drawer Mode)
+   ============================================================ */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed !important; /* 固定定位，变成抽屉 */
+    left: 0;
+    top: 0;
+    height: 100vh !important; /* 铺满全屏高度 */
+    width: 280px !important;  /* 固定宽度 */
+    z-index: 1000;            /* 置于顶层 */
+    transform: translateX(-100%); /* 初始状态在屏幕左侧外 */
+    border-right: none;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* 增加阴影，提升质感 */
+  }
+
+  /* 当菜单打开时 */
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  /* 汉堡按钮样式 */
+  .hamburger-btn {
+    display: flex !important; /* 移动端显示 */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100; /* 高于侧边栏 */
+    position: fixed;
+    top: 20px;
+    left: 20px;
+  }
+
+  .hamburger-btn span {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  /* 汉堡按钮变形成“X”的动画 */
+  .hamburger-btn.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* 遮罩层样式 */
+  .menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4); /* 半透明黑色 */
+    z-index: 999; /* 在侧边栏下方，按钮上方 */
+  }
+  .menu-overlay.is-visible {
+    display: block !important;
+  }
+}
+
+/* ============================================================
+   4. 侧边栏组件内部样式 (通用)
+   ============================================================ */
 .sidebar-title {
-  font-size: 1em;
-  color: #333;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e67e22;
+  font-size: 1em; font-weight: bold; color: #333;
+  margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e67e22;
 }
 
-.sidebar-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+.sidebar-list { list-style: none; padding: 0; margin: 0; }
 
-.sidebar-item {
-  margin-bottom: 12px;
-}
+.sidebar-item { margin-bottom: 12px; }
 
 .sidebar-link {
-  text-decoration: none;
-  color: #666;
-  font-size: 0.95em;
-  transition: all 0.3s;
-  display: block;
+  text-decoration: none; color: #666; font-size: 0.95em;
+  transition: all 0.3s ease; display: block;
 }
 
-.sidebar-link.active {
-  color: #e67e22 !important;
-  font-weight: bold;
-  padding-left: 5px;
-}
+.sidebar-link.active { color: #e67e22 !important; font-weight: bold; padding-left: 5px; }
+.sidebar-link:hover { color: #e67e22; padding-left: 5px; }
 
-.sidebar-link:hover {
-  color: #e67e22;
-  padding-left: 5px;
+/* 折叠抽屉样式 */
+.sidebar-accordion { margin-bottom: 10px; background: #fcfcfc; border-radius: 4px; }
+.sidebar-sub-title {
+  font-size: 0.85em; color: #666; padding: 8px 12px; cursor: pointer;
+  list-style: none; display: flex; align-items: center; transition: background 0.2s;
 }
+.sidebar-sub-title::-webkit-details-marker { display: none; }
+.sidebar-sub-title::before {
+  content: '▶'; display: inline-block; margin-right: 6px; font-size: 0.7em; color: #e67e22; transition: transform 0.2s;
+}
+.sidebar-accordion[open] .sidebar-sub-title::before { transform: rotate(90deg); }
+.sidebar-sub-title:hover { background-color: #f4f4f4; }
 
-.project-header-text {
-  display: block;
-  color: #333;
-  font-weight: bold;
-}
-/* 便签卡片样式 - 底部独立脚注版 */
+/* 日志列表紧凑样式 */
+.sidebar-log-list { list-style: none; padding: 0 0 8px 25px; margin: 0; }
+.sidebar-log-list .sidebar-item { margin-bottom: 4px; }
+.sidebar-log-list .sidebar-link { font-size: 0.85em; }
+
+/* 便签样式 */
 .sidebar-notice-card {
-  margin-top: 40px;      /* 【关键】创造一段明显的间距，不贴着 Back to All Projects */
-  margin-left: 5px;      /* 微调左边距，对齐视觉中心 */
+  margin-top: 40px;
+  margin-left: 5px;
   padding: 12px 15px;
-  background-color: #f8f8f8; /* 极淡的底色 */
-  border-left: 2px solid #e67e22; /* 标志性的橙色装饰线 */
+  background-color: #fffaf0; /* 改成一种非常淡的、暖色的底色，代表“温暖的回忆” */
+  border-left: 2px solid #e67e22; 
   border-radius: 4px;
-  /* 使用非常轻微的阴影，让它看起来像是一个独立的脚注 */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+  box-shadow: 0 1px 3px rgba(230, 126, 34, 0.1); /* 给阴影加一点点主题色的微光 */
 }
 
-.notice-en {
-  font-size: 10px;
-  color: #999;           /* 英文颜色调浅，减少视觉压力 */
-  margin: 0 0 3px 0;
-  line-height: 1.2;
-  font-style: italic;
-}
-
-.notice-zh {
-  font-size: 11px;
-  color: #777;           /* 中文颜色稍深，保证可读性 */
-  margin: 0;
-  line-height: 1.4;
-}
-
-
+.notice-en { color: #999; margin: 0 0 3px 0; font-style: italic; }
+.notice-zh { color: #777; margin: 0; }
 </style>
