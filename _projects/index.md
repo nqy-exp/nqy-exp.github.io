@@ -182,6 +182,38 @@ permalink: /projects/
     font-weight: 600; 
     text-decoration: underline; 
 }
+
+/* =========================================
+   侧边栏/项目树 日期样式优化
+   ========================================= */
+
+/* 针对 Plan 的小日期 (紧跟在标题后面) */
+.plan-link .log-date-small {
+    font-size: 0.8em;
+    color: #aaa;           /* 淡淡的灰色，不抢主标题风头 */
+    margin-left: 8px;      /* 和文字保持一点间距 */
+    font-weight: normal;   /* 不要太粗 */
+}
+
+/* 针对 Log 的日期 (在行末对齐) */
+.log-item {
+    display: flex;         /* 使用 flex 让标题和日期分居两侧 */
+    justify-content: space-between; /* 一个靠左，一个靠右 */
+    align-items: center;
+    padding: 4px 0;
+}
+
+.log-item .log-date {
+    font-size: 0.85em;
+    color: #bbb;           /* 稍微浅一点的颜色 */
+    font-family: monospace; /* 使用等宽字体，日期看起来更整齐 */
+}
+
+/* 增加一下 hover 时的交互感 */
+.log-link:hover .log-date {
+    color: #e67e22 !important; /* 鼠标悬停时，日期也跟着变橙色 */
+}
+
 </style>
 
 <h1 class="page-title">Experimental Logs</h1>
@@ -200,16 +232,18 @@ permalink: /projects/
 
       {% assign all_items_in_this_project = site.projects | where: "project", proj_id %}
 
-      <!-- 2. 展示该项目下的所有 Plan (始终可见) -->
-      {% assign current_project_plans = all_items_in_this_project | where: "type", "plan" %}
+      <!-- 2. 展示该项目下的所有 Plan (按日期从早到晚排序) -->
+      {% assign current_project_plans = all_items_in_this_project | where: "type", "plan" | sort: "date" %}
       <div class="plan-list">
         {% for plan in current_project_plans %}
-          <a href="{{ plan.url }}" class="log-link plan-link">📖 {{ plan.title }}</a>
+          <a href="{{ plan.url }}" class="log-link plan-link">
+            📖 {{ plan.title }} <span class="log-date-small">{{ plan.date | date: "%Y-%m-%d" }}</span>
+          </a>
         {% endfor %}
       </div>
 
-      <!-- 3. 分组显示子项目日志 (使用折叠功能) -->
-      {% assign project_logs = all_items_in_this_project | where: "type", "log" %}
+      <!-- 3. 分组显示子项目日志 (使用折叠功能，并按日期排序) -->
+      {% assign project_logs = all_items_in_this_project | where: "type", "log" | sort: "date" %}
       {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
       <div class="sub-projects-wrapper">
@@ -220,12 +254,12 @@ permalink: /projects/
               <summary class="sub-project-title">
                 📁 {{ site.project_mapping[sub] | default: sub }}
               </summary>
-              
               <ul class="log-list">
                 {% for log in project_logs %}
                   {% if log.sub_project == sub %}
                     <li class="log-item">
                       <a href="{{ log.url }}" class="log-link">📄 {{ log.title }}</a>
+                      <!-- 这里显示子项目的日期 -->
                       <span class="log-date">{{ log.date | date: "%Y-%m-%d" }}</span>
                     </li>
                   {% endif %}
@@ -238,8 +272,6 @@ permalink: /projects/
     </div>
   {% endfor %}
 </div>
-
-
 
 <br>
 
