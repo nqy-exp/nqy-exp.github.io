@@ -1278,8 +1278,30 @@ margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e67e22;
 text-decoration: none; color: #666; font-size: 0.95em;
 transition: all 0.3s ease; display: block;
 }
-.sidebar-link.active { color: #e67e22 !important; font-weight: bold; padding-left: 5px; }
-.sidebar-link:hover { color: #e67e22; padding-left: 5px; }
+/* =========================================
+   侧边栏激活状态：深橙色 + 轻微背景反馈
+   ========================================= */
+
+/* 1. 处理链接文字颜色 (针对两种可能的 HTML 结构) */
+.sidebar-link.active, 
+.sidebar-link.active a {
+    color: #d35400 !important; /* 【核心】使用更深的橙色，更有分量感 */
+    font-weight: bold !important; /* 加粗显示 */
+    text-decoration: none !important;
+}
+
+/* 2. 处理选中的那一整行背景 (增加“选中感”) */
+.sidebar-link.active {
+    background-color: #fff5eb !important; /* 【新增】极其淡的橙色底，像被点亮了一样 */
+    border-radius: 4px;                    /* 让背景带一点圆角，看起来更精致 */
+    padding-left: 8px !important;          /* 微调内边距，配合加粗效果 */
+}
+
+/* 3. 悬停状态 (保持轻盈) */
+.sidebar-link:hover,
+.sidebar-link:hover a {
+    color: #e67e22 !important; /* 悬停时用回原来的亮橙色，形成“浅 $\rightarrow$ 深”的逻辑 */
+}
 
 
 /* 折叠抽屉 (Accordion) */
@@ -1347,3 +1369,34 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         width: 250px !important;
     }
 }
+
+
+
+
+/* =========================================
+   视觉润色：优雅的渐变分割线 (Elegant Gradient HR)
+   ========================================= */
+
+.post-content hr {
+    border: none;                /* 移除默认的灰色边框 */
+    height: 1px;                 /* 线条厚度 */
+    margin: 50px auto;           /* 上下留出足够的呼吸空间，且水平居中 */
+    width: 70%;                  /* 【关键】不要占满全宽，缩短一点会让它看起来更精致 */
+    
+    /* 渐变逻辑：左边透明 -> 中间橙色 -> 右边透明 */
+    background: linear-gradient(to right, 
+        rgba(230, 126, 34, 0) 0%, 
+        rgba(230, 126, 34, 0.8) 50%, 
+        rgba(230, 126, 34, 0) 100%
+    );
+}
+
+
+/* 如果你希望这条线是实心的橙色（不推荐，但如果你喜欢也可以） */
+/*
+.post-content hr {
+    border: none;
+    height: 1px;
+    background-color: #e67e22;
+}
+*/
