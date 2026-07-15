@@ -614,7 +614,7 @@ font-weight: bold;        /* 加粗，视觉重心在此 */
 
 /* --- 轻量级提示样式 --- */
 .tiny-disclaimer {
-margin: 0 0 20px 0; /* 确保与下方分割线有距离 */
+margin: 0 0 10px 0; /* 确保与下方分割线有距离 */
 padding: 4px 10px;
 display: flex;      /* 使用 flex 让图标和文字对齐 */
 align-items: center;
@@ -1406,7 +1406,7 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
    定制化分割线 (带不对称间距)
    ========================================= */
 
-/* --- 极简笔触风 (Minimalist) --- */
+/* ---极简笔触风 (Minimalist) --- */
 .stroke-divider {
     height: 2.5px;
     width: 100%;
