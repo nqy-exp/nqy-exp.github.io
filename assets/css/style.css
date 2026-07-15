@@ -152,6 +152,12 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
    解决汉堡包挤压标题导致的不对称问题
    ========================================= */
 @media (max-width: 768px) {
+
+  div[style*="padding: 20px"] {
+        /* 强制把顶部的 padding 归零，消除与 body padding 的叠加效应 */
+        padding-top: 0 !important; 
+  }
+  
          /* 1. 全局防抖与防溢出 (解决你说的左右晃动问题) */
     html, body {
         width: 100% !important;
