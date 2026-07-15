@@ -176,7 +176,7 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
 
     /* 让正文内容从 Header 下方开始，并留出呼吸感 (解决标题太近的问题) */
     body {
-        padding-top: 70px !important; /* 这里的 80px 决定了标题和 Header 的距离 */
+        padding-top: 66px !important; /* 这里的 80px 决定了标题和 Header 的距离 */
     }
 
     .hamburger-btn {
