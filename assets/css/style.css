@@ -152,35 +152,47 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
    解决汉堡包挤压标题导致的不对称问题
    ========================================= */
 @media (max-width: 768px) {
-     .my-custom-header {
-        position: fixed !important; /* 【关键】从 sticky 改为 fixed，彻底解决下滑消失问题 */
+         /* 1. 全局防抖与防溢出 (解决你说的左右晃动问题) */
+    html, body {
+        width: 100% !important;
+        overflow-x: hidden !important; 
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 2. Header 修复 (解决悬浮消失和标题居中) */
+    .my-custom-header {
+        position: fixed !important; /* 固定在顶端 */
         top: 0 !important;
         left: 0 !important;
-        width: 100% !important;     /* 确保撑满屏幕宽度 */
-        height: 60px;               /* 给一个明确的高度，方便下方计算 */
-        z-index: 3000 !important;   /* 确保它是全站最高层级 */
+        width: 100% !important;
+        height: 60px !important;
+        z-index: 3000 !important;
         display: flex !important;
         justify-content: center !important; /* 标题居中 */
         padding: 0 20px !important;
         box-sizing: border-box !important;
     }
 
-    /* 让汉堡包“脱离排队”，变成悬浮在左侧的图标 */
-    .hamburger-btn {
-        display: flex !important;
-        position: absolute !important; /* 【关键】不再参与 Flex 排队，宽度被忽略 */
-        left: 20px;            /* 固定距离左边 20px */
-        top: 50%;              /* 垂直居中 */
-        transform: translateY(-50%); /* 精准微调垂直位置 */
-        z-index: 3100 !important; /* 比 Header 还高，确保能点到 */
+    /* 让正文内容从 Header 下方开始，并留出呼吸感 (解决标题太近的问题) */
+    body {
+        padding-top: 80px !important; /* 这里的 80px 决定了标题和 Header 的距离 */
     }
 
-    /* 让标题容器占满全宽，从而实现真正的水平居中 */
+    .hamburger-btn {
+        display: flex !important;
+        position: absolute !important; 
+        left: 20px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 3100 !important;
+    }
+
     .header-left {
-        width: 100%;
-        margin: 0 !important;  /* 清除所有边距干扰 */
-        display: flex;
-        justify-content: center; /* 强制标题在 Header 正中间 */
+        width: 100% !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
     }
 
     /* 隐藏桌面端菜单 */
@@ -410,18 +422,18 @@ min-width: 0;        /* 防止长单词撑破布局 */
 /* 移动端响应式样式 (水平滚动模式) */
 /* ----------------------------------------- */
 @media (max-width: 768px) {
-/* 1. 容器层：由并排改为上下堆叠 */
-.layout-container_split {
-flex-direction: column !important;
-padding: 0 !important; /* 移除边距，让内容撑满屏幕 */
+  .layout-container_split {
+        flex-direction: column !important; /* 变纵向堆叠 */
+        padding: 0 !important;             /* 移除容器边距，防止撑开宽度 */
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
-
-/* 3. 主内容区：调整边距 */
-.main-content {
-padding: 20px !important;   /* 给正文留出呼吸感，不至于贴死边缘 */
-width: 100% !important;
-flex: none !important;
+    .main-content {
+        width: 100% !important;
+        flex: none !important;
+        padding: 20px !important;          /* 给正文留出呼吸感 */
+        box-sizing: border-box !important; /* 确保 padding 不会撑开宽度导致晃动 */
     }
 }
 
