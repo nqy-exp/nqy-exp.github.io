@@ -66,12 +66,18 @@ permalink: /projects/
 }
 
 .plan-link {
-    display: block;          /* 【核心修复】从 inline-block 改为 block，确保独占一行 */
-    font-weight: bold !important;
-    color: #e67e22 !important;
-    text-decoration: none;
-    padding: 5px 0;          /* 增加点击区域的上下高度 */
-    transition: all 0.3s ease; /* 增加平滑过渡动画 */
+    /* --- 你原来的视觉风格 --- */
+    font-weight: bold !important;       /* 加粗 */
+    color: #e67e22 !important;          /* 品牌橙色 */
+    text-decoration: none !important;   /* 去掉下划线 */
+    padding: 5px 0;                     /* 你设置的上下点击区域 */
+    transition: all 0.3s ease;          /* 平滑过渡动画 */
+
+    /* --- 新增的布局逻辑 (为了配合日期靠右) --- */
+    flex-grow: 1 !important;            /* 【关键】让链接占据所有剩余空间，从而把日期顶到右边 */
+    overflow: hidden !important;        /* 防止标题过长撑破页面 */
+    text-overflow: ellipsis !important; /* 超出部分显示省略号... */
+    white-space: nowrap !important;     /* 禁止文字换行 */
 }
 
 .plan-link:hover {
@@ -187,13 +193,34 @@ permalink: /projects/
    侧边栏/项目树 日期样式优化
    ========================================= */
 
-/* 针对 Plan 的小日期 (紧跟在标题后面) */
-.plan-link .log-date-small {
-    font-size: 0.8em;
-    color: #aaa;           /* 淡淡的灰色，不抢主标题风头 */
-    margin-left: 8px;      /* 和文字保持一点间距 */
-    font-weight: normal;   /* 不要太粗 */
+/* =========================================
+   Plan 列表样式优化 (实现日期右对齐)
+   ========================================= */
+
+/* 1. 包装层：负责实现两端对齐 */
+.plan-item {
+    display: flex !important;          /* 启用 Flex 布局 */
+    justify-content: space-between !important; /* 【核心】将标题推向左，日期推向右 */
+    align-items: center !important;    /* 垂直居中对齐 */
+    width: 100% !important;            /* 占满容器宽度 */
+    margin-bottom: 8px;                /* 每行之间的间距 */
 }
+
+/* 2. 标题链接样式 *见上/
+
+
+
+
+/* 3. 日期样式 (现在它不再是链接的一部分了) */
+.log-date-small {
+    flex-shrink: 0 !important;         /* 【关键】禁止日期被压缩，确保完整显示 */
+    margin-left: 12px !important;      /* 给标题和日期留点间距 */
+    font-size: 0.8em;
+    color: #aaa;                       /* 淡淡的灰色 */
+    font-weight: normal;
+    white-space: nowrap;               /* 禁止日期换行 */
+}
+
 
 /* 针对 Log 的日期 (在行末对齐) */
 .log-item {
@@ -233,14 +260,18 @@ permalink: /projects/
       {% assign all_items_in_this_project = site.projects | where: "project", proj_id %}
 
       <!-- 2. 展示该项目下的所有 Plan (按日期从早到晚排序) -->
-      {% assign current_project_plans = all_items_in_this_project | where: "type", "plan" | sort: "date" %}
-      <div class="plan-list">
-        {% for plan in current_project_plans %}
-          <a href="{{ plan.url }}" class="log-link plan-link">
-            📖 {{ plan.title }} <span class="log-date-small">{{ plan.date | date: "%Y-%m-%d" }}</span>
-          </a>
-        {% endfor %}
-      </div>
+<!-- 2. 展示该项目下的所有 Plan (始终可见) -->
+{% assign current_project_plans = all_items_in_this_project | where: "type", "plan" | sort: "date" %}
+<div class="plan-list">
+  {% for plan in current_project_plans %}
+    <!-- 【关键修改】：增加一个 plan-item 包装层，让链接和日期成为平级的兄弟 -->
+    <div class="plan-item">
+      <a href="{{ plan.url }}" class="plan-link">📖 {{ plan.title }}</a>
+      <span class="log-date-small">{{ plan.date | date: "%Y-%m-%d" }}</span>
+    </div>
+  {% endfor %}
+</div>
+
 
       <!-- 3. 分组显示子项目日志 (使用折叠功能，并按日期排序) -->
       {% assign project_logs = all_items_in_this_project | where: "type", "log" | sort: "date" %}
