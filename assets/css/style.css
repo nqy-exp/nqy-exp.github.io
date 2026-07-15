@@ -1379,7 +1379,7 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 
 .post-content hr {
     border: none;                /* 移除默认的灰色边框 */
-    height: 3px;                 /* 线条厚度 */
+    height: 1.5px;                 /* 线条厚度 */
     margin: 50px auto;           /* 上下留出足够的呼吸空间，且水平居中 */
     width: 80%;                  /* 【关键】不要占满全宽，缩短一点会让它看起来更精致 */
     
@@ -1401,16 +1401,27 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 */
 
-/* 极简笔触风格 */
+
+/* =========================================
+   定制化分割线 (带不对称间距)
+   ========================================= */
+
+/* --- 风格 A：极简笔触风 (Minimalist) --- */
 .stroke-divider {
-    height: 2px;               /* 线条厚度 */
-    width: 100%;               /* 宽度 */
-    margin: 40px 0;            /* 上下留白 */
+    height: 2px;
+    width: 100%;
+    /* 【关键修改】：上面留 20px，下面留 50px */
+    margin: 20px 0 50px 0 !important; 
     border: none;
-    /* 使用不对称渐变：从实色到透明，在 60% 的位置就完成消失，模拟“提笔”动作 */
-    background: linear-gradient(to right, 
-        rgba(230, 126, 34, 1) 0%, 
-        rgba(230, 126, 34, 0.5) 40%, 
-        rgba(230, 126, 34, 0) 70%
-    );
+    background: linear-gradient(to right, rgba(230, 126, 34, 1) 0%, rgba(230, 126, 34, 0) 70%);
+}
+
+/* --- 风格 B：艺术晕染风 (Artistic Smear) --- */
+.smear-divider {
+    height: 3px;
+    /* 【关键修改】：上面留 25px，下面留 60px */
+    margin: 25px 0 60px 0 !important; 
+    background-color: #e67e22;
+    -webkit-mask-image: linear-gradient(to right, black 0%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+    mask-image: linear-gradient(to right, black 0%, black 40%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
 }
