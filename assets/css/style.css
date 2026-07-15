@@ -1281,3 +1281,34 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 * {
     outline: 1px solid red !important;
 }
+/* =========================================
+   桌面端强制对称修复 (Desktop Symmetry Fix)
+   ========================================= */
+
+@media (min-width: 769px) {
+    /* 1. 确保整个容器是居中的，并且宽度受限 */
+    .layout-container_split {
+        display: flex !important;
+        flex-direction: row !important;
+        max-width: 1200px !important; /* 锁定最大宽度 */
+        margin-left: auto !important;  /* 强制居中 */
+        margin-right: auto !important; /* 强制居中 */
+        width: 100% !important;       /* 确保它占满可用空间但不超过限制 */
+        box-sizing: border-box !important;
+    }
+
+    /* 2. 确保主内容区不会被撑破，且左右间距对称 */
+    .main-content {
+        flex: 1 !important;
+        min-width: 0 !important;      /* 防止长单词撑开宽度 */
+        padding-left: 40px !important; /* 保持你原来的左侧边距 */
+        padding-right: 40px !important; /* 【新增】强制加上右侧边距，实现对称 */
+        box-sizing: border-box !important;
+    }
+
+    /* 3. 如果有侧边栏，确保它不会把内容挤向一边 */
+    .sidebar {
+        flex-shrink: 0 !important;
+        width: 250px !important;
+    }
+}
