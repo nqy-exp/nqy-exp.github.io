@@ -129,7 +129,20 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
 .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
+@media (min-width: 769px) {
+    /* 在桌面端，汉堡包完全不存在，不占任何空间 */
+    .hamburger-btn {
+        display: none !important;
+    }
 
+    /* 确保标题和导航在两端对齐 */
+    .header-left {
+        margin-right: auto; 
+    }
+    .desktop-nav {
+        margin-left: auto;
+    }
+}
 
 /* ============================================================
    响应式媒体查询 (针对手机/小屏幕)
@@ -139,42 +152,31 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
    解决汉堡包挤压标题导致的不对称问题
    ========================================= */
 @media (max-width: 768px) {
-  /*防御性设置：彻底解决左右晃动问题，作为最后一道防线 */
-    html, body {
-        overflow-x: hidden !important; /* 防止任何内容溢出导致左右滑动 */
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    } 
-  
-  .my-custom-header {
-        /* 1. 改为居中对齐，这样标题就会在屏幕正中间 */
+    .my-custom-header {
+        /* 强制让 Header 的内容居中，为标题腾出空间 */
         justify-content: center !important; 
         padding: 10px 20px;
-        position: relative; /* 为汉堡包提供定位基准 */
+        position: relative; /* 给绝对定位的汉堡包提供参考基准 */
     }
 
-    /* 2. 将汉堡包从布局流中“抽离” */
+    /* 让汉堡包“脱离排队”，变成悬浮在左侧的图标 */
     .hamburger-btn {
         display: flex !important;
-        /* 【核心修复】：不再参与 Flex 排队，改为绝对定位 */
-        position: absolute !important; 
-        left: 20px;            /* 固定在距离左边 20px 的位置 */
+        position: absolute !important; /* 【关键】不再参与 Flex 排队，宽度被忽略 */
+        left: 20px;            /* 固定距离左边 20px */
         top: 50%;              /* 垂直居中 */
-        transform: translateY(-50%); /* 精准垂直居中修正 */
-        z-index: 3100 !important; /* 确保它依然在最顶层 */
+        transform: translateY(-50%); /* 精准微调垂直位置 */
     }
 
-    /* 3. 确保标题完全居中，不再受 margin-right 的影响 */
+    /* 让标题容器占满全宽，从而实现真正的水平居中 */
     .header-left {
-        margin-right: 0 !important;
-        margin-left: 0 !important;
+        width: 100%;
+        margin: 0 !important;  /* 清除所有边距干扰 */
         display: flex;
-        justify-content: center;
-        width: 100%; /* 让容器占满全宽，以便内部标题居中 */
+        justify-content: center; /* 强制标题在 Header 正中间 */
     }
 
-    /* 4. 隐藏桌面端菜单 */
+    /* 隐藏桌面端菜单 */
     .desktop-nav {
         display: none !important;
     }
