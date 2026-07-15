@@ -157,7 +157,7 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
         /* 强制把顶部的 padding 归零，消除与 body padding 的叠加效应 */
         padding-top: 0 !important; 
   }
-  
+
          /* 1. 全局防抖与防溢出 (解决你说的左右晃动问题) */
     html, body {
         width: 100% !important;
@@ -182,7 +182,7 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
 
     /* 让正文内容从 Header 下方开始，并留出呼吸感 (解决标题太近的问题) */
     body {
-        padding-top: 70px !important; /* 这里 决定了标题和 Header 的距离 */
+        padding-top: 66px !important; /* 这里 决定了标题和 Header 的距离 */
     }
 
     .hero-container {
