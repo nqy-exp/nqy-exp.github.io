@@ -73,11 +73,10 @@ permalink: /projects/
     padding: 5px 0;                     /* 你设置的上下点击区域 */
     transition: all 0.3s ease;          /* 平滑过渡动画 */
 
-    /* --- 新增的布局逻辑 (为了配合日期靠右) --- */
-    flex-grow: 1 !important;            /* 【关键】让链接占据所有剩余空间，从而把日期顶到右边 */
-    overflow: hidden !important;        /* 防止标题过长撑破页面 */
-    text-overflow: ellipsis !important; /* 超出部分显示省略号... */
-    white-space: nowrap !important;     /* 禁止文字换行 */
+      /* --- 允许换行的布局逻辑 --- */
+    flex-grow: 1 !important;            /* 让链接占据除了日期之外的所有空间 */
+    white-space: normal !important;     /* 【核心修改】：允许文字自动换行 */
+    word-break: break-word !important;  /* 防止超长单词撑破布局 */
 }
 
 .plan-link:hover {
@@ -199,11 +198,11 @@ permalink: /projects/
 
 /* 1. 包装层：负责实现两端对齐 */
 .plan-item {
-    display: flex !important;          /* 启用 Flex 布局 */
-    justify-content: space-between !important; /* 【核心】将标题推向左，日期推向右 */
-    align-items: center !important;    /* 垂直居中对齐 */
-    width: 100% !important;            /* 占满容器宽度 */
-    margin-bottom: 8px;                /* 每行之间的间距 */
+    display: flex !important;           /* 启用 Flex 布局 */
+    justify-content: space-between !important; /* 核心：将标题推向左，日期推向右 */
+    align-items: flex-start !important; /* 【关键修改】：从 center 改为 flex-start。这样如果标题换行了，日期会对齐在第一行的位置，而不是跑到中间去 */
+    width: 100% !important;             /* 占满容器宽度 */
+    margin-bottom: 4px;                 /* 每个 Plan 之间的间距 */
 }
 
 /* 2. 标题链接样式 *见上/
