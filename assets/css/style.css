@@ -6,7 +6,15 @@ margin: 0 !important;
 padding: 0 !important;
 background-color: #ffffff; /* 默认白色背景 */
 }
-
+/* 只在手机端生效，解决左右晃动问题 */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden; /* 强制切断任何超出屏幕边缘的内容，不让它产生滚动条 */
+    }
+    html {
+        overflow-x: hidden; /* 双重保险 */
+    }
+}
 
 
 /*/* =========================================
@@ -1049,7 +1057,6 @@ transition: transform 0.3s ease;
 @media (min-width: 769px) {
 /* 这里的选择器必须覆盖到你 HTML 里所有的移动端专用 class */
 .hamburger-btn, 
-.menu-overlay, 
 .mobile-only-nav, 
 .sidebar-global-nav, /* 增加这一行，确保全局导航在桌面端也被藏起来 */
 .quick-links-list,   /* 增加这一行，防止 header 里的快速链接乱跳 */
@@ -1121,24 +1128,6 @@ background-color: #ffffff !important;
 overflow-y: auto;
     }
 
-
-/* 【核心修复】：遮罩层 (放在侧边栏之下，但按钮之上) */
-.menu-overlay {
-display: block !important;
-position: fixed;
-top: 0; left: 0;
-width: 100vw; height: 100vh;
-background: rgba(0, 0, 0, 0.4) !important; /* 变暗背景 */
-z-index: 1500 !important; /* 在侧边栏 (2000) 之下，但在汉堡按钮 (3000) 之下 */
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.3s ease;
-    }
-
-.menu-overlay.is-visible {
-opacity: 1;
-pointer-events: auto; /* 点击阴影关闭菜单 */
-    }
 
 
 /* 强制显示移动端专属元素 */
