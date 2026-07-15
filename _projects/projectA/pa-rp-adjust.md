@@ -1,6 +1,6 @@
 ---
 layout: projects-layout
-title: Research Plan Modifications and Adjustments｜研究计划修正与调整
+title: Research Plan Adjustments｜研究计划调整
 project: projecta
 type: plan
 date: 2026-07-14
