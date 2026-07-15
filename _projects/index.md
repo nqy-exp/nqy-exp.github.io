@@ -61,7 +61,7 @@ permalink: /projects/
 .plan-list {
     display: flex;           /* 使用 Flex 布局 */
     flex-direction: column;  /* 【核心修复】强制子元素垂直排列 */
-    gap: 10px;               /* 【核心修复】设置 Plan 之间的间距 */
+    gap: 4px;               /* 【核心修复】设置 Plan 之间的间距 */
     margin-bottom: 25px;     /* 与下方折叠部分的间距 */
 }
 
@@ -202,7 +202,7 @@ permalink: /projects/
     justify-content: space-between !important; /* 核心：将标题推向左，日期推向右 */
     align-items: flex-start !important; /* 【关键修改】：从 center 改为 flex-start。这样如果标题换行了，日期会对齐在第一行的位置，而不是跑到中间去 */
     width: 100% !important;             /* 占满容器宽度 */
-    margin-bottom: 4px;                 /* 每个 Plan 之间的间距 */
+    margin-bottom: 1px;                 /* 每个 Plan 之间的间距 */
 }
 
 /* 2. 标题链接样式 *见上/
