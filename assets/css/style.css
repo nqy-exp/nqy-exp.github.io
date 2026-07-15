@@ -6,15 +6,6 @@ margin: 0 !important;
 padding: 0 !important;
 background-color: #ffffff; /* 默认白色背景 */
 }
-/* 只在手机端生效，解决左右晃动问题 */
-@media (max-width: 768px) {
-    body {
-        overflow-x: hidden; /* 强制切断任何超出屏幕边缘的内容，不让它产生滚动条 */
-    }
-    html {
-        overflow-x: hidden; /* 双重保险 */
-    }
-}
 
 
 /*/* =========================================
@@ -143,29 +134,52 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
 /* ============================================================
    响应式媒体查询 (针对手机/小屏幕)
    ============================================================ */
+/* =========================================
+   修正后的移动端 Header 布局
+   解决汉堡包挤压标题导致的不对称问题
+   ========================================= */
 @media (max-width: 768px) {
-.my-custom-header {
-padding: 10px 20px; /* 移动端更紧凑的 Padding */
+  /*防御性设置：彻底解决左右晃动问题，作为最后一道防线 */
+    html, body {
+        overflow-x: hidden !important; /* 防止任何内容溢出导致左右滑动 */
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    } 
+  
+  .my-custom-header {
+        /* 1. 改为居中对齐，这样标题就会在屏幕正中间 */
+        justify-content: center !important; 
+        padding: 10px 20px;
+        position: relative; /* 为汉堡包提供定位基准 */
     }
 
-
-/* 在移动端隐藏桌面端的横向菜单 */
-.desktop-nav {
-display: none !important;
+    /* 2. 将汉堡包从布局流中“抽离” */
+    .hamburger-btn {
+        display: flex !important;
+        /* 【核心修复】：不再参与 Flex 排队，改为绝对定位 */
+        position: absolute !important; 
+        left: 20px;            /* 固定在距离左边 20px 的位置 */
+        top: 50%;              /* 垂直居中 */
+        transform: translateY(-50%); /* 精准垂直居中修正 */
+        z-index: 3100 !important; /* 确保它依然在最顶层 */
     }
 
-
-/* 在移动端显示汉堡按钮 */
-.hamburger-btn {
-display: flex !important; /* 强制显示 */
+    /* 3. 确保标题完全居中，不再受 margin-right 的影响 */
+    .header-left {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        display: flex;
+        justify-content: center;
+        width: 100%; /* 让容器占满全宽，以便内部标题居中 */
     }
 
-
-/* 确保移动端标题也靠左，不居中 */
-.header-left {
-margin-right: 0; 
+    /* 4. 隐藏桌面端菜单 */
+    .desktop-nav {
+        display: none !important;
     }
 }
+
 
 
 /* =========================================
