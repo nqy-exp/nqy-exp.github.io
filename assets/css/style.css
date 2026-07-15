@@ -1379,9 +1379,9 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 
 .post-content hr {
     border: none;                /* 移除默认的灰色边框 */
-    height: 1px;                 /* 线条厚度 */
+    height: 3px;                 /* 线条厚度 */
     margin: 50px auto;           /* 上下留出足够的呼吸空间，且水平居中 */
-    width: 70%;                  /* 【关键】不要占满全宽，缩短一点会让它看起来更精致 */
+    width: 80%;                  /* 【关键】不要占满全宽，缩短一点会让它看起来更精致 */
     
     /* 渐变逻辑：左边透明 -> 中间橙色 -> 右边透明 */
     background: linear-gradient(to right, 
@@ -1400,3 +1400,17 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     background-color: #e67e22;
 }
 */
+
+/* 极简笔触风格 */
+.stroke-divider {
+    height: 2px;               /* 线条厚度 */
+    width: 100%;               /* 宽度 */
+    margin: 40px 0;            /* 上下留白 */
+    border: none;
+    /* 使用不对称渐变：从实色到透明，在 60% 的位置就完成消失，模拟“提笔”动作 */
+    background: linear-gradient(to right, 
+        rgba(230, 126, 34, 1) 0%, 
+        rgba(230, 126, 34, 0.5) 40%, 
+        rgba(230, 126, 34, 0) 70%
+    );
+}
