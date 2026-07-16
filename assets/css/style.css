@@ -1415,3 +1415,20 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     border: none;
     background: linear-gradient(to right, rgba(230, 126, 34, 1) 0%, rgba(230, 126, 34, 0) 70%);
 }
+
+/* =========================================
+   轻量化分割符 (Half-Width Fade Divider)
+   用于在文章或列表中进行极简的视觉分隔
+   ========================================= */
+
+.light-divider {
+    /* 基础结构 */
+    height: 1px;                /* 线条极细 */
+    width: 50%;                 /* 【核心】只占一半宽度 */
+    margin:30px 0 20px 0;   /* 左边距为0，右边留白 */
+    border: none;               /* 移除默认边框 */
+
+    /* 【核心】渐变效果：从浅灰色到完全透明 */
+    /* 使用 rgba(0,0,0,0.1) 这种极淡的颜色，看起来非常高级 */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+}

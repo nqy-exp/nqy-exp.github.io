@@ -9,6 +9,8 @@ description:
 
 <em><strong>This page serves as a long-term revision log for this research plan. Should any omissions or directional deviations be identified in the experimental plan, they will all be documented here, including timestamps, adjusted content, and related reflections.</strong></em>
 
+<div class="light-divider"></div>
+
 July 14, 2026
 
 In the research plan published yesterday( *July 13, 2026* ), the experimental focus of the phase 3 was the microscopic observation of fibers immersed in various daily chemical media. However, after reviewing the initial plan, I realized that: although microscopic observation of fibers is of great value for clarifying the impact of daily chemical media on fiber structure and expanding the diversity of the AI training database, if used as a rapid identification method in a household environment, its operational dimension deviates somewhat from the core goals of "low cost and ease of operation." This was my oversight.
@@ -27,11 +29,20 @@ In addition to observing the morphological changes of the whole sample, fluoresc
 
 When necessary, a "rinsing with clean water" step will be added to better observe the impact of daily chemical media on morphology.
 
+<div class="light-divider"></div>
 
+July 16, 2026
+
+Inspired by the concept of "pre-treatment"<sup class="reference">*</sup> in textile dyeing and finishing processes, this study intends to introduce a multi-stage composite experimental mode, expanding upon the original experimental design of Phase 3. Rather than being limited to the direct effect of a single medium, the research will explore the synergistic reaction patterns between a "pre-treatment agent (such as surfactants—laundry detergent or dish soap) and a target detection medium." Considering that the pre-treatment media themselves may impact fiber morphology, the specific experimental procedures will be dynamically adjusted based on the state of the fibers following the pre-treatment stage.
+
+
+>\* Liu, S., & Yang, B. L. (Eds.). (2017). _Introduction to textile dyeing and finishing_ (3rd ed.) （*Fangzhi ran gailun*）. China Textile & Apparel Press. ISBN: 978-7-5180-3285-3
 
 ---
 
 <em><strong>本页面将作为本研究计划的长期修订日志。未来若发现实验计划存在疏漏或方向偏差，均将在此统一记录修正时间、调整内容及相关思考。</strong></em>
+
+<div class="light-divider"></div>
 
 2026-07-14
 
@@ -52,3 +63,8 @@ When necessary, a "rinsing with clean water" step will be added to better observ
  在必要时，增加“清水冲洗”步骤，以便更好的观察日常化学介质对于形态的影响。
 
 
+<div class="light-divider"></div>
+
+2026-07-16
+
+在阅读书籍时，受纺织染整工艺中“前处理”<sup class="reference">*</sup>的启发，拟在第三阶段原本的实验之外，再引入多级复合实验模式。不再局限于单一介质的直接作用，而是探索“预处理剂（如表面活性剂——洗衣液或者洗碗液）+ 目标检测介质”的协同反应规律。考虑到预处理的介质本身会对纤维形态产生影响，具体的实验步骤将根据预处理后的纤维状态进行动态调整。
