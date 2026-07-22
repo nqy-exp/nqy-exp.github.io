@@ -73,7 +73,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">Opportunities</h3>
       <p class="opportunity-text">
-      I am currently seeking opportunities in academic research (PhD positions) and R&D roles related to nanomaterials, nanocomposites, and advanced materials applications. My research interests include nanoparticle-based materials, experimental characterization, structure–property relationships, and understanding how material design influences practical performance. If you feel my capabilities or research interests align with your team, please feel free to reach out at any time.<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
+      I am currently seeking opportunities in academic research (PhD positions) and R&D roles related to nanomaterials, nanocomposites, and advanced materials applications. My research interests include nanomaterial-based material modification, materials characterization, and understanding how material modifications influence properties and performance. If you feel my capabilities or research interests align with your team, please feel free to reach out at any time.<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
 
       </p>
 
@@ -151,7 +151,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
 
       <h3 class="section-sub-title">关于机会</h3>
       <p class="opportunity-text">
-       我目前正在寻找纳米材料、纳米复合材料及先进材料应用方向的学术研究（博士岗位）和研发领域的职业发展机会。我的研究兴趣包括基于纳米颗粒的材料体系、实验表征、结构-性能关系，以及探索材料设计如何影响实际性能。如果你认为我的个人能力或研究兴趣与你的团队方向契合，非常欢迎随时联系。<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
+       我目前正在寻找纳米材料、纳米复合材料及先进材料应用方向的学术研究（博士岗位）和研发领域的职业发展机会。我的研究兴趣包括基于纳米材料的材料改性、材料表征，以及理解材料改性如何影响材料性质和性能。如果你认为我的个人能力或研究兴趣与你的团队方向契合，非常欢迎随时联系。<a href="mailto:nqy.pro@outlook.com" class="tiny-email-icon">✉️</a>
 
       </p>
 

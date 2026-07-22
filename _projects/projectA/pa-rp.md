@@ -48,7 +48,7 @@ First, the collection of microscopic images of pure fibers will be conducted, fo
 
 **Phase 2: Introducing computer vision technology for auxiliary identification (exploratory phase)**
 
-To improve identification efficiency, this study intends to attempt the introduction of computer vision (CV) technology for auxiliary judgment. In the studies by L. Deng<sup class="reference">[7]</sup> and C. Zhong<sup class="reference">[8]</sup>, it can be seen that using artificial intelligence (AI) technology to assist in fiber identification can achieve an accuracy of over 85%. Due to current limitations in the completeness of literature access and computing resources, this phase will take "feasibility exploration" as its main goal, attempting to improve the precision and efficiency of identification through computer vision methods.
+To improve identification efficiency, this study intends to attempt the introduction of computer vision (CV) technology for auxiliary judgment. In the studies by Zhong, C.<sup class="reference">[7]</sup> and C. Zhong<sup class="reference">[8]</sup>, it can be seen that using artificial intelligence (AI) technology to assist in fiber identification can achieve an accuracy of over 85%. Due to current limitations in the completeness of literature access and computing resources, this phase will take "feasibility exploration" as its main goal, attempting to improve the precision and efficiency of identification through computer vision methods.
 
 **Phase 3: Experimental validation and protocol establishment**
 
@@ -196,7 +196,7 @@ As well as the challenges and technical bottlenecks to be addressed during the r
 >4. Ali, Z., Talpur, F. N., Afridi, H. I., Ahmed, F., Brohi, N. A., & Abbasi, H. (2025). Analytical approaches and advancement in the analysis of natural and synthetic fiber: A comprehensive review. Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy, 326, 125164. [https://doi.org/10.1016/j.saa.2024.125164](https://doi.org/10.1016/j.saa.2024.125164)
 >5. Tsai, P.-F., & Yuan, S.-M. (2025). Using Infrared Raman Spectroscopy with Machine Learning and Deep Learning as an Automatic Textile-Sorting Technology for Waste Textiles. Sensors, 25(1), 57. [https://doi.org/10.3390/s25010057](https://doi.org/10.3390/s25010057)
 >6. Peets, P., Leito, I., Pelt, J., & Vahur, S. (2017). Identification and classification of textile fibres using ATR-FT-IR spectroscopy with chemometric methods. Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy, 173, 175–181. [https://doi.org/10.1016/j.saa.2016.09.007](https://doi.org/10.1016/j.saa.2016.09.007)
->7. Lequan Deng, Kang Zhang, Dong Shi, Shengfu Liu, Deqin Xu, Yongliang Shao, Jianxing Shen, Yongzhong Wu, Xiaopeng Hao, Rational design of Schottky heterojunction with modulating surface electron density for high-performance overall water splitting, Applied Catalysis B: Environmental, Volume 299, 2021, 120660, ISSN 0926-3373, [https://doi.org/10.1016/j.apcatb.2021.120660](https://doi.org/10.1016/j.apcatb.2021.120660).
+>7. Zhong, C., Ma, G., & Feng, X. (2022). Automatic classification of textile fibers and content detection based on image processing. In 2022 14th International Conference on Signal Processing Systems (ICSPS) (pp. 444–448). IEEE. [https://doi.org/10.1109/ICSPS58776.2022.00082](https://doi.org/10.1109/ICSPS58776.2022.00082)
 >8. Zhong, C., Ma, G., & Feng, X. (2022). Automatic classification of textile fibers and content detection based on image processing. In 2022 14th International Conference on Signal Processing Systems (ICSPS) (pp. 444-448). IEEE. [https://doi.org/10.1109/ICSPS58776.2022.00082](https://doi.org/10.1109/ICSPS58776.2022.00082)
 >9. Zapata, F., Ortega-Ojeda, F. E., & García-Ruiz, C. (2022). Forensic examination of textile fibres using Raman imaging and multivariate analysis. Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy, 268, 120695. [https://doi.org/10.1016/j.saa.2021.120695](https://doi.org/10.1016/j.saa.2021.120695)
 >10. Schotman, T. G., Xu, X., Rodewijk, N., & van der Weerd, J. (2017). Application of dye analysis in forensic fibre and textile examination: Case examples. Forensic Science International, 278, 338–350. [https://doi.org/10.1016/j.forsciint.2017.07.026](https://doi.org/10.1016/j.forsciint.2017.07.026)
@@ -244,7 +244,7 @@ As well as the challenges and technical bottlenecks to be addressed during the r
 
 **第二阶段：引入计算机视觉技术进行辅助识别（探索性阶段）**
 
-为了提高鉴别的效率，本研究拟尝试引入计算机视觉 (CV) 技术进行辅助判断。在L. Deng<sup class="reference">[7]</sup>以及C.Zhong<sup class="reference">[8]</sup>的研究中可以看到，利用人工智能（AI）技术辅助进行纤维辨别的准确率可达到 85% 以上。由于目前受限于文献获取的完整度以及计算资源的限制，本阶段将以“可行性探索”为主要目标，尝试通过计算机视觉手段提升识别的精确程度以及效率。
+为了提高鉴别的效率，本研究拟尝试引入计算机视觉 (CV) 技术进行辅助判断。在Zhong, C.<sup class="reference">[7]</sup>以及C.Zhong<sup class="reference">[8]</sup>的研究中可以看到，利用人工智能（AI）技术辅助进行纤维辨别的准确率可达到 85% 以上。由于目前受限于文献获取的完整度以及计算资源的限制，本阶段将以“可行性探索”为主要目标，尝试通过计算机视觉手段提升识别的精确程度以及效率。
 
 **第三阶段：实验验证与方案建立**
 
