@@ -276,14 +276,11 @@ permalink: /projects/
       {% assign project_logs = all_items_in_this_project | where: "type", "log" | sort: "date" %}
       {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
-      <div class="sub-projects-wrapper">
-       {% comment %} 定义一个计数器 {% endcomment %}
-        {% assign sub_count = 0 %}
-       
+      <div class="sub-projects-wrapper">   
         {% for sub in sub_ids %}
           {% if sub != nil and sub != "" %}
             <!-- 【关键点】：使用 details 实现折叠 -->
-            <details class="sub-project-accordion"{% if sub_count == 1 %}open{% endif %}>
+            <details class="sub-project-accordion"{% if first_valid_sub == nil %}open{% endif %}>
               <summary class="sub-project-title">
                 📁 {{ site.project_mapping[sub] | default: sub }}
               </summary>
