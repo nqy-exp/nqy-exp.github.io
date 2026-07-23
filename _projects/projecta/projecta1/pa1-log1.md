@@ -104,7 +104,7 @@ After extracting the fibers using tweezers, longitudinal and cross-sectional ope
 - Microscopic Images
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/T001.jpg" alt="Figure 3: T001 microscopic images" style="max-width: 600px; height: auto; border-radius: 4px;">
+  <img src="/images/T001.jpg" alt="Figure 3: T001 microscopic images" style="max-width: 800px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 3: T001 microscopic images
   </figcaption>
@@ -159,7 +159,7 @@ Since the fibers in both the first (CZ-01, 02) and second (CZ-03, 04) cross-sect
 - Longitudinal Structure
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/T002-L.jpg" alt="Figure 5: T002 longitudinal structures" style="max-width: 600px; height: auto; border-radius: 4px;">
+  <img src="/images/T002-L.jpg" alt="Figure 5: T002 longitudinal structures" style="max-width: 800px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 5: T002 longitudinal structures
   </figcaption>
@@ -174,7 +174,7 @@ It can be observed that the longitudinal structures in these images clearly show
 - Cross-section
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/T002-C.jpg" alt="Figure 6: T002 cross-sections" style="max-width: 600px; height: auto; border-radius: 4px;">
+  <img src="/images/T002-C.jpg" alt="Figure 6: T002 cross-sections" style="max-width: 800px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 6: T002 cross-sections
   </figcaption>
