@@ -65,7 +65,7 @@ I want to thank my family. During my job searching, they encouraged me to pursue
       </div>
 
       <div class="engagement-item">
-        <a href="https://github.com/nqy-exp/nqy-exp.github.io" class="engagement-link">
+        <a href="https://github.com/nqy-exp/nqy-exp.github.io" target="_blank" rel="noopener noreferrer" class="engagement-link">
           <span class="icon">💻</span> GitHub Repository
         </a>
         <p class="item-desc">Interested in how this site was built? Feel free to check out the source code.</p>
@@ -143,11 +143,12 @@ I want to thank my family. During my job searching, they encouraged me to pursue
       </div>
 
       <div class="engagement-item">
-        <a href="https://github.com/nqy-exp/nqy-exp.github.io" class="engagement-link">
-          <span class="icon">💻</span> GitHub 仓库
-        </a>
-        <p class="item-desc">对本站的构建过程感兴趣吗？欢迎查看源代码。</p>
-      </div>
+  <a href="https://github.com/nqy-exp/nqy-exp.github.io" target="_blank" rel="noopener noreferrer" class="engagement-link">
+    <span class="icon">💻</span> GitHub 仓库
+  </a>
+  <p class="item-desc">对本站的构建过程感兴趣吗？欢迎查看源代码。</p>
+</div>
+
 
       <h3 class="section-sub-title">关于机会</h3>
       <p class="opportunity-text">

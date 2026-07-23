@@ -1432,3 +1432,17 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     /* 使用 rgba(0,0,0,0.1) 这种极淡的颜色，看起来非常高级 */
     background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
 }
+
+/* 定义链接的基础样式 */
+.exp-link {
+  color: #e67e22;            /* 你选定的橙色 */
+  text-decoration: none;     /* 坚决不使用下划线 */
+  display: inline-block;     /* 【关键】必须设置为 inline-block，scale 缩放效果才会生效 */
+  transition: transform 0.3s ease, color 0.3s ease; /* 让放大和颜色变化都平滑过渡 */
+}
+
+/* 定义悬停时的“突显”效果 */
+.exp-link:hover {
+  color: #d35400;            /* 悬停时颜色稍微加深，增加视觉反馈 */
+  transform: scale(1.05);    /* 核心：轻微放大 5%。这个比例最自然，不会显得突兀 */
+}
