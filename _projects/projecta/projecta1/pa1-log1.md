@@ -104,7 +104,7 @@ After extracting the fibers using tweezers, longitudinal and cross-sectional ope
 - Microscopic Images
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/T001.jpg" alt="Figure 3: T001 microscopic images" style="max-width: 400px; height: auto; border-radius: 4px;">
+  <img src="/images/T001.jpg" alt="Figure 3: T001 microscopic images" style="max-width: 600px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 3: T001 microscopic images
   </figcaption>
@@ -159,7 +159,7 @@ Since the fibers in both the first (CZ-01, 02) and second (CZ-03, 04) cross-sect
 - Longitudinal Structure
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/T002-L.jpg" alt="Figure 5: T002 longitudinal structures" style="max-width: 400px; height: auto; border-radius: 4px;">
+  <img src="/images/T002-L.jpg" alt="Figure 5: T002 longitudinal structures" style="max-width: 600px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 5: T002 longitudinal structures
   </figcaption>
@@ -174,7 +174,7 @@ It can be observed that the longitudinal structures in these images clearly show
 - Cross-section
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/T002-C.jpg" alt="Figure 6: T002 cross-sections" style="max-width: 400px; height: auto; border-radius: 4px;">
+  <img src="/images/T002-C.jpg" alt="Figure 6: T002 cross-sections" style="max-width: 600px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 6: T002 cross-sections
   </figcaption>
@@ -188,7 +188,7 @@ In images T002-CZ-03 and 04, oblique cut marks on the cotton fibers are clearly 
 Considering that nail base coat is designed primarily to increase toughness, it may lead to high cutting resistance and poor slicing efficiency, whereas nail top coat focuses more on solidification. Therefore, a trial using nail top coat for embedding and solidification was conducted.
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/T002-C-10x.jpg" alt="Figure 7: Cotton fiber cross-section solidified with nail top coat. Objective 10x" style="max-width: 400px; height: auto; border-radius: 4px;">
+  <img src="/images/T002-C-10x.jpg" alt="Figure 7: Cotton fiber cross-section solidified with nail top coat. Objective 10x" style="max-width: 500px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 7: Cotton fiber cross-section solidified with nail top coat. Objective 10x
   </figcaption>
