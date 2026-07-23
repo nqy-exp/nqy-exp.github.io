@@ -58,18 +58,18 @@ Due to storage issues (lack of constant temperature and humidity), the nail base
 
 In the research plan, a desk lamp is used as the light source with a maximum illuminance of 1250 lux. 
 
-However, in practice, this intensity is too high; even with filters placed in the microscope and the aperture adjusted to its minimum, careful visual observation remains difficult, and frequent overexposure occurs during imaging. 
+However, in practice, this intensity is too high; even with filters placed in the microscope and the aperture adjusted to its minimum, careful visual observation remains difficult, and frequent overexposure occurs during imaging. <br>
 Therefore, the brightness was adjusted to approximately 600 lux (measured via the Photone app) and will be further adjusted as needed based on actual imaging requirements.
 
 - Imaging Issues
 
 Mobile imaging was the **primary challenge** in this experiment. 
 
-Due to the overly intelligent features of the smartphone camera (the native iOS Camera app), which automatically adjust macro mode, night mode, and exposure, frequent defocusing and blackouts occurred during observation and imaging.
+Due to the overly intelligent features of the smartphone camera (the native iOS Camera app), which automatically adjust macro mode, night mode, and exposure, frequent defocusing and blackouts occurred during observation and imaging.<br>
 Countermeasures: In Settings > Camera > Preserve Settings, enable Macro Control, Night Mode, and Exposure Adjustment. 
 
-Before imaging, turn off Night Mode, tap 0.5x to enter the wide-angle lens mode (which automatically triggers macro mode), and long-press the eyepiece view in the frame to activate the Auto-Exposure/Auto-Focus (AE/AF) lock. Once the imaging environment is stabilized, gradually zoom from 1.0x to 2.0x. If defocusing persists, repeat the process by returning to 0.5x. 
-During the coarse focusing stage, defocusing occurs easily; therefore, coarse focusing should be performed in the 0.5x wide-angle mode. Once a blurry outline is identified, switch to 2.0x for fine focusing. 
+Before imaging, turn off Night Mode, tap 0.5x to enter the wide-angle lens mode (which automatically triggers macro mode), and long-press the eyepiece view in the frame to activate the Auto-Exposure/Auto-Focus (AE/AF) lock. Once the imaging environment is stabilized, gradually zoom from 1.0x to 2.0x. If defocusing persists, repeat the process by returning to 0.5x. <br>
+During the coarse focusing stage, defocusing occurs easily; therefore, coarse focusing should be performed in the 0.5x wide-angle mode. Once a blurry outline is identified, switch to 2.0x for fine focusing. <br>
 *A magnification of 2.0x is most suitable for imaging, as the eyepiece field of view fills the entire screen.*
 
 - Optical Aberration Issues 
