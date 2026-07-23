@@ -277,10 +277,13 @@ permalink: /projects/
       {% assign sub_ids = project_logs | map: "sub_project" | uniq %}
 
       <div class="sub-projects-wrapper">
+       {% comment %} 定义一个计数器 {% endcomment %}
+        {% assign sub_count = 0 %}
+       
         {% for sub in sub_ids %}
           {% if sub != nil and sub != "" %}
             <!-- 【关键点】：使用 details 实现折叠 -->
-            <details class="sub-project-accordion">
+            <details class="sub-project-accordion"{% if sub_count == 1 %}open{% endif %}>
               <summary class="sub-project-title">
                 📁 {{ site.project_mapping[sub] | default: sub }}
               </summary>
