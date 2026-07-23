@@ -279,8 +279,9 @@ permalink: /projects/
       <div class="sub-projects-wrapper">   
         {% for sub in sub_ids %}
           {% if sub != nil and sub != "" %}
+
             <!-- 【关键点】：使用 details 实现折叠 -->
-            <details class="sub-project-accordion"{% if first_valid_sub == nil %}open{% endif %}>
+      <details class="sub-project-accordion" {% if first_valid_sub == nil %}open{% endif %}>
               <summary class="sub-project-title">
                 📁 {{ site.project_mapping[sub] | default: sub }}
               </summary>
