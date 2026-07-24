@@ -50,7 +50,7 @@ After refining my thoughts, I realized that the current title overemphasizes opt
 <br><br>
 The ultimate goal of the exploratory research is to find a characterization method that does not require a microscope, but instead allows for direct observation after adding common household liquids/media, or at most only requires the assistance of a low-cost Wood's lamp, obtaining results through cross-comparison.
 <br><br>
-Furthermore, I want to clarify the core significance of **Phase II (AI assistance)**: if rapid and accurate judgment can be achieved through AI training, it will significantly expand the range of testable fabrics in Phase III. Conversely, should Phase II fail, the research scope would be limited to testing known materials, thereby restricting the breadth of the study.
+Furthermore, I want to clarify the core significance of <strong>>Phase 2 (AI assistance)</strong>: if rapid and accurate judgment can be achieved through AI training, it will significantly expand the range of testable fabrics in Phase 3. Conversely, should Phase 2 fail, the research scope would be limited to testing known materials, thereby restricting the breadth of the study.
 <br><br>
 In short, the core objective of this exploratory research is not merely the success of AI training or the application of microscopy; these are simply the means used to expand the testing scope, facilitate observation, and acquire more fiber information.
 <br><br>
@@ -101,7 +101,7 @@ Therefore, to more accurately express the research purpose, the title has been u
 <br>
 探索研究的最终目的是寻找到一种无需借助显微镜，而是滴入日常介质后，进行直接观察，或至多仅需借助低成本的伍德氏灯进行辅助，通过交叉对比后得出结果的表征手法。<br>
 <br>
-同时，我需要明确**第二阶段AI辅助**的核心意义：如果能够通过 AI 训练实现AI辅助快速准确的判定，将极大扩展第三阶段可测试的布料范围。反之，若第二阶段失败，研究范围将被局限于已知材料的测试，从而限制了研究对象的广度。<br>
+同时，我需要明确<strong>第二阶段AI辅助</strong>的核心意义：如果能够通过 AI 训练实现AI辅助快速准确的判定，将极大扩展第三阶段可测试的布料范围。反之，若第二阶段失败，研究范围将被局限于已知材料的测试，从而限制了研究对象的广度。<br>
 <br>
 总之，这项探索性研究的核心目标，并非仅仅是 AI 训练的成功或显微镜的应用，这些都只是为了扩大测试范围、辅助观察并获取更多纤维信息的手段。<br>
 <br>
