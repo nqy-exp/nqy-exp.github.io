@@ -39,7 +39,8 @@ Inspired by the concept of "pre-treatment"<sup class="reference">*</sup> in text
 >\* Liu, S., & Yang, B. L. (Eds.). (2017). _Introduction to textile dyeing and finishing_ (3rd ed.) （*Fangzhi ran gailun*）. China Textile & Apparel Press. ISBN: 978-7-5180-3285-3
 
 <div class="light-divider"></div>
-
+<p id="20260724en">
+</p>
 <span class="update-badge">Major Update</span>
 
 July 24, 2026
@@ -87,7 +88,8 @@ Therefore, to more accurately express the research purpose, the title has been u
 在阅读书籍时，受纺织染整工艺中“前处理”<sup class="reference">*</sup>的启发，拟在第三阶段原本的实验之外，再引入多级复合实验模式。不再局限于单一介质的直接作用，而是探索“预处理剂（如表面活性剂——洗衣液或者洗碗液）+ 目标检测介质”的协同反应规律。考虑到预处理的介质本身会对纤维形态产生影响，具体的实验步骤将根据预处理后的纤维状态进行动态调整。
 
 <div class="light-divider"></div>
-
+<p id="20260724zh">
+</p>
 <span class="update-badge">重大更新</span>
 
 2026.07.24
