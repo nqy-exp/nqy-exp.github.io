@@ -38,13 +38,30 @@ Inspired by the concept of "pre-treatment"<sup class="reference">*</sup> in text
 
 >\* Liu, S., & Yang, B. L. (Eds.). (2017). _Introduction to textile dyeing and finishing_ (3rd ed.) （*Fangzhi ran gailun*）. China Textile & Apparel Press. ISBN: 978-7-5180-3285-3
 
+<div class="light-divider"></div>
+
+<span class="update-badge">Major Update</span>
+
+July 24, 2026
+
+After refining my thoughts, I realized that the current title overemphasizes optical microscopy. While optical microscopy is a vital characterization tool in exploratory research, it is not the primary object of study.
+
+The ultimate goal of the exploratory research is to find a characterization method that does not require a microscope, but instead allows for direct observation after adding daily media, or at most only requires the assistance of a low-cost Wood's lamp, obtaining results through cross-comparison.
+
+Furthermore, I want to clarify the core significance of **Phase II (AI assistance)**: if rapid and accurate judgment can be achieved through AI training, it will significantly expand the range of testable fabrics in Phase III. Conversely, should Phase II fail, the research scope would be limited to testing known materials, thereby restricting the breadth of the study.
+
+In short, the core objective of this exploratory research is not merely the success of AI training or the application of microscopy; these are simply the means used to expand the testing scope, facilitate observation, and acquire more fiber information.
+
+Therefore, to more accurately express the research purpose, the title has been updated to: **Exploring Rapid Characterization Methods for Textile Fibers | 纺织纤维快速表征探索研究**
+
+
 ---
 
 <em><strong>本页面将作为本研究计划的长期修订日志。未来若发现实验计划存在疏漏或方向偏差，均将在此统一记录修正时间、调整内容及相关思考。</strong></em>
 
 <div class="light-divider"></div>
 
-2026-07-14
+2026.07.14
 
 在昨天（ *2026-07-13* ）发布的研究计划中，第三阶段的实验重心在对于浸润过各种日常化学介质的纤维的显微镜观察。但在对初步方案进行复盘后，我意识到：虽然针对纤维的显微观察对于明确日常化学介质对纤维结构的影响，以及扩充 AI训练数据库的多样性具有重要价值，但若以此作为家庭环境下的快速鉴别手段，其操作维度与“低成本、易操作”的核心目标存在一定偏差。这是我的疏漏。
 
@@ -65,6 +82,23 @@ Inspired by the concept of "pre-treatment"<sup class="reference">*</sup> in text
 
 <div class="light-divider"></div>
 
-2026-07-16
+2026.07.16
 
 在阅读书籍时，受纺织染整工艺中“前处理”<sup class="reference">*</sup>的启发，拟在第三阶段原本的实验之外，再引入多级复合实验模式。不再局限于单一介质的直接作用，而是探索“预处理剂（如表面活性剂——洗衣液或者洗碗液）+ 目标检测介质”的协同反应规律。考虑到预处理的介质本身会对纤维形态产生影响，具体的实验步骤将根据预处理后的纤维状态进行动态调整。
+
+<div class="light-divider"></div>
+
+<span class="update-badge">重大更新</span>
+
+2026.07.24
+
+在整理了一下思路之后，我意识到目前的标题过于强调光学显微镜了。光学显微镜虽然是探索研究中的一个重要的表征手段，但是并不是重点研究对象。
+
+探索研究的最终目的是寻找到一种无需借助显微镜，而是滴入日常介质后，进行直接观察，或至多仅需借助低成本的伍德氏灯进行辅助，通过交叉对比后得出结果的表征手法。
+
+同时，我需要明确**第二阶段AI辅助**的核心意义：如果能够通过 AI 训练实现AI辅助快速准确的判定，将极大扩展第三阶段可测试的布料范围。反之，若第二阶段失败，研究范围将被局限于已知材料的测试，从而限制了研究对象的广度。
+
+总之，这项探索性研究的核心目标，并非仅仅是 AI 训练的成功或显微镜的应用，这些都只是为了扩大测试范围、辅助观察并获取更多纤维信息的手段。
+
+因此为了更加明确地表达研究目的，将研究标题更改为：
+**Exploring Rapid Characterization Methods for Textile Fibers｜纺织纤维快速表征探索研究**
