@@ -8,7 +8,7 @@ description: Exploring Rapid Characterization Methods for Textile Fibers and com
 ---
 # 1. Research Title
 Exploring Rapid Characterization Methods for Textile Fibers <br>
-（~~Rapid Characterization of Textile Fibers via Optical Microscopy~~ <a href="/projects/projecta/pa-rp-adjust.html#20260724en" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">Edit Reason</a>）
+（~~Rapid Characterization of Textile Fibers via Optical Microscopy~~ <a href="/projects/projectA/pa-rp-adjust#20260724en" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">Edit Reason</a>）
 
 # 2. Research Motivation & Background 
 As a consumer who enjoys textile handicrafts, I often find myself questioning the material composition of yarns and fabrics during purchase. In typical consumer settings, due to the lack of professional testing tools, identification is often limited to subjective sensory methods, such as tactile examination or combustion testing. However, the burning test poses significant safety risks (e.g., in markets with highly flammable materials) and lacks sufficient precision for distinguishing complex blended fibers. Consequently, verifying the authenticity of material composition remains a persistent challenge.
@@ -206,7 +206,7 @@ As well as the challenges and technical bottlenecks to be addressed during the r
 ---
 #  1.研究标题
 纺织纤维快速表征探索研究 <br>
-(~~基于光学显微成像的纺织纤维快速表征研究~~ <a href="/projects/projecta/pa-rp-adjust.html#20260724zh" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">修改理由</a>)
+(~~基于光学显微成像的纺织纤维快速表征研究~~ <a href="/projects/projectA/pa-rp-adjust#20260724zh" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">修改理由</a>)
 
 # 2. 研究动机与背景
 
