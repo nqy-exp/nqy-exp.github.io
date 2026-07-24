@@ -41,11 +41,11 @@ Inspired by the concept of "pre-treatment"<sup class="reference">*</sup> in text
 <div class="light-divider"></div>
 
 <p id="20260724en">
-<br>
+
 <span class="update-badge">Major Update</span>
-<br>
+<br><br>
 July 24, 2026
-<br>
+<br><br>
 After refining my thoughts, I realized that the current title overemphasizes optical microscopy. While optical microscopy is a vital characterization tool in exploratory research, it is not the primary object of study.
 <br><br>
 The ultimate goal of the exploratory research is to find a characterization method that does not require a microscope, but instead allows for direct observation after adding daily media, or at most only requires the assistance of a low-cost Wood's lamp, obtaining results through cross-comparison.
@@ -92,11 +92,11 @@ Therefore, to more accurately express the research purpose, the title has been u
 <div class="light-divider"></div>
 
 <p id="20260724zh">
-<br>
+
 <span class="update-badge">重大更新</span>
-<br>
+<br><br>
 2026.07.24
-<br>
+<br><br>
 在整理了一下思路之后，我意识到目前的标题过于强调光学显微镜了。光学显微镜虽然是探索研究中的一个重要的表征手段，但是并不是重点研究对象。<br>
 <br>
 探索研究的最终目的是寻找到一种无需借助显微镜，而是滴入日常介质后，进行直接观察，或至多仅需借助低成本的伍德氏灯进行辅助，通过交叉对比后得出结果的表征手法。<br>
