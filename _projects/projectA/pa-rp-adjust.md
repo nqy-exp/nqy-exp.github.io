@@ -40,7 +40,7 @@ Inspired by the concept of "pre-treatment"<sup class="reference">*</sup> in text
 
 <div class="light-divider"></div>
 <p id="20260724en">
-</p>
+
 <span class="update-badge">Major Update</span>
 
 July 24, 2026
@@ -53,8 +53,8 @@ Furthermore, I want to clarify the core significance of **Phase II (AI assistanc
 
 In short, the core objective of this exploratory research is not merely the success of AI training or the application of microscopy; these are simply the means used to expand the testing scope, facilitate observation, and acquire more fiber information.
 
-Therefore, to more accurately express the research purpose, the title has been updated to: **Exploring Rapid Characterization Methods for Textile Fibers | 纺织纤维快速表征探索研究**
-
+Therefore, to more accurately express the research purpose, the title has been updated to: **Exploring Rapid Characterization Methods for Textile Fibers**
+</p>
 
 ---
 
@@ -89,7 +89,7 @@ Therefore, to more accurately express the research purpose, the title has been u
 
 <div class="light-divider"></div>
 <p id="20260724zh">
-</p>
+
 <span class="update-badge">重大更新</span>
 
 2026.07.24
@@ -104,3 +104,4 @@ Therefore, to more accurately express the research purpose, the title has been u
 
 因此为了更加明确地表达研究目的，将研究标题更改为：
 **Exploring Rapid Characterization Methods for Textile Fibers｜纺织纤维快速表征探索研究**
+</p>
