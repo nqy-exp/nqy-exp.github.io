@@ -55,7 +55,7 @@ Furthermore, I want to clarify the core significance of **Phase II (AI assistanc
 In short, the core objective of this exploratory research is not merely the success of AI training or the application of microscopy; these are simply the means used to expand the testing scope, facilitate observation, and acquire more fiber information.
 <br><br>
 Therefore, to more accurately express the research purpose, the title has been updated to:<br>
- <strong>Exploring Rapid Characterization Methods for Textile Fibers**</strong><br>
+ <strong>Exploring Rapid Characterization Methods for Textile Fibers</strong><br>
 </p>
 
 ---
