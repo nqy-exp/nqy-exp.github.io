@@ -50,7 +50,7 @@ After refining my thoughts, I realized that the current title overemphasizes opt
 <br><br>
 The ultimate goal of the exploratory research is to find a characterization method that does not require a microscope, but instead allows for direct observation after adding common household liquids/media, or at most only requires the assistance of a low-cost Wood's lamp, obtaining results through cross-comparison.
 <br><br>
-Furthermore, I want to clarify the core significance of <strong>>Phase 2 (AI assistance)</strong>: if rapid and accurate judgment can be achieved through AI training, it will significantly expand the range of testable fabrics in Phase 3. Conversely, should Phase 2 fail, the research scope would be limited to testing known materials, thereby restricting the breadth of the study.
+Furthermore, I want to clarify the core significance of <strong>Phase 2 (AI assistance)</strong>: if rapid and accurate judgment can be achieved through AI training, it will significantly expand the range of testable fabrics in Phase 3. Conversely, should Phase 2 fail, the research scope would be limited to testing known materials, thereby restricting the breadth of the study.
 <br><br>
 In short, the core objective of this exploratory research is not merely the success of AI training or the application of microscopy; these are simply the means used to expand the testing scope, facilitate observation, and acquire more fiber information.
 <br><br>
