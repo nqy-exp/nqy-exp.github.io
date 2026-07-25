@@ -109,7 +109,8 @@ After extracting the fibers using tweezers, longitudinal and cross-sectional ope
     Figure 3: T001 microscopic images
   </figcaption>
 </figure>
-***Safety Note: Sharp tools are used during sample preparation. Please handle with caution and prioritize safety.***
+<br>
+***Safety Note: Sharp tools are used during sample preparation. Handle with caution and prioritize safety.***
 <br><br>
 
 Longitudinal Structure:<br>
