@@ -7,10 +7,19 @@ date: 2026-07-23
 description: "A reference guide for the project's experiment numbering convention, covering sample IDs, treatment modes, and image structure abbreviations."
 
 ---
+# Experiment Code
 
+**Numbering Convention**: XX00-00
+
+**Format**: Sample ID-Sequence Number
+
+*For special cases, such as independent numbering for specialized experiments, refer to the respective logs.*
+
+# Image Code
 **Numbering Convention**: XX00-YYYY-LCGZ-00
 
 **Format**: Sample ID-Treatment Mode (Phase 3 only)-Image Structure& mounting medium-Sequence Number
+
 
 ## Sample ID (XX):
 
@@ -31,12 +40,13 @@ description: "A reference guide for the project's experiment numbering conventio
 
 *For single-letter identifiers, the format is X000.*
 
+
 ## Image Structure & Mounting Medium Abbreviations:
 
 - **L**: Longitudinal
 - **C**: Cross-sectional
 - **G**: Glycerin
-- **Z**: Nail coat
+- **Z**: Nail polish 
 - **N**: Unembedded
 
 
@@ -46,9 +56,19 @@ description: "A reference guide for the project's experiment numbering conventio
 
 ---
 
+# 实验编号
+**编号**：XX00-00。  
+
+**结构**：实验样品编号-数字编号
+
+*如有特殊情况，如特别实验单独编号，则以对应Log内为准。*
+
+# 图片编号
+
 **编号**：XX00-YYYY-LCGZ-00。  
 
 **结构**：实验样品编号-处理模式（只在第三阶段）-图像结构及封片介质-数字编号
+
 
 ## 样品编号（XX）
 
@@ -68,6 +88,7 @@ description: "A reference guide for the project's experiment numbering conventio
 - **U**：未知样品
 
 *单个字母时，则格式为X000。*
+
 
 ## 图像结构及封片介质缩写
 
