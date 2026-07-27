@@ -4,7 +4,7 @@ title: Research Plan Adjustments｜研究计划调整
 project: projecta
 type: plan
 date: 2026-07-14
-description:
+description: "This page serves as a long-term revision log for research plan."
 ---
 
 <em><strong>This page serves as a long-term revision log for this research plan. Should any omissions or directional deviations be identified in the experimental plan, they will all be documented here, including timestamps, adjusted content, and related reflections.</strong></em>
