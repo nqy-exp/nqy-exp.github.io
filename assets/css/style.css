@@ -1576,9 +1576,13 @@ html {
     font-style: italic;
 }
 
+.post-content strong {
+    color: #bd4e03; 
+    font-weight: 700;
+}
 /* 【第二阶：渐变粗体】 
    作用：普通关键词加粗，使用色彩流产生“震撼感”。 */
-.post-content strong {
+.post-content strong.wow {
    background: linear-gradient(
         to right, 
         #f7c13b 0%,     /* 1. 极其明亮的浅金 (高光) */
