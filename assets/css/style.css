@@ -1433,9 +1433,11 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
 }
 
-/* 定义链接的基础样式 */
 .exp-link {
-  color: #e67e22;            /* 你选定的橙色 */
+  color: #e67e22;          /* 你选定的橙色 */
+  padding: 0 6px 0 4px;   /* 左边少一点，右边多一点，视觉上找平 */
+  margin: 0 1px 0 2px;    /* 同理微调 */ 
+  font-weight: 300;         
   text-decoration: none;     /* 坚决不使用下划线 */
   display: inline-block;     /* 【关键】必须设置为 inline-block，scale 缩放效果才会生效 */
   transition: transform 0.3s ease, color 0.3s ease; /* 让放大和颜色变化都平滑过渡 */
@@ -1572,7 +1574,7 @@ html {
 /* 【第一阶：标准斜体】 
    作用：轻量级的语气转折，保持品牌色。 */
 .post-content em {
-    color: #dc771e; 
+    color: #d26b11; 
     font-style: italic;
 }
 
