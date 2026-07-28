@@ -1535,7 +1535,7 @@ html {
 
 /* H1: 深色、略厚、渐隐感较强 */
 .post-content h1 {
-    color: #3e2723; 
+    color: #201205; 
     font-size: 1.9em;
 }
 .post-content h1::after {
@@ -1545,7 +1545,7 @@ html {
 
 /* H2: 品牌核心色、中等粗细、平滑渐隐 */
 .post-content h2 {
-    color: #a6520d;      /* 加深的品牌色 */
+    color: #2f1a0c;      /* 加深的品牌色 */
     font-size: 1.55em;
 }
 .post-content h2::after {
@@ -1556,7 +1556,7 @@ html {
 
 /* H3: 轻盈、极细、几乎透明的渐隐线 */
 .post-content h3 {
-    color: #bd672e; 
+    color: #41230f; 
     font-size: 1.25em;
 }
 .post-content h3::after {
@@ -1577,7 +1577,7 @@ html {
 }
 
 .post-content strong {
-    color: #bd4e03; 
+    color: #c85d15; 
     font-weight: 700;
 }
 /* 【第二阶：渐变粗体】 
