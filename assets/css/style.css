@@ -4,7 +4,7 @@
 body {
 margin: 0 !important;
 padding: 0 !important;
-background-color: #ffffff; /* 默认白色背景 */
+background-color: #fffdfa; 
 }
 
 
@@ -1502,4 +1502,268 @@ box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 /* 同时确保跳转过程是平滑滚动的（可选，但强烈建议加上） */
 html {
     scroll-behavior: smooth;
+}
+
+
+/* --- 正文内容模式修改模块 --- */
+
+/* --- 1. 标题层级 (渐隐艺术版) --- */
+
+/* 基础容器设置 */
+.post-content h1, 
+.post-content h2, 
+.post-content h3 {
+    display: table;      /* 让宽度紧贴文字 */
+    position: relative;  /* 为伪元素线条提供定位基准 */
+    margin-top: 1.8em;
+    margin-bottom: 0.7em;
+    padding-left: 8px;   /* 控制线条比字长出的距离 */
+    padding-right: 8px;  /* 控制线条比字长出的距离 */
+}
+
+/* 定义所有标题线条的共有样式 (伪元素) */
+.post-content h1::after, 
+.post-content h2::after, 
+.post-content h3::after {
+    content: "";         /* 必须要有 content 才能显示 */
+    position: absolute;
+    bottom: 0;           /* 定位在线条底部 */
+    left: 0;
+    right: 0;            /* 线条宽度会受限于父元素的 padding-left/right */
+    height: 2px;         /* 线条高度 (粗细) */
+}
+
+/* H1: 深色、略厚、渐隐感较强 */
+.post-content h1 {
+    color: #3e2723; 
+    font-size: 1.9em;
+}
+.post-content h1::after {
+    height: 1px;         /* H1 线条稍厚 */
+    background: linear-gradient(to right, rgba(230, 126, 34, 0.5), transparent);
+}
+
+/* H2: 品牌核心色、中等粗细、平滑渐隐 */
+.post-content h2 {
+    color: #a6520d;      /* 加深的品牌色 */
+    font-size: 1.55em;
+}
+.post-content h2::after {
+    height: 1px;
+    /* 从品牌色平滑过渡到透明 */
+    background: linear-gradient(to right,  rgba(166, 82, 13, 0.25), transparent);
+}
+
+/* H3: 轻盈、极细、几乎透明的渐隐线 */
+.post-content h3 {
+    color: #bd672e; 
+    font-size: 1.25em;
+}
+.post-content h3::after {
+    height: 1px;         /* H3 线条极细 */
+    /* 非常淡的颜色，且渐隐得非常快/自然 */
+    background: linear-gradient(to right, rgba(166, 82, 13, 0.1), transparent);
+}
+
+
+
+/* --- 2. 文字强调 (三阶冲击版) --- */
+
+/* 【第一阶：标准斜体】 
+   作用：轻量级的语气转折，保持品牌色。 */
+.post-content em {
+    color: #dc771e; 
+    font-style: italic;
+}
+
+/* 【第二阶：渐变粗体】 
+   作用：普通关键词加粗，使用色彩流产生“震撼感”。 */
+.post-content strong {
+   background: linear-gradient(
+        to right, 
+        #f7c13b 0%,     /* 1. 极其明亮的浅金 (高光) */
+        #e67e22 25%,    /* 2. 标准品牌橙 (过渡) */
+        #c86625 50%,    /* 3. 极深的黑褐色 (核心重音 - 确保厚重感) */
+        #e67e22 75%,    /* 4. 标准品牌橙 (过渡) */
+        #f7c13b 100%    /* 5. 极其明亮的浅金 (高光) */
+    );
+
+    /* 让这个色彩波浪变得非常巨大 (文字宽度的 4 倍) */
+    background-size: 120% 100%; 
+
+    /* 极其关键：将背景定位在中心！
+       这保证了无论你的词是“重点”还是“结论”，
+       它的核心部分永远被对准了渐变波浪中最深、最重的那个点。 */
+    background-position: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block; 
+    font-weight: 900; /* 配合厚重的颜色，使用极粗字重 */
+}
+
+/* 【第三阶：终极粗斜体 - 荧光黑字版】 
+   作用：最高级别的强调，模拟在文档上重重划下的荧光笔效果。 */
+.post-content strong em, 
+.post-content em strong {
+    /* 1. 强制回归黑色文字，并覆盖掉父级 strong 的透明设置 */
+    color: #222 !important; 
+    -webkit-text-fill-color: #222 !important; 
+    font-weight: 700;
+    font-style: italic;
+
+    /* 2. 创建荧光笔高亮效果：
+       使用 linear-gradient 模拟笔划，只覆盖文字的下半部分 */
+    background: linear-gradient(
+        to bottom, 
+        transparent 45%,           /* 文字上半部分保持透明 */
+        rgba(230, 126, 34, 0.4) 45%, /* 下半部分填充品牌色的半透明层 */
+        rgba(230, 126, 34, 0.4) 100%
+    );
+
+    /* 3. 让背景紧贴文字，不产生奇怪的边距 */
+    display: inline; 
+    padding: 0 2px; /* 给高亮留出极小的呼吸空间 */
+    border-radius: 2px; /* 让笔划边缘圆润一点 */
+}
+
+
+
+
+/* --- 3. 列表系统 (还原原始状态，仅改色) --- */
+
+/* 还原所有列表的默认样式，只改变点（marker）的颜色 */
+.post-content ul,
+.post-content ol {
+padding-left: 1.5em;
+margin-bottom: 1.5em;
+}
+
+/* 无序列表的点 */
+.post-content ul li::marker {
+color: #e67e22; /* 直接把点变成品牌色 */
+font-size: 1.1em;
+}
+
+/* 有序列表的数字 */
+.post-content ol li::marker {
+color: #e67e22; /* 数字也统一为品牌色，增加整体感 */
+font-weight: bold;
+}
+
+
+/* --- 4. 引用块 (暖炭极简版) --- */
+.post-content blockquote {
+    margin: 1.5em 0;
+    padding: 10px 20px;
+    border-left: 2px solid #e67e22;
+    background-color: #fffaf5;
+    color: #3d342e;          /* 暖炭色：极深的灰棕色，非常现代 */
+    font-style: italic;
+    line-height: 1.7;
+}
+
+/* --- 扩展：删除线 (褪色记号版) --- */
+
+.post-content del, 
+.post-content s {
+    position: relative;      /* 为线条提供定位基准 */
+    display: inline-block;   /* 确保 transform 和 padding 生效 */
+    text-decoration: none;   /* 彻底禁用系统默认的黑线 */
+
+    /* 1. 文字的褪色感：轻微模糊 + 中等透明度 */
+    /* 我们减小了模糊值，并提高了透明度，让字“虽然淡，但很清晰” */
+    filter: blur(0.5px);     /* 极轻微的虚化，保留文字轮廓 */
+    opacity: 0.5;            /* 提高透明度，确保一眼能认出是字 */
+    
+    transition: all 0.3s ease; /* 平滑过渡动画 */
+}
+
+/* 2. 创建橙色划痕线 */
+.post-content del::after, 
+.post-content s::after {
+    content: "";
+    position: absolute;
+    left: -2px;              /* 线条稍微向左延伸，增加手感 */
+    width: calc(100% + 4px); /* 线条宽度略大于文字 */
+    top: 55%;                /* 精准定位在文字中心 */
+    transform: translateY(-50%); 
+    
+    /* --- 关键改动：让线在“静止状态”就很锐利 --- */
+    height: 1.5px;           /* 保持一个精细的厚度 */
+    background-color: rgba(230, 126, 34, 0.8); /* 提高透明度到0.8，让线看起来很实、很清晰 */
+    box-shadow: 0 0 1px rgba(230, 126, 34, 0.3); /* 给线条加一层极细微的阴影，增加“锐利感” */
+    
+    transition: all 0.3s ease;
+}
+
+/* 3. 鼠标悬停时的交互：文字变清晰，线条变锐利 */
+.post-content del:hover, 
+.post-content s:hover {
+    filter: blur(0px);       /* 文字瞬间恢复清晰 */
+    opacity: 1;              /* 文字完全变亮 */
+}
+
+.post-content del:hover::after, 
+.post-content s:hover::after {
+    height: 1px;             /* 线条变细，变得更锐利、更像笔划 */
+    background-color: #e67e22; /* 线条变为实心的品牌橙色 */
+}
+
+
+
+/* --- 扩展：高亮标签 (流体熔合版) --- */
+
+.post-content mark {
+       /* 🆕 关键修复：先清除浏览器的默认样式 */
+    background: transparent !important;  /* 干掉荧光黄 */
+    text-decoration: none !important;    /* 干掉下面的线 */
+    /* 1. 让文字保持纯粹的行内流，彻底解决“断层感”和“间距问题” */
+    display: inline; 
+    padding: 0; /* 清除 padding，让文字直接贴合背景 */
+    margin: 0;
+    color: inherit;
+    position: relative; /* 为伪元素提供定位基准 */
+    z-index: 1;         /* 确保文字在最上层 */
+}
+
+.post-content mark::before {
+    /* 2. 将所有的“艺术感”移动到伪元素上 */
+    content: "";
+    position: absolute;
+    z-index: -1;        /* 确保背景垫在文字下方 */
+    
+    /* 3. 控制高亮的范围：通过 top/bottom/left/right 来定义 */
+    /* 使用百分比让它根据文字长度自动伸缩，同时保留一点点上下边距 */
+    top: -0.1em;
+    bottom: -0.1em;
+    left: -3px;         /* 稍微向左扩展，增加覆盖感 */
+    right: -3px;        /* 稍微向右扩展 */
+
+    /* 4. 完美的有机形状 (你最喜欢的那个) */
+    border-radius: 12px 4px 15px 6px / 6px 12px 4px 15px;
+
+    /* 5. 多层叠加的静态渐变 (你最喜欢的色彩逻辑) */
+   background-color: rgba(230, 127, 38, 0.251); 
+
+    /* 第二、三层：光影装饰层 - 通过 background-image 叠加渐变 */
+    /* 注意：在 CSS 中，background-image 的顺序是：写在前面的在最上面 */
+    background-image: 
+        /* A. 顶部的微弱高光 (模拟光线照射边缘) */
+        linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 30%),
+        /* B. 中间的径向光晕 (使用暖金感，增加立体深度) */
+        radial-gradient(circle at 30% 30%, rgba(247, 213, 146, 0.4) 0%, transparent 60%);
+    /* 6. 深度感与磨砂质感 */
+    backdrop-filter: blur(6px); 
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.6),   /* 顶部高光 */
+        inset 0 -1px 3px rgba(0, 0, 0, 0.05),      /* 底部微阴影 */
+        0 2px 4px rgba(227, 122, 30, 0.1);         /* 外部轻微投影 */
+
+    /* 7. 核心黑科技：边缘渐变融合 (Edge Fading) */
+    /* 这让形状的左右两端不再是“硬边界”，而是像水滴一样自然地消散在文字中 */
+    border-radius: 12px 4px 15px 6px / 6px 12px 4px 15px; /* 有机不规则形状 */
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
