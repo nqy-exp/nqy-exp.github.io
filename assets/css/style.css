@@ -1571,13 +1571,6 @@ html {
 
 /* --- 2. 文字强调 (三阶冲击版) --- */
 
-/* 【第一阶：标准斜体】 
-   作用：轻量级的语气转折，保持品牌色。 */
-.post-content em {
-    color: #d26b11; 
-    font-style: italic;
-}
-
 .post-content strong {
     color: #c85d15; 
     font-weight: 700;
@@ -1716,6 +1709,32 @@ font-weight: bold;
     background-color: #e67e22; /* 线条变为实心的品牌橙色 */
 }
 
+/* ============================================================
+   移动端适配：删除线简化版 (Mobile Optimized)
+   解决小屏幕上伪元素定位偏移和挤压的问题
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .post-content del, 
+    .post-content s {
+        /* 1. 恢复文字的清晰度和透明度，让它在小屏幕上易于识别 */
+        filter: blur(0.3px);      /* 极轻微模糊，不再是厚重的雾气 */
+        opacity: 0.5;             /* 中等透明度，确保能看清字 */
+        
+        /* 2. 使用原生的 text-decoration 解决对齐问题 */
+        text-decoration: line-through; /* 强制使用系统原生删除线 */
+        text-decoration-thickness: 1px; /* 线条保持精细 */
+        
+        /* 3. 给线条赋予品牌色，让它看起来是有意为之的标记 */
+        text-decoration-color: rgba(230, 126, 34, 0.7); /* 使用品牌橙的半透明版本 */
+    }
+
+    /* 4. 彻底禁用掉之前那个复杂的伪元素划痕，防止它在移动端乱跑 */
+    .post-content del::after, 
+    .post-content s::after {
+        display: none !important;
+    }
+}
 
 
 /* --- 扩展：高亮标签 (流体熔合版) --- */
