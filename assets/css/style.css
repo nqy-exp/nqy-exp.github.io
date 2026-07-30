@@ -1737,58 +1737,11 @@ font-weight: bold;
 }
 
 
-/* --- 扩展：高亮标签 (流体熔合版) --- */
-
 .post-content mark {
-       /* 🆕 关键修复：先清除浏览器的默认样式 */
-    background: transparent !important;  /* 干掉荧光黄 */
-    text-decoration: none !important;    /* 干掉下面的线 */
-    /* 1. 让文字保持纯粹的行内流，彻底解决“断层感”和“间距问题” */
-    display: inline; 
-    padding: 0; /* 清除 padding，让文字直接贴合背景 */
-    margin: 0;
-    color: inherit;
-    position: relative; /* 为伪元素提供定位基准 */
-    z-index: 1;         /* 确保文字在最上层 */
-}
-
-.post-content mark::before {
-    /* 2. 将所有的“艺术感”移动到伪元素上 */
-    content: "";
-    position: absolute;
-    z-index: -1;        /* 确保背景垫在文字下方 */
-    
-    /* 3. 控制高亮的范围：通过 top/bottom/left/right 来定义 */
-    /* 使用百分比让它根据文字长度自动伸缩，同时保留一点点上下边距 */
-    top: -0.1em;
-    bottom: -0.1em;
-    left: -3px;         /* 稍微向左扩展，增加覆盖感 */
-    right: -3px;        /* 稍微向右扩展 */
-
-    /* 4. 完美的有机形状 (你最喜欢的那个) */
-    border-radius: 12px 4px 15px 6px / 6px 12px 4px 15px;
-
-    /* 5. 多层叠加的静态渐变 (你最喜欢的色彩逻辑) */
-   background-color: rgba(230, 127, 38, 0.251); 
-
-    /* 第二、三层：光影装饰层 - 通过 background-image 叠加渐变 */
-    /* 注意：在 CSS 中，background-image 的顺序是：写在前面的在最上面 */
-    background-image: 
-        /* A. 顶部的微弱高光 (模拟光线照射边缘) */
-        linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 30%),
-        /* B. 中间的径向光晕 (使用暖金感，增加立体深度) */
-        radial-gradient(circle at 30% 30%, rgba(247, 213, 146, 0.4) 0%, transparent 60%);
-    /* 6. 深度感与磨砂质感 */
-    backdrop-filter: blur(6px); 
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 
-        inset 0 1px 2px rgba(255, 255, 255, 0.6),   /* 顶部高光 */
-        inset 0 -1px 3px rgba(0, 0, 0, 0.05),      /* 底部微阴影 */
-        0 2px 4px rgba(227, 122, 30, 0.1);         /* 外部轻微投影 */
-
-    /* 7. 核心黑科技：边缘渐变融合 (Edge Fading) */
-    /* 这让形状的左右两端不再是“硬边界”，而是像水滴一样自然地消散在文字中 */
-    border-radius: 12px 4px 15px 6px / 6px 12px 4px 15px; /* 有机不规则形状 */
-    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    background: rgba(0, 188, 212, 0.2) !important; /* 使用极淡的青绿色 */
+    color: inherit !important;
+    text-decoration: none !important;
+    padding: 0 4px;
+    border-radius: 4px;
+    display: inline;
 }
