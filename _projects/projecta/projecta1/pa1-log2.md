@@ -1,6 +1,6 @@
 ---
 layout: projects-layout
-title: Log02|SE01 Cross-sectional Method Exploration I|横截面方案探索 I
+title: Log02 | SE01 Cross-sectional Method Exploration I |横截面方案探索 I
 project: projecta
 sub_project: projecta1
 type: log
@@ -22,7 +22,7 @@ Additionally, regarding the observed cross-sectional whitening, a hypothesis is 
 
 Regarding the whitening of cross-sections observed in Log01, I have developed new hypotheses. Previously, I considered the possibility of **refractive index instability** caused by the components of the nail base coat. Now, I am considering the possibility that the high viscosity of the nail base coat introduced micro-bubbles during embedding, leading to **optical non-uniformity**. Another possibility worth noting is that the nail base coat contains acrylate copolymers, which may cause **stress whitening** during the cutting process after solidification.
 
-Due to economic constraints, I currently rely primarily on optical microscopy for observation; therefore, the optical properties of the materials must be taken into consideration. I plan to attempt using ==UV glue== as an alternative medium, utilizing its characteristic of having a refractive index close to glass after solidification to optimize imaging quality. However, it should be noted that this medium may still face the risk of stress whitening during the slicing stage.
+Due to economic constraints, I currently rely primarily on optical microscopy for observation; therefore, the optical properties of the materials must be taken into consideration. I plan to attempt using <MARK>UV glue</MARK> as an alternative medium, utilizing its characteristic of having a refractive index close to glass after solidification to optimize imaging quality. However, it should be noted that this medium may still face the risk of stress whitening during the slicing stage.
 
 Therefore, more media need to be tested to find the optimal embedding agent available under current conditions.
 
@@ -42,9 +42,9 @@ Cotton is the most commonly used natural fiber material in daily life. Furthermo
 
 **Experimental Items:**
 
-- 1. Effect of different embedding media on the longitudinal structure of cotton fibers.
+- 1.Effect of different embedding media on the longitudinal structure of cotton fibers.
 
-- 2. Effect of different embedding media on parchment paper (the carrier material).
+- 2.Effect of different embedding media on parchment paper (the carrier material).
   Thinly coating the parchment paper with embedding media, rolling it up, slicing, and observing under a microscope. The embedding media used in this special experiment include:
     - Nail base coat (KH Xiaodengpao)
     - Nail top coat (KH Xiaodengpao)
@@ -65,7 +65,7 @@ Cotton is the most commonly used natural fiber material in daily life. Furthermo
 </figure>
 
 
-- 3. Effect of different embedding methods on cross-sectional cutting:
+- 3.Effect of different embedding methods on cross-sectional cutting:
     - Apply medium to parchment paper - after solidify remove fiber - slice in slicer and observe.
     - Apply medium to parchment paper - after solidify remove fiber, roll into **new parchment paper** - slice in slicer and observe.
     - Apply medium to parchment paper - after solidify, roll up together with the parchment paper - slice in slicer and observe.
@@ -106,10 +106,10 @@ Cotton is the most commonly used natural fiber material in daily life. Furthermo
 	- NG: No embedding medium, glycerin only
 
 - YY(Treatment methods):
-	- PA: Apply medium to parchment paper - after solidify remove fiber - slice in slicer and observe.
-    - PN: Apply medium to parchment paper - after solidify remove fiber, roll into **new parchment paper** - slice in slicer and observe.
-    - PP: Apply medium to parchment paper - after solidify, roll up together with the parchment paper - slice in slicer and observe.
-    - PS: Do not use embedding media, roll fibers and parchment paper directly - slice and observe.(Blank control group)
+  - PA: Apply medium to parchment paper - after solidify remove fiber - slice in slicer and observe.
+  - PN: Apply medium to parchment paper - after solidify remove fiber, roll into **new parchment paper** - slice in slicer and observe.
+  - PP: Apply medium to parchment paper - after solidify, roll up together with the parchment paper - slice in slicer and observe.
+  - PS: Do not use embedding media, roll fibers and parchment paper directly - slice and observe.(Blank control group)
 
 
 ### Parchment Paper Cross-sectional Sample Preparation Method
@@ -124,16 +124,16 @@ Cut the parchment paper into strips of the required width. Since I am using doub
 </figure>
 
 
-*Compared to pure fiber preparation, the parchment paper roll provides more support (more rigid) inside the slicer, but it must be ==packed tightly== during loading to ensure its stability.*
+*Compared to pure fiber preparation, the parchment paper roll provides more support (more rigid) inside the slicer, but it must be <MARK>packed tightly</MARK> during loading to ensure its stability.*
 
 
 ### 2026.07.27｜Effect of embedding media on longitudinal structure
-**Subject**: Effect of various embedding media on the longitudinal structure of T002 cotton fibers
+**Subject**: Effect of various embedding media on the longitudinal structure of T002 cotton fibers<br>
 **Environmental Conditions**: 27.4°C,  65.3%RH
 
 **Experimental Record:** 
 
-Fibers were placed on a slide, and embedding media were applied. After solidification was complete, glycerin was added for microscopic observation. 
+Fibers were placed on a slide, and embedding media were applied. After solidification was complete, glycerin was added for microscopic observation. <br>
 The main purpose was to observe whether the solidification of the embedding media would affect the cotton fibers.
 
 **Experimental Analysis:**
@@ -163,7 +163,7 @@ Additionally, due to personal operational issues during the experiment, two inte
 
 <strong class="wow">Micro-bubbles caused by blowing air</strong>
 
-During the operation of T02L-ZT, due to rushing during the process, a dust blower was used to ==blow air== onto the fibers in the embedding medium to accelerate solidification.
+During the operation of T02L-ZT, due to rushing during the process, a dust blower was used to <MARK>blow air</MARK> onto the fibers in the embedding medium to accelerate solidification.
 
 
 <figure style="text-align: center; margin: 2em 0;">
@@ -182,14 +182,14 @@ Considering this issue, no blowing devices should be used to accelerate solidifi
 
 This also reminds me of the nanoflotation principles involved in my Master's thesis. Applying this to the current situation, I hypothesize that blowing with a dust blower fills the nail top coat with micro-bubbles. Since the wax layer(cuticle) of the cotton fiber's primary wall is hydrophobic, it easily combines with these bubbles, forming a bubble layer on the fiber surface.
 
-Does this phenomenon also occur in other embedding media when blown? 
+Does this phenomenon also occur in other embedding media when blown? <br>
 Since the attachment of micro-bubbles to cotton fibers is due to its surface hydrophobicity, if this hydrophobicity were destroyed (for example, through mercerization), would it prevent bubble attachment and thus reduce cross-sectional imaging blurriness?
 
 <em style="color: #e67e22;">This might be a direction worth exploring.</em>
 
 <strong class="wow">Fiber whitening phenomenon under different light intensities</strong>
 
-While using fabric hardener (white), I operated under the hypothesis that the hardener might affect the fibers. During observations of the T02L-HW group, ==partial white structures== were observed inside the fibers under **different lighting** conditions (comparing 01 with 02 and 03 with 04). This raised suspicion as to whether the fabric hardener was affecting the cotton fibers; therefore, photographs were taken under various light intensities at that time.
+While using fabric hardener (white), I operated under the hypothesis that the hardener might affect the fibers. During observations of the T02L-HW group, <MARK>partial white structures</MARK> were observed inside the fibers under **different lighting** conditions (comparing 01 with 02 and 03 with 04). This raised suspicion as to whether the fabric hardener was affecting the cotton fibers; therefore, photographs were taken under various light intensities at that time.
 
 However, since the white structures only appeared in some fibers, it was impossible to confirm whether they were caused by fiber damage or the fibers' own structure. Additionally, the glycerin group had only one set of photos taken and lacked light contrast. Consequently, another control group using only glycerin without embedding media (i.e., T02L-NG-02, 03) was photographed.
 
@@ -208,10 +208,8 @@ Regarding this phenomenon, I hypothesize two possible causes:
 - The longitudinal thickness of the cotton fiber at that position is large (e.g., due to natural twisting causing folding along the Z-axis), resulting in a white visual area caused by the inability of light to penetrate.
 
 
-
-
 ### 2026.07.28｜Effect of parchment paper on cross-sectional testing
-**Subject**: Attempting cross-sectional sample preparation with parchment paper
+**Subject**: Attempting cross-sectional sample preparation with parchment paper<br>
 **Environmental Conditions**: 28.8°C,  63.5%RH
 
 **Experimental Record:** 
@@ -228,7 +226,7 @@ This experiment encountered <strong class="wow">significant difficulties!</stron
 
 First, the advantages of parchment paper. It performs excellently during sample preparation and slicing. During the process, the parchment paper provides **good skeletal support**, allowing the slicer to grip it tightly, resulting in neat cuts (essentially achievable with a single stroke). This validates my idea of using parchment paper as a cutting skeleton, and I will continue to consider it for this purpose in the future.
 
-However, there is one significant drawback of parchment paper that was previously unexpected:
+However, there is one significant drawback of parchment paper that was previously unexpected:<br>
 Because the method involves rolling up the parchment paper and pressing it tightly into the slicer, if the initial number of windings is too high, the rolled-up paper will occupy ***a large portion of the field of view*** when switching from 10x to 40x magnification.
 
 
@@ -240,7 +238,7 @@ Because the method involves rolling up the parchment paper and pressing it tight
 </figure>
 
 
-As seen in Figure 6, the parchment paper's cross-section is quite clear and distinguishable under a 10x objective lens, with good light transmittance. However, once under a 40x objective lens, it becomes almost unrecognizable. In the T02C-NG-PS experimental group, even with fibers rolled inside, it is difficult to find the fiber structures within the field of view, and the overall image is blurry. It is suspected that the silicone oil layer on the surface of the parchment paper causes light scattering, combined with ==the fact that the parchment paper's thickness (approx. 0.1 mm) far exceeds the diameter of a single fiber (approx. 0.01-0.02 mm)==, which greatly limits observation.
+As seen in Figure 6, the parchment paper's cross-section is quite clear and distinguishable under a 10x objective lens, with good light transmittance. However, once under a 40x objective lens, it becomes almost unrecognizable. In the T02C-NG-PS experimental group, even with fibers rolled inside, it is difficult to find the fiber structures within the field of view, and the overall image is blurry. It is suspected that the silicone oil layer on the surface of the parchment paper causes light scattering, combined with <MARK>the fact that the parchment paper's thickness (approx. 0.1 mm) far exceeds the diameter of a single fiber (approx. 0.01-0.02 mm)</MARK>, which greatly limits observation.
 
 By reducing the number of windings, some fibers can be observed; for example, T02C-NG-PS-02 shows an oblique cross-section of a cotton fiber. However, the overall field of view remains restricted.
 
@@ -255,9 +253,9 @@ Next, experiments were conducted by applying a thin layer of either nail base co
 </figure>
 
 
-It can be seen that **protrusions left by the solidified embedding media** are visible on the parchment paper structure, but they are not transparent; instead, they exhibit ==white, bubble-like areas==, similar to the cross-sections observed in Log-01.
+It can be seen that **protrusions left by the solidified embedding media** are visible on the parchment paper structure, but they are not transparent; instead, they exhibit <MARK>white, bubble-like areas</MARK>, similar to the cross-sections observed in Log-01.
 
-Subsequently, T02C-ZT-PP was attempted, which involved placing fibers on the parchment paper followed by a thin application of nail top coat, then rolling and slicing directly after solidification. 
+Subsequently, T02C-ZT-PP was attempted, which involved placing fibers on the parchment paper followed by a thin application of nail top coat, then rolling and slicing directly after solidification. <br>
 Observations were made using both 10x and 40x objectives. It can be seen that under both magnifications, although the attached fibers are visible, their **cross-sections cannot be accurately identified**.
 
 By comparing BCP-ZT-01 and T02C-ZT-PP-01, it can be found that this method indeed allows the fibers to be held tightly against the parchment paper skeleton during slicing; however, the cross-sectional structure cannot be clearly seen due to the embedding medium itself.
@@ -273,19 +271,19 @@ For the SE01-01 experiment so far, the following problems have been resolved:
 
 However, the persistent problem remains the cross-section. The issues to be addressed next are:
 
-- How to ==reduce the obstruction of the field of view== caused by the parchment paper acting as a cutting skeleton.
-- The ==visibility and clarity== of the embedding media under a microscope after solidification and slicing.
+- How to <MARK>reduce the obstruction of the field of view</MARK> caused by the parchment paper acting as a cutting skeleton.
+- The <MARK>visibility and clarity</MARK> of the embedding media under a microscope after solidification and slicing.
 
 
 ## Future plans:
 
-Continue the special experiment SE01.
+Continue the special experiment SE01.<br>
 Considering the current limitations, efforts will be made to utilize existing materials and minimize new purchases.
 
 First, introduce <strong class="wow">baked parchment paper</strong> (***coded as BB***). Since the silicone paper I use is baking paper, I previously noticed that white baking paper turns yellow after baking; therefore, it is hypothesized that the degree of light scattering from the baked parchment paper will decrease, and it can also be distinguished from white baking paper.
 
 Current plans are as follows:
-- Perform cross-sectional slicing with baked parchment paper to observe its structure and its impact on the microscopic field of view. 
+- Perform cross-sectional slicing with baked parchment paper to observe its structure and its impact on the microscopic field of view. <br>
 *If the cross-sectional slicing effect of baked parchment paper is superior to that of regular parchment paper, the experimental carrier will be **entirely replaced with baked parchment paper.***
 - Continue the BPC-XX and T02C-XX-YY series experiments with other embedding media to observe whether they also present the same unobservable issue.
 - Optimize the PA method (solidifying on parchment paper, removing it, and then slicing directly in the slicer) by attempting to increase the number of fibers (although this will increase sample loss).
@@ -293,7 +291,7 @@ Current plans are as follows:
 If a suitable embedding scheme cannot be found according to the original plan (which is highly probable), the following attempts will be made:
 - Switch to <strong class="wow">a thick application</strong> of embedding media, rolling only 1-2 layers. To ensure tight pressure, an additional parchment paper roll can be added externally to increase external pressure, enhancing slicability and allowing for separation after slicing. Different colored parchment paper will be used to increase distinguishability and facilitate separation. (However, thick coating may exacerbate the scattering issue.)
 - ***Multi-layer embedding***: First, solidify UV glue (or other embedding media with a structure significantly different from that of parchment paper) on the parchment paper to separate the fibers from the parchment paper, and then proceed with the embedding and solidification process.
-- Introduce ==new embedding media==: Consider introducing <strong class="wow">transparent, ultra-thin silicone sheets</strong>.
+- Introduce <MARK>new embedding media</MARK>: Consider introducing <strong class="wow">transparent, ultra-thin silicone sheets</strong>.
 
 The introduction of parchment paper itself represents a ***deconstruction*** of the embedding process by separating the solidification and embedding steps; however, problems still arose during observation, essentially because parchment paper itself is not an ideal embedding medium.
 
@@ -301,7 +299,7 @@ There are still certain expectations for UV glue as an embedding medium. However
 
 *However, it is possible that none of the selected embedding media can yield clear cross-sectional images under the current conditions.*
 
-Therefore, I will proceed with ==Option 3 of the research plan==: attempting cross-sectional slicing by wrapping fibers with wool. This involves first observing the structure of the wool fibers, and then wrapping T002 cotton fibers with them for cross-sectional slicing.
+Therefore, I will proceed with <MARK>Option 3 of the research plan</MARK>: attempting cross-sectional slicing by wrapping fibers with wool. This involves first observing the structure of the wool fibers, and then wrapping T002 cotton fibers with them for cross-sectional slicing.
 
 However, the flaws of Option 3 are evident:
 
@@ -312,7 +310,7 @@ Consequently, Option 3 can only be used for cross-sectional slicing of known sam
 
 From an experimental structure perspective, the longitudinal structure of fibers is sufficient for most qualitative observations, and it can be advanced independently in both Phase 2&3.
 
-However, **the cross-sectional structure provides more information**, for instance, with hemp fibers, the longitudinal structure cannot distinguish between flax and ramie. Furthermore, in Phase 3 having cross-sections would allow for a clearer understanding of whether the medium causes structural damage or swelling to the fibers.
+However, **the cross-sectional structure provides more information**, for instance, with hemp fibers, the longitudinal structure cannot distinguish between flax and ramie. <br>Furthermore, in Phase 3 having cross-sections would allow for a clearer understanding of whether the medium causes structural damage or swelling to the fibers.
 
 Upon reviewing currently available literature, there is a lack of detailed cross-sectional slicing methods suitable for non-professional equipment, except for those using shellac or specialized slicing tools. At the same time, existing research on computer vision (AI) for fiber identification mostly focuses on longitudinal structures.
 
@@ -340,7 +338,7 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 对于Log01中横截面发白的情况，我有了新的假设。之前我考虑过，指甲底油成分导致的**折射率不稳定**的情况。现在考虑是由于指甲底油的黏稠度较高在包埋时引进微小气泡导致**光学不均匀性**的可能性。还有个值得关注的可能，使用的指甲底油成份内有丙烯酸（酯）类共聚物，在固化后切割过程中可能引起了**应力发白**。
 
-受限于经济条件，目前主要依赖光学显微镜进行观察，使用材料的光学特性就必须要考虑在内。计划增加尝试使用 ==UV 无影胶== 作为替代介质，因为其固化后折射率与玻璃接近的特性来优化成像质量。但需注意，该介质在切片阶段仍可能面临应力发白的风险。
+受限于经济条件，目前主要依赖光学显微镜进行观察，使用材料的光学特性就必须要考虑在内。计划增加尝试使用 <MARK>UV 无影胶</MARK> 作为替代介质，因为其固化后折射率与玻璃接近的特性来优化成像质量。但需注意，该介质在切片阶段仍可能面临应力发白的风险。<br>
 因此需要尝试更多介质，以找到一个在目前条件下可使用的最佳包埋剂。
 
 所以决定在原有的实验计划之外，针对横截面制样开展一次专门的特别实验（代号：SE01），实验对象为T002棉纤维。后续若其他纤维类型不适用已有方案，将再另行开展特别实验。
@@ -350,17 +348,18 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 ## 特别实验（SE01）——横截面制样方式探索
 
-**实验目的**：
-旨在现有实验条件下，探索并确定制备棉纤维横截面图像的最适合的包埋介质及切片方案。
+**实验目的**：<br>
+旨在现有实验条件下，探索并确定制备棉纤维横截面图像的最适合的包埋介质及切片方案。<br>
 此前的方案由于对切片器的清洁度要求较高，限制了可选包埋剂的种类。本次实验计划通过“切片器外包埋固化”的方法来扩大介质选择范围，并尝试利用硅油纸作为纤维切割的骨架。
 
 **实验对象**：T002 棉纤维
+
 **选取理由**：棉是日常生活中最常使用的天然纤维材料。再者，目前所有的材料里，只有棉纤维的白坯布，因其未经处理，适合作为初步探索制样方法的基准材料。
 
 **实验项目**：
-- 1. 不同包埋介质对棉纤维纵结构的影响。
+- 1.不同包埋介质对棉纤维纵结构的影响。
 
-- 2. 不同包埋介质对于硅油纸（承载材料）的影响。
+- 2.不同包埋介质对于硅油纸（承载材料）的影响。
   将硅油纸薄涂包埋介质后卷起切片后，在显微镜下进行观察。本次特别实验中使用的包埋介质有：
 	- 指甲底油（KH小灯泡）
 	- 指甲顶油（KH小灯泡）
@@ -372,9 +371,9 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 	- 锁边布料水 （KEARING）
 	-  UV无影胶水 （Anergoo）
 
-（图片1见英文版： 包埋介质一览）emb-sum
+（图片1见英文版： 包埋介质一览）
 
-- 3. 不同包埋方式对于横截面切割的影响。
+- 3.不同包埋方式对于横截面切割的影响。
 	- 在硅油纸上涂包埋剂——固化后取出纤维——放入切片器切片后观察
 	- 在硅油纸上涂包埋剂——固化后取出纤维卷入**新的硅油纸**——放入切片器切片后观察
 	- 在硅油纸上涂包埋剂——固化后连同硅油纸一同卷起——放入切片器切片后观察
@@ -426,16 +425,16 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 将硅油纸按所需宽度切割成条状。由于我使用的是隔肉饼的双面圆形硅油纸（品牌：美厨），需先修整一侧边缘使其平整。随后，借助镊子辅助将其以 5mm 的间距进行卷绕，放入切片器中并压紧，切去多余部分（***注意安全操作！***），放下匀给架后进行切片，完成制样。
 
-（图片2见英文版：硅油纸横截面制样流程）y172-bp
+（图片2见英文版：硅油纸横截面制样流程）
 
-*相比于单纯的纤维制样，硅油纸卷在切片器内更具支撑力（更硬挺），但在装入时需要==确保塞紧==，以保证其稳定性。*
+*相比于单纯的纤维制样，硅油纸卷在切片器内更具支撑力（更硬挺），但在装入时需要<MARK>确保塞紧</MARK>，以保证其稳定性。*
 
 
 ###  2026.07.27｜包埋剂对纵结构的影响
-**实验主题**：各色包埋剂对T002棉纤维的纵结构的影响
+**实验主题**：各色包埋剂对T002棉纤维的纵结构的影响<br>
 **环境参数**：27.4°C  65.3%RH
 
-**实验记录**：
+**实验记录**：<br>
 将纤维放置在载玻片上，滴上包埋剂，等待固化完成后，再滴加甘油，进行显微镜下的观察。
 主要目的是观察包埋剂固化是否会对棉纤维产生影响。
 
@@ -443,7 +442,7 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 先说结论，所有测试的包埋剂对T002棉纤维的纵结构均**无影响**。
 
-（图片3见英文版：不同包埋剂下棉纤维的纵向结构） T02L-Psum
+（图片3见英文版：不同包埋剂下棉纤维的纵向结构）
 
 比较意外的是，观察发现T02L-UV-02（选取拍摄效果较好的一张）也就是UV无影胶在纵向结构的成像表现不佳，成像整体略显模糊，猜测是由于固化时胶体过厚导致的。不过固化效果如期待，较为清透且硬挺，与其他包埋剂相比气泡较少。期待该介质在横截面实验中的表现。
 
@@ -460,11 +459,11 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 <strong class="wow">吹气操作导致的微小气泡</strong>
 
-在操作T02L-ZT时，由于操作时心急，所以使用了吹尘球对在包埋剂中的纤维==吹气==，使其加速固化。
+在操作T02L-ZT时，由于操作时心急，所以使用了吹尘球对在包埋剂中的纤维<MARK>吹气</MARK>，使其加速固化。
 
-（图片4见英文版：指甲顶油中的棉纤维周边附着大量微小气泡T02L-ZT-01/02/03；对比T02L-ZT-04自然固化无气泡）T02L-ZT-Bubble
+（图片4见英文版：指甲顶油中的棉纤维周边附着大量微小气泡T02L-ZT-01/02/03；对比T02L-ZT-04自然固化无气泡）
 
-从图中可以清晰地看到，细密的微小气泡附着在棉纤维上。
+从图中可以清晰地看到，细密的微小气泡附着在棉纤维上。<br>
 相比之下，04 组采用了自然干燥的方式，未见气泡。由此可见，使用吹尘球加速固化会对包埋质量产生负面影响，不应采用吹气方式来加速固化。
 
 这让我想到了T001与T002在之前的实验中横截面发白的情况，由此可以推测，由于使用吹尘球吹气加速固化，使其形成**细密的小气泡**围绕纤维，形成了一圈微小结构形成散光层，让横截面不够清晰。
@@ -473,18 +472,18 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 这也让我想到我的硕士论文涉及的纳米浮选原理，将其迁移到这个情况进行推测：吹尘球吹气的操作使指甲顶油中充满微小气泡。而由于棉纤维初生层的蜡质层具有疏水性，更易与气泡相结合，从而在纤维表面形成气泡层。
 
-那么，其他包埋介质在吹气的情况下是否也有这样的现象？
-既然微小气泡能够附着在棉纤维是由于其表面疏水结构，如果破坏了这种疏水性（例如丝光棉处理），使气泡无法附着，那么是否就能减少横截面成像的不清晰？
+那么，其他包埋介质在吹气的情况下是否也有这样的现象？<br>
+既然微小气泡能够附着在棉纤维是由于其表面疏水结构，如果破坏了这种疏水性（例如丝光棉处理），使气泡无法附着，那么是否就能减少横截面成像的不清晰？<br>
 <em style="color: #e67e22;">这或许是个值得探索的方向。</em>
 
 
 <strong class="wow">不同光强下的纤维反白现象</strong>
 
-使用织物硬化剂（白色）时，有硬化剂可能会对纤维产生一定影响的假设。所以当在T02L-HW组的观测中，发现**光线明暗**的条件下（对比01与02，03与04）纤维==内部有部分白色结构==，怀疑是否是织物硬化液对棉纤维造成的影响。于是当时就在不同光强下都拍摄了照片。
+使用织物硬化剂（白色）时，有硬化剂可能会对纤维产生一定影响的假设。所以当在T02L-HW组的观测中，发现**光线明暗**的条件下（对比01与02，03与04）纤维<MARK>内部有部分白色结构</MARK>，怀疑是否是织物硬化液对棉纤维造成的影响。于是当时就在不同光强下都拍摄了照片。
 
 然而只出现了部分纤维有白色结构，无法确认白色结构是由于纤维被破坏还是其自身结构导致，而甘油组只进行了一组拍摄，并无明暗对比。所以再拍摄了一组只滴甘油没有包埋剂的对照组（即T02L-NG-02、03）。
 
-（图片5见英文版：T02L-HW以及T02L-NG同一区域光线明暗时的不同图像）T02L-HW
+（图片5见英文版：T02L-HW以及T02L-NG同一区域光线明暗时的不同图像）
 
 观察结果显示，在甘油组中，同样出现在明暗光线下均呈现白色的区域，**白色区域并非是纤维被破坏的标志**。结合T02L-HW中的纤维形态完好，有天然转曲，呈棉纤维的纵向结构特征，故认为是包埋剂--织物硬化剂（白色）并不对棉纤维产生破坏。
 
@@ -494,14 +493,14 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 
 ### 2026.07.28 ｜硅油纸对横截面测试的影响
-**实验主题**：带有硅油纸的横截面制样尝试
+**实验主题**：带有硅油纸的横截面制样尝试<br>
 **环境参数**：28.8°C  63.5%RH
 
 **实验记录**：
 
 本次实验主要进行了对硅油纸作为棉纤维横截面切割骨架以及包埋介质对硅油纸的影响测试。
 
-首先，在**无包埋剂**的情况下，进行了单独切割硅油纸，以及硅油纸单独包裹棉纤维后切割的实验。
+首先，在**无包埋剂**的情况下，进行了单独切割硅油纸，以及硅油纸单独包裹棉纤维后切割的实验。<br>
 随后进行了，在指甲底油与指甲顶油的包埋剂下，单独切割带有包埋剂的硅油纸，以及在硅油纸上进行纤维的包埋固化后，卷起直接切割（PP）的实验。实验主要集中在指甲顶油作为包埋剂上。
 
 **实验分析**：
@@ -510,22 +509,22 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 先说硅油纸的优点。在制样切割中表现非常出色。在制样切割过程中，硅油纸能提供**很好的骨架支撑**，切片器也能够紧紧卡住，切口整齐（基本可以一刀切断）。这验证了我使用硅油纸作为切割骨架的想法，并且在未来依旧会考虑硅油纸当作切割骨架。
 
-然而，硅油纸存在一个此前未预料到的显著缺点：
+然而，硅油纸存在一个此前未预料到的显著缺点：<br>
 由于使用硅油纸的方法是将其卷起，塞入切片器中压紧，初始阶段缠绕圈数过多，虽然在10x物镜的图像相当清晰，但是换到40x物镜的时候，卷起的纸会***占据大量视野***。
 
-（图6见英文版：硅油纸单独实验的显微镜图像）BPC-T02C-NG
+（图6见英文版：硅油纸单独实验的显微镜图像）
 
-可以在图6中看到，在10x物镜下，硅油纸横截面相当清晰可辨，透光性良好。但是一旦处于40x物镜之下，就几乎无法辨认。在T02C-NG-PS的试验组中即使卷入了纤维，也难以在视野内找到纤维结构，并且整体图像模糊。猜测是由于硅油纸表面的硅油层散射光线，加之==硅油纸的厚度（约0.1mm）远超过单根纤维本身的直径（约在0.01-0.02mm）==，极大的限制了观察。
+可以在图6中看到，在10x物镜下，硅油纸横截面相当清晰可辨，透光性良好。但是一旦处于40x物镜之下，就几乎无法辨认。在T02C-NG-PS的试验组中即使卷入了纤维，也难以在视野内找到纤维结构，并且整体图像模糊。猜测是由于硅油纸表面的硅油层散射光线，加之<MARK>硅油纸的厚度（约0.1mm）远超过单根纤维本身的直径（约在0.01-0.02mm）</MARK>，极大的限制了观察。
 
 通过减少缠绕圈数后可以发现少量纤维，例如T02C-NG-PS-02就是一个棉纤维的斜截面。但整体视野依旧受限。
 
 随后，进行了在硅油纸上薄涂一层指甲底油或者顶油，等待固化后，卷起切割观察的情况。
 
-（图7见英文版：指甲油类包埋剂对硅油纸实验的显微镜图像）BCP-T02C-ZBZT
+（图7见英文版：指甲油类包埋剂对硅油纸实验的显微镜图像）
 
-可以看到，在硅油纸结构上可以看到**包埋剂固化后留下的凸起**，但并不透亮，而是与之前Log1中的横截面一样，出现==白色气泡感区域==。
+可以看到，在硅油纸结构上可以看到**包埋剂固化后留下的凸起**，但并不透亮，而是与之前Log1中的横截面一样，出现<MARK>白色气泡感区域</MARK>。
 
-后又尝试了T02C-ZT-PP，也就是将纤维放置在硅油纸上后进行指甲顶油的薄涂，固化后直接卷起切片观察。
+后又尝试了T02C-ZT-PP，也就是将纤维放置在硅油纸上后进行指甲顶油的薄涂，固化后直接卷起切片观察。<br>
 使用物镜10x和40x分别观察。可以看到，无论是物镜10x还是40x的情况，虽然能够看到附着在上的纤维，但都**无法准确辨认纤维的横截面**。
 
 通过BCP-ZT-01与T02C-ZT-PP-01对比，可以发现，该方法确实可以将纤维紧紧贴在硅油纸骨架上进行切割，但是由于包埋介质根本无法看清其横截面结构。
@@ -539,18 +538,18 @@ SE01-01实验到目前，已经解决的问题有：
 - 证实了硅油纸作为横截面切割骨架的可行性
 
 但是持续的问题，依旧是横截面。接下来需要解决的问题是：
-- 硅油纸作为切割骨架如何==减少影响视野==
-- 包埋剂固化切割后在显微镜下的==可见性与清晰度==
+- 硅油纸作为切割骨架如何<MARK>减少影响视野</MARK>
+- 包埋剂固化切割后在显微镜下的<MARK>可见性与清晰度</MARK>
 
 ## 后续计划：
 
-继续SE01的特别实验。
+继续SE01的特别实验。<br>
 考虑到目前的条件局限性，要尽量利用已有材料以及少采购的情况。
 
 首先引入<strong class="wow">烘烤过后的硅油纸</strong>（***其编号为BB***），由于我使用的硅油纸为烘培纸，我曾经在烘烤披萨的时候发现白色烘培纸在烤后会发黄，推测烘烤过后的硅油纸对于光的散射程度会降低，并且也能与白色烘培纸形成区别。
 
 目前的计划有：
-- 烘烤硅油纸进行横截面切片观察其结构以及对显微镜视野的影响
+- 烘烤硅油纸进行横截面切片观察其结构以及对显微镜视野的影响<br>
 *如果烘烤硅油纸横截面效果比硅油纸佳，则将实验的载体**全部换为烘烤硅油纸。***
 - 继续其他包埋剂的BPC-XX以及T02C-XX-YY系列实验，观察是否其他包埋剂也有一样无法观测问题
 - 优化PA方式（在硅油纸上固化后取出，放入切片器直接切片），尝试增加纤维数量（虽然这会增加样本损耗）
@@ -558,21 +557,21 @@ SE01-01实验到目前，已经解决的问题有：
 如果按照原有计划无法找到合适的包埋方案（预计大概率），则进行下列尝试：
 - 改为<strong class="wow">厚涂</strong>包埋剂，只卷1-2层。为了压紧，外部可以额外再加一个硅油纸卷，来增加外部压力，使其可切性变强，在切片后分离。使用颜色不同的硅油纸增加辨识度，便于分离。（但厚涂可能会加剧散射问题）
 - ***多层包埋***，在硅油纸上先进行UV无影胶（或其他具有显著和硅油纸结构有区别的包埋剂）的固化，让纤维与硅油纸分开，然后再进行包埋固化。
-- 引入==新的包埋介质==：考虑引入<strong class="wow">透明超薄硅胶片</strong>。
+- 引入<MARK>新的包埋介质</MARK>：考虑引入<strong class="wow">透明超薄硅胶片</strong>。
 
 硅油纸的引入本身就是对于包埋的***解构***，将固化以及包埋步骤分开考虑，但是仍旧在观察中产生了问题，其本质还是由于硅油纸本身并非是良好的包埋介质。
 
 目前对UV无影胶作为包埋介质还是存在一定的期待。不过由于其特性，在固化时是否会与指甲油类一致存在微小结构的散光以及应力发白还是需要测试。并且UV无影胶若进行较厚包埋可能会存在**切割困难的情况**。
 
-*但有可能存在所有选择的包埋介质在现有条件下都无法获取清晰的横截面的图像。*
-就选择==研究计划的方案三==，即羊毛纤维包裹切片，进行尝试，先进行羊毛纤维结构的观察，随后使用羊毛纤维包裹T002棉纤维后，进行横截面切片。
+*但有可能存在所有选择的包埋介质在现有条件下都无法获取清晰的横截面的图像。*<br>
+就选择<MARK>研究计划的方案三</MARK>，即羊毛纤维包裹切片，进行尝试，先进行羊毛纤维结构的观察，随后使用羊毛纤维包裹T002棉纤维后，进行横截面切片。<br>
 但是方案三的缺陷很明显：
 - 难以用于对未知纤维的判断
 - 增加第二阶段标记以及辨识难度
 - 第三阶段实验，羊毛纤维可能产生干扰
-所以方案三只能对已知小样进行横截面切片，并且观察及了解其结构。
+<br>所以方案三只能对已知小样进行横截面切片，并且观察及了解其结构。
 
-从实验结构来看，纤维的纵结构已经足够进行大部分纤维的定性观察了，并且在第二阶段以及第三阶段也可以独立推进。
+从实验结构来看，纤维的纵结构已经足够进行大部分纤维的定性观察了，并且在第二阶段以及第三阶段也可以独立推进。<br>
 但是，**纤维横结构可以提供更多的信息**，例如同样是麻纤维，纵结构无法辨别亚麻或是苎麻的区别。并且在第三阶段，如果有横结构，可以更清晰的知道介质是否对纤维的结构产生破坏以及溶胀的信息。
 
 翻阅目前查阅的资料，除使用火棉胶或是专门切片用具以外，缺乏针对非专业设备下的详细横截面切片方法。同时，现有资料中对计算机视觉（AI）对纤维的辨别也大多集中在纤维的纵向结构上。
