@@ -1,6 +1,6 @@
 ---
 layout: projects-layout
-title: Log-01 | Imaging Setup & Slicing Exploration | 成像系统与切片探索
+title: Log01 | Imaging Setup & Slicing Exploration | 成像系统与切片探索
 project: projecta
 sub_project: projecta1
 type: log
