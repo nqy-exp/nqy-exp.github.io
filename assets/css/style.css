@@ -1736,12 +1736,29 @@ font-weight: bold;
     }
 }
 
+/*mark*/
 
 .post-content mark {
-    background: rgba(0, 150, 136, 0.2) !important; /* 青绿色调，极低饱和度 */
+    background: transparent !important;
     color: inherit !important;
-    text-decoration: none !important;
-    padding: 0 4px;
-    border-radius: 4px;
+    position: relative;
     display: inline;
+    z-index: 1;
+}
+
+.post-content mark::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    /* 控制高亮范围 */
+    top: 0.2em; 
+    bottom: 0.1em;
+    left: -2px;
+    right: -2px;
+    
+    /* 核心：非常简单的非对称圆角，模拟笔划感 */
+    border-radius: 4px 10px 3px 8px; 
+    
+    /* 纯色半透明 */
+    background-color: rgba(240, 131, 30, 0.396) !important;
 }

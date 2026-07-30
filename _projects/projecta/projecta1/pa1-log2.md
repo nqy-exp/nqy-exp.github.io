@@ -70,7 +70,7 @@ Cotton is the most commonly used natural fiber material in daily life. Furthermo
     - Apply medium to parchment paper - after solidify remove fiber, roll into **new parchment paper** - slice in slicer and observe.
     - Apply medium to parchment paper - after solidify, roll up together with the parchment paper - slice in slicer and observe.
     - Do not use embedding media, roll fibers and parchment paper directly - slice and observe.
-    - ~~Do not use embedding media, roll fibers and parchment paper directly -slice and then remove the parchment paper to observe ~~(*Abandoned. Upon testing, the parchment paper binds tightly with the fibers after slicing; peeling is difficult and easily causes fiber loss.*)
+    - <del>Do not use embedding media, roll fibers and parchment paper directly - slice and then remove the parchment paper to observe</del> (*Abandoned. Upon testing, the parchment paper binds tightly with the fibers after slicing; peeling is difficult and easily causes fiber loss.*)
 
 
 ### **Numbering Abbreviations:**
