@@ -101,4 +101,4 @@ Updated title and special font colors to create visual hierarchy, improving read
 
 <em>2026.07.30</em>
 
-更新了一下各类字体，增加了视觉层级，让阅读更为便利，
+更新了一下标题以及特殊字体的颜色，增加了视觉层级，让阅读更为便利，方便快速浏览获得信息。
