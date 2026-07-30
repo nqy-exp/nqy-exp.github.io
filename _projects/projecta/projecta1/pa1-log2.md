@@ -238,7 +238,7 @@ Because the method involves rolling up the parchment paper and pressing it tight
 </figure>
 
 
-As seen in Figure 6, the parchment paper's cross-section is quite clear and distinguishable under a 10x objective lens, with good light transmittance. However, once under a 40x objective lens, it becomes almost unrecognizable. In the T02C-NG-PS experimental group, even with fibers rolled inside, it is difficult to find the fiber structures within the field of view, and the overall image is blurry. It is suspected that the silicone oil layer on the surface of the parchment paper causes light scattering, combined with the fact that the parchment <mark>paper's thickness (approx. 0.1 mm)</mark>, far exceeds the diameter of a single fiber (approx. 0.01-0.02 mm) which greatly limits observation.
+As seen in Figure 6, the parchment paper's cross-section is quite clear and distinguishable under a 10x objective lens, with good light transmittance. However, once under a 40x objective lens, it becomes almost unrecognizable. In the T02C-NG-PS experimental group, even with fibers rolled inside, it is difficult to find the fiber structures within the field of view, and the overall image is blurry. It is suspected that the silicone oil layer on the surface of the parchment paper causes light scattering, combined with the fact that the parchment <mark>paper's thickness (approx. 0.1 mm) far exceeds the diameter of a single fiber (approx. 0.01-0.02 mm)</mark>, which greatly limits observation.
 
 By reducing the number of windings, some fibers can be observed; for example, T02C-NG-PS-02 shows an oblique cross-section of a cotton fiber. However, the overall field of view remains restricted.
 
@@ -514,7 +514,7 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 （图6见英文版：硅油纸单独实验的显微镜图像）
 
-可以在图6中看到，在10x物镜下，硅油纸横截面相当清晰可辨，透光性良好。但是一旦处于40x物镜之下，就几乎无法辨认。在T02C-NG-PS的试验组中即使卷入了纤维，也难以在视野内找到纤维结构，并且整体图像模糊。猜测是由于硅油纸表面的硅油层散射光线，加之<mark>硅油纸的厚度</mark>,（约0.1mm）远超过单根纤维本身的直径（约在0.01-0.02mm），极大的限制了观察。
+可以在图6中看到，在10x物镜下，硅油纸横截面相当清晰可辨，透光性良好。但是一旦处于40x物镜之下，就几乎无法辨认。在T02C-NG-PS的试验组中即使卷入了纤维，也难以在视野内找到纤维结构，并且整体图像模糊。猜测是由于硅油纸表面的硅油层散射光线，加之<mark>硅油纸的厚度（约0.1mm）远超过单根纤维本身的直径（约在0.01-0.02mm）</mark>，极大的限制了观察。
 
 通过减少缠绕圈数后可以发现少量纤维，例如T02C-NG-PS-02就是一个棉纤维的斜截面。但整体视野依旧受限。
 
