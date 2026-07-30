@@ -1739,26 +1739,21 @@ font-weight: bold;
 /*mark*/
 
 .post-content mark {
-    background: transparent !important;
+    /* 1. 直接使用背景色，而不是伪元素 */
+    /* 使用你喜欢的颜色，这里沿用你的 rgba 值 */
+    background-color: rgba(240, 131, 30, 0.3) !important; 
+    
     color: inherit !important;
-    position: relative;
-    display: inline;
-    z-index: 1;
-}
+    text-decoration: none !important;
 
-.post-content mark::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    /* 控制高亮范围 */
-    top: 0.2em; 
-    bottom: 0.1em;
-    left: -2px;
-    right: -2px;
+    /* 2. 关键：让高亮在换行时“分身” */
+    /* 这会让每一行的边缘都拥有独立的 padding 和圆角，而不是被拉伸成一个大长方形 */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+    /* 3. 设置间距和圆角 */
+    padding: 0 6px;      /* 左右留白 */
+    border-radius: 4px;  /* 圆角 */
     
-    /* 核心：非常简单的非对称圆角，模拟笔划感 */
-    border-radius: 4px 10px 3px 8px; 
-    
-    /* 纯色半透明 */
-    background-color: rgba(240, 131, 30, 0.396) !important;
+    display: inline;     /* 必须是 inline */
 }
