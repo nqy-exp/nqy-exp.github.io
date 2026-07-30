@@ -161,7 +161,7 @@ In other words, the primary components of current embedding media are mainly acr
 
 Additionally, due to personal operational issues during the experiment, two interesting phenomena were observed.
 
-<strong class="wow">Micro-bubbles caused by blowing air</strong>
+🫧<strong>Micro-bubbles caused by blowing air</strong>
 
 During the operation of T02L-ZT, due to rushing during the process, a dust blower was used to <MARK>blow air</MARK> onto the fibers in the embedding medium to accelerate solidification.
 
@@ -187,7 +187,7 @@ Since the attachment of micro-bubbles to cotton fibers is due to its surface hyd
 
 <em style="color: #e67e22;">This might be a direction worth exploring.</em>
 
-<strong class="wow">Fiber whitening phenomenon under different light intensities</strong>
+💡<strong>Fiber whitening phenomenon under different light intensities</strong>
 
 While using fabric hardener (white), I operated under the hypothesis that the hardener might affect the fibers. During observations of the T02L-HW group, <MARK>partial white structures</MARK> were observed inside the fibers under **different lighting** conditions (comparing 01 with 02 and 03 with 04). This raised suspicion as to whether the fabric hardener was affecting the cotton fibers; therefore, photographs were taken under various light intensities at that time.
 
@@ -457,7 +457,7 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 
 此外，在实验过程中因个人操作问题，还观察到了两个有趣的现象。
 
-<strong class="wow">吹气操作导致的微小气泡</strong>
+🫧<strong>吹气操作导致的微小气泡</strong>
 
 在操作T02L-ZT时，由于操作时心急，所以使用了吹尘球对在包埋剂中的纤维<MARK>吹气</MARK>，使其加速固化。
 
@@ -477,7 +477,7 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 <em style="color: #e67e22;">这或许是个值得探索的方向。</em>
 
 
-<strong class="wow">不同光强下的纤维反白现象</strong>
+💡<strong>不同光强下的纤维反白现象</strong>
 
 使用织物硬化剂（白色）时，有硬化剂可能会对纤维产生一定影响的假设。所以当在T02L-HW组的观测中，发现**光线明暗**的条件下（对比01与02，03与04）纤维<MARK>内部有部分白色结构</MARK>，怀疑是否是织物硬化液对棉纤维造成的影响。于是当时就在不同光强下都拍摄了照片。
 

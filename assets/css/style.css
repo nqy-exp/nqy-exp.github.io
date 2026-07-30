@@ -1738,7 +1738,7 @@ font-weight: bold;
 
 
 .post-content mark {
-    background: rgba(0, 188, 212, 0.2) !important; /* 使用极淡的青绿色 */
+    background: rgba(0, 150, 136, 0.2) !important; /* 青绿色调，极低饱和度 */
     color: inherit !important;
     text-decoration: none !important;
     padding: 0 4px;
