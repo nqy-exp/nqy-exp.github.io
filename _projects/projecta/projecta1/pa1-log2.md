@@ -1,6 +1,6 @@
 ---
 layout: projects-layout
-title: Log02 | SE01 Cross-sectional Method Exploration I |横截面方案探索 I
+title: Log02 | SE01 Cross-sectional Method Exploration I | 横截面方案探索 I
 project: projecta
 sub_project: projecta1
 type: log
