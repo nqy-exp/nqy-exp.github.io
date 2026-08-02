@@ -246,12 +246,12 @@ Next, experiments were conducted by applying a thin layer of either nail base co
 
 
 <figure style="text-align: center; margin: 2em 0;">
-  <img src="/images/BCP-T02C-ZBZT.jpg" alt="Figure 7: Microscopic images of nail polish-type embedding media on parchment paper" style="max-width: 800px; height: auto; border-radius: 4px;">
+  <img src="/images/BPC-T02C-ZBZT.jpg" alt="Figure 7: Microscopic images of nail polish-type embedding media on parchment paper" style="max-width: 800px; height: auto; border-radius: 4px;">
   <figcaption style="font-size: 0.85em; color: #555; font-style: italic; margin-top: 10px;">
     Figure 7: Microscopic images of nail polish-type embedding media on parchment paper
   </figcaption>
 </figure>
-
+(*Erratum: Image code BPC-ZT-01 was miswritten as BCP-ZT-01.*)
 
 It can be seen that **protrusions left by the solidified embedding media** are visible on the parchment paper structure, but they are not transparent; instead, they exhibit <MARK>white, bubble-like areas</MARK>, similar to the cross-sections observed in Log-01.
 
@@ -521,6 +521,9 @@ As a purely curiosity-driven exploration project, I have no time constraints, my
 随后，进行了在硅油纸上薄涂一层指甲底油或者顶油，等待固化后，卷起切割观察的情况。
 
 （图7见英文版：指甲油类包埋剂对硅油纸实验的显微镜图像）
+
+（*BPC-ZT-01图片编号误写成BCP-ZT-01，在此勘误*）
+
 
 可以看到，在硅油纸结构上可以看到**包埋剂固化后留下的凸起**，但并不透亮，而是与之前Log1中的横截面一样，出现<MARK>白色气泡感区域</MARK>。
 
