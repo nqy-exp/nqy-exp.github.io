@@ -213,7 +213,48 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
         display: none !important;
     }
 }
+/* =========================================
+   导航区背景实验
+   ========================================= */
+/* 【核心】导航区氛围背景容器 */
+.nav-ambient-bg {
+  position: absolute;
+  /* 将其定位在右侧导航区域的后方 */
+  right: 0;            
+  top: 50%;            /* 垂直居中 */
+  transform: translateY(-50%); 
+  
+  /* 控制氛围层的范围：不要让它铺满全屏，只覆盖右侧导航区 */
+  width: 350px;        /* 根据你的菜单长度调整这个宽度 */
+  height: 100%;
+  
+  z-index: -1;         /* 【关键】确保它在 nav-menu 文字的后面 */
+  pointer-events: none; /* 【关键】确保鼠标点击可以穿透背景，直接点到链接上 */
+}
 
+.nav-ambient-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  
+  /* 【核心艺术处理】 */
+  opacity: 0.04;       /* 极低的透明度：营造“若隐若现”的感觉 */
+  filter: blur(8px);   /* 【关键】增加模糊度，让它看起来像是一团光影，而不是一个生硬的图形 */
+  transform: rotate(-15deg); /* 轻微旋转，增加艺术化的不对称感 */
+}
+
+/* 确保桌面端导航菜单本身是相对定位，以便层级正确 */
+.desktop-nav {
+  position: relative;
+  z-index: 2;          /* 确保文字在氛围背景之上 */
+}
+
+/* --- 移动端适配 (防止在手机上出现奇怪的背景) --- */
+@media (max-width: 768px) {
+  .nav-ambient-bg {
+    display: none;     /* 在移动端隐藏，因为移动端菜单是全屏或抽屉式的，不需要这种局部氛围 */
+  }
+}
 
 
 /* =========================================
