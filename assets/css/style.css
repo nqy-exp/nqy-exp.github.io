@@ -345,7 +345,7 @@ display: flex;
   object-fit: contain;
   
   /* 【艺术化处理：实现“光晕”效果】 */
-  opacity: 0.05;       /* 极低的透明度：让它看起来像是一种若隐若现的影子 */
+  opacity: 0.5;       /* 极低的透明度：让它看起来像是一种若隐若现的影子 */
   filter: blur(30px);  /* 【关键】大幅度模糊：把 Logo 变成一团“光影”，而不是一个图形 */
   transform: rotate(-15deg); /* 轻微旋转，增加动态的不对称美感 */
 }
