@@ -318,37 +318,8 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%); /* 完美的几何中心对齐 */
 text-align: center;
-
-display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-/* 【核心】氛围背景层容器 */
-.center-nav-ambient {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* 让 Logo 在导航区中心对齐 */
-  
-  /* 【关键】控制背景的大小。要比文字区域大，才能形成“晕染”感 */
-  width: 350px;  /* 根据你的需求调整大小 */
-  height: 350px;
-  
-  z-index: -1;         /* 【关键】确保它在 h2 和 links 的下面 */
-  pointer-events: none; /* 【关键】防止背景干扰链接的点击 */
 }
 
-.center-ambient-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  
-  /* 【艺术化处理：实现“光晕”效果】 */
-  opacity: 0.5;       /* 极低的透明度：让它看起来像是一种若隐若现的影子 */
-  filter: blur(30px);  /* 【关键】大幅度模糊：把 Logo 变成一团“光影”，而不是一个图形 */
-  transform: rotate(-15deg); /* 轻微旋转，增加动态的不对称美感 */
-}
 
 .center-nav h2 {
 font-size: 0.8em;
