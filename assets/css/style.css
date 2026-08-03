@@ -1770,13 +1770,9 @@ font-weight: bold;
   opacity: 0.4;            /* 保持一种半透明的、若隐若现的感觉 */
 }
 .icon-sign {
-  width: 5px;             /* 极小的尺寸，像一个微小的印章 */
-  height: 5px;
+  width: 10px;             /* 极小的尺寸，像一个微小的印章 */
+  height: 10px;
   object-fit: contain;
-  
-  /* 将图标处理成一种“压痕”或“水印”的效果 */
-  filter: grayscale(1) contrast(0.8); /* 转为灰度并降低对比度，使其不突兀 */
-  
   /* 彻底移除所有交互动画的可能性 */
   pointer-events: none;    /* 确保鼠标滑过时完全没有任何反应 */
   user-select: none;       /* 防止用户意外选中它 */
