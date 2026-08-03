@@ -1762,8 +1762,8 @@ font-weight: bold;
 }
 
 .icon-sign {
-  width: 12px;             /* 极小的尺寸，像一个微小的印章 */
-  height: 12px;
+  width: 15px;             /* 极小的尺寸，像一个微小的印章 */
+  height: 15px;
   object-fit: contain;
   vertical-align: middle; 
   /* 彻底移除所有交互动画的可能性 */
