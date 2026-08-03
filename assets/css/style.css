@@ -213,54 +213,7 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
         display: none !important;
     }
 }
-/* =========================================
-   导航区背景实验
-   ========================================= */
-/* 【核心】导航区氛围背景容器 */
-.nav-ambient-bg {
-  position: absolute;
-  /* 将其定位在右侧导航区域的后方 */
-  right: 0;            
-  top: 50%;            /* 垂直居中 */
-  transform: translateY(-50%); 
-  
-  /* 控制氛围层的范围：不要让它铺满全屏，只覆盖右侧导航区 */
-  width: 350px;        /* 根据你的菜单长度调整这个宽度 */
-  height: 100%;
-  
-  z-index: -1;         /* 【关键】确保它在 nav-menu 文字的后面 */
-  pointer-events: none; /* 【关键】确保鼠标点击可以穿透背景，直接点到链接上 */
 
-  /* --- 调试专用代码 --- */
-  background-color: red !important; /* 如果你看不到红色，说明元素根本没渲染出来 */
-  opacity: 1 !important;           /* 强制显示，不让透明度干扰判断 */
-  z-index: 10 !important;          /* 强行提到最前面 */
-  /* ------------------ */
-}
-
-.nav-ambient-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  
-  /* 【核心艺术处理】 */
-  opacity: 0.04;       /* 极低的透明度：营造“若隐若现”的感觉 */
-  filter: blur(8px);   /* 【关键】增加模糊度，让它看起来像是一团光影，而不是一个生硬的图形 */
-  transform: rotate(-15deg); /* 轻微旋转，增加艺术化的不对称感 */
-}
-
-/* 确保桌面端导航菜单本身是相对定位，以便层级正确 */
-.desktop-nav {
-  position: relative;
-  z-index: 2;          /* 确保文字在氛围背景之上 */
-}
-
-/* --- 移动端适配 (防止在手机上出现奇怪的背景) --- */
-@media (max-width: 768px) {
-  .nav-ambient-bg {
-    display: none;     /* 在移动端隐藏，因为移动端菜单是全屏或抽屉式的，不需要这种局部氛围 */
-  }
-}
 
 
 /* =========================================
@@ -365,8 +318,37 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%); /* 完美的几何中心对齐 */
 text-align: center;
+
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* 【核心】氛围背景层容器 */
+.center-nav-ambient {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 让 Logo 在导航区中心对齐 */
+  
+  /* 【关键】控制背景的大小。要比文字区域大，才能形成“晕染”感 */
+  width: 350px;  /* 根据你的需求调整大小 */
+  height: 350px;
+  
+  z-index: -1;         /* 【关键】确保它在 h2 和 links 的下面 */
+  pointer-events: none; /* 【关键】防止背景干扰链接的点击 */
 }
 
+.center-ambient-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  
+  /* 【艺术化处理：实现“光晕”效果】 */
+  opacity: 0.05;       /* 极低的透明度：让它看起来像是一种若隐若现的影子 */
+  filter: blur(30px);  /* 【关键】大幅度模糊：把 Logo 变成一团“光影”，而不是一个图形 */
+  transform: rotate(-15deg); /* 轻微旋转，增加动态的不对称美感 */
+}
 
 .center-nav h2 {
 font-size: 0.8em;

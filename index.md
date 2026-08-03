@@ -19,6 +19,9 @@ description: "A digital log of my research and thoughts."
 
   <!-- 中间导航 -->
   <div class="center-nav">
+    <div class="center-nav-ambient">
+     <img src="/images/favicon-180x180.png" alt="" class="center-ambient-logo">
+    </div>
     <h2>Navigation | 板块导航</h2>
     <div class="center-links">
       <a href="/about/">About me</a>
