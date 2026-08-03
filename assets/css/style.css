@@ -1765,13 +1765,13 @@ font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center; /* 居中，营造仪式感 */
-  gap: 6px;                /* 微小的间距 */
-  margin: 80px auto 60px auto; /* 给文章留出大量的呼吸空间，让签名显得孤傲 */
+  gap: 3px;                /* 微小的间距 */
+  margin: 20px auto 20px auto; /* 给文章留出大量的呼吸空间，让签名显得孤傲 */
   opacity: 0.4;            /* 保持一种半透明的、若隐若现的感觉 */
 }
 .icon-sign {
-  width: 12px;             /* 极小的尺寸，像一个微小的印章 */
-  height: 12px;
+  width: 5px;             /* 极小的尺寸，像一个微小的印章 */
+  height: 5px;
   object-fit: contain;
   
   /* 将图标处理成一种“压痕”或“水印”的效果 */
@@ -1786,4 +1786,9 @@ font-weight: bold;
 .article-sign-off:hover {
   opacity: 0.4;            /* 强制维持原有的低透明度 */
   transform: none !important;
+}
+@media (max-width: 768px) {
+  .article-sign-off {
+    margin: 60px auto 40px auto;
+  }
 }
