@@ -8,111 +8,66 @@ background-color: #fffdfa;
 }
 
 
-/* =========================================
-   2. 自定义 Header (集成 Logo 品牌版)
+/*/* =========================================
+   2. 自定义 Header (顶部导航栏) - 响应式增强版
    ========================================= */
 
+
 .my-custom-header {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-  padding: 15px 40px;
-  border-bottom: 1px solid #eee;
-  background-color: rgba(255, 255, 255, 0.9);
-  position: sticky; 
-  top: 0;
-  z-index: 3000 !important;
+display: flex; 
+/* 【核心修复】确保左边是标题，右边是菜单，中间留空 */
+justify-content: space-between; 
+align-items: center;
+padding: 15px 40px;
+border-bottom: 1px solid #eee;
+background-color: rgba(255, 255, 255, 0.9);
+position: sticky; /* 让 header 粘在顶部 */
+top: 0;
+z-index: 3000 !important;
 }
 
-/* 左侧组合容器 */
+
+/* 左侧组合容器：包含汉堡按钮和标题 */
 .header-left {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* 汉堡按钮与品牌单元之间的间距 */
-  margin-right: auto; 
+display: flex;
+align-items: center;
+gap: 15px; /* 按钮和标题之间的距离 */
+/* 确保左侧部分不会被挤向中间 */
+margin-right: auto; 
 }
 
-/* 【核心新增】品牌单元：Logo + 文字的组合体 */
-.header-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Logo 与文字之间的呼吸感间距 */
-  text-decoration: none !important;
-  transition: opacity 0.3s ease;
-}
 
-.header-brand:hover {
-  opacity: 0.8; /* 整体悬停时轻微透明，增加交互高级感 */
-}
-
-/* 【核心新增】Logo 图片样式 */
-.header-logo {
-  width: 28px;  /* 控制 Logo 大小，与文字视觉对齐 */
-  height: 28px;
-  object-fit: contain;
-  display: block;
-}
-
-/* 【重构】标题基础样式 */
+/* 标题基础样式 */
 .header-title {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #333;
-  text-decoration: none !important;
-  position: relative;     
-  display: inline-block;  
-  padding-bottom: 4px;    
-  transition: color 0.3s ease; 
+font-weight: bold;
+font-size: 1.2em;
+color: #333;
+text-decoration: none !important;
+position: relative;     
+display: inline-block;  
+padding-bottom: 4px;    
+transition: color 0.3s ease; 
 }
 
-/* 【优化】标题下方的橙色装饰线：现在改为在 hover 整个 brand 时触发 */
+
+/* 标题下方的橙色装饰线 */
 .header-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;            
-  background-color: #e67e22; 
-  transform: scaleX(0);   
-  transform-origin: center; 
-  transition: transform 0.3s ease;
-  pointer-events: none; 
+content: "";
+position: absolute;
+left: 0;
+bottom: 0;
+width: 100%;
+height: 2px;            
+background-color: #e67e22; 
+transform: scaleX(0);   
+transform-origin: center; 
+transition: transform 0.3s ease;
+pointer-events: none; 
 }
 
-/* 当鼠标悬停在整个品牌单元时，标题下的线展开 */
-.header-brand:hover .header-title::after {
-  transform: scaleX(1);   
-}
 
-/* --- 移动端适配部分 (保持你原有的逻辑并优化对齐) --- */
-
-@media (max-width: 768px) {
-  .my-custom-header {
-    justify-content: center !important; /* 确保 Header 在移动端居中 */
-    padding: 0 20px !important;
-    height: 60px !important;
-  }
-
-  .header-left {
-    width: 100% !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: center !important; /* 确保 Logo + 文字 在移动端居中 */
-  }
-  
-  /* 如果在手机上觉得 Logo 太大，可以微调这个值 */
-  .header-logo {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* 桌面端隐藏汉堡包 */
-@media (min-width: 769px) {
-  .hamburger-btn {
-    display: none !important;
-  }
+.header-title:hover::after {
+transform: scaleX(1);   
 }
 
 
@@ -174,6 +129,20 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
 .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
+@media (min-width: 769px) {
+    /* 在桌面端，汉堡包完全不存在，不占任何空间 */
+    .hamburger-btn {
+        display: none !important;
+    }
+
+    /* 确保标题和导航在两端对齐 */
+    .header-left {
+        margin-right: auto; 
+    }
+    .desktop-nav {
+        margin-left: auto;
+    }
+}
 
 /* ============================================================
    响应式媒体查询 (针对手机/小屏幕)
