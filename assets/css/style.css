@@ -230,6 +230,12 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的动画 */
   
   z-index: -1;         /* 【关键】确保它在 nav-menu 文字的后面 */
   pointer-events: none; /* 【关键】确保鼠标点击可以穿透背景，直接点到链接上 */
+
+  /* --- 调试专用代码 --- */
+  background-color: red !important; /* 如果你看不到红色，说明元素根本没渲染出来 */
+  opacity: 1 !important;           /* 强制显示，不让透明度干扰判断 */
+  z-index: 10 !important;          /* 强行提到最前面 */
+  /* ------------------ */
 }
 
 .nav-ambient-logo {
