@@ -1772,21 +1772,21 @@ font-weight: bold;
 }
 
 /* =========================================
-   【终极版】悬浮斜角流光标签 (Floating Slanted Shimmer Tag)
+   【极致精悍版】微型胶囊 + 斜角流光标签
    ========================================= */
 
-/* 1. 视口容器 */
+/* 1. 视口容器：大幅缩小宽度，让它紧贴内容 */
 main.hero-container .marquee-viewport {
     position: absolute !important;
     top: 40px !important;
-    right: 20px !important; /* 稍微往左挪一点，给斜角标签留空间 */
-    width: 230px !important;
-    height: 55px !important;
-    overflow: visible !important; /* 【关键】必须为 visible，否则悬浮的 New 会被切掉 */
+    right: 10px !important;         /* 靠右侧更紧凑 */
+    width: 170px !important;        /* 【修改】大幅缩小容器宽度 */
+    height: 45px !important;        /* 【修改】高度调小，适应微型气泡 */
+    overflow: visible !important;   /* 允许 New 标签溢出 */
     z-index: 9999 !important;
     display: block !important;
 
-    /* 上下渐隐遮罩：依然保留，但因为 overflow 是 visible，它只会影响泡泡本身 */
+    /* 上下渐隐遮罩 */
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
 }
@@ -1795,104 +1795,76 @@ main.hero-container .marquee-viewport {
 main.hero-container .marquee-track {
     display: flex !important;
     flex-direction: column !important;
-    gap: 15px !important; /* 增加间距，给悬浮标签留出呼吸空间 */
+    gap: 10px !important;           /* 泡泡之间的垂直间距变小 */
     animation: step-jump-final 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite !important;
 }
 
-/* 3. 泡泡包装层 (作为定位基准) */
-main.hero-container .marquee-item-wrapper {
-    position: relative !important; /* 【关键】让 New 标签能相对于此进行绝对定位 */
+/* 3. 【微型胶囊】容器样式 */
+main.hero-container .marquee-item {
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
-    height: 45px !important; /* 泡泡高度 */
-    flex-shrink: 0 !important;
+    justify-content: flex-start !important; /* 【修改】不再两端对齐，改为左对齐 */
+    width: 100% !important;
+    height: 32px !important;        /* 【修改】气泡高度大幅度减小，更显精悍 */
+    padding: 4px 12px !important;   /* 【修改】内边距变窄 */
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 16px !important; /* 对应高度的圆角，保持胶囊感 */
+    border: 1px solid rgba(230, 126, 34, 0.15) !important;
+    text-decoration: none !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* 4. 【核心】斜角悬浮 New 标签 (模仿图片效果) */
+/* 4. 【斜角流光标签】微调位置 */
 main.hero-container .new-shimmer-tag {
     position: absolute !important;
-    top: -12px !important;         /* 向外弹出，悬浮在泡泡边缘上方 */
-    left: -8px !important;         /* 向左侧偏移 */
-    z-index: 10001 !important;     /* 确保在最顶层 */
-    padding: 2px 8px !important;
+    top: -8px !important;           /* 稍微向上悬浮 */
+    left: -2px !important;          /* 贴近左侧边缘 */
+    z-index: 10001 !important;
+    transform: rotate(-15deg) !important;
     
-    /* 旋转角度：模仿图片中的斜角 */
-    transform: rotate(-15deg) !important; 
-    
-    /* 【炫彩流光效果】 */
-    font-size: 0.7em !important;
+    font-size: 0.6em !important;    /* 字号调小 */
     font-weight: 900 !important;
-    text-transform: uppercase !important;
-    background: linear-gradient(
-        to right, 
-        #e67e22 0%, 
-        #ffcf9d 50%, 
-        #e67e22 100%
-    ) !important;
+    background: linear-gradient(to right, #e67e22 0%, #ffcf9d 50%, #e67e22 100%) !important;
     background-size: 200% auto !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     animation: shimmer-blink 2s linear infinite !important;
-    
-    /* 为了让斜角标签更有质感，可以加一个微弱的阴影 */
-    filter: drop-shadow(0 2px 3px rgba(230, 126, 34, 0.3)) !important;
 }
 
+/* 5. 文字内容：解决间距问题 */
+main.hero-container .m-title {
+    font-size: 0.7em !important;    /* 字号微调 */
+    color: #333 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-right: 6px !important;   /* 【核心】不再用 flex-grow，改用固定的右间距 */
+}
+
+main.hero-container .m-date {
+    font-size: 0.6em !important;    /* 日期也变小 */
+    color: #999 !important;
+    font-family: monospace !important;
+    flex-shrink: 0 !important;      /* 防止日期被压缩 */
+}
+
+/* 6. 动画逻辑保持不变 */
 @keyframes shimmer-blink {
     0% { background-position: 200% center; }
     100% { background-position: -200% center; }
 }
 
-/* 5. 胶囊泡泡本身 */
-main.hero-container .marquee-item {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-    height: 100% !important;
-    padding: 6px 14px !important;
-    background: rgba(255, 255, 255, 0.85) !important;
-    border-radius: 30px !important;
-    border: 1px solid rgba(230, 126, 34, 0.2) !important;
-    text-decoration: none !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
-}
-
-main.hero-container .m-title {
-    font-size: 0.75em !important;
-    color: #333 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    flex-grow: 1 !important;
-}
-
-main.hero-container .m-date {
-    font-size: 0.65em !important;
-    color: #999 !important;
-    margin-left: 8px !important;
-    font-family: monospace !important;
-    flex-shrink: 0 !important;
-}
-
-/* 6. 跳跃动画 */
 @keyframes step-jump-final {
     0%, 30% { transform: translateY(0); }
-    35%, 65% { transform: translateY(calc(-1 * (45px + 12px))); }
-    70%, 95% { transform: translateY(calc(-2 * (45px + 12px))); }
-    100% { transform: translateY(calc(-3 * (45px + 12px))); }
+    35%, 65% { transform: translateY(calc(-1 * (32px + 10px))); } /* 基于新高度调整 */
+    70%, 95% { transform: translateY(calc(-2 * (32px + 10px))); }
+    100% { transform: translateY(calc(-3 * (32px + 10px))); }
 }
 
-/* 悬停停止 */
-main.hero-container .marquee-viewport:hover .marquee-track {
-    animation-play-state: paused !important;
-}
-
-/* 移动端适配 */
+/* 移动端适配：彻底隐藏 */
 @media (max-width: 768px) {
     main.hero-container .marquee-viewport {
-        display: none !important; /* 彻底隐藏 */
+        display: none !important;
     }
 }
