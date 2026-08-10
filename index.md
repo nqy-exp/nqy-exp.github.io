@@ -7,34 +7,33 @@ description: "A digital log of my research and thoughts."
 <!-- 核心视觉区 -->
 <main class="hero-container">
 
-<!-- 最近更新垂直滚动流 -->
-<div class="marquee-viewport">
-  <div class="marquee-track">
-    {% assign all_updates = site.ideas | concat: site.projects | sort: 'date' | reverse %}
-    
-    {% comment %} 第一遍循环：抓取真实文章 {% endcomment %}
-    {% for item in all_updates %}
-      {% if item.title contains "Index" or item.url contains "index" %}
-        {% continue %}
-      {% endif %}
-      <a href="{{ item.url }}" class="marquee-item">
-        <span class="m-title">{{ item.title | truncate: 15 }}</span>
-        <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-      </a>
-    {% endfor %}
+  <!-- 【必须放在这里！】最近更新动态气泡集群 -->
+  {% assign all_updates = site.ideas | concat: site.projects | sort: 'date' | reverse %}
+  {% assign top_three = all_updates | slice: 0, 3 %}
 
-    {% comment %} 第二遍循环：完全复制一遍，实现无缝衔接的视觉欺骗 {% endcomment %}
-    {% for item in all_updates %}
-      {% if item.title contains "Index" or item.url contains "index" %}
-        {% continue %}
-      {% endif %}
-      <a href="{{ item.url }}" class="marquee-item">
-        <span class="m-title">{{ item.title | truncate: 15 }}</span>
-        <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-      </a>
-    {% endfor %}
+  <div class="marquee-viewport">
+    <div class="marquee-track">
+      {% for item in top_three %}
+        {% if item.title contains "Index" or item.url contains "index" %}
+          {% continue %}
+        {% endif %}
+        <a href="{{ item.url }}" class="marquee-item">
+          <span class="m-title">{{ item.title | truncate: 15 }}</span>
+          <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+        </a>
+      {% endfor %}
+
+      {% for item in top_three %}
+        {% if item.title contains "Index" or item.url contains "index" %}
+          {% continue %}
+        {% endif %}
+        <a href="{{ item.url }}" class="marquee-item">
+          <span class="m-title">{{ item.title | truncate: 15 }}</span>
+          <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+        </a>
+      {% endfor %}
+    </div>
   </div>
-</div>
 
 
   <!-- 左上方内容 -->

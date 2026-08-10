@@ -1772,103 +1772,84 @@ font-weight: bold;
 }
 
 /* =========================================
-   垂直滚动泡泡流 (Vertical Rolling Marquee)
+   垂直滚动泡泡流 (修复版)
    ========================================= */
 
-.marquee-viewport {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    width: 180px;           /* 固定宽度 */
-    height: 50px;           /* 【关键】高度只够显示一个完整泡泡的高度 */
-    overflow: hidden;       /* 隐藏超出部分 */
-    z-index: 1000;
-    
-    /* 【核心】上下渐隐遮罩：让上下露出的“一半”泡泡看起来是逐渐消失的 */
-    mask-image: linear-gradient(
-        to bottom, 
-        transparent 0%, 
-        black 30%, 
-        black 70%, 
-        transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-        to bottom, 
-        transparent 0%, 
-        black 30%, 
-        black 70%, 
-        transparent 100%
-    );
+/* 1. 确保父容器有定位基准 */
+main.hero-container {
+    position: relative !important;
 }
 
-.marquee-track {
-    display: flex;
-    flex-direction: column; /* 纵向排列 */
-    gap: 10px;              /* 泡泡之间的间距 */
-    animation: vertical-scroll 20s linear infinite; /* 滚动动画 */
+/* 2. 视口容器：控制可见区域和遮罩 */
+main.hero-container .marquee-viewport {
+    position: absolute !important;
+    top: 40px !important;       /* 距离顶部高度 */
+    right: 40px !important;     /* 距离右侧宽度 */
+    width: 180px !important;    /* 【关键】强制限制宽度，防止撑开页面 */
+    height: 50px !important;    /* 【关键】高度只显示一个泡泡 */
+    overflow: hidden !important; /* 隐藏多余的泡泡 */
+    z-index: 9999 !important;   /* 确保在最顶层 */
+    display: block !important;
+
+    /* 上下渐隐遮罩 */
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
 }
 
-/* 当鼠标悬停时，停止滚动，方便用户点击 */
-.marquee-viewport:hover .marquee-track {
-    animation-play-state: paused;
+/* 3. 滚动轨道：控制垂直排列和动画 */
+main.hero-container .marquee-track {
+    display: flex !important;
+    flex-direction: column !important; /* 【核心】强制纵向排列 */
+    gap: 10px !important;
+    animation: vertical-scroll-fix 15s linear infinite !important;
 }
 
-.marquee-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 15px;
-    background: rgba(255, 255, 255, 0.8);
+/* 4. 单个泡泡样式 */
+main.hero-container .marquee-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 6px 14px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(230, 126, 34, 0.2);
-    border-radius: 30px;
+    border-radius: 30px !important;
+    border: 1px solid rgba(230, 126, 34, 0.2) !important;
     text-decoration: none !important;
-    transition: all 0.3s ease;
-    flex-shrink: 0; /* 防止泡泡被压缩 */
+    flex-shrink: 0 !important; /* 防止泡泡被压缩 */
 }
 
-.marquee-item:hover {
-    background: #fff;
-    border-color: #e67e22;
-    transform: scale(1.05);
+main.hero-container .m-title {
+    font-size: 0.75em !important;
+    color: #333 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 90px !important;
 }
 
-.m-title {
-    font-size: 0.75em;
-    color: #333;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 90px;
+main.hero-container .m-date {
+    font-size: 0.65em !important;
+    color: #999 !important;
+    margin-left: 5px !important;
+    font-family: monospace !important;
 }
 
-.m-date {
-    font-size: 0.65em;
-    color: #999;
-    font-family: monospace;
+/* 5. 动画逻辑 */
+@keyframes vertical-scroll-fix {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(-50% - 5px)); } /* 移动一半的距离实现无缝循环 */
 }
 
-/* 【核心】滚动动画逻辑 */
-@keyframes vertical-scroll {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        /* 向上移动一半的高度（因为我们复制了一份内容，所以移到一半时正好衔接） */
-        transform: translateY(calc(-50% - 5px)); 
-    }
+/* 鼠标悬停停止滚动 */
+main.hero-container .marquee-viewport:hover .marquee-track {
+    animation-play-state: paused !important;
 }
 
-/* 移动端适配 */
+/* 手机端适配 */
 @media (max-width: 768px) {
-    .marquee-viewport {
-        top: 70px;
-        right: 15px;
-        width: 150px;
-        height: 45px;
+    main.hero-container .marquee-viewport {
+        top: 70px !important;
+        right: 20px !important;
+        width: 150px !important;
     }
-    .m-title { max-width: 70px; }
 }
-
-
