@@ -21,8 +21,9 @@ description: "A digital log of my research and thoughts."
 
     <!-- 第一遍循环 -->
     {% for item in top_three %}
+     <span class="new-shimmer-text">New</span>
       <a href="{{ item.url }}" class="marquee-item">
-        <span class="new-shimmer-text">New</span>
+       
         <span class="m-title">{{ item.title | truncate: 15 }}</span>
         <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
       </a>
@@ -30,8 +31,9 @@ description: "A digital log of my research and thoughts."
 
     <!-- 第二遍循环（无缝衔接） -->
     {% for item in top_three %}
+      <span class="new-shimmer-text">New</span>
       <a href="{{ item.url }}" class="marquee-item">
-        <span class="new-shimmer-text">New</span>
+      
         <span class="m-title">{{ item.title | truncate: 15 }}</span>
         <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
       </a>

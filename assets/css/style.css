@@ -1772,16 +1772,17 @@ font-weight: bold;
 }
 
 /* =========================================
-   【终极稳健版】胶囊泡泡 + 内置流光 New
+   【最终完美版】胶囊泡泡 + 悬浮斜角流光 New
    ========================================= */
 
+/* 1. 视口容器：控制显示范围和遮罩 */
 main.hero-container .marquee-viewport {
     position: absolute !important;
-    top: 40px !important;
+    top: 5px !important;         /* 保持你之前的 top 值，你可以根据需要微调 */
     right: 15px !important;
-    width: 180px !important; /* 稍微加宽一点，给文字留空间 */
-    height: 40px !important;  /* 泡泡高度 */
-    overflow: hidden !important; /* 【关键】必须隐藏，防止乱跳的碎片 */
+    width: 215px !important;      /* 保持宽度 */
+    height: 40px !important;      /* 保持高度 */
+    overflow: visible !important; /* 【关键】必须改为 visible，否则悬浮的 New 会被切掉 */
     z-index: 9999 !important;
     display: block !important;
 
@@ -1790,38 +1791,38 @@ main.hero-container .marquee-viewport {
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
 }
 
+/* 2. 轨道 */
 main.hero-container .marquee-track {
     display: flex !important;
     flex-direction: column !important;
-    gap: 10px !important; /* 泡泡之间的固定间距 */
+    gap: 10px !important;        /* 保持间距 */
     animation: step-jump-final 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite !important;
 }
 
-main.hero-container .marquee-item {
+/* 3. 包装层：作为 New 标签的定位基准 */
+main.hero-container .marquee-item-wrapper {
+    position: relative !important; /* 【关键】提供绝对定位的参照物 */
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-start !important; /* 左对齐 */
-    width: 100% !important;
-    height: 35px !important; /* 泡泡高度 */
-    padding: 0 12px !important; /* 精简内边距 */
-    background: rgba(255, 255, 255, 0.85) !important;
-    border-radius: 20px !important; /* 紧凑胶囊感 */
-    border: 1px solid rgba(230, 126, 34, 0.15) !important;
-    text-decoration: none !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    justify-content: center !important;
+    height: 35px !important;      /* 与泡泡高度一致 */
     flex-shrink: 0 !important;
 }
 
-/* 【核心】内置流光 New 文字 */
-main.hero-container .new-shimmer-text {
+/* 4. 【核心】悬浮斜角流光 New 标签 */
+main.hero-container .new-shimmer-tag {
+    position: absolute !important; /* 【关键】实现悬浮效果 */
+    top: -10px !important;         /* 向外弹出，挂在边角 */
+    left: -4px !important;          /* 向左侧偏移 */
+    z-index: 10001 !important;     /* 确保在最顶层 */
+    transform: rotate(-15deg) !important; /* 斜角效果 */
+
     font-size: 0.65em !important;
     font-weight: 900 !important;
-    color: #e67e22 !important;
-    margin-right: 5px !important;
-    white-space: nowrap !important;
-    display: inline-block !important;
-
-    /* 流光渐变 */
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    
+    /* 流光渐变效果 */
     background: linear-gradient(to right, #e67e22 0%, #ffcf9d 50%, #e67e22 100%) !important;
     background-size: 200% auto !important;
     -webkit-background-clip: text !important;
@@ -1835,27 +1836,45 @@ main.hero-container .new-shimmer-text {
     100% { background-position: -200% center; }
 }
 
+/* 5. 泡泡本身 */
+main.hero-container .marquee-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important; /* 左对齐 */
+    width: 100% !important;
+    height: 100% !important; /* 撑满 wrapper */
+    padding: 0 12px !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(230, 126, 34, 0.15) !important;
+    text-decoration: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    flex-shrink: 0 !important;
+}
+
+/* 6. 标题与日期 */
 main.hero-container .m-title {
-    font-size: 0.7em !important;
+    font-size: 0.72em !important;
     color: #333 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    flex-grow: 1 !important; /* 让标题占据剩余空间 */
+    flex-grow: 1 !important;
+    min-width: 0 !important; /* 允许标题收缩以防挤压日期 */
+    margin-right: 6px !important;
 }
 
 main.hero-container .m-date {
-    font-size: 0.6em !important;
+    font-size: 0.65em !important;
     color: #999 !important;
-    margin-left: 4px !important;
-    flex-shrink: 0 !important;
+    font-family: monospace !important;
+    flex-shrink: 0 !important; /* 禁止日期被挤压 */
 }
 
-/* 【核心】精确计算的跳跃动画 */
+/* 7. 动画逻辑 */
 @keyframes step-jump-final {
-    /* 每一个阶段停留一段时间，然后瞬间移动到下一个位置 */
     0%, 30%   { transform: translateY(0); }
-    35%, 65%  { transform: translateY(calc(-1 * (35px + 10px))); } /* 高度+间距 */
+    35%, 65%  { transform: translateY(calc(-1 * (35px + 10px))); }
     70%, 95%  { transform: translateY(calc(-2 * (35px + 10px))); }
     100%      { transform: translateY(calc(-3 * (35px + 10px))); }
 }
