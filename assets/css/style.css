@@ -1772,74 +1772,87 @@ font-weight: bold;
 }
 
 /* =========================================
-   【强力覆盖版】分步跳动更新流
+   【最终形态】胶囊气泡 + 流光闪烁文字 (Bubble + Shimmer Text)
    ========================================= */
 
+/* 1. 视口容器：控制显示范围和上下遮罩 */
 main.hero-container .marquee-viewport {
     position: absolute !important;
     top: 40px !important;
-    right: 15px !important; 
-    width: 230px !important;
+    right: 15px !important; /* 靠右显示 */
+    width: 230px !important; /* 宽度足够容纳文字和标签 */
     height: 55px !important;
     overflow: hidden !important;
     z-index: 9999 !important;
     display: block !important;
+
+    /* 上下渐隐遮罩：实现上下露出一半的效果 */
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
 }
 
+/* 2. 滚动轨道 */
 main.hero-container .marquee-track {
     display: flex !important;
     flex-direction: column !important;
     gap: 12px !important;
-    /* 这里控制跳动节奏 */
     animation: step-jump-final 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite !important;
 }
 
-main.hero-container .marquee-item-wrapper {
-    position: relative !important; /* 给 New 标签提供定位基准 */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 50px !important;
-    flex-shrink: 0 !important;
-}
-
-/* 【强制显示】New 标签样式 */
-main.hero-container .marquee-item-wrapper .new-tag {
-    position: absolute !important;
-    top: -4px !important;          /* 稍微向下移一点，确保在视口内 */
-    left: 6px !important;         /* 从左边边缘进入 */
-    background-color: #e67e22 !important;
-    color: #ffffff !important;
-    font-size: 0.65em !important;
-    padding: 2px 6px !important;
-    border-radius: 4px !important;
-    transform: rotate(-12deg) !important;
-    font-weight: bold !important;
-    z-index: 10000 !important;    /* 确保在最顶层 */
-    display: block !important;    /* 强制显示 */
-}
-
+/* 3. 【胶囊气泡】容器样式 */
 main.hero-container .marquee-item {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     width: 100% !important;
     padding: 6px 14px !important;
-    background: rgba(255, 255, 255, 0.85) !important;
-    border-radius: 30px !important;
+    background: rgba(255, 255, 255, 0.85) !important; /* 半透明白气泡 */
+    backdrop-filter: blur(5px);
+    border-radius: 30px !important; /* 胶囊形状 */
     border: 1px solid rgba(230, 126, 34, 0.2) !important;
     text-decoration: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
 }
 
+/* 4. 【布灵布灵】New 文字闪烁效果 */
+main.hero-container .new-shimmer-text {
+    font-size: 0.7em !important;         /* 小巧的字号 */
+    font-weight: 900 !important;         /* 极粗体，增加视觉存在感 */
+    margin-right: 8px !important;        /* 与标题的距离 */
+    white-space: nowrap !important;
+    display: inline-block !important;
+
+    /* 创建流光渐变：从深橙色 -> 亮金色 -> 深橙色 */
+    background: linear-gradient(
+        to right, 
+        #e67e22 0%, 
+        #ffcf9d 50%, 
+        #e67e22 100%
+    ) !important;
+    background-size: 200% auto !important; /* 背景拉长以实现移动效果 */
+    
+    /* 将渐变应用到文字本身 */
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important; 
+
+    /* 绑定闪烁动画 */
+    animation: shimmer-blink 2s linear infinite !important;
+}
+
+@keyframes shimmer-blink {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* 5. 其他元素样式 */
 main.hero-container .m-title {
     font-size: 0.75em !important;
     color: #333 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: 110px !important;
+    flex-grow: 1 !important;
 }
 
 main.hero-container .m-date {
@@ -1847,8 +1860,10 @@ main.hero-container .m-date {
     color: #999 !important;
     margin-left: 5px !important;
     font-family: monospace !important;
+    flex-shrink: 0 !important;
 }
 
+/* 6. 跳跃动画逻辑 */
 @keyframes step-jump-final {
     0%, 30% { transform: translateY(0); }
     35%, 65% { transform: translateY(calc(-1 * (50px + 12px))); }
@@ -1856,37 +1871,72 @@ main.hero-container .m-date {
     100% { transform: translateY(calc(-3 * (50px + 12px))); }
 }
 
+/* 悬停停止 */
 main.hero-container .marquee-viewport:hover .marquee-track {
     animation-play-state: paused !important;
 }
 
+
+
+
 /* =========================================
-   移动端适配优化 (针对泡泡位置)
+   【极致轻量版】移动端微型悬浮泡泡 (Micro-Badge Mode)
    ========================================= */
+
 @media (max-width: 768px) {
+    /* 1. 视口容器：变得极小，只包裹住微型气泡 */
     main.hero-container .marquee-viewport {
-        /* 【方案 A】如果你想让它紧贴屏幕最顶端（可能会在导航栏下方或重叠） */
-        top: 0 !important; 
-        
-        /* 【方案 B】如果你想让它刚好在导航栏下面一点点，请尝试这个值：
-           top: 65px !important; 
-        */
-
-        right: 10px !important;      /* 稍微靠近右边边缘 */
-        width: 150px !important;     /* 手机端宽度减小，防止遮挡过多的标题文字 */
+        top: 55px !important;         /* 紧贴 Header 下方 */
+        right: 10px !important;       /* 贴近右侧边缘 */
+        width: auto !important;       /* 宽度由内容决定，不再撑满全屏 */
+        height: 30px !important;      /* 高度极低，仅容纳微型泡泡 */
+        background: none !important;  /* 移除背景色，减少视觉重量 */
+        mask-image: none !important;  /* 移动端取消遮罩，防止切掉小文字 */
+        -webkit-mask-image: none !important;
     }
 
-    /* 为了确保在移动端“New”标签不会因为贴顶而被剪掉，我们微调一下它的位置 */
-    main.hero-container .marquee-item-wrapper .new-tag {
-        top: -2px !important;        /* 减小负值，让它更靠近泡泡中心 */
-        left: 4px !important;
-        font-size: 0.55em !important; /* 手机端标签再小一点点 */
+    /* 2. 轨道：紧凑排列 */
+    main.hero-container .marquee-track {
+        gap: 5px !important;          /* 泡泡之间的垂直间距也变小 */
     }
 
-    /* 调整标题和日期在小屏幕上的间距 */
+    /* 3. 【核心】微型胶囊样式 */
+    main.hero-container .marquee-item {
+        padding: 2px 8px !important;  /* 极小的内边距，让气泡非常窄 */
+        border-radius: 10px !important; /* 更小更圆润的胶囊 */
+        background: rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+    }
+
+    /* 4. 【核心】微型文字：缩减到极致 */
+    main.hero-container .new-shimmer-text {
+        font-size: 0.55em !important; /* 极小的字号 */
+        margin-right: 3px !important;  /* 紧凑的间距 */
+    }
+
     main.hero-container .m-title {
-        max-width: 85px !important;  /* 给泡泡留出更多空间给 New 标签 */
+        font-size: 0.6em !important;  /* 标题也变得非常小 */
+        max-width: 80px !important;   /* 限制宽度，防止气泡太长 */
+    }
+
+    main.hero-container .m-date {
+        font-size: 0.55em !important; /* 日期也极小 */
+        margin-left: 4px !important;
+    }
+
+    /* 5. 调整跳跃动画的距离，因为泡泡变小了 */
+    @keyframes step-jump-final {
+        0%, 30% { transform: translateY(0); }
+        35%, 65% { transform: translateY(calc(-1 * (30px + 5px))); } /* 高度+间距 */
+        70%, 95% { transform: translateY(calc(-2 * (30px + 5px))); }
+        100% { transform: translateY(calc(-3 * (30px + 5px))); }
+    }
+
+    /* 确保页面主体不会被 Header 遮挡 */
+    body {
+        padding-top: 60px !important;
     }
 }
+
 
 

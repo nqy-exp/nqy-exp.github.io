@@ -25,16 +25,19 @@ description: "A digital log of my research and thoughts."
     <!-- 只取前三篇 -->
     {% assign top_three = real_posts | slice: 0, 3 %}
 
-   {% for item in top_three %}
-    <div class="marquee-item-wrapper bubble-{{ forloop.index }}">
-     <span class="new-tag">New</span> 
-    
-       <a href="{{ item.url }}" class="marquee-item">
-       <span class="m-title">{{ item.title | truncate: 15 }}</span>
-       <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-      </a>
-    </div>
-   {% endfor %}
+{% for item in top_three %}
+  <div class="marquee-item-wrapper bubble-{{ forloop.index }}">
+    <a href="{{ item.url }}" class="marquee-item">
+      <!-- 【核心】New 标签现在是气泡内部的一个行内元素 -->
+      <span class="new-shimmer-text">New</span>
+      
+      <span class="m-title">{{ item.title | truncate: 15 }}</span>
+      <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+    </a>
+  </div>
+{% endfor %}
+
+
 
 
     <!-- 为了实现无限循环，我们在末尾复制一遍 -->
