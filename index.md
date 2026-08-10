@@ -27,15 +27,16 @@ description: "A digital log of my research and thoughts."
 
 {% for item in top_three %}
   <div class="marquee-item-wrapper bubble-{{ forloop.index }}">
+    <!-- 【关键】New 标签现在是包装层的一个子元素，它将悬浮在气泡上方 -->
+    <span class="new-shimmer-tag">New</span>
+    
     <a href="{{ item.url }}" class="marquee-item">
-      <!-- 【核心】New 标签现在是气泡内部的一个行内元素 -->
-      <span class="new-shimmer-text">New</span>
-      
       <span class="m-title">{{ item.title | truncate: 15 }}</span>
       <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
     </a>
   </div>
 {% endfor %}
+
 
 
 
