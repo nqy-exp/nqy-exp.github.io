@@ -1772,103 +1772,103 @@ font-weight: bold;
 }
 
 /* =========================================
-   最近更新气泡集群 (Dynamic Update Cluster)
+   垂直滚动泡泡流 (Vertical Rolling Marquee)
    ========================================= */
 
-.updates-cluster {
+.marquee-viewport {
     position: absolute;
     top: 30px;
     right: 40px;
+    width: 180px;           /* 固定宽度 */
+    height: 50px;           /* 【关键】高度只够显示一个完整泡泡的高度 */
+    overflow: hidden;       /* 隐藏超出部分 */
     z-index: 1000;
-    display: flex;
-    flex-direction: column; /* 纵向排列，也可以改为 row 如果你喜欢横向 */
-    align-items: flex-end;
-    gap: 8px; /* 气泡之间的间距 */
+    
+    /* 【核心】上下渐隐遮罩：让上下露出的“一半”泡泡看起来是逐渐消失的 */
+    mask-image: linear-gradient(
+        to bottom, 
+        transparent 0%, 
+        black 30%, 
+        black 70%, 
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to bottom, 
+        transparent 0%, 
+        black 30%, 
+        black 70%, 
+        transparent 100%
+    );
 }
 
-.update-bubble {
+.marquee-track {
+    display: flex;
+    flex-direction: column; /* 纵向排列 */
+    gap: 10px;              /* 泡泡之间的间距 */
+    animation: vertical-scroll 20s linear infinite; /* 滚动动画 */
+}
+
+/* 当鼠标悬停时，停止滚动，方便用户点击 */
+.marquee-viewport:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.marquee-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(230, 126, 34, 0.2);
+    border-radius: 30px;
     text-decoration: none !important;
-    background: rgba(255, 255, 255, 0.8); /* 半透明白 */
-    backdrop-filter: blur(5px);           /* 毛玻璃效果 */
-    padding: 4px 10px;
-    border-radius: 20px;                  /* 胶囊形状 */
-    border: 1px solid rgba(230, 126, 34, 0.15);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    
-    /* 初始状态：不可见且缩得很小 */
-    opacity: 0;
-    transform: scale(0) translateY(-20px); 
-    
-    /* 绑定弹出动画 */
-    animation: bubble-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* 防止泡泡被压缩 */
 }
 
-/* 设置三个气泡的弹出先后顺序 (延迟时间) */
-.bubble-1 { animation-delay: 0.2s; }
-.bubble-2 { animation-delay: 0.4s; }
-.bubble-3 { animation-delay: 0.6s; }
-
-/* 核心弹跳动画：从缩放0 -> 稍微过冲(1.2) -> 回到正常(1) */
-@keyframes bubble-pop {
-    0% {
-        opacity: 0;
-        transform: scale(0) translateY(-20px);
-    }
-    70% {
-        transform: scale(1.1) translateY(2px); /* 稍微弹过头一点点 */
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+.marquee-item:hover {
+    background: #fff;
+    border-color: #e67e22;
+    transform: scale(1.05);
 }
 
-/* 气泡内部元素样式 */
-.bubble-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #e67e22;
-    border-radius: 50%;
-    margin-right: 8px;
-    flex-shrink: 0;
-}
-
-.bubble-title {
-    font-size: 0.75em;       /* 极小字体 */
+.m-title {
+    font-size: 0.75em;
     color: #333;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* 自动显示 ... */
-    max-width: 100px;        /* 限制标题长度，防止气泡太长 */
+    text-overflow: ellipsis;
+    max-width: 90px;
 }
 
-.bubble-date {
-    font-size: 0.65em;       /* 日期更小一点 */
+.m-date {
+    font-size: 0.65em;
     color: #999;
-    margin-left: 8px;
-    font-family: monospace;  /* 使用等宽字体让日期看起来很整齐 */
+    font-family: monospace;
 }
 
-/* 悬停效果 */
-.update-bubble:hover {
-    transform: scale(1.05) !important; /* 悬停时轻微放大 */
-    background: rgba(255, 255, 255, 1);
-    border-color: #e67e22;
+/* 【核心】滚动动画逻辑 */
+@keyframes vertical-scroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        /* 向上移动一半的高度（因为我们复制了一份内容，所以移到一半时正好衔接） */
+        transform: translateY(calc(-50% - 5px)); 
+    }
 }
 
 /* 移动端适配 */
 @media (max-width: 768px) {
-    .updates-cluster {
-        top: 70px;           /* 避开手机端的 Header */
+    .marquee-viewport {
+        top: 70px;
         right: 15px;
-        align-items: flex-end;
+        width: 150px;
+        height: 45px;
     }
-    .bubble-title {
-        max-width: 80px;     /* 手机端标题更短 */
-    }
+    .m-title { max-width: 70px; }
 }
 
 
