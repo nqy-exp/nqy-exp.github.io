@@ -7,51 +7,34 @@ description: "A digital log of my research and thoughts."
 <!-- 核心视觉区 -->
 <main class="hero-container">
 
-<!-- 最近更新分步跳动流 -->
+<!-- 最近更新动态流 (稳定版) -->
 <div class="marquee-viewport">
   <div class="marquee-track">
     {% assign all_updates = site.ideas | concat: site.projects | sort: 'date' | reverse %}
-    
-    {% comment %} 
-      我们先通过变量存入真正的文章，过滤掉 URL 是目录或以 / 结尾的 index 页 
-    {% endcomment %}
     {% assign real_posts = "" | split: "" %}
     {% for item in all_updates %}
       {% unless item.url == "/" or item.url == "/ideas/" or item.url == "/projects/" or item.url contains "index" %}
         {% assign real_posts = real_posts | push: item %}
       {% endunless %}
     {% endfor %}
-
-    <!-- 只取前三篇 -->
     {% assign top_three = real_posts | slice: 0, 3 %}
 
-{% for item in top_three %}
-  <div class="marquee-item-wrapper bubble-{{ forloop.index }}">
-    <!-- 【关键】New 标签现在是包装层的一个子元素，它将悬浮在气泡上方 -->
-    <span class="new-shimmer-tag">New</span>
-    
-    <a href="{{ item.url }}" class="marquee-item">
-      <span class="m-title">{{ item.title | truncate: 15 }}</span>
-      <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-    </a>
-  </div>
-{% endfor %}
-
-
-
-
-
-    <!-- 为了实现无限循环，我们在末尾复制一遍 -->
+    <!-- 第一遍循环 -->
     {% for item in top_three %}
-       {% unless item.url == "/" or item.url == "/ideas/" or item.url == "/projects/" or item.url contains "index" %}
-          <div class="marquee-item-wrapper bubble-{{ forloop.index | plus: 3 }}">
-            <span class="new-tag">New</span>
-            <a href="{{ item.url }}" class="marquee-item">
-              <span class="m-title">{{ item.title | truncate: 15 }}</span>
-              <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-            </a>
-          </div>
-       {% endunless %}
+      <a href="{{ item.url }}" class="marquee-item">
+        <span class="new-shimmer-text">New</span>
+        <span class="m-title">{{ item.title | truncate: 15 }}</span>
+        <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+      </a>
+    {% endfor %}
+
+    <!-- 第二遍循环（无缝衔接） -->
+    {% for item in top_three %}
+      <a href="{{ item.url }}" class="marquee-item">
+        <span class="new-shimmer-text">New</span>
+        <span class="m-title">{{ item.title | truncate: 15 }}</span>
+        <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+      </a>
     {% endfor %}
   </div>
 </div>
