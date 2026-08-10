@@ -1772,40 +1772,32 @@ font-weight: bold;
 }
 
 /* =========================================
-   【最终优化版】分步跳动更新流 (Fix: New Tag & Position)
+   【强力覆盖版】分步跳动更新流
    ========================================= */
 
-main.hero-container {
-    position: relative !important;
-}
-
-/* 1. 视口容器：调整了宽度和右边距，并确保标签不被剪切 */
 main.hero-container .marquee-viewport {
     position: absolute !important;
     top: 40px !important;
-    right: 15px !important;          /* 【修改】更靠近屏幕右侧 */
-    width: 230px !important;         /* 【修改】加宽容器，给标签留出空间 */
+    right: 15px !important; 
+    width: 230px !important;
     height: 55px !important;
     overflow: hidden !important;
     z-index: 9999 !important;
     display: block !important;
-
-    /* 上下渐隐遮罩 */
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
 }
 
-/* 2. 滚动轨道 */
 main.hero-container .marquee-track {
     display: flex !important;
     flex-direction: column !important;
     gap: 12px !important;
+    /* 这里控制跳动节奏 */
     animation: step-jump-final 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite !important;
 }
 
-/* 3. 包装层 */
 main.hero-container .marquee-item-wrapper {
-    position: relative !important;
+    position: relative !important; /* 给 New 标签提供定位基准 */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1813,7 +1805,22 @@ main.hero-container .marquee-item-wrapper {
     flex-shrink: 0 !important;
 }
 
-/* 4. 单个泡泡样式 */
+/* 【强制显示】New 标签样式 */
+main.hero-container .marquee-item-wrapper .new-tag {
+    position: absolute !important;
+    top: -4px !important;          /* 稍微向下移一点，确保在视口内 */
+    left: 6px !important;         /* 从左边边缘进入 */
+    background-color: #e67e22 !important;
+    color: #ffffff !important;
+    font-size: 0.65em !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    transform: rotate(-12deg) !important;
+    font-weight: bold !important;
+    z-index: 10000 !important;    /* 确保在最顶层 */
+    display: block !important;    /* 强制显示 */
+}
+
 main.hero-container .marquee-item {
     display: flex !important;
     align-items: center !important;
@@ -1821,27 +1828,9 @@ main.hero-container .marquee-item {
     width: 100% !important;
     padding: 6px 14px !important;
     background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(5px);
     border-radius: 30px !important;
     border: 1px solid rgba(230, 126, 34, 0.2) !important;
     text-decoration: none !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
-}
-
-/* 5. 【修复】New 标签：调整定位，使其在泡泡内部可见 */
-main.hero-container .new-tag {
-    position: absolute !important;
-    top: -4px !important;           /* 【修改】稍微减小负值，防止被剪切 */
-    left: 6px !important;           /* 【修改】从左侧边缘向内移 */
-    background-color: #e67e22 !important;
-    color: white !important;
-    font-size: 0.6em !important;
-    padding: 1px 5px !important;
-    border-radius: 4px !important;
-    transform: rotate(-12deg) !important; /* 保持斜角 */
-    font-weight: bold !important;
-    z-index: 10 !important;
-    box-shadow: 0 2px 4px rgba(230, 126, 34, 0.3) !important;
 }
 
 main.hero-container .m-title {
@@ -1850,7 +1839,7 @@ main.hero-container .m-title {
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: 110px !important;     /* 【修改】稍微增加宽度，配合容器变宽 */
+    max-width: 110px !important;
 }
 
 main.hero-container .m-date {
@@ -1860,7 +1849,6 @@ main.hero-container .m-date {
     font-family: monospace !important;
 }
 
-/* 6. 跳跃动画 */
 @keyframes step-jump-final {
     0%, 30% { transform: translateY(0); }
     35%, 65% { transform: translateY(calc(-1 * (50px + 12px))); }
@@ -1868,17 +1856,36 @@ main.hero-container .m-date {
     100% { transform: translateY(calc(-3 * (50px + 12px))); }
 }
 
-/* 悬停停止 */
 main.hero-container .marquee-viewport:hover .marquee-track {
     animation-play-state: paused !important;
 }
 
-/* 移动端适配 */
+/* =========================================
+   移动端适配优化 (针对泡泡位置)
+   ========================================= */
 @media (max-width: 768px) {
     main.hero-container .marquee-viewport {
-        top: 5px !important;
-        right: 15px !important;
-        width: 180px !important; /* 手机端稍宽一点 */
+        /* 【方案 A】如果你想让它紧贴屏幕最顶端（可能会在导航栏下方或重叠） */
+        top: 0 !important; 
+        
+        /* 【方案 B】如果你想让它刚好在导航栏下面一点点，请尝试这个值：
+           top: 65px !important; 
+        */
+
+        right: 10px !important;      /* 稍微靠近右边边缘 */
+        width: 150px !important;     /* 手机端宽度减小，防止遮挡过多的标题文字 */
+    }
+
+    /* 为了确保在移动端“New”标签不会因为贴顶而被剪掉，我们微调一下它的位置 */
+    main.hero-container .marquee-item-wrapper .new-tag {
+        top: -2px !important;        /* 减小负值，让它更靠近泡泡中心 */
+        left: 4px !important;
+        font-size: 0.55em !important; /* 手机端标签再小一点点 */
+    }
+
+    /* 调整标题和日期在小屏幕上的间距 */
+    main.hero-container .m-title {
+        max-width: 85px !important;  /* 给泡泡留出更多空间给 New 标签 */
     }
 }
 
