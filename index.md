@@ -7,6 +7,20 @@ description: "A digital log of my research and thoughts."
 <!-- 核心视觉区 -->
 <main class="hero-container">
 
+<!-- 最近更新动态气泡集群 -->
+{% assign all_updates = site.ideas | concat: site.projects | sort: 'date' | reverse %}
+{% assign top_three = all_updates | slice: 0, 3 %}
+
+<div class="updates-cluster">
+  {% for item in top_three %}
+    <a href="{{ item.url }}" class="update-bubble bubble-{{ forloop.index }}">
+      <span class="bubble-dot"></span>
+      <span class="bubble-title">{{ item.title | truncate: 15 }}</span>
+      <span class="bubble-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+    </a>
+  {% endfor %}
+</div>
+
   <!-- 左上方内容 -->
   <div class="hero-left">
     <!-- 去掉 style，统一交给 CSS 控制 -->

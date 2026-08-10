@@ -1770,3 +1770,105 @@ font-weight: bold;
   pointer-events: none;    /* 确保鼠标滑过时完全没有任何反应 */
   user-select: none;       /* 防止用户意外选中它 */
 }
+
+/* =========================================
+   最近更新气泡集群 (Dynamic Update Cluster)
+   ========================================= */
+
+.updates-cluster {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; /* 纵向排列，也可以改为 row 如果你喜欢横向 */
+    align-items: flex-end;
+    gap: 8px; /* 气泡之间的间距 */
+}
+
+.update-bubble {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    background: rgba(255, 255, 255, 0.8); /* 半透明白 */
+    backdrop-filter: blur(5px);           /* 毛玻璃效果 */
+    padding: 4px 10px;
+    border-radius: 20px;                  /* 胶囊形状 */
+    border: 1px solid rgba(230, 126, 34, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    
+    /* 初始状态：不可见且缩得很小 */
+    opacity: 0;
+    transform: scale(0) translateY(-20px); 
+    
+    /* 绑定弹出动画 */
+    animation: bubble-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* 设置三个气泡的弹出先后顺序 (延迟时间) */
+.bubble-1 { animation-delay: 0.2s; }
+.bubble-2 { animation-delay: 0.4s; }
+.bubble-3 { animation-delay: 0.6s; }
+
+/* 核心弹跳动画：从缩放0 -> 稍微过冲(1.2) -> 回到正常(1) */
+@keyframes bubble-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(-20px);
+    }
+    70% {
+        transform: scale(1.1) translateY(2px); /* 稍微弹过头一点点 */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* 气泡内部元素样式 */
+.bubble-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #e67e22;
+    border-radius: 50%;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.bubble-title {
+    font-size: 0.75em;       /* 极小字体 */
+    color: #333;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 自动显示 ... */
+    max-width: 100px;        /* 限制标题长度，防止气泡太长 */
+}
+
+.bubble-date {
+    font-size: 0.65em;       /* 日期更小一点 */
+    color: #999;
+    margin-left: 8px;
+    font-family: monospace;  /* 使用等宽字体让日期看起来很整齐 */
+}
+
+/* 悬停效果 */
+.update-bubble:hover {
+    transform: scale(1.05) !important; /* 悬停时轻微放大 */
+    background: rgba(255, 255, 255, 1);
+    border-color: #e67e22;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .updates-cluster {
+        top: 70px;           /* 避开手机端的 Header */
+        right: 15px;
+        align-items: flex-end;
+    }
+    .bubble-title {
+        max-width: 80px;     /* 手机端标题更短 */
+    }
+}
+
+
