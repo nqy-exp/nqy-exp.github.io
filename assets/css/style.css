@@ -1772,50 +1772,76 @@ font-weight: bold;
 }
 
 /* =========================================
-   垂直滚动泡泡流 (修复版)
+   【最终版】分步跳动更新流 (Step-wise Pop Animation)
    ========================================= */
 
-/* 1. 确保父容器有定位基准 */
 main.hero-container {
     position: relative !important;
 }
 
-/* 2. 视口容器：控制可见区域和遮罩 */
+/* 视口容器：控制显示范围和上下遮罩 */
 main.hero-container .marquee-viewport {
     position: absolute !important;
-    top: 40px !important;       /* 距离顶部高度 */
-    right: 40px !important;     /* 距离右侧宽度 */
-    width: 180px !important;    /* 【关键】强制限制宽度，防止撑开页面 */
-    height: 50px !important;    /* 【关键】高度只显示一个泡泡 */
-    overflow: hidden !important; /* 隐藏多余的泡泡 */
-    z-index: 9999 !important;   /* 确保在最顶层 */
+    top: 40px !important;
+    right: 40px !important;
+    width: 200px !important;        /* 略微加宽以容纳标签 */
+    height: 55px !important;        /* 高度刚好容纳一个泡泡 */
+    overflow: hidden !important;
+    z-index: 9999 !important;
     display: block !important;
 
-    /* 上下渐隐遮罩 */
+    /* 上下渐隐遮罩：实现“上下露出一半”的感觉 */
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
 }
 
-/* 3. 滚动轨道：控制垂直排列和动画 */
+/* 轨道：负责控制“跳跃”的节奏 */
 main.hero-container .marquee-track {
     display: flex !important;
-    flex-direction: column !important; /* 【核心】强制纵向排列 */
-    gap: 10px !important;
-    animation: vertical-scroll-fix 15s linear infinite !important;
+    flex-direction: column !important;
+    gap: 12px !important;           /* 泡泡间的间距 */
+    animation: step-jump 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite !important;
 }
 
-/* 4. 单个泡泡样式 */
+/* 每一个泡泡的包装层，用来承载 New 标签和跳动动画 */
+main.hero-container .marquee-item-wrapper {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 50px !important;        /* 泡泡高度 */
+    flex-shrink: 0 !important;
+}
+
+/* 单个泡泡样式 */
 main.hero-container .marquee-item {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+    width: 100% !important;
     padding: 6px 14px !important;
-    background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(5px);
     border-radius: 30px !important;
     border: 1px solid rgba(230, 126, 34, 0.2) !important;
     text-decoration: none !important;
-    flex-shrink: 0 !important; /* 防止泡泡被压缩 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+}
+
+/* 左上角斜着的 New 标签 */
+main.hero-container .new-tag {
+    position: absolute !important;
+    top: -8px !important;
+    left: -5px !important;
+    background-color: #e67e22 !important;
+    color: white !important;
+    font-size: 0.6em !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    transform: rotate(-15deg) !important; /* 关键：倾斜 */
+    font-weight: bold !important;
+    z-index: 10 !important;
+    box-shadow: 0 2px 5px rgba(230, 126, 34, 0.4) !important;
 }
 
 main.hero-container .m-title {
@@ -1824,7 +1850,7 @@ main.hero-container .m-title {
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: 90px !important;
+    max-width: 100px !important;
 }
 
 main.hero-container .m-date {
@@ -1834,13 +1860,27 @@ main.hero-container .m-date {
     font-family: monospace !important;
 }
 
-/* 5. 动画逻辑 */
-@keyframes vertical-scroll-fix {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(calc(-50% - 5px)); } /* 移动一半的距离实现无缝循环 */
+/* =========================================
+   核心逻辑：分段跳跃动画 (Step Animation)
+   ========================================= */
+@keyframes step-jump {
+    /* 假设有3个泡泡，每个泡泡占约33%的时间 */
+    /* 我们让它在每个阶段“停顿”，然后快速“跳转” */
+
+    /* 第一篇：展示 (0% - 30%) */
+    0%, 30% { transform: translateY(0); }
+
+    /* 跳转到第二篇 (30% - 35%) */
+    35%, 65% { transform: translateY(calc(-1 * (50px + 12px))); } /* 50px高度 + 12px间距 */
+
+    /* 跳转到第三篇 (65% - 70%) */
+    70%, 95% { transform: translateY(calc(-2 * (50px + 12px))); }
+
+    /* 最后回到起点实现无缝循环 (95% - 100%) */
+    100% { transform: translateY(calc(-3 * (50px + 12px))); }
 }
 
-/* 鼠标悬停停止滚动 */
+/* 鼠标悬停时停止跳动，方便点击 */
 main.hero-container .marquee-viewport:hover .marquee-track {
     animation-play-state: paused !important;
 }
@@ -1849,7 +1889,8 @@ main.hero-container .marquee-viewport:hover .marquee-track {
 @media (max-width: 768px) {
     main.hero-container .marquee-viewport {
         top: 70px !important;
-        right: 20px !important;
-        width: 150px !important;
+        right: 15px !important;
+        width: 170px !important;
     }
 }
+

@@ -7,33 +7,51 @@ description: "A digital log of my research and thoughts."
 <!-- 核心视觉区 -->
 <main class="hero-container">
 
-  <!-- 【必须放在这里！】最近更新动态气泡集群 -->
-  {% assign all_updates = site.ideas | concat: site.projects | sort: 'date' | reverse %}
-  {% assign top_three = all_updates | slice: 0, 3 %}
+<!-- 最近更新分步跳动流 -->
+<div class="marquee-viewport">
+  <div class="marquee-track">
+    {% assign all_updates = site.ideas | concat: site.projects | sort: 'date' | reverse %}
+    
+    {% comment %} 
+      我们先通过变量存入真正的文章，过滤掉 URL 是目录或以 / 结尾的 index 页 
+    {% endcomment %}
+    {% assign real_posts = "" | split: "" %}
+    {% for item in all_updates %}
+      {% unless item.url == "/" or item.url == "/ideas/" or item.url == "/projects/" or item.url contains "index" %}
+        {% assign real_posts = real_posts | push: item %}
+      {% endunless %}
+    {% endfor %}
 
-  <div class="marquee-viewport">
-    <div class="marquee-track">
-      {% for item in top_three %}
-        {% if item.title contains "Index" or item.url contains "index" %}
-          {% continue %}
-        {% endif %}
+    <!-- 只取前三篇 -->
+    {% assign top_three = real_posts | slice: 0, 3 %}
+
+    {% for item in top_three %}
+      <div class="marquee-item-wrapper bubble-{{ forloop.index }}">
+        <!-- 左上角的小斜标签 -->
+        <span class="new-tag">New</span>
+        
         <a href="{{ item.url }}" class="marquee-item">
           <span class="m-title">{{ item.title | truncate: 15 }}</span>
           <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
         </a>
-      {% endfor %}
+      </div>
+    {% endfor %}
 
-      {% for item in top_three %}
-        {% if item.title contains "Index" or item.url contains "index" %}
-          {% continue %}
-        {% endif %}
-        <a href="{{ item.url }}" class="marquee-item">
-          <span class="m-title">{{ item.title | truncate: 15 }}</span>
-          <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-        </a>
-      {% endfor %}
-    </div>
+    <!-- 为了实现无限循环，我们在末尾复制一遍 -->
+    {% for item in top_three %}
+       {% unless item.url == "/" or item.url == "/ideas/" or item.url == "/projects/" or item.url contains "index" %}
+          <div class="marquee-item-wrapper bubble-{{ forloop.index | plus: 3 }}">
+            <span class="new-tag">New</span>
+            <a href="{{ item.url }}" class="marquee-item">
+              <span class="m-title">{{ item.title | truncate: 15 }}</span>
+              <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+            </a>
+          </div>
+       {% endunless %}
+    {% endfor %}
   </div>
+</div>
+
 
 
   <!-- 左上方内容 -->
