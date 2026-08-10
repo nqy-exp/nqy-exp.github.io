@@ -7,7 +7,7 @@ description: "A digital log of my research and thoughts."
 <!-- 核心视觉区 -->
 <main class="hero-container">
 
-<!-- 最近更新动态流 (稳定版) -->
+<!-- 最近更新动态流 (分级亮度版) -->
 <div class="marquee-viewport">
   <div class="marquee-track">
     {% assign all_updates = site.ideas | concat: site.projects | sort: 'date' | reverse %}
@@ -19,27 +19,32 @@ description: "A digital log of my research and thoughts."
     {% endfor %}
     {% assign top_three = real_posts | slice: 0, 3 %}
 
-    <!-- 第一遍循环 -->
+    <!-- 第一组：真实的三个文章 -->
     {% for item in top_three %}
-     <span class="new-shimmer-tag">New</span>
-      <a href="{{ item.url }}" class="marquee-item">
-       
-        <span class="m-title">{{ item.title | truncate: 15 }}</span>
-        <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-      </a>
+      <div class="marquee-item-wrapper bubble-{{ forloop.index }}">
+        <!-- 【关键修改】增加了 rank-{{ forloop.index }} 类名 -->
+        <span class="new-shimmer-tag rank-{{ forloop.index }}">New</span>
+        
+        <a href="{{ item.url }}" class="marquee-item">
+          <span class="m-title">{{ item.title | truncate: 15 }}</span>
+          <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+        </a>
+      </div>
     {% endfor %}
 
-    <!-- 第二遍循环（无缝衔接） -->
+    <!-- 第二组：完全复制，用于无缝衔接 (注意这里 rank 也要对应) -->
     {% for item in top_three %}
-      <span class="new-shimmer-tag">New</span>
-      <a href="{{ item.url }}" class="marquee-item">
-      
-        <span class="m-title">{{ item.title | truncate: 15 }}</span>
-        <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
-      </a>
+      <div class="marquee-item-wrapper bubble-{{ forloop.index | plus: 3 }}">
+        <span class="new-shimmer-tag rank-{{ forloop.index }}">New</span>
+        <a href="{{ item.url }}" class="marquee-item">
+          <span class="m-title">{{ item.title | truncate: 15 }}</span>
+          <span class="m-date">{{ item.date | date: "%Y-%m-%d" }}</span>
+        </a>
+      </div>
     {% endfor %}
   </div>
 </div>
+
 
 
 

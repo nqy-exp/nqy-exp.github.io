@@ -1772,87 +1772,109 @@ font-weight: bold;
 }
 
 /* =========================================
-   【最终完美版】胶囊泡泡 + 悬浮斜角流光 New
+   【最终稳定版】无遮罩、完美循环泡泡流
    ========================================= */
 
-/* 1. 视口容器：控制显示范围和遮罩 */
 main.hero-container .marquee-viewport {
     position: absolute !important;
-    top: 5px !important;         /* 保持你之前的 top 值，你可以根据需要微调 */
-    right: 15px !important;
-    width: 215px !important;      /* 保持宽度 */
-    height: 40px !important;      /* 保持高度 */
-    overflow: visible !important; /* 【关键】必须改为 visible，否则悬浮的 New 会被切掉 */
+    top: 10px !important;
+    right: 1px !important;
+    width: 210px !important;      /* 给日期留足宽度 */
+    height: 30px !important;     /* 容器高度 */
+    overflow: hidden !important; /* 依然隐藏多余的泡泡，但不使用遮罩 */
     z-index: 9999 !important;
     display: block !important;
-
-    /* 上下渐隐遮罩 */
-    mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+    
 }
 
-/* 2. 轨道 */
 main.hero-container .marquee-track {
     display: flex !important;
     flex-direction: column !important;
-    gap: 10px !important;        /* 保持间距 */
-    animation: step-jump-final 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite !important;
+    gap: 10px !important;        /* 泡泡之间的间距 */
+    /* 这里的动画时长和位移必须配合上面的 HTML 循环逻辑 */
+    animation: step-jump-final-v2 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite !important;
 }
 
-/* 3. 包装层：作为 New 标签的定位基准 */
 main.hero-container .marquee-item-wrapper {
-    position: relative !important; /* 【关键】提供绝对定位的参照物 */
+    position: relative !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 35px !important;      /* 与泡泡高度一致 */
+    height: 30px !important;     /* 每个泡泡的高度 */
     flex-shrink: 0 !important;
 }
 
-/* 4. 【核心】悬浮斜角流光 New 标签 */
-main.hero-container .new-shimmer-tag {
-    position: absolute !important; /* 【关键】实现悬浮效果 */
-    top: -10px !important;         /* 向外弹出，挂在边角 */
-    left: -4px !important;          /* 向左侧偏移 */
-    z-index: 10001 !important;     /* 确保在最顶层 */
-    transform: rotate(-15deg) !important; /* 斜角效果 */
+/* =========================================
+   【最终版】分级亮度的流光 New 标签
+   ========================================= */
 
+/* 1. 基础样式：定义所有共享的动画和形状 */
+main.hero-container .new-shimmer-tag {
+    position: absolute !important;
+    top: -6px !important;
+    left: -6px !important;
+    z-index: 10001 !important;
+    transform: rotate(-15deg) !important;
     font-size: 0.65em !important;
     font-weight: 900 !important;
     padding: 2px 6px !important;
     border-radius: 4px !important;
-    
-    /* 流光渐变效果 */
-    background: linear-gradient(to right, #e67e22 0%, #ffcf9d 50%, #e67e22 100%) !important;
+
+    /* 流光渐变基础 */
+    background: linear-gradient(
+        to right, 
+        #e67e22 0%, 
+        #ffcf9d 50%, 
+        #e67e22 100%
+    ) !important;
     background-size: 200% auto !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
-    animation: shimmer-blink 2s linear infinite !important;
+    animation: shimmer-blink 1s linear infinite !important;
 }
 
+/* 2. 【核心】分级亮度控制 */
+
+/* 第一篇：最新文章 - 最亮、最鲜艳 */
+main.hero-container .new-shimmer-tag.rank-1 {
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 3px rgba(230, 126, 34, 0.6)) !important;
+}
+
+/* 第二篇：次新文章 - 稍微暗淡一点 */
+main.hero-container .new-shimmer-tag.rank-2 {
+    opacity: 0.5 !important; /* 透明度减半 */
+    filter: drop-shadow(0 1px 2px rgba(230, 126, 34, 0.2)) !important;
+}
+
+/* 第三篇：较旧文章 - 非常暗淡，接近背景色 */
+main.hero-container .new-shimmer-tag.rank-3 {
+    opacity: 0.2 !important; /* 透明度极低 */
+    filter: none !important; /* 去掉阴影，减少存在感 */
+}
+
+/* 动画保持不变 */
 @keyframes shimmer-blink {
     0% { background-position: 200% center; }
     100% { background-position: -200% center; }
 }
 
-/* 5. 泡泡本身 */
+
+
 main.hero-container .marquee-item {
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-start !important; /* 左对齐 */
+    justify-content: flex-start !important;
     width: 100% !important;
-    height: 100% !important; /* 撑满 wrapper */
+    height: 100% !important;
     padding: 0 12px !important;
     background: rgba(255, 255, 255, 0.85) !important;
     border-radius: 20px !important;
     border: 1px solid rgba(230, 126, 34, 0.15) !important;
     text-decoration: none !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-    flex-shrink: 0 !important;
 }
 
-/* 6. 标题与日期 */
 main.hero-container .m-title {
     font-size: 0.72em !important;
     color: #333 !important;
@@ -1860,7 +1882,7 @@ main.hero-container .m-title {
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     flex-grow: 1 !important;
-    min-width: 0 !important; /* 允许标题收缩以防挤压日期 */
+    min-width: 0 !important;
     margin-right: 6px !important;
 }
 
@@ -1868,25 +1890,25 @@ main.hero-container .m-date {
     font-size: 0.65em !important;
     color: #999 !important;
     font-family: monospace !important;
-    flex-shrink: 0 !important; /* 禁止日期被挤压 */
+    flex-shrink: 0 !important;
 }
 
-/* 7. 动画逻辑 */
-@keyframes step-jump-final {
+/* 【核心】修正后的步进动画：精确跳到第3个泡泡的位置，然后瞬间重置 */
+@keyframes step-jump-final-v2 {
     0%, 30%   { transform: translateY(0); }
-    35%, 65%  { transform: translateY(calc(-1 * (35px + 10px))); }
-    70%, 95%  { transform: translateY(calc(-2 * (35px + 10px))); }
-    100%      { transform: translateY(calc(-3 * (35px + 10px))); }
+    35%, 65%  { transform: translateY(calc(-1 * (30px + 10px))); } /* 跳到第2个 */
+    70%, 95%  { transform: translateY(calc(-2 * (30px + 10px))); } /* 跳到第3个 */
+    100%      { transform: translateY(calc(-3 * (30px + 10px))); } /* 跳回起点实现无缝循环 */
 }
 
-/* 鼠标悬停停止 */
+
 main.hero-container .marquee-viewport:hover .marquee-track {
     animation-play-state: paused !important;
 }
 
-/* 移动端隐藏 */
 @media (max-width: 768px) {
     main.hero-container .marquee-viewport {
         display: none !important;
     }
 }
+
