@@ -1,6 +1,6 @@
 ---
 layout: niu-docs-layout
-title: User Manual | NIU
+title: User Guide | NIU
 niu_sidebar_links:
 # 第一章
   - { text: "🔬 Product Overview", url: "#overview", level: 1 }
