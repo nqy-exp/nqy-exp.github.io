@@ -42,6 +42,14 @@ Currently, this small software is online, and you are welcome to check out <a hr
 
 However, the documentation page for NIU is still under production and may take some time.
 
+<div class="light-divider"></div>
+
+2026.08.15
+
+<a href="/NIU/" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">The NIU User Guide</a> is finally online, welcome to check it out!
+Having gone through the complete process from software prototype development, refinement and documentation writing, although it was extremely challenging and energy-consuming, it is finally successfully completed! Coincidentally, the experimental site has also returned to an available state, so next week the focus will return to experiments.
+
+
 ---
 
 
@@ -71,3 +79,9 @@ However, the documentation page for NIU is still under production and may take s
 
 不过，NIU的说明页面还在制作中，可能需要一段时间。
 
+<div class="light-divider"></div>
+
+2026.08.15
+
+<a href="/NIU/" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">NIU 的使用说明书</a>终于上线啦，欢迎大家查看！
+经历了从软件雏形开发、完善到说明文档撰写的完整过程，虽然极具挑战且耗费精力，但终于圆满完成！正好实验场地也已经回到可用状态，下周重心将重新回到实验中。
