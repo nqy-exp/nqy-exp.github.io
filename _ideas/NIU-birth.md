@@ -83,5 +83,5 @@ Having gone through the complete process from software prototype development, re
 
 2026.08.15
 
-<a href="/NIU/" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">NIU 的使用说明书</a>终于上线啦，欢迎大家查看！
+<a href="/NIU/" target="_blank" rel="noopener noreferrer" style="color: #e67e22; text-decoration: none;">NIU 的使用说明书</a>终于上线啦，欢迎大家查看！
 经历了从软件雏形开发、完善到说明文档撰写的完整过程，虽然极具挑战且耗费精力，但终于圆满完成！正好实验场地也已经回到可用状态，下周重心将重新回到实验中。
