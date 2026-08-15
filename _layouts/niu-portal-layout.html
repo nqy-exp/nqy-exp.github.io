@@ -1,0 +1,27 @@
+<!-- _layouts/niu-portal-layout.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | NIU</title>
+    <!-- 引入全局 CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- 如果页面有特殊的 niu-css，可以通过 front matter 注入 -->
+    {{ page.niu_extra_css }}
+</head>
+<body class="niu-portal-body">
+
+    <!-- 使用新的 NIU Header -->
+    {% include niu-header.html %}
+
+    <!-- 内容包装器，方便定位整个门户的范围 -->
+    <div class="niu-portal-wrapper">
+        {{ content }}
+    </div>
+
+    <!-- 使用旧分支的 Footer -->
+    {% include footer.html %}
+
+</body>
+</html>

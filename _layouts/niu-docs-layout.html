@@ -1,0 +1,170 @@
+<!-- _layouts/niu-docs-layout.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | NIU</title>
+    <!-- 引入全局 CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    {{ page.niu_extra_css }}
+    
+    <style>
+        /* --- 布局控制 (不影响正文内容本身) --- */
+        .niu-docs-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px);
+            position: relative;
+        }
+
+        /* --- 侧边栏样式 (仅控制导航) --- */
+        .niu-doc-sidebar {
+            width: 280px;
+            height: calc(100vh - 80px);
+            position: sticky;
+            top: 80px;
+            padding: 40px 20px;
+            border-right: 1px solid #eee;
+            overflow-y: auto;
+            background-color: #fff;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #bbb;
+            margin-bottom: 25px;
+            display: block;
+            font-weight: bold;
+        }
+
+        /* 导航列表层级 */
+        .niu-doc-nav-list, .niu-doc-nav-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* H1 层级 (顶级) */
+        .niu-doc-link-h1 {
+            display: block;
+            padding: 8px 0;
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        /* H2 层级 (二级缩进) */
+        .niu-doc-nav-list ul { padding-left: 18px; }
+        .niu-doc-link-h2 {
+            display: block;
+            padding: 6px 0;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.92em;
+            transition: color 0.3s ease;
+        }
+
+        /* H3 层级 (三级缩进) */
+        .niu-doc-nav-list ul ul { padding-left: 15px; }
+        .niu-doc-link-h3 {
+            display: block;
+            padding: 4px 0;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: color 0.3s ease;
+        }
+
+        /* 激活高亮 */
+        .niu-doc-link-h1.active,
+        .niu-doc-link-h2.active,
+        .niu-doc-link-h3.active {
+            color: #e67e22 !important;
+            font-weight: bold;
+        }
+
+        /* 悬停反馈 */
+        .niu-doc-nav-list a:hover { color: #e67e22; }
+
+        /* --- 响应式适配 (移动端) --- */
+        @media (max-width: 768px) {
+            .niu-docs-container { flex-direction: column; }
+            .niu-doc-sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body class="niu-docs-body">
+
+    {% include niu-header.html %}
+
+    <div class="niu-docs-container">
+        <!-- 侧边栏导航 -->
+        <aside class="niu-doc-sidebar">
+            <span class="sidebar-title">CONTENTS</span>
+            <nav>
+                <ul class="niu-doc-nav-list">
+                    {% for link in page.niu_sidebar_links %}
+                        <!-- 逻辑说明：通过 level 判断渲染哪种类名 -->
+                        {% if link.level == 1 %}
+                            <li class="niu-doc-item-h1">
+                                <a href="{{ link.url }}" class="niu-doc-link-h1 {% if link.active %}active{% endif %}">{{ link.text }}</a>
+                            </li>
+                        {% elsif link.level == 2 %}
+                            <li class="niu-doc-item-h2">
+                                <a href="{{ link.url }}" class="niu-doc-link-h2 {% if link.active %}active{% endif %}">{{ link.text }}</a>
+                            </li>
+                        {% elsif link.level == 3 %}
+                            <li class="niu-doc-item-h3">
+                                <a href="{{ link.url }}" class="niu-doc-link-h3 {% if link.active %}active{% endif %}">{{ link.text }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主文档阅读区：严格保持全局 CSS 定义 -->
+        <main class="post-content">
+            {{ content }}
+        </main>
+    </div>
+
+    {% include footer.html %}
+
+    <script>
+        // 滚动监听逻辑：直接寻找 post-content 下带有 ID 的标题
+        window.addEventListener('scroll', () => {
+            let current = "";
+            const sections = document.querySelectorAll('.post-content [id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.niu-doc-nav-list a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') && link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

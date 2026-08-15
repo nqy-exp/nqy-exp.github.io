@@ -1,223 +1,287 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIU | Entry</title>
-<!-- 引入全局CSS -->
-<link rel="stylesheet" href="/assets/css/style.css">
+---
+layout: niu-portal-layout
+title: NIU | Entry
+niu_extra_css: "" 
+---
+
 <style>
+/* =========================================
+   1. 核心变量与基础设置
+   ========================================= */
 :root {
---primary-color: #e67e22;
---bg-color: #fffdfa;
-        }
-
-/* 【修正】允许滚动，并确保高度至少为一屏 */
-body, html {
-margin: 0; padding: 0;
-width: 100%; 
-min-height: 100vh; 
-background-color: var(--bg-color);
-font-family: sans-serif;
-overflow-x: hidden; 
-overflow-y: auto; /* 允许纵向滚动 */
+    --niu-primary: #e67e22;
+    --niu-text-main: #333;
+    --niu-text-sub: #888;
+    --niu-text-faq: #444; /* FAQ 使用更稳重的深灰色 */
+    --niu-bg: #fffdfa;
 }
 
 /* =========================================
-           1. Header (仅品牌)
-           ========================================= */
-.portal-header {
-position: fixed; top: 0; left: 0; width: 100%; height: 80px;
-display: flex; justify-content: center; align-items: center;
-z-index: 3000; border-bottom: 1px solid #eee;
-        }
-
-.ni-brand-center {
-font-weight: bold; font-size: 1.8em; color: #333;
-text-decoration: none !important; position: relative;
-display: inline-block; padding-bottom: 4px; transition: color 0.3s ease;
-        }
-
-.ni-brand-center::after {
-content: "";
-position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;            
-background-color: #e67e22; 
-transform: scaleX(0);   
-transform-origin: center; 
-transition: transform 0.3s ease;
-pointer-events: none; 
-        }
-.ni-brand-center:hover::after { transform: scaleX(1); }
-
-/* =========================================
-           2. 四角悬浮导航 (Corner Navigation)
-           ========================================= */
-.corner-nav-container {
-position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-pointer-events: none; z-index: 2000;
-        }
-
-.corner-nav-container a, .corner-nav-container div { pointer-events: auto; }
-
-/* 右上角: User Guide */
-.top-right-group {
-position: absolute; top: 40px; right: 40px; text-align: right;
-        }
-
-/* 左下角: 说明书 */
-.bottom-left-group {
-position: absolute; bottom: 100px; left: 40px; text-align: left;
-        }
-
-.corner-title {
-font-weight: bold; font-size: 1.2em; color: #333;
-display: block; margin-bottom: 15px;
-        }
-
-.corner-list {
-list-style: none; padding: 0; margin: 0;
-display: flex; flex-direction: column;
-        }
-
-/* 【关键】左下角反向逻辑 */
-.bottom-left-group .corner-list {
-flex-direction: column-reverse; 
-        }
-
-.corner-item {
-font-size: 0.9em; color: #888; text-decoration: none;
-display: block; padding: 4px 12px; transition: all 0.3s ease;
-        }
-
-.corner-item:hover { color: var(--primary-color); }
-
-.top-right-group .corner-item:hover { transform: translateX(-5px); }
-.bottom-left-group .corner-item:hover { transform: translateX(5px); }
-
-/* =========================================
-           3. 中心 Hero (FAQ)
-           ========================================= */
-.portal-hero {
-/* 【修正】使用 min-height 而不是 height，确保它至少占一屏，但可以被内容撑开 */
-min-height: 100vh; 
-display: flex; flex-direction: column;
-justify-content: center; align-items: center; text-align: center;
-        }
-
-.faq-giant-link {
-font-size: 4em; font-weight: 900; color: #333;
-text-decoration: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-.faq-giant-link:hover {
-color: var(--primary-color);
-letter-spacing: 8px;
-        }
-
-.faq-subtitle {
-margin-top: 10px; font-size: 0.8em; color: #bbb; letter-spacing: 6px; text-transform: uppercase;
-        }
-
-/* =========================================
-           4. 正在施工的便利贴 (Construction Note)
-           ========================================= */
-.construction-sticky {
-position: fixed; bottom: 100px; right: 40px; 
-padding: 12px 20px;
-background-color: #fffde7;
-border-left: 4px solid #fbc02d;
-box-shadow: 3px 3px 10px rgba(0,0,0,0.05);
-display: flex; align-items: center; gap: 10px;
-border-radius: 4px;
-z-index: 9999;
-animation: float 3s ease-in-out infinite;
-        }
-
-@keyframes float {
-0%, 100% { transform: translateY(0); }
-50% { transform: translateY(-10px); }
+   2. 四角悬浮导航 (Corner Navigation)
+   ========================================= */
+.niu-corner-nav-container {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100vh;
+    pointer-events: none; 
+    z-index: 2000;
 }
 
-.note-icon { font-size: 1.2em; }
-.note-text { font-size: 0.85em; color: #7d6608; line-height: 1.4; }
+.niu-corner-nav-container * {
+    pointer-events: auto;
+}
+
+/* 【核心入口】超大标题 */
+.niu-corner-title {
+    font-weight: 900; 
+    font-size: 4.5em; 
+    color: var(--niu-text-main);
+    text-decoration: none !important;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 12px; /* 增加间距感 */
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+/* --- 动态渐变线基类 --- */
+.niu-corner-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4px; 
+    transform: scaleX(0.7); /* 通过 hover 触发生长 */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 【右上角 User Guide 特殊逻辑】
+   右边实，左边淡。移动时从右向左单侧伸长。
+*/
+.niu-group-top-right .niu-corner-title::after {
+    right: 0; /* 对齐右侧 */
+    background: linear-gradient(to left, var(--niu-primary), rgba(230, 126, 34, 0));
+    transform-origin: right; /* 从右侧生长 */
+}
+
+.niu-group-top-right .niu-corner-title:hover::after {
+    transform: scaleX(1.2); /* 向左伸长 */
+}
+
+/* 【左下角 说明书 特殊逻辑】
+   左边实，右边淡。移动时从左向右单侧伸长。
+*/
+.niu-group-bottom-left .niu-corner-title::after {
+    left: 0; /* 对齐左侧 */
+    background: linear-gradient(to right, var(--niu-primary), rgba(230, 126, 34, 0));
+    transform-origin: left; /* 从左侧生长 */
+}
+
+.niu-group-bottom-left .niu-corner-title:hover::after {
+    transform: scaleX(1.2); /* 向右伸长 */
+}
+
+/* 右上角组: User Guide (English) */
+.niu-group-top-right {
+    position: absolute; 
+    top: 70px; 
+    right: 50px; 
+    text-align: right;
+}
+
+/* 增加英文标题与下方列表的呼吸感 */
+.niu-group-top-right .niu-corner-list {
+    margin-top: 35px; 
+}
+
+/* 左下角组: 说明书 (中文) */
+.niu-group-bottom-left {
+    position: absolute; 
+    bottom: 150px; 
+    left: 50px; 
+    text-align: left;
+}
+
+/* 【核心修正】增加中文列表与下方标题之间的间隔，让它更舒展 */
+.niu-group-bottom-left .niu-corner-list {
+    margin-bottom: 40px; 
+    flex-direction: column-reverse; 
+}
+
+/* 列表样式 */
+.niu-corner-list {
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+    display: flex; 
+    flex-direction: column;
+}
+
+.niu-corner-item {
+    font-size: 1em; 
+    color: var(--niu-text-sub); 
+    text-decoration: none;
+    display: block; 
+    padding: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.niu-corner-item:hover {
+    color: var(--niu-primary);
+    transform: scale(1.1);
+}
+
+/* 悬停偏移 */
+.niu-group-top-right .niu-corner-item:hover { transform: translateX(-10px); }
+.niu-group-bottom-left .niu-corner-item:hover { transform: translateY(-5px); }
+
 
 /* =========================================
-           5. 其他组件
-           ========================================= */
-.personal-footer-link {
-position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-text-decoration: none; color: #bbb; font-size: 0.8em; transition: all 0.3s ease;
+   3. 中心 Hero (FAQ) - 视觉降级优化
+   ========================================= */
+.niu-portal-hero {
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
 }
-.personal-footer-link:hover { color: var(--primary-color); }
 
+/* FAQ 现在颜色更深，不再是“半透明感”，而是“优雅的灰色” */
+.niu-faq-giant-link {
+    font-size: 2.5em; 
+    font-weight: 700; 
+    color: var(--niu-text-faq); 
+    text-decoration: none; 
+    transition: all 0.4s ease;
+}
+
+.niu-faq-giant-link:hover {
+    color: var(--niu-primary);
+    letter-spacing: 5px;
+}
+
+.niu-faq-subtitle {
+    margin-top: 15px; 
+    font-size: 0.8em; 
+    color: #ddd; 
+    letter-spacing: 6px; 
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   4. 其他组件 (便签 & 个人链接)
+   ========================================= */
+
+/* 建设中便利贴 */
+.niu-construction-sticky {
+    position: fixed; 
+    bottom: 100px; 
+    right: 40px; 
+    padding: 12px 20px;
+    background-color: #fffde7;
+    border-left: 4px solid #fbc02d;
+    box-shadow: 3px 3px 15px rgba(0,0,0,0.08);
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    border-radius: 4px;
+    z-index: 9999;
+    animation: niu-float 3s ease-in-out infinite;
+}
+
+@keyframes niu-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.niu-note-icon { font-size: 1.2em; }
+.niu-note-text { font-size: 0.85em; color: #7d6608; line-height: 1.4; }
+
+/* 底部个人网站入口 */
+.niu-personal-footer-wrapper {
+    padding: 20px 0 50px 0; 
+    text-align: center;
+}
+
+.niu-personal-link {
+    text-decoration: none; 
+    color: #ccc; 
+    font-size: 0.75em; 
+    transition: color 0.3s ease;
+}
+
+.niu-personal-link:hover { 
+    color: var(--niu-primary); 
+}
+
+
+/* =========================================
+   5. 响应式适配
+   ========================================= */
 @media (max-width: 768px) {
-.top-right-group, .bottom-left-group { position: static; text-align: center; padding: 20px; }
-.portal-hero { padding-top: 80px; }
-.faq-giant-link { font-size: 3em; }
+    .niu-group-top-right, .niu-group-bottom-left { 
+        position: relative; 
+        top: 0; right: 0; bottom: 0; left: 0;
+        text-align: center; 
+        padding: 40px 20px; 
+    }
+    .niu-group-top-right .niu-corner-list,
+    .niu-group-bottom-left .niu-corner-list {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .niu-corner-title { font-size: 3em; }
+    .niu-faq-giant-link { font-size: 2em; }
+    .niu-construction-sticky { position: relative; bottom: 0; right: 0; margin: 20px auto; }
 }
 </style>
-</head>
-<body id="body">
-
-<!-- Header -->
-<header class="portal-header">
-<a href="https://github.com/nqy-exp/Numbered-Image-Utility" 
-target="_blank" rel="noopener noreferrer" class="ni-brand-center">
-            NIU
-</a>
-</header>
 
 <!-- 四角悬浮导航 -->
-<div class="corner-nav-container">
-    <!-- 右上角: User Guide -->
-    <div class="top-right-group">
-        <span class="corner-title">
-            <a href="/en/index" style="text-decoration: none; color: inherit;">User Guide</a>
-        </span>
-        <div class="corner-list">
-            <a href="/en/index#section1" class="corner-item">Getting Started</a>
-            <a href="/en/index#section2" class="corner-item">Advanced Features</a>
-            <a href="/en/index#section3" class="corner-item">...</a>
-        </div>
+<div class="niu-corner-nav-container">
+    <!-- 右上角: User Guide (English) -->
+    <div class="niu-group-top-right">
+        <a href="/NIU/en/index" class="niu-corner-title">User Guide</a>
+        <ul class="niu-corner-list">
+            <li><a href="/NIU/en/index#intro" class="niu-corner-item">Getting Started</a></li>
+            <li><a href="/NIU/en/index#install" class="niu-corner-item">Installation</a></li>
+            <li><a href="/NIU/en/index#usage" class="niu-corner-item">Usage Guide</a></li>
+        </ul>
     </div>
 
-    <!-- 左下角: 说明书 -->
-    <div class="bottom-left-group">
-        <div class="corner-list">
-            <a href="/zh/index#section4" class="corner-item">章节 4</a>
-            <a href="/zh/index#section3" class="corner-item">章节 3</a>
-            <a href="/zh/index#section2" class="corner-item">章节 2</a>
-            <a href="/zh/index#section1" class="corner-item">章节 1</a>
-        </div>
-
-        <span class="corner-title">
-            <a href="/zh/index" style="text-decoration: none; color: inherit;">说明书</a>
-        </span>
+    <!-- 左下角: 说明书 (中文) -->
+    <div class="niu-group-bottom-left">
+        <ul class="niu-corner-list">
+            <li><a href="/NIU/zh/index#intro" class="niu-corner-item">项目简介</a></li>
+            <li><a href="/NIU/zh/index#install" class="niu-corner-item">安装指南</a></li>
+            <li><a href="/NIU/zh/index#naming" class="niu-corner-item">命名规范</a></li>
+        </ul>
+        <a href="/NIU/zh/index" class="niu-corner-title">说明书</a>
     </div>
 </div>
 
 <!-- 中心 Hero -->
-<main class="portal-hero">
-    <a href="/faq/index" class="faq-giant-link">FAQ</a>
-    <p class="faq-subtitle">Frequently Asked Questions</p>
+<main class="niu-portal-hero">
+    <a href="/NIU/faq/index" class="niu-faq-giant-link">FAQ</a>
+    <p class="niu-faq-subtitle">常见问题</p>
 </main>
 
-<!-- 正在施工的便利贴 -->
-<div class="construction-sticky">
-    <span class="note-icon">🚧</span>
-    <div class="note-text">
+<!-- 建设中便签 -->
+<div class="niu-construction-sticky">
+    <span class="niu-note-icon">🚧</span>
+    <div class="niu-note-text">
         <div style="font-weight: bold; font-size: 0.9em;">建设中 / Under Construction</div>
         <div style="font-size: 0.8em; opacity: 0.8;">更多功能正在路上...</div>
     </div>
 </div>
 
 <!-- 底部个人网站入口 -->
-<a href="https://your-personal-website.com" target="_blank" rel="noopener noreferrer" class="personal-footer-link">
+<div class="niu-personal-footer-wrapper">
+    <a href="/" target="_blank" rel="noopener noreferrer" class="niu-personal-link">
         欢迎造访我的个人网站 / Welcome to my personal website
-</a>
-
-<!-- 原有页脚 -->
-    {% include footer.html %}
-
-</body>
-</html>
+    </a>
+</div>

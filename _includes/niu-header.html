@@ -1,0 +1,55 @@
+<!-- _includes/niu-header.html -->
+<header class="niu-portal-header">
+    <a href="https://github.com/nqy-exp/Numbered-Image-Utility" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="niu-brand-center">
+        NIU
+    </a>
+</header>
+
+<style>
+/* 使用 niu- 前缀，确保绝对不会污染全局样式 */
+.niu-portal-header {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 60px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 3000; 
+    border-bottom: 1px solid rgba(238, 238, 238, 0.5);
+    background-color: rgba(255, 253, 250, 0.8); /* 半透明米白 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+}
+
+.niu-brand-center {
+    font-weight: bold; 
+    font-size: 1.8em; 
+    color: #333;
+    text-decoration: none !important; 
+    position: relative;
+    display: inline-block; 
+    padding-bottom: 4px; 
+    transition: color 0.3s ease;
+}
+
+.niu-brand-center::after {
+    content: "";
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    width: 100%; 
+    height: 2px;            
+    background-color: #e67e22; /* 品牌橙 */
+    transform: scaleX(0);   
+    transform-origin: center; 
+    transition: transform 0.3s ease;
+}
+
+.niu-brand-center:hover::after { 
+    transform: scaleX(1); 
+}
+</style>
