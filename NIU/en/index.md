@@ -249,7 +249,8 @@ python app.py --project my_first_project --port 5001
 
 *You can replace ‘my_first_project’ with any project name you want; please use English letters to reduce the possibility of errors.*
 
-
+### 🚪 How to Close
+To close the currently running program, please press [Ctrl] + [C] in the terminal (macOS/Linux) or command prompt (Windows).
 ---
 
 ## 📂 Project Directory Structure <a id="dir-spec"></a>
@@ -780,7 +781,14 @@ While I cannot guarantee an immediate fix for every bug, I welcome all feedback 
 
 ---
 
+>***This project was co-created with Google/Gemma-4-26B-a4b (Q6_K).***
+>I genuinely believe that AI represents a convergence of humanity's collective intelligence. So in a sense, this project was born from collaboration with the wisdom of all.
+>I am grateful for how technology has evolved, enabling me to bridge the programming gap and turn my thoughts into useful tools to support my research projects.
+
+
+
 <div align="right"> <i>Thank you for using NIU —— Making numbered image management lightweight.</i> </div>
 <br><br><br><br>
-*Last updated: 2026.08.15*
+
+*Last updated: 2026.08.19*
 <br><br><br><br>
