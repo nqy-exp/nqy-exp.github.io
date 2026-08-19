@@ -781,10 +781,11 @@ While I cannot guarantee an immediate fix for every bug, I welcome all feedback 
 
 ---
 
->***This project was co-created with Google/Gemma-4-26B-a4b (Q6_K).***
->I genuinely believe that AI represents a convergence of humanity's collective intelligence. So in a sense, this project was born from collaboration with the wisdom of all.
->I am grateful for how technology has evolved, enabling me to bridge the programming gap and turn my thoughts into useful tools to support my research projects.
+>***This project was co-created with Google/Gemma-4-26B-a4b (Q6_K).***<br>
+>I genuinely believe that AI represents a convergence of humanity's collective intelligence. So in a sense, this project was born from collaboration with the wisdom of all.<br>
+>I am grateful for how technology has evolved, enabling me to bridge the programming gap and turn my thoughts into useful tools to support my research projects.<br>
 
+<div style="color: #888; font-size: 0.8em; margin-top: 50px;">This page is translated with the assistance of AI.</div>
 
 
 <div align="right"> <i>Thank you for using NIU —— Making numbered image management lightweight.</i> </div>
