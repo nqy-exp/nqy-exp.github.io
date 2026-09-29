@@ -306,14 +306,16 @@ permalink: /projects/
 
 <br>
 
+
 <!-- 【提示便签】 -->
-<div class="construction-note">
+<div class="construction-note" hidden>
   <div class="note-content">
     <span class="note-icon">🏖️</span>
     <p class="note-text">Please note that experimental logs updates may proceed at a slower pace due to summer heat conditions.</p>
     <p class="note-text-zh">受夏季高温影响，实验日志更新可能会以较慢的节奏进行。</p>
   </div>
 </div>
+
 
 <br>
 
