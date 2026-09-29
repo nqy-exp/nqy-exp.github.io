@@ -1,6 +1,6 @@
 ---
 layout: projects-layout
-title: Log03|SE01 Cross-sectional Method Exploration II(Silicone Sheet Approach)|横截面方案探索 II（硅胶皮方案）
+title: Log03 | SE01 Cross-sectional Method Exploration II(Silicone Sheet Approach) | 横截面方案探索 II（硅胶皮方案）
 project: projecta
 sub_project: projecta1
 type: log
