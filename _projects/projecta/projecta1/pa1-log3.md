@@ -11,6 +11,8 @@ description: "Exploring fiber cross-section preparation via a silicone sheet san
 ## Overview:
 After experiment, the **parchment paper** showed no changes in shape or structure after baking, the plan to use it as the main substrate for cross-sectional cutting **failed**. Testing then shifted to ***silicone sheets*** because of their high transparency under a microscope and the ability to clearly identify curing agents. Consequently, further tests were conducted on sample preparation and the curing speeds of different agents on silicone sheets. Finally, a method was found that allows for both ***simple sample preparation and clear observation of fiber cross-sections*** under current limitations.
 
+*In this log, "parchment paper" refers to silicone-coated baking paper (commonly known as baking paper).*
+
 ### 2026.08.19 | Observation of Baked Parchment Paper
 **Experiment Code**: SE01-03<br>
 **Environmental Conditions**: 27.4°C  66%RH
